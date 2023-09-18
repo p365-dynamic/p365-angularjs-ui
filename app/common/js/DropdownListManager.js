@@ -627,7 +627,7 @@ var termAndConditions = "http://p365dev.infintus.com/termsandconditions/";
 var privacyPolicy = "http://p365dev.infintus.com/privacy-policy/";
 APPLICATION_VERSION = "policies365-version-10064";
 getSearchServiceLink = 'http://uatservices.policies365.com/cxf/configmanager/config/getaddress?filter=';
-getServiceLink = 'http://uatservices.policies365.com/cxf/configmanager/config/getconfigdata?filter=';
+getServiceLink = 'https://mservices.policies365.com/cxf/configmanager/config/getconfigdata?filter='; //'http://uatservices.policies365.com/cxf/configmanager/config/getconfigdata?filter=';
 getQuoteCalcLink = 'http://uatservices.policies365.com/cxf/authrestservices/integrate/invoke';
  getShortURLLink='http://uatservices.policies365.com/cxf/urlshortnerservice/urlshortner/getshorturl/integrate/invoke';
 

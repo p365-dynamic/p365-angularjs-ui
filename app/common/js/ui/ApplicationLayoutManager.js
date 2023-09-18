@@ -7,6 +7,7 @@ angular.module('policies365', [
 	'claims',
 	'logout',
 	'signIn',
+	'landingPage',
 	// 'terms',
 	// 'privacy',
 	'assurancePurchasingStatement',
@@ -76,6 +77,11 @@ angular.module('policies365', [
 ])
 	.config(['$routeProvider', function ($routeProvider) {
 		$routeProvider
+			.when('/', {
+				controller: 'quoteController',
+				templateUrl: wp_path + 'buy/landingPage/landingPage.html',
+				title: 'landing page'
+			})
 			.when('/quote', {
 				controller: 'quoteController',
 				templateUrl: wp_path + 'buy/common/html/GetQuoteTemplate.html',
@@ -483,7 +489,8 @@ angular.module('policies365', [
 						urlPattern != "/claims" && urlPattern != "/logout" && urlPattern != "/contact" && urlPattern != "/signIn" &&
 						urlPattern != "/quote" && urlPattern.indexOf("pay") == -1 && urlPattern.indexOf("proposalresdata") == -1 && urlPattern.indexOf("professionalShareAPI") == -1 && urlPattern.indexOf("sharefromAPI") == -1 &&
 						urlPattern.indexOf("ipos") == -1 && (p365Includes(productPageUrls, urlPattern) == false) && !$rootScope.reloadStatus) {
-							$location.path('/professionalJourney');
+							console.log('redirection commanded');
+							// $location.path('/professionalJourney');
 					} else {
 						//for landing page campaign
 						$rootScope.reloadStatus = true;

@@ -18,8 +18,10 @@ var wp_path;
 if (wordPressEnabled && iquoteEnabled) {
     wp_path = localized;
 } else {
-    wp_path = '';
+    wp_path = 'https://mservices.policies365.com/cxf';
 } 
+
+console.log(wp_path, ' ', wordPressEnabled, ' ', iquoteEnabled, ' ', localized);
 
 if(!wordPressEnabled && pospEnabled){
     wp_path = localized;
