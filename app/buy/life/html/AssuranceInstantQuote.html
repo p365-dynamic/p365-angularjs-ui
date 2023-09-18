@@ -1,0 +1,50 @@
+<md-content ng-controller="lifeInstantQuoteController" 
+	class="wp_md-content wp_inputBorderRadius"><!-- style="background:#fff;" --> 
+	<ng-container ng-if="$root.displayInstantScreen"> <md-input-container style="width: 100%;">
+
+
+<label>{{globalLabel.applicationLabels.life.genderType}}</label> <md-select
+	name="type" ng-model="quoteParam.gender"
+	ng-change="calculateLifePremium()"> <md-option
+	ng-value="gender.value" ng-repeat="gender in genderType"
+	ng-disabled="instantQuoteLifeForm">{{gender.label}}</md-option> </md-select> </md-input-container>
+	<div class="clearfix"></div>
+
+
+	 <md-input-container
+	class="md-block"> <label>{{globalLabel.applicationLabels.life.age}}</label>
+<md-select name="type" ng-model="quoteParam.age"
+	ng-change="calculateLifePremium()"> <md-option
+	ng-value="age" ng-repeat="age in ageList"
+	ng-disabled="instantQuoteLifeForm">{{age}}</md-option> </md-select> </md-input-container> 
+	<div class="clearfix"></div>
+
+
+	<md-input-container
+	class="md-block"> <label>{{globalLabel.applicationLabels.life.tobaccoAddiction}}</label>
+<md-select name="type" ng-model="quoteParam.tobacoAdicted"
+	ng-change="calculateLifePremium()"> <md-option
+	ng-value="tobacco.value" ng-repeat="tobacco in tobaccoAddictionStatus"
+	ng-disabled="instantQuoteLifeForm">{{tobacco.label}}</md-option> </md-select> </md-input-container> 
+	<div class="clearfix"></div>
+
+	<md-input-container
+	class="md-block"> <label>{{globalLabel.applicationLabels.life.annualIncome}}</label>
+<md-select name="type" ng-model="personalDetails.annualIncomeObject"
+	ng-model-options="{trackBy: '$value.display'}"
+	ng-change="calculateSumAssured()"> <md-option
+	ng-value="income" ng-repeat="income in annualIncomesRange"
+	ng-disabled="instantQuoteLifeForm">{{income.label}}</md-option> </md-select> </md-input-container> 
+	<div class="clearfix"></div>
+
+
+	<md-input-container
+	class="md-block"> <label>{{globalLabel.applicationLabels.life.sumAssured}}</label>
+<md-select name="type" ng-model="personalDetails.sumInsuredObject"
+	ng-change="calculateLifePremium()"
+	ng-model-options="{trackBy: '$value.display'}"> <md-option
+	ng-repeat="sumInsured in personalDetails.sumInsuredList"
+	ng-value="sumInsured" ng-disabled="instantQuoteLifeForm">{{sumInsured.display}}</md-option>
+</md-select> </md-input-container> </ng-container> </md-content>
+
+

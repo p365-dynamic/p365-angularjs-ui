@@ -1,0 +1,44 @@
+<div style="height: 400px; overflow: auto;">
+	<div class="clear"></div>
+	<div class="border robo marginbot10">
+		<div class="section group">
+			<div class="col span_1_of_3">
+				<img src="{{selectPremiumFromResult.carrierLogo}}" width="120" height="55">
+			</div>
+			<div class="col span_1_of_3">
+				<div class="heading">{{globalLabel.applicationLabels.life.eligibilityFeatures}}</div>
+			</div>
+			<div class="col span_1_of_3">
+				<div style="width: 50px; margin: auto;" ng-circles
+					value="selectPremiumFromResult.ratingsList['10'][keySliderEligibilityFeature.value]" max-value="5"
+					colors="colors" width="25"></div>
+			</div>
+		</div>
+		<div class="plandetail"></div>
+	</div>
+
+	<div class="marginbot10">
+		<table class="popupquotetable robo">
+			<tr>
+				<th>{{globalLabel.applicationLabels.common.category}}</th>
+				<th>{{globalLabel.applicationLabels.common.features}}</th>
+				<th>{{globalLabel.applicationLabels.common.limit}}</th>
+			</tr>
+			<tr>
+				<td
+					rowspan="{{selectPremiumFromResult.featuresList.eligibilityFeatures.length}}">{{globalLabel.applicationLabels.life.eligibilityFeatures}}</td>
+				<td class="yes">{{selectPremiumFromResult.featuresList.eligibilityFeatures[0].description}}</td>
+				<td>{{selectPremiumFromResult.featuresList.eligibilityFeatures[0].displayLimit}}</td>
+			</tr>
+			<tr
+				ng-repeat="data in selectPremiumFromResult.featuresList.eligibilityFeatures"
+				ng-if="$index > 0">
+				<td class="yes">{{data.description}}</td>
+				<td>{{data.displayLimit}}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="pad10 center">
+	<a class="orangebutton" ng-click="toggleMoreDetails()">{{globalLabel.applicationLabels.common.popupButton}}</a>
+</div>

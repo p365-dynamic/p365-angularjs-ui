@@ -1,0 +1,7 @@
+<md-radio-group ng-model="payoutDetails.payoutOption">
+		<md-list-item class="md-1-line" ng-repeat="option in payoutOptions">
+		<md-radio-button ng-value="option" ng-checked="true" md-prevent-menu-close
+			>{{option.name}}
+		 </md-radio-button> </md-list-item> </md-radio-group>
+		 <!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip"
+		 title="{{option.description}}" tooltip></i> -->

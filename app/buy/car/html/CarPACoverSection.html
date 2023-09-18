@@ -1,0 +1,22 @@
+<div>
+	<div style="margin-bottom: 3% !important;">
+		<md-list class="resultPad">
+			<md-radio-group ng-model="$root.PACoverDetailsQuestion" ng-change="togglePAQuestions($root.PACoverDetailsQuestion)">
+				<md-list-item class="md-1-line smallTextInfo" ng-repeat="ques in PACoverQuestions">
+					<div class="md-list-item-text">
+						<md-radio-button ng-value="ques.key" ng-checked="ques.key" style="margin-bottom: 0px !important;" class="resp_mar4">
+							&nbsp;{{ques.question}}
+						</md-radio-button>
+					</div>
+				</md-list-item>
+			</md-radio-group>
+		</md-list>
+	</div>
+	<span ng-show="PAQuesTypeError" style="color: #ff0000 !important; margin-left: 20%;">Please
+		Select at least one option</span>
+
+	<div class="center submitBtnAlign">
+		<md-button class="md-raised md-primary popupSubmitBtn capitalizeText bold12" id="carSubmitPACoverForm" 
+		ng-click="submitPACoverDetails($root.PACoverDetailsQuestion)">Submit</md-button>
+	</div>	
+</div>

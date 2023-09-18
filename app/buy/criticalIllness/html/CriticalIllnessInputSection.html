@@ -1,0 +1,120 @@
+<div class="showForMobile" style="display:{{$root.hideonEdit}}">
+		<div>
+				<div class="clearfix"></div>
+			<md-card class="pad2TopBot">
+				<div layout="row" class="resp_pad7_10 border1Bot">
+					<div flex="10">
+						<span><i class="material-icons resp_font18">favorite</i></span>
+					</div>
+					<div flex="80" class="font12">Critical Illness Details </div>
+					<div flex="10" class="font12 pinkFont cursor" ng-click="$root.editForMobile()">Edit</div>
+				</div>
+				<div class="resp_pad7_10 bold12">
+					{{quoteParam.gender == 'M' ? "Male": "Female"}}, aged {{quoteParam.age}} with {{personalDetails.annualIncomeObject.annualIncome}} Annual Income
+				</div>
+				
+				<div layout="row" class="resp_pad7_10">
+					<div flex="60" class="resp_titleProp">
+						Insured upto
+					</div>
+					<div flex="40" class="resp_valueProp">
+						{{personalDetails.maturityAge}}
+					</div>
+				</div>
+				<div layout="row" class="resp_pad7_10">
+					<div flex="60" class="resp_titleProp">
+						Sum Assured
+					</div>
+					<div flex="40" class="resp_valueProp">
+						{{personalDetails.sumInsuredAmount}}
+					</div>
+				</div>
+			</md-card>
+		</div>
+	</div>
+
+	<div ng-form="criticalIllnessInputForm" class="hideForMobile" style="display:{{$root.showonEdit}}">
+			<div class="wrap width100 side3Pad quoteInpSec modifyDiv">
+		<ng-container class="pj_width19 padRig15 resp_width100">
+		<md-input-container class="md-block"> <label
+			class="md-no-float classForTooltip font12">{{globalLabel.applicationLabels.criticalIllness.genderType}}</label>
+		<md-select name="type" ng-model="quoteParam.gender" required
+			md-no-asterisk> <md-option ng-value="gender.value"
+			ng-repeat="gender in genderType">{{gender.label}}</md-option> </md-select> 
+		</md-input-container>
+		
+	</ng-container>
+	<ng-container class="wp_left wp_resultCol30 wp_padRgt30 pj_width19 padRig15 resp_width100">
+		<md-input-container class="md-block"> <label
+			class="md-no-float classForTooltip">Your smoking habit?
+			<i class="fa fa-question-circle fa-sm bluecolor"
+			data-toggle="tooltip" data-html="true"
+			title="{{tooltipContent.insuredSmokingHabit}}" tooltip></i>
+		</label> <md-select name="type" ng-model="quoteParam.tobacoAdicted" required
+			md-no-asterisk> <md-option ng-value="tobacco.value"
+			ng-repeat="tobacco in tobaccoAddictionStatus">{{tobacco.label}}</md-option>
+		</md-select> </md-input-container>
+	</ng-container>
+	
+	
+		<ng-container class="pj_width19 padRig15 resp_width100">
+		<md-input-container class="md-block"> <label
+			class="md-no-float classForTooltip">{{globalLabel.applicationLabels.criticalIllness.sumAssured}}
+			<i class="fa fa-question-circle fa-sm bluecolor"
+			data-toggle="tooltip" data-html="true"
+			title="{{tooltipContent.sumAssured}}" tooltip></i>			
+			<span style="color: red"  >{{message}}</span>
+		</label> 
+		<input  style="width:70% !important;height:30px !important" ng-pattern='/^[1-9][0-9]*$/' ng-change="checkSum(personalDetails.sumInsuredAmount);"  name="type" ng-model="personalDetails.sumInsuredAmount"
+		required md-no-asterisk autocomplete='off' 	maxlength='8' minlength='1' >
+		<span style="width: 30% !important; font-weight:bold "> {{showAmount(personalDetails.sumInsuredAmount)}} Lakhs</span>	
+		</md-input-container>
+	</ng-container>
+	<!-- <ng-container class="wp_left wp_resultCol30 wp_padRgt30 pj_width19 padRig15 resp_width100">
+		<div class="clearfix"></div>
+		<div class="clearfix"></div>
+		<md-input-container class="md-block"> <label
+			class="md-no-float classForTooltip">{{globalLabel.applicationLabels.criticalIllness.premiumFrequency}}
+			<i class="fa fa-question-circle fa-sm bluecolor"
+			data-toggle="tooltip" data-html="true"
+			title="{{tooltipContent.insuredSmokingHabit}}" tooltip></i>
+		</label> <md-select name="type" ng-model="quoteParam.premiumFrequency" ng-change="updatePremiumFrequecy(quoteParam.premiumFrequency)" required
+			md-no-asterisk> <md-option ng-value="frequency.value"
+			ng-repeat="frequency in PremiumFrequencyList">{{frequency.displayField}}</md-option>
+		</md-select> </md-input-container>
+
+		</ng-container> -->
+
+		 <ng-container class="pj_width19 resp_width100">
+				<md-input-container class="md-block"> <label
+					class="md-no-float classForTooltip norm11">{{globalLabel.applicationLabels.criticalIllness.age}}
+					<i class="fa fa-question-circle fa-sm bluecolor" data-html="true"
+					data-toggle="tooltip" title="{{tooltipContent.insuredAge}}" tooltip></i>
+				</label> <md-select name="type" ng-model="quoteParam.age"
+					ng-change="updateMaturityAgeList()" required md-no-asterisk>
+				<md-option ng-value="age" ng-repeat="age in ageList">{{age}}</md-option>
+				</md-select> </md-input-container>
+			</ng-container>
+	
+			<ng-container class="pj_width19 resp_width100">
+		<md-input-container class="md-block"> <label
+			class="md-no-float classForTooltip">{{globalLabel.applicationLabels.criticalIllness.maturityAge}}
+			<i class="fa fa-question-circle fa-sm bluecolor" data-html="true"
+			data-toggle="tooltip" title="{{tooltipContent.insuredAge}}" tooltip></i>
+		</label> <md-select name="type" ng-model="personalDetails.maturityAge"
+			required md-no-asterisk> <md-option
+			ng-repeat="maturity in maturityAgeList" ng-value="maturity">{{maturity}}</md-option>
+		</md-select> </md-input-container>
+	
+</ng-container>
+	
+		<ng-container class="section padRig15 width100 center" ng-if="criticalIllnessInputForm.$dirty">
+				<div class="">
+					<p class="dialogButton">
+						<md-button ng-click="toggleChange()" class="inpCancelBtn" id="criticalIllnessBuyProductBtn" >Cancel</md-button>
+						<md-button ng-click="singleClickCriticalIllnessQuote()" class="inpSaveBtn" id="editLifeInputSectionBtn">Submit</md-button>
+					</p>
+				</div>
+			</ng-container>
+	</div>
+	</div>

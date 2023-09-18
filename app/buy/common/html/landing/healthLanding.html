@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       <style>
+           @font-face {
+    font-family:Roboto-Regular;
+    src: url(fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family:Roboto-Bold;
+    src: url(fonts/Roboto-Bold.ttf);
+}
+img {
+    width: 100%;
+    max-width: 100%;
+}
+/*-------------Header Start---------------------*/
+ol, ul{
+	margin-bottom:0px;
+}
+a, .btn, button{
+	-webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+	text-decoration:none;
+	  font-family:Roboto-Regular;
+}
+a:hover, a:focus{
+	text-decoration:none;
+}
+.h1, .h2, .h3, h1, h2, h3, h4 {
+    font-size:40px;
+    color: #000000;	
+	  font-family:Roboto-Bold;
+	letter-spacing:1px;
+}
+section, footer{
+	width:100%;
+	float:left;
+	position:relative;
+}
+section{
+    padding:50px 0;
+}
+ul{
+	padding:0px;
+}
+p{
+	font-size:20px;
+	  font-family:Roboto-Regular;
+}
+
+/*-------------header-menu-----------------*/
+
+*{margin:0;padding:0;text-decoration:none}
+
+header{
+	padding:0;
+}
+input:focus, button:focus {
+    outline: transparent;
+}
+
+/*---------------menu-list--------------------------*/
+
+
+.socail_icon {
+    float: left;
+    margin-right: 10px;
+}
+
+.socail_icon i {
+    color: rgb(103, 94, 87);
+    background: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 2;
+    float: left;
+    margin-top: 4px;
+}
+
+
+.header .logo img {
+    max-width: 200px;
+}
+
+.header span {
+    font-size: 23px;
+    cursor: pointer;
+    color: #fff;
+    float: right;
+}
+
+.header {
+    float: left;
+    width: 100%;
+    padding: 30px 60px 0px 60px;
+}
+
+.header {
+    position: absolute;
+    top: 0;    z-index: 1
+  
+}
+
+.logo {
+    width: 25%;
+    float: left;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0!important;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    text-align: center;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav {
+    background: #4d646c;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.navbar-right {
+
+    margin-right:0px!important;
+}
+.enter-no {
+    padding-bottom: 0;
+}
+
+/*------ End Header------*/
+
+/*------ Slider------*/
+.slider_header {
+    position: relative;
+}
+.img_slider img {
+    width: 100%;
+    min-height: 100vh;
+}
+.slider_heading {
+    width: 90%;
+    text-align: left;
+    color: #fff;
+    margin: auto;
+    /* max-width: 1000px; */
+    padding-top: 200px;
+}
+h1.slider_title {
+    font-size: 30px;
+    color: #444546;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+.sider_text {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 0;
+}
+
+h2.slider_sub_title {
+    font-size: 2.5vw;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-top: 0;
+    line-height: 1.5;
+}
+
+p.desgin {
+    font-size: 28px;
+    display: inline-block;
+    background: #4d646c;
+    padding: 8px 20px;
+    margin-top: 12px;
+}
+hr.sep {
+    display: block;
+    width: 12%;
+    margin: 1em auto;
+    border: 1px solid #c5c5c5;
+    -webkit-transition: width 1s ease;
+    -moz-transition: width 1s ease;
+    transition: width 1s ease;
+}
+
+h2.call {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.down_arrow {
+    text-align: center;
+    width: 100%;
+}
+
+.down_arrow img {
+    margin-top: 3%;
+}
+.we-care, .m-we-care {
+    background: #e8e8e8;
+    box-shadow: 0 6px 19px rgb(0 0 0 / 50%);
+    padding-bottom: 30px;
+}
+.we-care li, .m-we-care li {
+    list-style: none;
+    font-size: 20px;
+    line-height: 45px;
+    padding-left: 33px;
+    position: relative;
+}
+.we-care li:after {
+    background: #ca3181; 
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 10px;
+    left: 5px;
+    top: 17px;
+    border-radius: 100px;	
+}
+.m-we-care li:after {
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 10px;
+    left: 5px;
+    top: 17px;
+    border-radius: 100px;		
+     background: #48a901!important; 
+}
+.m-we-care h2 {
+    text-align: center;
+    padding-top: 25px;
+    font-size: 22px;
+}
+.we-care-content h2 {
+    font-size: 22px;
+    text-align: center;
+    padding-top: 20px;
+}
+ul li::before{
+    color:#48a901;
+}
+
+we-care li, .m-we-care li::before{
+    content:"\2022" ;
+    color: #48a901;
+    font-weight: bold;
+    display: inline-block;
+    width:1.3em;
+    margin-left:-1em;
+}
+.no-form select#cars {
+    border: transparent!important;
+    box-shadow: unset!important;
+    font-size: 22px;
+    font-weight: bold;
+    color: #000000;
+    padding: 17px 0 20px;
+    height: auto!important;
+}
+.no-form label {
+    font-size: 19px;
+    padding-bottom: 12px;
+	color:#555555;	
+}
+.no-form input#phone {
+    padding: 10px;
+    height: auto!important;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    box-shadow: unset;
+    border-bottom: solid 1px #555555;
+    font-size: 20px;
+	color:#555555;
+}
+.no-form input:placeholder {
+	color:#555555;
+}
+
+
+.chknow {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.chknow input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #cacaca;
+}
+
+/* On mouse-over, add a grey background color */
+.chknow:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.chknow input:checked ~ .checkmark {
+    background-color: #ffffff;
+    border: solid 2px #cccccc;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.chknow input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.chknow .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 13px;
+    border: solid #ca3181;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(
+45deg
+);
+    -ms-transform: rotate(45deg);
+    transform: rotate(
+45deg
+);
+}
+.chknow .checkmark2:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 13px;
+    border: solid #48a901;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(
+45deg
+);
+    -ms-transform: rotate(45deg);
+    transform: rotate(
+45deg
+);
+}
+.no-form label.chknow {
+    margin-top: 40px;
+}
+.no-form button {
+    background: #ca3181;
+    padding: 10px;
+    width: 100%;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    border: transparent;
+    margin-top: 20px;
+}
+.m-health button {
+    background: #48a901!important;
+}
+label.chknow a {
+    color: #2f6ae0;
+}
+.no-form h2 {
+    font-size: 21px;
+    padding-bottom: 22px;
+}
+
+/*-----------------media------------------*/
+
+@media screen and (max-width:767px) {
+.img_slider img {
+    width: 100%;
+    min-height: 58vh;
+}	
+	.slider_heading {
+    padding-top: 100px;
+}
+h1.slider_title {
+    font-size: 18px;
+}
+p.desgin {
+    font-size: 18px;
+    padding: 8px 13px;
+    margin-top: 12px;
+}
+.header {
+    padding: 20px;
+}
+}
+       </style>				
+	</head>
+	<body>
+		
+<!------------------------------Header Start-------------------->
+ <header>
+     <ng-container ng-controller="healthInstantQuoteController">
+      </ng-container>
+ <div class="header">
+            <div class="logo">
+                <a><img ng-src="{{$root.wp_path}}img/landing/logo.png"></a>
+            </div>
+        </div>
+</header> 
+
+<div class="slider_header">
+        <div class="img_slider">
+            <img ng-src="{{$root.wp_path}}img/landing/banner.jpg" alt="">
+        </div>
+
+    <div class="sider_text">
+
+        <div class="slider_heading">
+            <h1 class="slider_title">Say yes to health insurance.</h1>
+            <p class="desgin">Say no to compromise.</p>
+        </div>
+
+    </div>
+ </div>
+
+<section class="m-we-care">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="m-care-content">
+					<ul>
+						<li>Cashless treatment at 3500+ empanelled hospitals</li>
+						<li>Free health check-ups for the insured</li>
+						<li>Pre and post-hospitalisation cover to save on related medical expenses</li>
+					</ul>
+					<h2>WE CARE. WE SERVE.</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="enter-no m-health">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="no-form">
+					<form name="quoteUserInfoForm">  
+						<h2>Get health Insurance</h2>
+					  <div class="form-group">
+							<label for="phone">Mobile number</label>
+                            <!-- <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control" placeholder="+91 1234567890"> -->
+                            <input type="text" id="phone" name="phone" class="form-control"  placeholder="Mobile Number" name="mobileNumber"
+							ng-model="quoteUserInfo.mobileNumber" autocomplete="off"
+							ng-pattern="/^[6789]\d{9}$/" maxlength="10" minlength="10"
+							required />
+						<div ng-messages="quoteUserInfoForm.mobileNumber.$error"
+							ng-if="quoteUserInfoForm.mobileNumber.$touched">
+							<div style="padding-left:120px;color: red" ng-message="required">valid mobile number is required</div>
+							<div style="padding-left:120px;color: red" ng-message="maxlength">valid mobile number is required></div>
+							<div style="padding-left:120px;color: red" ng-message="minlength">valid mobile number is required</div>
+							<div style="padding-left:120px;color: rgb(8, 0, 0)" ng-message="pattern">valid mobile number is required</div>
+						</div>
+					  </div>
+					 <label class="chknow">I accept the <a>Terms & Conditions.</a>
+					  <input type="checkbox" ng-model="quoteUserInfo.termsCondition" required/>
+					  <span class="checkmark checkmark2"></span>
+					</label>
+					<!-- <button type="submit" ng-disabled="quoteUserInfoForm.$invalid" ng-click="getLandingQuotes()" form="form1" value="Submit">Submit</button> -->
+                    <button type="submit" ng-disabled="disabledRedirectToResult || quoteUserInfoForm.$invalid"
+					ng-click="landingRedirection()" 
+					id="lifeLeadSubmissionPop" style="position: unset; width: 100%;">
+					 <u>SUBMIT <span ng-show="disabledRedirectToResult"><i
+						class="fa fa-spinner fa-spin "></i></span></u>
+				</button>     
+                </form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!----------------------------Footer End-------------------------->
+
+
+    <!-- <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>	 -->
+
+<script>
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "90%";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        $(document).ready(function() {
+            $('#Carousel').carousel({
+                interval: 5000
+            })
+        });
+</script>
+
+	</body>
+</html>

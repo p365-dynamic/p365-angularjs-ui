@@ -1,0 +1,11 @@
+<div id="tabbed-nav_main">
+	<ul class="tabs iPOSWidth crmMainNavi" ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled">
+		<li class="iPOS20Width" ng-repeat="tab in $root.mainTabsMenu"  ng-class="{active:tab.active}" ng-click="$root.onClickIquoteTab(tab)"
+		 ><span class="{{tab.className}}">
+				<label class="navigationLabel"><b><h4
+							class="navigationTitle iPOS50Margin">{{tab.title}}</h4></b></label>
+		</span></a>
+		</li>
+	</ul>
+</div>
+

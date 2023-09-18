@@ -1,0 +1,114 @@
+<!-- <div> -->
+<div class="side10PerMar center resp_noMar resp_topBot5Pad padBot3Per marTop4Per">
+	<h2 class="chooseProfTitle resp_font18">
+		<span data-bind-html-compile="globalLabel.applicationLabels.professionalJourney.bike.addOnDetails" data-ng-bind-html="globalLabel.applicationLabels.professionalJourney.bike.addOnDetails"></span>
+	</h2>
+</div>
+<div ng-form='bikeInputForm'>
+	<div class="side10PerMar">
+			<p class="greyc9Txt font10 topBot5pxMar">Policies365 Recommended Add-Ons</p>
+		</div>
+	<div layout="row" layout-xs="column" layout-sm="column" class="addOnSec pad10 recomdAddonMotor">
+		<div flex="100" class="recomdAddonRgt">
+			<div layout="row" layout-xs="column" layout-sm="column" style="flex-wrap: wrap">
+				<div flex="50" flex-xs="100" flex-sm="100" style="padding-right: 10px;">
+					<div layout="row" layout-xs="column" layout-sm="column">
+						<md-checkbox class="blackAddon resize" ng-true-value="true" ng-false-value="false" ng-change="togglePACover()" ng-model="BikePACoverDetails.isPACoverApplicable"
+							name='add'>
+							<span class="font15 marTopBot10" layout="row">{{p365Labels.common.personalAccidentCover}}</span>
+						</md-checkbox>
+					</div>
+					<p class="font11 marginCheckbox">{{p365Labels.common.personalAccidentCoverDesc}}</p>
+				</div>
+				<div flex="50" flex-xs="100" flex-sm="100" style="padding-right: 10px;" class="md-1-line checkBox" ng-repeat="addOnCover in addOnCovers"
+				 ng-if="addOnCover.isEnable == 'Y'">
+					<div layout="row" layout-xs="column" layout-sm="row" layout-wrap flex>
+						<div class="classForTooltip" flex="100">
+							<div ng-if="addOnCover.riderId != '28'">
+								<div layout="row" layout-xs="column" layout-sm="row">
+									<md-checkbox class="blackAddon resize" checklist-model="$root.bikeAddOnCoversList.selectedAddOnCovers" checklist-value="addOnCover"
+									 name='add' checklist-change="calculateQuoteOnAddOnCover(addOnCover)">
+										<span class="font15 marTopBot10" layout="row">{{addOnCover.riderName}}</span>
+									</md-checkbox>
+									<span class="pinkFont" style='margin-left: 10px;font-size: 10px;margin-top: 15px' ng-show="addOnCover.isRecommended == true">(P365 Recommended)</span>
+									<div class="marLeft20" ng-repeat="check in $root.bikeAddOnCoversList.selectedAddOnCovers" ng-if="(check.riderId == addOnCover.riderId) && addOnCover.hasValue=='Y'">
+										<span class="" ng-if="check.riderId!=11 && check.riderId!=15">
+											<md-input-container class="noMargin">
+												<input type="text" class="ridersBottomBorder" ng-model="addOnCover.riderAmount" ng-change="validateRiderAmount(addOnCover.riderAmount)"
+												 ng-init='addOnCover.riderAmount=getRiderDefaultValue(addOnCover.riderId)' required> </md-input-container>
+											<span ng-if="addOnCover.riderAmount < minRiderLimit || addOnCover.riderAmount > maxRiderLimit" style="color: red" class="checkValidation">
+												<span>Please enter amount between {{ minRiderLimit}} - {{maxRiderLimit}}.</span>
+											</span>
+										</span>
+									</div>
+								</div>
+								<p class="font11 marginCheckbox">{{addOnCover.description}}</p>
+							</div>
+
+							<div ng-if="addOnCover.riderId == '28'">
+								<div layout="row" layout-xs="column" layout-sm="row">
+									<md-checkbox class="blackAddon resize" checklist-model="$root.bikeAddOnCoversList.selectedAddOnCovers" checklist-value="addOnCover"
+									 name='add' ng-change="calculateQuoteOnAddOnCover(addOnCover)">
+										<span class="font15 marTopBot10" layout="row">{{addOnCover.riderName}}</span>
+									</md-checkbox>
+									<span style='margin-left: 10px;font-size: 10px;margin-top: 15px' class="pinkFont" ng-show="addOnCover.isRecommended == true">(P365 Recommended)</span>
+									<span class="marLeft20" ng-repeat="check in $root.bikeAddOnCoversList.selectedAddOnCovers" ng-if="check.riderId == '28'">
+										<md-select class="noMargin" name="type" ng-model="addOnCover.riderAmount" ng-change="calculateQuoteOnAddOnCover(check)"
+										ng-init='addOnCover.riderAmount=passengerCoverSAList[0]' required
+										 md-no-asterisk>
+											<md-option ng-value="passengerCover" ng-repeat="passengerCover in passengerCoverSAList">{{passengerCover}}</md-option>
+										</md-select>
+									</span>
+								</div>
+								<p class="font11 marginCheckbox">{{addOnCover.description}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ng-container class="section padRig15 width100 center">
+		<div class="">
+			<p class="dialogButton">
+				<md-button class='width20_per capitalTxt resp_normFont13 inpCancelBtn' ng-click="showEditInputSection()">BACK</md-button>
+				<md-button class='width20_per capitalTxt resp_normFont13 inpSaveBtn' ng-click="callSingleClickBikeQuote()">CONFIRM</md-button>
+			</p>
+		</div>
+	</ng-container>
+</div>
+</div>
+
+<modal-dialog show="PACoverModal" width='800px' height='auto' class="ng-hide RTOSearchDiv">
+		<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">Personal Accident ( PA ) Cover ?</h2>
+			</div>
+			<div class='ng-modal-close closePopup' ng-click='hidePACoverModal()'>
+				<i class="material-icons greyb7Txt">highlight_off</i>
+			</div>
+		</div>
+		<div class="pad10 borderf2Top">
+			<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+				<div class="centerAlignTxt">
+					<div class="PACoverTxt grey63Txt">
+						<p class="font15 greyb9Txt">
+							This policy covers the owner for death or disability due to an accident. Owner(in case of disability) or nominee(in case
+							of death) will get <span class="font17 grey666Txt">15 lakhs</span>.
+						</p>
+						<p class="font16 grey63Txt">YOU CAN BUY A PLAN WITHOUT PA COVER IN FOLLOWING CASES.</p>
+						<p class="font15 greyb9Txt">1. The bike is registered in a company's name.</p>
+						<p class="font15 greyb9Txt">2. You already have a PA Cover of 15 lakhs.</p>
+						<p class="font15 greyb9Txt">3. You don't have valid driving license.</p>
+					</div>
+					<md-checkbox class="font12 grey63Txt" ng-model='PACoverDeclaration'>
+						<p>I declare that the vehicle is either company owned by an individual with existing Personal Accident(PA) cover of Rs.15 lakhs</p>
+					</md-checkbox>
+	
+				</div>
+				<div class="center submitBtnAlign ">
+					<md-button class="md-raised md-primary popupSubmitBtn capitalizeText bold12" ng-click="submitPACoverDetails('existingInsurance')" ng-disabled='!PACoverDeclaration' id="carSubmitPACoverForm">No Need</md-button>
+				</div>
+			</div>
+		</div>
+</modal-dialog>

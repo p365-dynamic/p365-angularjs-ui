@@ -1,0 +1,1201 @@
+<loading></loading>
+<!-- <nav class="showForMobile" mfb-menu position="br" effect="zoomin" toggling-method="click" class="app-menu" menu-state="menuState"
+ ng-class="{'fadeOut' : menuState === 'closed'}">
+	<button mfb-button label="Share Quotes" icon="share" ng-click="showShareEmailModal()"></button>
+	<button mfb-button label="Sort" icon="swap_vert" ng-click="showSortOptionsModal()"></button>
+</nav> -->
+<div id="htmlview">
+<div after-render="missionCompled"></div>
+<!-- <div ng-class="{header_container : $root.header_container == true}">
+	<div class="section carBg wp_padHeaderNavi wp_innerCar" ng-if="!isThirdPartyResource && !$root.professionalJourney">
+		<ng-container ng-include="$root.headerNavigation" ng-controller='headerNavigationController'></ng-container>
+		<div class="clearfix"></div>
+	</div>
+</div> -->
+<div class="section carBg wp_padHeaderNavi wp_innerCar" ng-if="!$root.wordPressEnabled && $root.baseEnvEnabled">
+	<ng-container ng-include="$root.iquoteTabNavigationHTML" ng-controller='iquoteTabNavigationController'></ng-container>
+	<div class="clearfix"></div>
+</div>
+<div class="section carBg wp_padHeaderNavi wp_innerCar" ng-if="!$root.wordPressEnabled && $root.baseEnvEnabled">
+	<ng-container ng-include="$root.headerNavigation" ng-controller='headerNavigationController'></ng-container>
+	<div class="clearfix"></div>
+</div>
+
+<div class="clearfix"></div>
+
+<form name="quoteCarInputForm">
+	<div class="middleTab one-edge-shadow widthFull resultCommon mobileResult wp_padHeaderNavi wp_resultBorder wp_noBoxShadow white_e7_Bg">
+		<span class="cursor backBtn" ng-show="$root.isFromProfessionalJourney ||  ($root.wordPressEnabled)">
+			<span ng-click="backToResultScreen()" id="bikeBackToResultScreen" role="button" tabindex="0">
+				<i class="material-icons">keyboard_arrow_left</i>
+			</span>
+		</span>
+
+		<div class="boxShadow pad5Bot white_e7_Bg resp_white_f7_Bg">
+			<div class="section">
+				<ng-container ng-include="carInputSectionHTML"></ng-container>
+			</div>
+			<div class="showForMobile">
+				<div class="wrap center padTop4Per">
+					<div class="resp_pj_width33 selfCenter rightBord1ddd cursor" ng-click="showIDVModal()">
+						{{selectedIDV}}
+						<div class="clearfix"></div>
+						<div class="arrow-down"></div>
+					</div>
+					<div class="resp_pj_width20 selfCenter rightBord1ddd cursor" ng-click="showRiderModal()">
+						<span ng-if="quoteParam.riders.length=='0' || !quoteParam.riders">Addon </span>
+						<span ng-if="quoteParam.riders.length > 0">{{quoteParam.riders.length+" "+""+"Addon"}} </span>
+						<div class="clearfix"></div>
+						<div class="arrow-down"></div>
+					</div>
+					<div class="resp_pj_width20 selfCenter cursor centerAlignTxt" ng-click="showShareEmailModal()">
+						Share
+						<div class="clearfix"></div>
+						<div class="arrow-down"></div>
+					</div>
+				</div>
+				<div class="wrap resp_pad10">
+					<div class="selfCenter cursor padRig15 zeroLineHeight">
+						<md-checkbox class="blackAddon resize noMarBot" ng-disabled="quoteParam.onlyODApplicable" ng-model="CarPACoverDetails.isPACoverApplicable"
+						 name='add' ng-change="togglePACover()">
+							<span class="font12 marTopBot10" layout="row">{{p365Labels.common.personalAccidentCover}}</span>
+						</md-checkbox>
+					</div>
+				</div>
+				<!-- <div class="col pj_widthAuto hideForMobile lineHgt35">
+					<div class="padButtonResult marBtmMobile wp_marBorder noMargin">
+						<md-checkbox class="blackAddon resize" ng-disabled="quoteParam.policyType=='new'" ng-model="odonly"
+						 name='add' ng-change="changePolicyPlan()">
+							<span class="font12 marTopBot10" layout="row">OD Only</span>
+						</md-checkbox>
+					</div>
+				</div> -->
+			
+			<div class="col fullWidth wp_padNo pj_widthAuto resp_widthAuto">
+				<md-button class="md-raised  wp_resultBorder wp_borderRadius25 wp_noMarginLeft wp_btnText themedBorder resp_width90"
+				 layout="row" layout-align="center-start"ng-disabled="quoteParam.policyType=='new'" ng-model="odonly"
+				 name='add' ng-click="changePolicyPlan()">
+					<span  class="resp_normFont12 textCapitialize">OD
+						<!-- <span class="hideForMobile">Options</span> -->
+					</span>
+					
+					<i class="material-icons" style="position: relative; top: 7px">keyboard_arrow_down</i>
+				</md-button>
+
+			</div>
+			</div>
+		</div>
+		<div class="showForMobile">
+			<div class="row padTop4Per">
+				<!-- <div style="margin:auto;font-size: 10px">
+							* All prices are exclusive of GST
+						</div> -->
+				<div flex="100">
+					<p class="right greyb7Txt font13 noMargin" style="margin-right: 24px">{{p365Labels.common.pricesExclusiveOfGST}}</p>
+				</div>
+			</div>
+			<div>
+				<md-card ng-repeat="data in $root.carQuoteResult | orderBy :sortKey:sortReverse" ng-if="validatePremium(data) && validateInsurancePlanType(data)"
+				 ng-show="showForShare(data)" class="posRel resp_mar8">
+					<div layout="row">
+						<div flex="50" class="side10Pad">
+							<img data-toggle="tooltip" title="{{data.insuranceCompany}}" ng-src="{{$root.wp_path}}img\clogo\{{data.carrierId}}.png" style=""
+							 tooltip>
+						</div>
+						<div flex="50" class="right" id="mobileCarrierId-{{data.carrierId}}">
+							<md-button class="quoteBtn pinkFont" ng-disabled="quoteCarInputForm.$invalid || buyOptionDisabled" ng-click="buyProduct(data)"
+							 id="carBuyProductBtn">{{p365Labels.common.buyNow}}</md-button>
+						</div>
+					</div>
+					<div layout="row" class="resp_white_f7_Bg">
+						<div flex="33.33" class="width100 padLf10">
+							<p class="font12 lightGrey">{{p365Labels.common.rating}}
+								<span class="chipsRating font11 lightGrey">{{data.proffesionalRating | number:1}}</span>
+							</p>
+							<p class="bold13 highlightBlack">
+								<ng-rate-it star-width="12" star-height="12" step="0.1" ng-model="data.proffesionalRating" data-toggle="tooltip" title="{{data.proffesionalRating | number:1}}"
+								 resetable="false" rated="ratedCallback" min="0" max="5" read-only="true"></ng-rate-it>
+							</p>
+						</div>
+						<div flex="33.33" class="width100 padLf10 centerAlignTxt">
+							<p class="font12 lightGrey">
+								{{p365Labels.common.IDV}}
+								<!--<i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.insuredDeclaredValue}}" tooltip></i>-->
+							</p>
+							<p id="mobileidv" class="bold13 highlightBlack">&#8377; {{(data.insuredDeclareValue) | number:0 | regexINR}}</p>
+						</div>
+						<div flex="33.33" class="width100 padLf10 centerAlignTxt padRig10">
+							<p class="font12 lightGrey">
+								{{p365Labels.common.Premium}}
+								<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.totalPremium}}" tooltip></i>-->
+							</p>
+							<div class="bold13 highlightBlack">
+								<a class="pinkFont cursor" style="display: inline-block;"  ng-click="openCarPopup(0,data)" title="{{tooltipContent.viewDetails}}" data-html="true" tooltip>
+									&#8377; {{data.netPremium | number:0 | regexINR}}
+								</a>
+								<button class="cursor" ng-click="pdfviewer(data)" style="font-size: 12px;background-color: #f5edee;">
+									<i class="fa fa-file"  style="color: red;"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div ng-if="isMinPremium(data.grossPremium,data.carrierId)" class="lowPremium">
+						<span>
+							<img ng-src="{{$root.wp_path}}img/icons/lowPremium.png">
+						</span>
+					</div>
+					<div ng-if="$first" class="highValue">
+						<span>
+							<img ng-src="{{$root.wp_path}}img/icons/highValue.png">
+						</span>
+					</div>
+				</md-card>
+			</div>
+		</div>
+		<div class="topBot1Pad side3Pad resp_noPad noPadBot hideForMobile">
+			<!-- <ng-container ng-if="quoteParam.policyType=='renew'">
+				<div class="col fullWidth wp_padNo pj_widthAuto resp_widthAuto">
+					<md-button class="md-raised wp_Width100 wp_resultBorder wp_noTextTransform wp_borderRadius25 wp_noMarginLeft wp_btnText themedBorder resp_width90"
+					 layout="row" layout-align="end-start" md-ink-ripple="{{rippleColor}}" ng-click="showPolicyTypeModal()">
+						<label class="resp_normFont12 hideForMobile textCapitialize">&nbsp;Policy Type</label>
+						<span flex></span>
+						<i class="material-icons wp_btnIconPlacer" style="position: relative; top: 7px">keyboard_arrow_down</i>
+					</md-button>
+				</div>
+			</ng-container> -->
+			<div class="col fullWidth wp_padNo pj_widthAuto resp_widthAuto">
+				<md-button class="md-raised wp_Width100 wp_resultBorder wp_noTextTransform wp_borderRadius25 wp_noMarginLeft wp_btnText themedBorder resp_width90"
+				 layout="row" layout-align="end-start" md-ink-ripple="{{rippleColor}}" ng-click="showIDVModal()">
+					<!-- <label ng-if="!selectedIDV" class="resp_normFont12">INSURED DECLARED VALUE</label> -->
+					<label class="resp_normFont12 hideForMobile textCapitialize">&nbsp;{{selectedIDV}}</label>
+					<span flex></span>
+					<i class="material-icons wp_btnIconPlacer" style="position: relative; top: 7px">keyboard_arrow_down</i>
+				</md-button>
+
+			</div>
+			<div class="col fullWidth wp_padNo pj_widthAuto resp_widthAuto">
+				<md-button class="md-raised wp_Width100 wp_resultBorder wp_borderRadius25 wp_noMarginLeft wp_btnText themedBorder resp_width90"
+				 layout="row" layout-align="end-start" md-ink-ripple="{{rippleColor}}" ng-click="showRiderModal()">
+					<span ng-if="quoteParam.riders.length=='0' || !quoteParam.riders" class="resp_normFont12 textCapitialize">{{p365Labels.common.additionalCovers}}
+					</span>
+					<span ng-if="quoteParam.riders.length > 0" class="textCapitialize">{{selectedAddOn}}&nbsp;&nbsp;additional covers </span>
+					<span flex></span>
+					<i class="material-icons" style="position: relative; top: 7px">keyboard_arrow_down</i>
+				</md-button>
+
+			</div>
+
+			<div class="col fullWidth wp_padNo pj_widthAuto resp_widthAuto">
+				<md-button class="md-raised wp_Width100 wp_resultBorder wp_noTextTransform wp_borderRadius25 wp_noMarginLeft wp_btnText themedBorder resp_width90"
+				 layout="row" layout-align="end-start" md-ink-ripple="{{rippleColor}}" ng-click="showVehicleOwnerModal()">
+					<span ng-if="quoteParam.ownedBy.length =='0' " class="resp_normFont12 textCapitialize">{{p365Labels.common.vehicleOwner}}</span>
+					<span ng-if="quoteParam.ownedBy.length > 0 " class="textCapitialize">{{quoteParam.ownedBy}}</span>
+					<span flex></span>
+					<i class="material-icons wp_btnIconPlacer" style="position: relative; top: 7px">keyboard_arrow_down</i>
+				</md-button>
+
+			</div> 
+			<div class="col pj_widthAuto resp_widthAuto" ng-if="quoteParam.policyType == 'new'">
+				<md-button class="themedBorder resp_normFont12 capitalizeText" layout="row" layout-align="end-start" md-ink-ripple="{{rippleColor}}"
+				 ng-click="showInsuranceTypeModal()">
+					&nbsp;{{p365Labels.common.insuranceTypes}}
+					<i class="material-icons wp_btnIconPlacer" style="position: relative; top: 7px">keyboard_arrow_down</i>
+				</md-button>
+			</div>
+			<div class="col fullWidth wp_padNo pj_widthAuto resp_widthAuto">
+				<md-button class="md-raised  wp_resultBorder wp_borderRadius25 wp_noMarginLeft wp_btnText themedBorder resp_width90"
+				 layout="row" layout-align="center-start"  ng-disabled="quoteParam.policyType=='new'" ng-model="odonly"
+				 name='add' ng-click="changePolicyPlan()">
+					<span  class="resp_normFont12 textCapitialize">OD
+						<!-- <span class="hideForMobile">Options</span> -->
+					</span>
+					
+					<i class="material-icons" style="position: relative; top: 7px">keyboard_arrow_down</i>
+				</md-button>
+
+			</div>
+			<div class="col pj_widthAuto hideForMobile lineHgt44">
+				<div class="padButtonResult marBtmMobile wp_marBorder noMargin">
+					<md-checkbox class="blackAddon resize noMarBot" ng-disabled="quoteParam.onlyODApplicable" ng-model="CarPACoverDetails.isPACoverApplicable"
+					 name='add' ng-change="togglePACover()">
+						<span class="font12 marTopBot10" layout="row">{{p365Labels.common.personalAccidentCover}}</span>
+					</md-checkbox>
+				</div>
+			</div>
+			<!-- <div class="col pj_widthAuto hideForMobile lineHgt35">
+				<div class="padButtonResult marBtmMobile wp_marBorder noMargin">
+					<md-checkbox class="blackAddon resize" ng-disabled="quoteParam.policyType=='new'" ng-model="odonly"
+					 name='add' ng-change="changePolicyPlan()">
+						<span class="font12 marTopBot10" layout="row">OD Only</span>
+					</md-checkbox>
+				</div>
+			</div> -->
+			
+			<div class="col pj_widthAuto hideForMobile">
+				<div class="padButtonResult marBtmMobile  wp_marBorder">
+					<md-button class="pj_noBoxShadow pj_shareText lineHgt44" id="carShareBtn" ng-class="{tabActive : activeMenu === 'Email'}"
+					 md-ink-ripple="{{rippleColor}}" ng-click="showShareEmailModal()" style="line-height:45px;">
+						<i class="material-icons wp_btnIcons pj_shareIcon">share</i> {{p365Labels.common.shareQuote}}</md-button>
+				</div>
+			</div>
+			<div class="col pj_widthAuto hideForMobile floatRight">
+				<div class="hideForMobile white_e7_Bg posRel lineHgt55">
+					<div flex="100">
+						<p class="right greyb7Txt font13 noMargin">{{p365Labels.common.pricesExclusiveOfGST}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+	<!-- start -->
+	<div class="white_e7_Bg">
+		<div class="topBot1Pad side3Pad resp_noPad noPadBot hideForMobile">
+			<div class="col fullWidth wp_padNo pj_widthAuto resp_widthAuto">
+				<ng-container class="section padRig15 width100" ng-if="!$root.wordPressEnabled">
+					<div ng-if='displayLoader' class="VariantSpinner">
+						<i class='fa fa-spinner fa-spin'></i>
+					</div>
+					<!-- <div ng-if="noCarrierVariantFound">No Result Founds</div> -->
+					<div class="col fullWidth padRig15 pj_widthAuto resp_widthAuto" ng-repeat="data in carrierVariantList">
+						<md-input-container class="md-block" ng-repeat="obj in carrierQuoteList | unique:'carrierId'" ng-if="obj.carrierId==data.carrierId">
+							<label class="resp_normFont12 hideForMobile textCapitialize">&nbsp;{{data.carrierName}}</label>
+							<md-select name="carrierVarients" ng-model="carrierVarients" ng-change="onSelectCarrierVariant(carrierVarients,data)" class="bold12 lineHgt34">
+								<md-option ng-value="varients" ng-repeat="varients in data.CarrierMaster"> {{varients.displayName}} </md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+				</ng-container>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<ng-container class="section padRig15 width100 center" ng-if="calcQuoteOnVariant">
+			<div class="">
+				<p class="dialogButton">
+					<!-- <md-button ng-click="toggleChangeClose()" class="inpCancelBtn" id="carBuyProductBtn">Cancel</md-button> -->
+					<md-button ng-click="singleClickCarQuote('calculateCarProductQuote');" class="inpSaveBtn" id="editCarInputSectionBtn">Submit</md-button>
+				</p>
+			</div>
+		</ng-container>
+		<div class="clearfix"></div>
+	</div>
+	<!-- end -->
+	<!-- Professional Journey Quote Screen -->
+	<!-- <div layout="row" class="hideForMobile white_e7_Bg posRel">
+		<div flex="100" class="side4Pad">
+			<p class="right greyb7Txt font13 noMargin">All prices are exclusive of GST</p>
+		</div>
+	</div> -->
+	<div class="clearfix"></div>
+
+	<div class="wrap side3Pad hideForMobile white_e7_Bg posRel">
+		<div class="pj_width23 Bot1Mar side10Mar resp_width100 iPad_width47" ng-repeat="data in $root.carQuoteResult | orderBy :sortKey:sortReverse | filter: customFilterCar"
+		 ng-if="validatePremium(data) && validateInsurancePlanType(data)" ng-show="showForShare(data)">
+			<div class="whiteBg borRad5 posRel">
+				<div layout="row">
+					<div flex="50" class="side10Pad">
+						<img data-toggle="tooltip" title="{{data.insuranceCompany}}" ng-src="{{$root.wp_path}}img\clogo\{{data.carrierId}}.png" style=""
+						 tooltip>
+					</div>
+					<div flex="50" class="right" id="carrierId-{{data.carrierId}}">
+						<!-- <md-button class="quoteBtn pinkFont" ng-disabled="quoteCarInputForm.$invalid || buyOptionDisabled" 
+						 ng-click="selectProduct(data)" id="carBuyProductBtn">Select this</md-button> -->
+						<md-button class="quoteBtn pinkFont" ng-disabled="quoteCarInputForm.$invalid || buyOptionDisabled" ng-click="buyProduct(data)"
+						 id="carBuyProductBtn">{{p365Labels.common.buyNow}}</md-button>
+
+					</div>
+				</div>
+				<md-card layout="row" class="pad10 noSideMar offWhiteBg borRad7" style="box-shadow: 1px 2px 4px #ddd;">
+					<div flex="33.33" class="width100 padLf10">
+						<p class="font11 lightGrey">{{p365Labels.common.rating}}
+							<span class="chipsRating font11 lightGrey">{{data.proffesionalRating | number:1}}</span>
+						</p>
+						<p class="bold13 highlightBlack">
+							<ng-rate-it star-width="12" star-height="12" step="0.1" ng-model="data.proffesionalRating" data-toggle="tooltip" title="{{data.proffesionalRating | number:1}}"
+							 resetable="false" rated="ratedCallback" min="0" max="5" read-only="true"></ng-rate-it>
+							<!-- {{data.proffesionalRating|number:1}}-->
+						</p>
+					</div>
+					<div flex="33.33" class="width100 padLf10 centerAlignTxt">
+						<p class="font11 lightGrey">
+							{{p365Labels.common.IDV}}
+							<!--<i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.insuredDeclaredValue}}" tooltip></i>-->
+						</p>
+						<p id="idv" class="bold13 highlightBlack">&#8377; {{(data.insuredDeclareValue) | number:0 | regexINR}}</p>
+					</div>
+					<div flex="33.33" class="width100 padLf10 centerAlignTxt">
+						<p class="font11 lightGrey">{{p365Labels.common.Premium}}
+							<!--<i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.totalPremium}}" tooltip></i>-->
+						</p>
+						<div class="bold13 highlightBlack">
+							<a class="pinkFont cursor"  style="display: inline-block;" ng-click="openCarPopup(0,data)" title="{{tooltipContent.viewDetails}}" data-html="true" tooltip>
+								&#8377; {{data.netPremium | number:0 | regexINR}}
+							</a>
+							<button ng-click="pdfviewer(data)" style="font-size: 12px;background-color: #f5edee;">
+								<i class="fa fa-file cursor"  style="color: red;"></i>
+							</button>
+						</div>
+					</div>
+				</md-card>
+				<div ng-if="isMinPremium(data.grossPremium,data.carrierId)" class="lowPremium">
+					<span>
+						<img ng-src="{{$root.wp_path}}img/icons/lowPremium.png">
+					</span>
+				</div>
+				<div ng-if="$first" class="highValue">
+					<span>
+						<img ng-src="{{$root.wp_path}}img/icons/highValue.png">
+					</span>
+				</div>
+				<md-card layout="row" class="pad10 noSideMar borRad7 noMarTop" style="box-shadow: 1px 2px 4px #ddd;">
+
+					<div flex="25" class="center" ng-click="openCarPopup(0,data)">
+						<div style="position:relative">
+							<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+							<span class="bold12 customStarText28">{{data.netPremiumMean|number:1}}</span>
+						</div>
+						<p class="font11 pinkFont cursor">{{p365Labels.common.Premium}}</p>
+					</div>
+					<div flex="25" class="center" ng-click="openCarPopup(1,data)">
+						<div style="position:relative">
+							<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+							<span class="bold12 customStarText28">{{data.insurerIndex|number:1}}</span>
+						</div>
+						<p class="font11 pinkFont cursor">{{p365Labels.common.Servicing}}</p>
+					</div>
+					<div flex="25" class="center" ng-click="openCarPopup(2,data)">
+						<div style="position:relative">
+							<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+							<span class="bold12 customStarText28">{{data.claimIndex|number:1}}</span>
+						</div>
+						<p class="font11 pinkFont cursor">{{p365Labels.common.Claims}}</p>
+					</div>
+					<div flex="25" class="center" ng-click="openCarPopup(3,data)">
+						<div style="position:relative">
+							<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+							<span class="bold12 customStarText28">{{data.garageIndex|number:1}}</span>
+						</div>
+						<div>
+							<p class="font11 pinkFont cursor">{{p365Labels.common.Garage}}</p>
+						</div>
+					</div>
+					<!-- <div flex="20" class="center">
+
+					</div> -->
+				</md-card>
+				<!-- ng-if="data.totalRiderAmount > 0" -->
+				<ng-container>
+					<div ng-if="data.ridersList.length>0">
+						<ng-container ng-repeat="riders in data.ridersList  | orderBy:'totalValue':true ">
+							<!-- ng-if="riders.totalValue > 0" -->
+							<div layout="row" class="pad10 resultQuote">
+								<p flex="5" class="">
+									<!-- <i class="material-icons pinkFont font12 padLf10">done_all</i> -->
+								</p>
+								<p flex="75">
+									<span ng-if="riders.updatedRiderName">{{riders.updatedRiderName}}</span>
+									<span ng-if="!riders.updatedRiderName">{{riders.riderName}}</span>
+								</p>
+								<p flex="20">
+									<span ng-if="riders.riderType != 'NA' && riders.riderType != 'included' && (riders.riderValue >= 1)">&#8377; {{riders.riderValue | number:0 | regexINR}}</span>
+								    <span ng-if="riders.riderType == 'NA' || riders.riderType == 'included'">{{riders.riderType}}</span>
+								    <span ng-if="riders.riderType != 'NA' && riders.riderType != 'included' && (!riders.riderValue || riders.riderValue == 0 || riders.riderValue < 1)">NA</span>
+								</p>
+							</div>
+
+							<div layout="row" class="pad10 resultQuote" ng-repeat="dependants in riders.dependant">
+								<p flex="5" class="">
+									<!-- <i class="material-icons pinkFont font12 padLf10">done_all</i> -->
+								</p>
+								<p flex="75">{{dependants.riderName}}</p>
+								<p flex="20">{{dependants.riderType}}</p>
+							</div>
+						</ng-container>
+					</div>
+				</ng-container>
+			</div>
+		</div>
+		<div class="pj_width25 Bot1Mar resp_width100 iPad_width33" ng-repeat="quoteRequest in $root.carQuoteRequest">
+			<ng-container ng-if="quoteRequest.status==0">
+			<div class="whiteBg borRad5" >
+				<div layout="row">
+					<div flex="50" class="side10Pad">
+						<img data-toggle="tooltip" title="{{data.insuranceCompany}}" ng-src="{{$root.wp_path}}img\clogo\{{quoteRequest.carrierId}}.png"
+						 style="" tooltip>
+					</div>
+					<div flex="50" class="right">
+					</div>
+				</div>
+				<md-card layout="row" class="pad10 noSideMar offWhiteBg borRad7 errorCard justifyCenter" style="box-shadow: 1px 2px 4px #ddd;">
+					
+				</md-card>
+				<md-card   layout="row" class="pad10 noSideMar offWhiteBg borRad7 errorCard justifyCenter" style="box-shadow: 1px 2px 4px #ddd;">
+					<img  src="{{$root.wp_path}}img/svg/eclipse.svg" alt="">
+					<!-- <div ng-bind-html="quoteRequest.message" bind-html-compile="quoteRequest.message" ng-if="quoteRequest.status == 2"></div></div> -->
+				 </md-card>
+			</div>
+		</ng-container>
+		<ng-container ng-if="$root.agencyPortalEnabled && quoteRequest.status == 2">
+			<div class="whiteBg borRad5" >
+				<div layout="row">
+					<div flex="50" class="side10Pad">
+						<img data-toggle="tooltip" title="{{data.insuranceCompany}}" ng-src="{{$root.wp_path}}img\clogo\{{quoteRequest.carrierId}}.png"
+						 style="" tooltip>
+					</div>
+					<div flex="50" class="right">
+					</div>
+				</div>
+				<md-card  layout="row" class="pad10 noSideMar offWhiteBg borRad7 errorCard justifyCenter" style="box-shadow: 1px 2px 4px #ddd;">
+					<div  ng-bind-html="quoteRequest.message" bind-html-compile="quoteRequest.message">
+				</div> 
+				</md-card>
+				<md-card layout="row" class="pad10 noSideMar offWhiteBg borRad7 errorCard justifyCenter" style="box-shadow: 1px 2px 4px #ddd;">
+					
+				 </md-card>
+			</div>
+		</ng-container>
+		</div>
+		
+		<div ng-if="noQuoteResultFound">
+			<md-card  ng-if="!$root.agencyPortalEnabled" layout="row" class="pad10 noSideMar offWhiteBg borRad7 errorCard justifyCenter" style="box-shadow: 1px 2px 4px #ddd;">
+				<div ng-bind-html="$root.carQuoteErrorResponse[0].message" bind-html-compile="$root.carQuoteErrorResponses[0].message"></div>
+			</md-card>
+		</div>
+	</div>
+
+	<!-- Professional Journey Quote Screen -->
+	<modal-dialog show="sortOptionsModal" width='500px' height='auto' class="ng-hide RTOSearchDiv">
+		<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.sortBy}}</h2>
+			</div>
+			<div class='ng-modal-close closePopup' ng-click='hideSortOptionsModal()'>
+				<i class="material-icons">highlight_off</i>
+			</div>
+		</div>
+		<div class="pad10">
+			<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+				<md-list class="resultPad">
+					<md-radio-group ng-model="sortOpt" ng-change="updateSort(sortOpt)">
+						<md-list-item class="md-1-line" ng-repeat="type in sortTypes">
+							<div class="md-list-item-text" flex="100">
+								<md-radio-button ng-value="sortTypes" style="margin-bottom: 0px !important;  margin: 0px auto !important;">
+									{{type.display}}
+								</md-radio-button>
+							</div>
+						</md-list-item>
+					</md-radio-group>
+				</md-list>
+			</div>
+		</div>
+	</modal-dialog>
+
+	<!-- <modal-dialog show="PACoverModal" width='600px' height='auto' class="ng-hide RTOSearchDiv">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">Personal Accident Cover Details</h2>
+		</div>
+		<div class='ng-modal-close closePopup' ng-click='hidePACoverModal()'>
+			<i class="material-icons">highlight_off</i>
+		</div>
+	</div>
+	<div class="pad10">
+		<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+			<ng-container ng-include="carPACoverSectionHTML"></ng-container>
+		</div>
+	</div>
+</modal-dialog> -->
+
+	<modal-dialog show="PACoverModal" width='800px' height='auto' class="ng-hide RTOSearchDiv">
+		<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">{{p365Labels.common.PACover}}</h2>
+			</div>
+			<div class='ng-modal-close closePopup' ng-click='hidePACoverModal()'>
+				<i class="material-icons greyb7Txt">highlight_off</i>
+			</div>
+		</div>
+		<div class="pad10 borderf2Top">
+			<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+				<div class="centerAlignTxt">
+					<div class="PACoverTxt grey63Txt">
+						<p class="font15 greyb9Txt">
+							{{p365Labels.common.PACoverPolicyDesc}}
+							<span class="font17 grey666Txt">{{p365Labels.common.amount}}</span>.
+						</p>
+						<p class="font16 grey63Txt">{{p365Labels.common.buyPlanWithoutPACover}}</p>
+						<p class="font15 greyb9Txt">{{p365Labels.common.buyPlanWithoutPACoverCase1}}</p>
+						<p class="font15 greyb9Txt">{{p365Labels.common.buyPlanWithoutPACoverCase2}}</p>
+						<p class="font15 greyb9Txt">{{p365Labels.common.buyPlanWithoutPACoverCase3}}</p>
+					</div>
+					<md-checkbox class="font12 grey63Txt" ng-model='PACoverDeclaration'>
+						<p>{{p365Labels.common.PACoverDeclaration}}
+						</p>
+					</md-checkbox>
+
+				</div>
+				<div class="center submitBtnAlign ">
+					<md-button class="md-raised md-primary popupSubmitBtn capitalizeText bold12" ng-click="submitPACoverDetails('existingInsurance')"
+					 ng-disabled='!PACoverDeclaration' id="carSubmitPACoverForm">{{p365Labels.common.noNeed}}</md-button>
+				</div>
+			</div>
+		</div>
+	</modal-dialog>
+
+	<modal-dialog show='riderDetailsModal' width='80%' height='auto' class="ng-hide RTOSearchDiv">
+		<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.selectRiderOption}}</h2>
+			</div>
+			<div class='ng-modal-close closePopup' ng-click='hideRiderDetailsModal()'>
+				<i class="material-icons">highlight_off</i>
+			</div>
+		</div>
+		<div class="pad10">
+			<div class="leadCaptureBox familyPopup selectRiderPop" style="padding: 0% !important;">
+				<ng-container ng-include="carRiderSectionHTML"></ng-container>
+			</div>
+			<div class="center submitBtnAlign">
+				<div class="dialogButton wrap" style="display:inline;">
+					<md-button ng-click="resetRiderSelection()" class="bluebuybuttoncar wp_riderPopup pj_cancel" id="carBuyProductBtn" style="background-color: #c4c4c4 !important;">{{p365Labels.common.Cancel}}</md-button>
+					<md-button ng-click="singleClickCarQuote()" class="bluebuybuttoncar wp_riderPopup pj_submit" id="carBuyProductBtn">{{p365Labels.common.Submit}}</md-button>
+				</div>
+			</div>
+		</div>
+	</modal-dialog>
+	<modal-dialog show="OdOnlyModal" width='300px' height='auto' class="ng-hide RTOSearchDiv">
+		<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow resultPad modifyIDVDiv">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;margin:5%">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">Enter Relevant Dates
+				</h2>
+				<ng-container class="pj_width14 padRig15 resp_width100 iPad_width25">
+					<md-input-container class="md-block" ng-show="polStatus">
+						<label class="md-no-float classForTooltip font12">TPPolicyStartDate</label> 
+						<input class="newDatepickerBorder wp_textBlack bold12"  placeholder="Enter Third Party Start Date" type="text" 
+							ng-model="vehicleInfo.TPPolicyStartDate" 
+							p365-date-picker="tpPolicyStartDate" />
+					</md-input-container>
+				</ng-container>  
+				<ng-container class="pj_width14 padRig15 resp_width100 iPad_width25"> 
+					<md-input-container class="md-block" >
+						<label class="md-no-float classForTooltip font12">TPPolicyExpiryDate</label> 
+						<input class="newDatepickerBorder wp_textBlack bold12"  placeholder="Enter Third Party Expiry Date" type="text" 
+							ng-model="vehicleInfo.TPPolicyExpiryDate"  
+							 p365-date-picker="tpPolicyExpiryDate" />
+					</md-input-container>
+					
+				</ng-container>
+			</div>
+		</div>
+		<div class='ng-modal-close closePopup' ng-click='hideOdOnlyDetailsModal()'>
+			<i class="material-icons">highlight_off</i>
+		</div>
+
+		
+		<ng-container class="section padRig15 width100 center">
+			<div class="">
+				<p class="dialogButton">
+					<md-button class='width20_per capitalTxt resp_normFont13 inpCancelBtn' ng-click="hideOdOnlyDetailsModal()" id="OdOnlyCancleBtn">CANCEL</md-button>
+					<md-button class='width20_per capitalTxt resp_normFont13 inpSaveBtn' ng-disabled="!vehicleInfo.TPPolicyExpiryDate" ng-click="singleClickCarQuote()" id="OdOnlySubmitBtn">SUBMIT</md-button>
+				</p>
+			</div>
+		</ng-container>
+	</modal-dialog>
+
+	<modal-dialog show="ownerTypeModal" width='500px' height='auto' class="ng-hide RTOSearchDiv">
+		<ng-container ng-include="vehicalOwnerTypeSectionHTML"></ng-container>
+	</modal-dialog>
+
+	<modal-dialog show="idvDetailsModal" width='500px' height='auto' class="ng-hide RTOSearchDiv">
+
+		<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.selectIdv}}</h2>
+			</div>
+			<div class='ng-modal-close wp_modalClose closePopup' ng-click='hideIDVModal()'>
+				<i class="material-icons">highlight_off</i>
+			</div>
+		</div>
+
+		<div class="pad10">
+			<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+				<ng-container ng-include="carIDVSectionHTML"></ng-container>
+			</div>
+		</div>
+
+	</modal-dialog>
+	<modal-dialog show="prevPolTypeModal" width='500px' height='auto' class="ng-hide RTOSearchDiv">
+		<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">Policy Type</h2>
+			</div>
+			<div class='ng-modal-close wp_modalClose closePopup' ng-click='hidePrevPolTypeModal()'>
+				<i class="material-icons">highlight_off</i>
+			</div>
+		</div>
+		<div class="pad10">
+			<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+				<div class="fullShadow resultBg">
+
+					<md-list class="resultPad modifyIDVDiv">
+						<md-radio-group ng-change="singleClickCarQuote();hidePrevPolTypeModal();" ng-model="quoteParam.onlyODApplicable">
+							<div class="pad10">
+								<md-list-item class="md-1-line">
+									<md-radio-button ng-value="false" class="classForTooltip">Comprehensive
+										<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" data-html="true" title="{{tooltipContent.IDVBestDeal}}"
+									 tooltip></i> -->
+										<!-- ng-checked="true" -->
+									</md-radio-button>
+								</md-list-item>
+							</div>
+							<div ng-show="showBundle" class="pad10 ng-hide !important">
+								<md-list-item class="md-1-line">
+									<md-radio-button ng-value="true" class="classForTooltip"> Bundled (1 OD + 5 TP)
+										<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" data-html="true" title="{{tooltipContent.IDVYourDeal}}"
+									 tooltip></i> -->
+									</md-radio-button>
+								</md-list-item>
+							</div>
+						</md-radio-group>
+					</md-list>
+				</div>
+			</div>
+		</div>
+	</modal-dialog>
+
+
+	<!-- Insurance Type Modal -->
+	<modal-dialog show="insuranceTypeModal" width='500px' height='auto' class="ng-hide RTOSearchDiv">
+		<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.selectInsuranceType}}</h2>
+			</div>
+			<div class='ng-modal-close wp_modalClose closePopup' ng-click='hideInsuranceTypeModal()'>
+				<i class="material-icons">highlight_off</i>
+			</div>
+		</div>
+
+		<div class="pad10">
+			<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+				<div ng-include="carInsuranceTypeSectionHTML"></div>
+			</div>
+		</div>
+	</modal-dialog>
+	<!-- ./Insurance Type Modal -->
+</form>
+<modal-dialog show='modalVehicleRegistration' width='900px' class="ng-hide RTOSearchDiv fghjhh" style="overflow:auto;">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.regPlaceModalLabel1}} </h2>
+		</div>
+		<div class='ng-modal-close wp_modalClose closePopup' ng-click='hideModal()'>
+			<i class="material-icons">highlight_off</i>
+		</div>
+	</div>
+
+	<div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop">
+		<div class="pad30 wp_noPadTop wp_RtoMetro">
+			<div class="inner-addon right-addon posRel">
+				<i class="material-icons RTOSearchIcon">search</i>
+				<input type="text" class="form-control wp_borRadius30 wp_noBoxShadow" autocomplete="off" placeholder="Search for your RTO or City using search option below"
+				 ng-required="true" name="search" ng-model="$root.selectedRegData" typeahead-on-select="onSelect($item)" typeahead-wait-ms="10"
+				 typeahead-no-results="noResults" uib-typeahead="reg.display for reg in getRegPlaceList($viewValue)" typeahead-show-hint="true"
+				 typeahead-min-length="2" style="width: 100%;" />
+			</div>
+			<div class="dropdown-menu-NoResult" ng-if="noResults">{{p365Labels.common.noResults}}
+			</div>
+			<div class="RTOPopup">
+				<p class="RTOHeading blueTextColor popularHeadRto center">{{p365Labels.common.popularCities}}</p>
+			</div>
+			<div class="RTOMiddleTab">
+				<div class="gallery-items" style="padding-bottom: 5px;">
+					<div class="gallery-item clickMetro" ng-click="selectedMetroRTO(metros)" ng-repeat="metros in defaultMetroList">
+						<div class="gallery-contents">
+							<div class="thumbnail gallery-trigger wp_RTOThumbnail">{{metros.cityName}}</div>
+							<input type="hidden" ng-value="$index" class="rowCount" />
+						</div>
+						<div class="showMetro">
+							<div class="info-bg" ng-hide="hideStatus" style="display: block;">
+								<div class="section group divForMobile">
+									<div class="col span_1_of_3 borderBtmRTO" ng-repeat="rto in metros.RTODetails">
+										<a ng-click="onSelect(rto)" class="hiddencities">{{rto.display}}</a>
+									</div>
+									<div ng-if="dummyLength==1" class="hideforMobile">
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+									</div>
+									<div ng-if="dummyLength==2" class="hideforMobile">
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</modal-dialog>
+
+<modal-dialog show="shareEmailModal" width='500px' height='auto' class="ng-hide RTOSearchDiv">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.shareEmail}}</h2>
+		</div>
+		<div class='ng-modal-close closePopup' ng-click='hideEmailModal()'>
+			<i class="material-icons">highlight_off</i>
+		</div>
+	</div>
+	<div class="pad10">
+		<div class="leadCaptureBox familyPopup selectRiderPop" style="padding: 0% !important;">
+			<ng-container ng-include="carShareEmailSectionHTML"></ng-container>
+		</div>
+	</div>
+</modal-dialog>
+
+<!-- ./Insurance Type Modal -->
+<!--     Premium Breakup Popup       -->
+<ng-container id="carPremiumBreakup" ng-include="carPremiumTemplate"></ng-container>
+<!--     Premium Breakup Popup       -->
+
+<form name="resultCnfrmBuy">
+	<modal-dialog show='modalResultCnfrmBuy' width='550px' max-height='620px' class="ng-hide popup_md-container">
+		<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.confirmDetails}}</h2>
+			</div>
+			<div class='ng-modal-close wp_modalClose closePopup' ng-click='hideResultCnfrmBuyModal()'>
+				<i class="material-icons">highlight_off</i>
+			</div>
+		</div>
+
+		<div class="pad10 responsiveTellus newPopupInnerShadow" style="border-radius: 0px !important; padding-top: 5px !important; padding-bottom: 7px !important;">
+			<!-- <span class="carBuyPopup"><p>
+				Please note inaccurate information on any of these details<br>
+			</p></span> -->
+			<div class="section">
+				<div class="col col-sm-12" style="width: 100%;">
+					<p class="compareMsg right greyb7Txt">{{p365Labels.common.pricesExclusiveOfGST}}</p>
+				</div>
+			</div>
+			<div class="leadCaptureBox buyNowBtnPopup divForMobile">
+				<div ng-if="!$root.agencyPortalEnabled" class="pad10 leftnoborder paddingWebNew leadCapturePadding carBuyConfirmDialog wp_NoPad"
+				 style="margin-bottom: 5px !important;">
+					<div class="section group">
+						<div layout="row">
+							<div flex="50" class="right5Mar">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack">{{p365Labels.common.grossPremium}}</label>
+									<input value="&nbsp;&#8377;{{selectedProduct.netPremium | number:0 | regexINR}}" disabled> </md-input-container>
+							</div>
+							<div flex="50" class="wp_width50">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack">{{p365Labels.common.idvValue}}</label>
+									<input value="&nbsp;&#8377;{{selectedProduct.insuredDeclareValue | number:0 | regexINR}}" disabled> </md-input-container>
+							</div>
+						</div>
+						<div>
+							<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+								<label class="wp_textBlack">{{p365Labels.common.vehicle}}</label>
+								<input value="{{selectedProduct.carrierVariantDisplayName}}" disabled>
+							</md-input-container>
+						</div>
+						<div layout="row">
+							<div flex="33" class="right5Mar">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack">{{p365Labels.common.regDate}}</label>
+									<!-- <a><span class="material-icons" style="float: left;">date_range&nbsp;</span></a> -->
+									<input class="newDatepickerBorder" type="text" ng-model="vehicleInfo.dateOfRegistration" ng-change="validateRegistrationDate()"
+									 readonly="readonly" p365-date-picker="dateOfRegistrationOptions" /> </md-input-container>
+							</div>
+							<div flex="33" class="right5Mar" ng-if="polStatus">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack hideForMobile">{{p365Labels.common.startDate}}</label>
+									<label class="wp_textBlack showForMobile">{{p365Labels.common.prevPolicyStart}}</label>
+									<!-- <a><span class="material-icons" style="float: left;">date_range&nbsp;</span></a> -->
+									<input class="newDatepickerBorder" type="text" ng-model="vehicleDetails.PreviousPolicyStartDate" readonly="readonly" p365-date-picker="previousPolicyStartDateOptions"
+									/> </md-input-container>
+							</div>
+							<div class="" style='color: #f7a100;'>{{prevPolicyStartDateWarning}}</div>
+							<div flex="33" ng-if="polStatus" class="">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack hideForMobile">{{p365Labels.common.expiryDate}}</label>
+									<label class="wp_textBlack showForMobile">{{p365Labels.common.prevPolicyExpiry}}</label>
+									<!-- <a><span class="material-icons" style="float: left;">date_range&nbsp;</span></a> -->
+									<input class="newDatepickerBorder" type="text" ng-model="vehicleInfo.PreviousPolicyExpiryDate" ng-change="setRangePrevPolicyStartDate()"
+									 readonly="readonly" p365-date-picker="previousPolicyExpiryDateOptions" /> </md-input-container>
+							</div>
+						</div>
+
+						<div layout="row">
+							<div flex="50" class="right5Mar">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack">{{p365Labels.common.selectManufactYear}}</label>
+									<md-select name="ManufacturingYear" class="mdInputContainer_input" ng-model="vehicleDetails.manufacturingYear" required md-no-asterisk>
+										<md-option ng-value="manuYear" ng-repeat="manuYear in manufacturingYearList">
+											{{manuYear}}</md-option>
+									</md-select>
+								</md-input-container>
+							</div>
+							<div flex="50">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom" ng-if="vehicleInfo.previousClaim == 'false' && renewal == true">
+									<label class="wp_textBlack">{{p365Labels.common.ncbExist}}</label>
+									<md-select name="ncb" ng-model="vehicleDetails.ncb" class="" ng-model-options="{trackBy: '$value.id'}" required md-no-asterisk>
+										<md-option ng-value="ncb" ng-repeat="ncb in ncbList" ng-disabled="instantQuoteCarForm"> {{ncb.display}} </md-option>
+									</md-select>
+								</md-input-container>
+							</div>
+							<div flex="50" ng-if="$root.voluntaryDeductable > 0 && quoteParam.deductible > 0">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack">{{p365Labels.common.deductibleAmount}}
+										<!--<i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.voluntaryDeductible}}" tooltip></i>-->
+									</label>
+									<md-select ng-model="vehicleDetails.deductibleObject" class="" ng-model-options="{trackBy: '$value.actualValue'}" required
+									 md-no-asterisk>
+										<md-option ng-value="deductible" ng-repeat="deductible in deductibleList">
+											{{deductible.actualValue}} </md-option>
+									</md-select>
+								</md-input-container>
+							</div>
+						</div>
+						<div layout="row" class="" ng-if="quoteParam.isAntiTheftDevice=='Y' && $root.antiTheftDeviceAmount > 0">
+							<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+								<label class="wp_textBlack">{{p365Labels.common.approvedAntiTheft}}
+									<!--<i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.approvedAntiTheftDevice}}"
+									 tooltip></i>-->
+								</label>
+								<md-select name="isAntiTheftDevice" class="" ng-model="vehicleDetails.isAntiTheftDevice">
+									<md-option ng-value="antiTheftDevice.value" ng-repeat="antiTheftDevice in antiTheftDeviceStatus" required md-no-asterisk>
+										{{antiTheftDevice.label}} </md-option>
+								</md-select>
+							</md-input-container>
+						</div>
+						<div layout="row" class="" ng-if="quoteParam.isARAIMember=='Y'">
+							<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+								<label class="wp_textBlack">{{p365Labels.common.autoAssociation}}
+									<!--<i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.automobileAssociationMember}}"
+									 tooltip></i>-->
+								</label>
+								<md-select name="isAutoAssociation" class="" ng-model="vehicleDetails.isAutoAssociation">
+									<md-option ng-value="autoAssociation.value" ng-repeat="autoAssociation in autoAssociationStatus" required md-no-asterisk>
+										{{autoAssociation.label}} </md-option>
+								</md-select>
+							</md-input-container>
+						</div>
+						<div ng-if="showPrevRiderPlanStatusDiv">
+							<div layout="row" class="">
+								<md-input-container flex="100" style="font-size:13px !important" class="md-block buyNowBtnPopup_bottom">{{p365Labels.common.riderSelectionTxt}}</md-input-container>
+								<md-radio-group ng-model="isPrevPolStatusRiderSelected" ng-change="checkPrevPolStatusRider(isPrevPolStatusRiderSelected)">
+									<md-list-item class="md-1-line smallTextInfo">
+										<md-radio-button ng-value="true" ng-checked="true" style="margin-bottom: 0px !important;margin: 0px auto !important;">Yes</md-radio-button>
+										<md-radio-button ng-value="false" style="margin-left: 15px !important;margin-bottom: 0px !important;">No
+										</md-radio-button>
+									</md-list-item>
+								</md-radio-group>
+							</div>
+							<div ng-repeat="selRider in selectedRiderList" style="font-size: 13px !important">
+								&nbsp;{{selRider.riderName}}{{$last ? '':($index==selRider.length-2)?',':',' }}
+								<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+							data-toggle="tooltip"
+							title="{{tooltipContent.automobileAssociationMember}}" tooltip></i> -->
+							</div>
+						</div>
+						<!-- <div layout="row" class="" ng-if="!CarPACoverDetails.isPACoverApplicable">
+							<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+								<label class="wp_textBlack">Exclude Personal Accident Cover </label>
+								<md-select name="ManufacturingYear" class="mdInputContainer_input" ng-model="$root.PACoverDetailsQuestion" ng-change="togglePAQuestions($root.PACoverDetailsQuestion)"
+								 required md-no-asterisk>
+									<md-option ng-value="ques.key" ng-repeat="ques in PACoverQuestions">
+										{{ques.question}}</md-option>
+								</md-select>
+							</md-input-container>
+						</div> -->
+						<div ng-if="!CarPACoverDetails.isPACoverApplicable" style="width: 100% !important;">
+							<md-checkbox class="resize blackAddon confirmBox" ng-true-value="true" ng-false-value="false" ng-model="KotakDeclarationForPACover.accpted"
+							 value="KotakDeclarationForPACover.accpted" name="_1OD_3TP" style="color: #9d2be8;font-size: 12px;">&nbsp;{{KotakDeclarationForPACover.msg}}
+							</md-checkbox>
+						</div>
+					</div>
+				</div>
+
+				<div ng-if="$root.agencyPortalEnabled" class="pad10 leftnoborder paddingWebNew leadCapturePadding carBuyConfirmDialog wp_NoPad"
+				 style="margin-bottom: 5px !important;">
+					<div class="section group">
+						<div layout="row">
+							<div flex="50" class="right5Mar">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack">{{p365Labels.common.grossPremium}}</label>
+									<input value="&nbsp;&#8377;{{selectedProduct.netPremium | number:0 | regexINR}}" disabled> </md-input-container>
+							</div>
+							<div flex="50" class="wp_width50">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack">{{p365Labels.common.idvValue}}</label>
+									<input value="&nbsp;&#8377;{{selectedProduct.insuredDeclareValue | number:0 | regexINR}}" disabled> </md-input-container>
+							</div>
+						</div>
+						<div>
+							<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+								<label class="wp_textBlack">{{p365Labels.common.vehicle}}</label>
+								<!-- <input value="{{vehicleDetails.carMakeObject.make + ' ' + vehicleDetails.carModelObject.model + ' ' + vehicleDetails.carVariantObject.variant + ' ' + vehicleInfo.fuel}}"
+								 disabled>-->
+								<input value="{{selectedProduct.carrierVariantDisplayName}}" disabled>
+							</md-input-container>
+						</div>
+						<div layout="row">
+							<div flex="33" class="right5Mar">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack">{{p365Labels.common.regDate}}</label>
+									<!-- <a><span class="material-icons" style="float: left;">date_range&nbsp;</span></a> -->
+									<input class="newDatepickerBorder" type="text" ng-model="vehicleInfo.dateOfRegistration" ng-change="validateRegistrationDate()"
+									 readonly="readonly" p365-date-picker="dateOfRegistrationOptions" /> </md-input-container>
+							</div>
+							<div flex="33" ng-if="polStatus" class="right5Mar">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack">{{p365Labels.common.startDate}}</label>
+									<!-- <a><span class="material-icons" style="float: left;">date_range&nbsp;</span></a> -->
+									<input class="newDatepickerBorder" type="text" ng-model="vehicleDetails.PreviousPolicyStartDate" readonly="readonly" p365-date-picker="previousPolicyStartDateOptions"
+									/> </md-input-container>
+								<div class="" style='color: #f7a100;'>{{prevPolicyStartDateWarning}}</div>
+							</div>
+							<div flex="33" ng-if="polStatus" class="">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack">{{p365Labels.common.expiryDate}}</label>
+									<!-- <a><span class="material-icons" style="float: left;">date_range&nbsp;</span></a> -->
+									<input class="newDatepickerBorder" type="text" ng-model="vehicleInfo.PreviousPolicyExpiryDate" ng-change="setRangePrevPolicyStartDate()"
+									 readonly="readonly" p365-date-picker="previousPolicyExpiryDateOptions" />
+								</md-input-container>
+							</div>
+						</div>
+						<div layout="row">
+							<div flex="50" class="right5Mar">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack">{{p365Labels.common.selectManufactYear}}</label>
+									<md-select name="ManufacturingYear" class="mdInputContainer_input" ng-model="vehicleDetails.manufacturingYear" required md-no-asterisk>
+										<md-option ng-value="manuYear" ng-repeat="manuYear in manufacturingYearList">
+											{{manuYear}}</md-option>
+									</md-select>
+								</md-input-container>
+							</div>
+							<div flex="50" class="">
+								<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom" ng-if="vehicleInfo.previousClaim == 'false' && renewal == true">
+									<label class="wp_textBlack">{{p365Labels.common.ncbExist}}</label>
+									<md-select name="ncbList" ng-model="vehicleDetails.ncb" class="" ng-model-options="{trackBy: '$value.id'}" required md-no-asterisk>
+										<md-option ng-value="ncb" ng-repeat="ncb in ncbList" ng-disabled="instantQuoteCarForm"> {{ncb.display}} </md-option>
+									</md-select>
+								</md-input-container>
+							</div>
+						</div>
+						<div layout="row" class="" ng-if="$root.voluntaryDeductable > 0 && quoteParam.deductible > 0">
+							<div flex="50" class="">
+								<md-input-container class="md-block buyNowBtnPopup_bottom">
+									<label class="wp_textBlack">{{p365Labels.common.deductibleAmount}}
+										<!--<i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.voluntaryDeductible}}" tooltip></i>-->
+									</label>
+									<md-select ng-model="vehicleDetails.deductibleObject" class="" ng-model-options="{trackBy: '$value.actualValue'}" required
+									 md-no-asterisk>
+										<md-option ng-value="deductible" ng-repeat="deductible in deductibleList">
+											{{deductible.actualValue}} </md-option>
+									</md-select>
+								</md-input-container>
+							</div>
+						</div>
+						<div flex="50" class="" ng-if="quoteParam.isAntiTheftDevice=='Y' && $root.antiTheftDeviceAmount > 0">
+							<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+								<label class="wp_textBlack">{{p365Labels.common.approvedAntiTheft}}
+									<!--<i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.approvedAntiTheftDevice}}"
+									 tooltip></i>-->
+								</label>
+								<md-select name="isAntiTheftDevice" class="" ng-model="vehicleDetails.isAntiTheftDevice">
+									<md-option ng-value="antiTheftDevice.value" ng-repeat="antiTheftDevice in antiTheftDeviceStatus" required md-no-asterisk>
+										{{antiTheftDevice.label}} </md-option>
+								</md-select>
+							</md-input-container>
+						</div>
+					</div>
+					<div layout="row" class="" ng-if="quoteParam.isARAIMember=='Y'">
+						<md-input-container flex="100" class="md-block buyNowBtnPopup_bottom">
+							<label class="wp_textBlack">{{p365Labels.common.autoAssociation}}
+								<i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.automobileAssociationMember}}"
+								 tooltip></i>
+							</label>
+							<md-select name="isAutoAssociation" class="" ng-model="vehicleDetails.isAutoAssociation">
+								<md-option ng-value="autoAssociation.value" ng-repeat="autoAssociation in autoAssociationStatus" required md-no-asterisk>
+									{{autoAssociation.label}} </md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+					<div ng-if="showPrevRiderPlanStatusDiv">
+						<div layout="row" class="">
+							<md-input-container flex="100" style="font-size:13px !important" class="md-block buyNowBtnPopup_bottom">{{p365Labels.common.riderSelectionTxt}} </md-input-container>
+							<md-radio-group ng-model="isPrevPolStatusRiderSelected" ng-change="checkPrevPolStatusRider(isPrevPolStatusRiderSelected)">
+								<md-list-item class="md-1-line smallTextInfo">
+									<md-radio-button ng-value="true" ng-checked="true" style="margin-bottom: 0px !important;margin: 0px auto !important;">Yes</md-radio-button>
+									<md-radio-button ng-value="false" style="margin-left: 15px !important;margin-bottom: 0px !important;">No
+									</md-radio-button>
+								</md-list-item>
+							</md-radio-group>
+						</div>
+						<div ng-repeat="selRider in selectedRiderList" style="font-size: 13px !important">
+							&nbsp;{{selRider.riderName}}{{$last ? '':($index==selRider.length-2)?',':',' }}
+							<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+							data-toggle="tooltip"
+							title="{{tooltipContent.automobileAssociationMember}}" tooltip></i> -->
+						</div>
+					</div>
+					<!-- <div ng-if="selectedProduct.carrierId==53" style="text-align: justify;width: 95% !important;">
+						 <md-checkbox class="resize blackAddon" ng-true-value="true" ng-false-value="false"
+						 ng-model="KotakDeclarationForPACover.accpted"
+						 value="KotakDeclarationForPACover.accpted" name="_1OD_3TP" style="color: #9d2be8;font-size: small;">&nbsp;{{KotakDeclarationForPACover.msg}}
+						 </md-checkbox>
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<div class='buyOwnerBtn center'>
+			<md-input-container class="md-block incomePg" style="margin:0px !important;">
+				<md-button ng-disabled='resultCnfrmBuy.$invalid || !KotakDeclarationForPACover.accpted' id="carSubmitResultCnfrmBuy" class='bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer'
+				 style="float: unset" ng-click="submitResultCnfrmBuy()">{{p365Labels.common.confirmBtn}}</md-button>
+			</md-input-container>
+		</div>
+	</modal-dialog>
+</form>
+<modal-dialog show='modalEmailView' width='550px' height='auto' class="ng-hide">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.shareEmailModalLabel1}}</h2>
+		</div>
+		<div class='ng-modal-close closePopup' ng-click='hideEmailModal()'>
+			<i class="material-icons">highlight_off</i>
+		</div>
+	</div>
+
+	<div class="pad10 responsiveTellus newPopupInnerShadow" style="">
+		<div class="popupTableHealth popupPadding" layout="row" style="padding: 3% 0% 3% 0% !important;">
+			<div flex="100" style="text-align: center; padding: 1% 0%;">
+				<b>{{p365Labels.common.shareEmailModalLabel2}}</b>
+				<div data-ng-repeat="choice in EmailChoices" ng-if="choice.username" flex="100" style="text-align: center; padding: 1% 0%;">
+
+					<b>{{choice.username}}</b>
+				</div>
+			</div>
+		</div>
+	</div>
+</modal-dialog>
+<modal-dialog show='sharePDF' width='650px' height='auto ' class="ng-hide">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">
+				Share PDF</h2>
+		</div>
+	</div>
+	<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+		<div class="fullShadow resultBg familyPopup" style="margin-bottom: 0px !important;">
+			<div flex="100" style="text-align: center; padding: 1% 0%;">
+				<b>PDF Shared successfully</b>
+				<p>
+					<b></b>
+			</div>
+			<div flex="100" style="text-align: left; padding: 1% 0%;">
+					<a href='{{PDFURL}}' target="_blank">
+						{{PDFURL}}</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="center submitBtnAlign">
+		<div class="dialogButton wrap" style="display:inline;">
+			<md-button ng-click="hideSharePDFModal()" class="bluebuybuttoncar wp_riderPopup pj_submit"
+				id="healthBuyProductBtn">OK</md-button>
+		</div>
+	</div>
+</modal-dialog>
+
+<form name="quoteUserInfoForm">
+	<modal-dialog show='modalView' width='550px' height='auto' class="ng-hide">
+		<div class="blueBackground one-edge-shadow">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.userInfoModalLabel4}}</h2>
+			</div>
+			<!-- <div class='ng-modal-close closePopup' ng-click='hideEmailModal()'>
+				<i class="material-icons">highlight_off</i>
+			</div> -->
+		</div>
+		<div class="pad10 responsiveTellus newPopupInnerShadow">
+			<div class="leadCaptureBox leadScrollMobile">
+				<div class="pad10 leftnoborder paddingWebNew leadCapturePadding">
+					<div class="section group">
+						<div layout="row" layout-xs="column">
+							<div class="right5Mar" flex="50" flex-xs="100">
+								<md-input-container style="width: 100%;">
+									<input type="text" class="capitializeName" placeholder="First name" name="firstName" ng-model="quoteUserInfo.firstName" autocomplete="off"
+									 maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/" required capitalize-first />
+									<div ng-messages="quoteUserInfoForm.firstName.$error" ng-if="quoteUserInfoForm.firstName.$touched">
+										<div style="color: red" ng-message="required">{{p365Labels.validationMessages.firstNameRequired}}</div>
+										<div style="color: red" ng-message="pattern">{{p365Labels.validationMessages.firstNameInvalid}}</div>
+										<div style="color: red" ng-message="maxlength">{{p365Labels.validationMessages.firstNameInvalid}}</div>
+										<div style="color: red" ng-message="minlength">{{p365Labels.validationMessages.firstNameInvalid}}</div>
+									</div>
+								</md-input-container>
+							</div>
+							<div flex="50" flex-xs="100" style="width: 100%;">
+								<md-input-container style="width: 100%;">
+									<input type="text" class="capitializeName" placeholder="Last name" name="lastName" ng-model="quoteUserInfo.lastName" autocomplete="off"
+									 maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/" style="box-shadow: 0px;" capitalize-first />
+
+									<div ng-messages="quoteUserInfoForm.lastName.$error" ng-if="quoteUserInfoForm.lastName.$touched">
+										<div style="color: red" ng-message="pattern">{{p365Labels.validationMessages.lastNameInvalid}}</div>
+										<div style="color: red" ng-message="maxlength">{{p365Labels.validationMessages.lastNameInvalid}}</div>
+										<div style="color: red" ng-message="minlength">{{p365Labels.validationMessages.lastNameInvalid}}</div>
+									</div>
+								</md-input-container>
+							</div>
+						</div>
+					</div>
+					<div layout="row" layout-xs="column">
+						<div class="right5Mar" flex="50" flex-xs="100">
+							<md-input-container style="width: 100%;">
+								<input type="text" ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-z.]{2,5}$/" placeholder="Email-ID" autocomplete="off"
+								 maxlength="50" name="emailId" ng-model="quoteUserInfo.emailId" required />
+								<div ng-messages="quoteUserInfoForm.emailId.$error" ng-if="quoteUserInfoForm.emailId.$touched">
+									<div style="color: red" ng-message="required">{{p365Labels.validationMessages.emailIdRequired}}</div>
+									<div style="color: red" ng-message="pattern">{{p365Labels.validationMessages.emailIdInvalid}}</div>
+									<div style="color: red" ng-message="maxlength">{{p365Labels.validationMessages.emailIdInvalid}}</div>
+								</div>
+							</md-input-container>
+						</div>
+						<div class="right5Mar" flex="50" flex-xs="100">
+							<md-input-container style="width: 100%;">
+								<div class="section group">
+									<div class="col span_3_of_3">
+										<input type="text" placeholder="Mobile Number" name="mobileNumber" ng-model="quoteUserInfo.mobileNumber" autocomplete="off"
+										 ng-pattern="/^[6789]\d{9}$/" maxlength="10" minlength="10" required />
+										<div ng-messages="quoteUserInfoForm.mobileNumber.$error" ng-if="quoteUserInfoForm.mobileNumber.$touched">
+											<div style="color: red" ng-message="required">{{p365Labels.validationMessages.mobileNumberRequired}}</div>
+											<div style="color: red" ng-message="maxlength">{{p365Labels.validationMessages.mobileNumberInvalid}}</div>
+											<div style="color: red" ng-message="minlength">{{p365Labels.validationMessages.mobileNumberInvalid}}</div>
+											<div style="color: red" ng-message="pattern">{{p365Labels.validationMessages.mobileNumberInvalid}}</div>
+										</div>
+									</div>
+								</div>
+							</md-input-container>
+						</div>
+					</div>
+					<div class="center resp_topBot5Pad">
+						<md-button type="submit" ng-click="redirectToAPResult()" id="aboutLeadBtn" ng-disabled="quoteUserInfoForm.$invalid || disabledRedirectToResult"
+						 class="PB_QuoteSaveBtn">
+							{{p365Labels.common.viewBuyQuote}}
+							<span ng-show="disabledRedirectToResult">
+								<i class="fa fa-spinner fa-spin "></i>
+							</span>
+						</md-button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</modal-dialog>
+</form>
+</div>

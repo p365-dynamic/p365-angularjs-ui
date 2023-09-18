@@ -1,0 +1,591 @@
+@media only screen and (min-device-width : 320px) and (max-device-width: 568px) {
+	body{
+		font-size: 12px;
+	}
+	.resp_Wrap{
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.resp_font12{
+		font-size: 12px !important;
+	}
+	.chooseProfession p{
+		font-size: 15px;
+	}
+	.resp_font14{
+		font-size: 14px !important;
+	}
+	.resp_font16{
+		font-size: 16px !important;
+	}
+	.resp_font18{
+		font-size: 18px !important;
+	}
+	.resp_font20{
+		font-size: 20px !important;
+	}
+	.resp_pj_width10{
+		width: 10%;
+	}
+	.resp_pj_width20{
+		width: 20%;
+	}
+	.resp_pj_width25{
+		width: 25%;
+	}
+	.resp_pj_width33{
+		width: 33%;
+	}
+	.resp_pj_width12-5{
+		width: 12.5%;
+	}
+	.resp_normFont12{
+		font-size: 12px;
+		font-weight: normal;
+	}
+	.resp_font9{
+		font-size: 9px;
+	}
+	.resp_normFont13{
+		font-size: 13px !important;
+		font-weight: normal !important;
+	}
+	.pj_shareIcon, .pj_sortIcon{
+		padding-right: 0px;
+	}
+	.customSwitch{position:absolute;left:30%;}
+	.resp_mar4 .md-label{left:5px;}
+	.resp_widthAuto{
+		width: auto !important;
+	}
+	.marginCheckbox{margin:0 0 0 32px;}
+	md-radio-button.ngo .md-label{
+		margin-left: 30px;
+	}
+	.ngo md-radio-button .md-container{
+		transform: translate(-50%,-50%);
+	}
+	.inpCancelBtn{
+		width: auto !important;
+	}
+	.noEqualHt{
+		min-height: unset;
+	}
+	.addOnInputRgt{
+		border-right: none;
+	}
+	.resp_noRigBorder{
+		border-right: none;
+	}
+	.resp_borderBottom{
+		border-bottom: 1px solid #ddd;
+	}
+	.resp_noBoder{
+	border: none;
+	}
+	.side10Mar {
+		margin-left: 7px;
+		margin-right: 7px;
+	}
+	.resp_side7Mar {
+		margin-left: 7px;
+		margin-right: 7px;
+	}
+	.resp_mar8Bot{
+		margin-bottom: 8px !important;
+	}
+	.resp_mar18Bot{
+		margin-bottom: 18px;
+	}
+	.resp_pad7_2Per{
+		padding: 7% 2%;
+	}
+	.resp_side5Pad{
+		padding-right: 5px;
+		padding-left: 5px;
+	}
+	.addToCartBtn{
+		/* left: 2px; */
+	}
+	.chooseProfession{
+		width: 50%;
+	}
+	.resp_width50{
+		width:50%;
+	}
+	.resp_pj_width55{
+		width:55%;
+	}
+	.resp_width40{
+		width:40%;
+	}
+	.resp_width45{
+		width:45%;
+	}
+	.resp_width15{
+		width:15%;
+	}
+	md-input-container{
+		margin: 12px 0;
+	}
+	.resp_width100{
+		width: 100%;
+	}
+	.resp_pad5{
+		padding: 5px;
+	}
+	.resp_pad10{
+		padding: 10px !important;
+	}
+	.resp_pad15{
+		padding: 15px !important;
+	}
+	.resp_pad20{
+		padding: 20px;
+	}
+	.resp_zeroPadRight{
+		padding-right:0px;
+	}
+	.resp_pad1{
+		padding: 1px;
+	}
+	.resp_padLf5{
+		padding-left: 5px; 
+	}
+	.resp_mar8{
+		margin: 12px 8px !important;
+	}
+	.resp_10Mar{
+		margin: 10px;
+	}
+	.resp_confirmBoxProp{
+		margin: 10%;
+		border: 1px solid #ddd;
+		border-radius: 3px;
+	}
+	.resp_existIllopupHgt{
+		height: 500px;
+		overflow: scroll;
+	}
+	.resp_riskpopupHgt{
+		height: 400px;
+		overflow: scroll;
+	}
+	.form-control{
+		font-size: 12px;
+	}
+	.resp_radioProp{
+		height: 40px;
+		width: 100%;
+		text-align: left;
+	}
+	.resp_selfCenter {
+		align-self: center;
+	}
+	.resp_noSelfCenter{
+		align-self: unset;
+	}
+	.bikeInfoPad{
+		padding:0%;
+	}
+	.width20_per{
+		width: 50%;
+	}
+	.resp_width45Per{
+		width: 45%;
+	}
+	.resp_width30Per{
+		width: 30%;
+	}
+	.resp_width80{
+		width: 80%;
+	}
+	.resp_width90{
+		width: 90%;
+	}
+	/* .pbAutocomplete input{
+		padding: 0px;
+	} */
+	.chooseProfession img{
+		box-shadow: 5px 10px 10px rgba(0,0,0,0.1);
+	}
+	.selectProfession h2,.personalInfo h2, .leadCaptureBox h2{
+		font-size: 20px;
+	}
+	.resp_white_f7_Bg {
+		background-color: #f7f7f7;
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	}
+	side3_25Pad{padding: 3%;}
+	.overFlowDiv{overflow-x:auto; }
+	.divForMobileTable {min-width:500px;}
+	.overFlowDiv .divForMobileTable .width20_per{width:auto;padding-right: 10px;}
+	.resp_side5Mar{
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	.resp_side5MarPer{
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+	.resp_topBot5MarPer{
+		margin-top: 5%;
+		margin-bottom: 5%;
+	}
+	.resp_padContainer {
+		padding: 0% 2%;
+	}
+	.genderPg button,.incomePg button,.commButton{
+		width: 50%;
+	}
+	.resp_center{
+		text-align: center;
+	}
+	.resp_borderProp{
+		border: 1px solid #ccc;
+		padding: 10px;
+		border-radius: 5px;
+	}
+	.resp_nosideMar{
+		margin-left:0px;
+		margin-right:0px;
+	}
+	.resp_noMar{
+		margin: 0px !important;
+	}
+	.resp_noPad{
+		padding: 0px !important;
+	}
+	.resp_topBot2Mar{
+		margin-top:2%;
+		margin-bottom:2%; 
+	}
+	.resp_side1Mar {
+		margin-left: 1%;
+		margin-right: 1%;
+	}
+	.resp_autoMar{
+		margin:auto;
+	}
+	.resp_topBot0Mar{
+		margin-top:0%;
+		margin-bottom:0%; 
+	}
+	.resp_noMarBot{
+		margin-bottom: 0px;
+	}
+	.pinkBtn{
+		padding: 0% 20%  !important;
+	}
+	.resp_insuredInfoData{
+		background: #fff;
+		box-shadow: 1px 2px 3px #ddd;
+		padding: 10px;
+		border-radius: 5px;
+	}
+	md-switch.noLabel{justify-content: center;}
+	md-switch.noLabel .md-container{margin-left: unset;}
+	md-autocomplete.infoPage{
+		background: transparent !important;
+	}
+	md-radio-group{
+		max-width: 100%;
+	}
+	.resp_servScroll,.resp_IncurScroll{
+		max-height: 345px;
+		overflow-y: scroll;
+	}
+	.resp_topBot5Pad{
+		padding-top:5%;
+		padding-bottom:5%; 
+	}
+	.resp_autoWidth{
+		width: auto;
+	}
+	.hideForMobile{
+		display: none !important;
+	}
+	.popAddToCartBtn{
+		padding: 0px 2px;
+	}
+	.showForMobile{
+		display:inline !important;
+	}
+	.resp_inputGroupPretend{
+		margin: 5% 0px 15% 0%;
+	}
+	.resp_left{
+		text-align: left;
+	}
+	/* .backBtn{
+		position: fixed !important;
+		left: -6px;
+		top: 50%;
+		background: #f2f2f2 !important;
+		border: 1px solid #e3e2e2 !important;
+		border-radius: 0px 50px 50px 0px !important;
+		padding: 4px 0px 0 !important;
+	}
+	.backBtn:hover{
+		background: #eae7e7;
+	} */
+	.resFrameAlignment {
+		margin: 10px 0px 10px 0px;
+	}
+
+	/* Car Input Section */
+
+	.resp_pad7_10{
+		padding: 7px 10px;
+	}
+	.resp_titleProp{
+		font-size: 11px;
+		color: #888;
+	}
+	.resp_valueProp{
+		font-size: 11px;
+		color: #424242;
+		font-weight: 600;
+	}
+	.resp_propPageCount{
+		position: absolute;
+		top: -32px;
+		right: 44%;
+	}
+	.gender md-radio-button .md-container{
+		left: unset;
+	}
+
+	md-checkbox:last-of-type {
+		left:unset;
+	}
+	md-radio-button .md-container {
+		margin-left: 4% !important;
+	}
+	.side4_3Mar{
+		margin-right: 4%;
+		margin-left: 4%;
+	}
+	.resp_6LfMar{
+		margin-left: 6%;
+	}
+	.resp_25LfMar{
+		margin-left: 25%;
+	}
+	.garMod md-tab-item{
+		border-bottom: 1px solid #ddd;
+	}
+	.resp_20LfMar{
+		margin-left: 20%;
+	}
+	.chooseProfTitle{
+		padding:0px 25px;
+	}
+	.addOnSec {
+		margin: 0% 5%;
+	}
+	.bestQuote {
+		margin: 0% 3%;
+	}
+	.resp_bikeRidePop{
+		height: 65vh;
+		overflow-y: scroll;
+		flex-wrap: unset;
+	}
+	.md-tab {
+		font-size: 13px !important;
+		padding: 12px 5px !important;
+	}
+	.pad25255{
+		padding: 15px 5px 5px;
+	}
+	.customStarText{left:52%;top:40%;}
+	.customStar{font-size: 20px;}
+	md-dialog{width:unset;}
+	/* Car Input Section */
+	.ng-modal-dialog {
+		width: 90% !important;
+	}
+	.gallery-item {
+		width: 100%;
+		height: 100% !important;
+	}
+	.showMetro{position: relative;padding: 0;}
+	.Mia-div{top:unset;bottom: 0;}
+	nz-tour #nzTour-box-wrap{width: 90% !important;}
+	nz-tour #nzTour-box {width:100% !important;}
+	.garMod md-tab-item{width:auto;float: unset;}
+	.wp_autoComplete.noDisplay  md-autocomplete{display: unset;}
+	.lowPremium{position:absolute;bottom:-21px;z-index: 1;right: -5px;}
+	.highValue{position:absolute;bottom:-21px;z-index: 1;}
+}
+.closePopup {
+    right: 5px;
+}
+/*----------  projector  ----------*/
+@media only projection and (min-device-width : 800px) {
+	.ng-modal-dialog {
+		width: 90% !important;
+	}
+}
+/*----------  iPad  ----------*/
+@media only screen and (min-device-width : 768px) and (max-device-width: 1024px) {
+	.iPad_font14{
+		font-size: 14px !important;
+	}
+	.iPad_side20Mar{
+		margin-left: 20%;
+		margin-right: 20%;
+	}
+	.iPad_side27Mar{
+		margin-left: 27%;
+		margin-right: 27%;
+	}
+	.iPad_nosideMar{
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	.iPad_side10PerMar{
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+	.iPad_side15PerMar{
+		margin-left: 15%;
+		margin-right: 15%;
+	}
+	.iPad_side5PerMar{
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+	.iPad_side25PerMar{
+		margin-left: 25%;
+		margin-right: 25%;
+	}
+	.iPad_zeroPadRight{
+		padding-right:0px;
+	}
+	.iPad_width10{
+		width:10%;
+	}
+	.iPad_width16{
+		width:16%;
+	}
+	.iPad_width17{
+		width:17%;
+	}
+	.iPad_width18{
+		width:18%;
+	}
+	.iPad_width20{
+		width:20%;
+	}
+	.iPad_width25{
+		width:25%;
+	}
+	.iPad_width30{
+		width:30%;
+	}
+	.iPad_width33{
+		width:33%;
+	}
+	.iPad_width40{
+		width:40%;
+	}
+	.iPad_width47{
+		width:47%;
+	}
+	.iPad_width50{
+		width:50%;
+	}
+	.iPad_width60{
+		width:60%;
+	}
+	.iPad_width75{
+		width:75%;
+	}
+	.iPad_width90{
+		width:90%;
+	}
+	.iPad_width100{
+		width: 100%;
+	}
+	.iPad_side5PerPad{
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+	md-radio-group {
+		max-width: 100%;
+		width: 20%;
+	}
+	.side28PerPad{padding-right: 20%; padding-left:20%; }
+	.resFrameAlignment {max-width:100% !important;}
+	.gender .input-group{width: 90%;}
+	.confirmContent .flex-15{max-width: 16% !important;}
+	.customStar{
+		font-size: 18px;
+	}
+	.get_quote_button{
+		width: auto;
+	}
+	/* .customStarText {
+		left: 17px;
+		top: 11px;
+	} */
+	.iPad_bold10{
+		font-size:10px !important;
+		font-weight:bold;
+	}
+	.addToCartBtn{
+		/* left: 20px; */
+	}
+	.iPad_btnAutoWid{
+		width:auto !important;
+	}
+	.iPad_noBoder{
+		border: none;
+	}
+	.iPad_noRigBorder{
+		border-right: none;
+	}
+	.iPad_borderBottom{
+		border-bottom: 1px solid #ddd;
+	}
+	.iPad_wrap{
+		flex-wrap: wrap;
+		display: flex;
+	}
+	.iPad_30MarTop{
+		margin-top: 3%;
+	}
+	.iPad_30MarLeft{
+		margin-left: 30%;
+	}
+.justifyCenter md-radio-group{justify-content: center;}
+	.iPad_20MarLeft{
+		margin-left: 20%;
+	}
+	.iPad_25MarLeft{
+		margin-left: 25%;
+	}
+	.iPad_10MarLeft{
+		margin-left: 10%;
+	}
+	.iPad_15MarLeft{
+		margin-left: 15%;
+	}
+	.iPad_existIllopupHgt{
+		height: 500px;
+		overflow: scroll;
+	}
+	.iPad_existIllopupWid{
+		width: 700px;
+	}
+	.bestQuote {
+		margin: 0% 3%;
+	}
+}
+@media only screen and (min-device-width : 990px) and (max-device-width: 1024px) {
+	.iPad_padRig5Per{
+		padding-right:5%;
+	}
+}

@@ -1,0 +1,132 @@
+<form name="coverageDetailsForm">
+		<div class="noMargin pad10 professionalProposalSection" >
+				<div class="right">
+					<!-- <p class="noMargin grey87Txt"><span><i class="material-icons pinkFont bold11">edit</i></span> Edit</p> -->
+				</div>
+				<div layout="row" layout-xs="column" layout-sm="row" class="resp_center">
+					<div flex="35" flex-xs="100" flex-sm="35">
+						<img ng-src="{{$root.wp_path}}img\clogo\{{selectedProduct.carrierId}}.png">
+					</div>
+					<div flex="65" flex-xs="100" flex-sm="65">
+						<p class="font12 noMarBot marTop8Per resp_noMar" ng-if="$root.wordPressEnabled">{{selectedProduct.insuranceCompany}} </p>
+		
+						<p class="font12 noMarBot marTop8Per resp_noMar" ng-if="!$root.wordPressEnabled">
+								<md-input-container class="md-block resultPad">
+										<md-select
+										name="reltn"
+										ng-model="premiumDetails.selectedProductDetails"
+										ng-change="changeInsuranceCompany()"
+										class="mdInputContainer_input" md-no-asterisk> <md-option
+										ng-value="travelquoteresp"
+										ng-repeat="travelquoteresp in quoteCalcResponse" ng-if="travelquoteresp.grossPremium > 0">
+									{{travelquoteresp.insuranceCompany}} - (Sum Insured : {{travelquoteresp.sumInsured}} & Premium :
+									{{travelquoteresp.grossPremium}})
+									</md-option> </md-select>
+								</md-input-container>
+							</p>
+						<p class="bold16 pinkFont marTop3Per" style="margin-bottom: 0">Premium Amount &#8377; {{selectedProduct.grossPremium | number:0 | regexINR}}
+						</p>
+						<p class="compareMsg font10" style="margin-top: 0">(All prices are inclusive of GST)</p>
+					</div>
+				</div>
+				<div layout="row" layout-xs="column" layout-sm="row">
+					<div flex="35" flex-xs="100" flex-sm="35" class="propCoverageTxt">
+						<p class="noMargin resp_normFont13">Coverage Details</p>
+					</div>
+					<div flex="65" flex-xs="100" flex-sm="65" style="border-top: 1px solid #ddd;margin-top: 5px;"></div>
+				</div>
+				<div class="pad1020 iPad_wrap">
+					<md-input-container class="noMarBot noMarTop width100 iPad_width50">
+						<p class="pLabel">Sum Insured</p>
+						<p class="bold12"><span ng-bind-html="selectedProduct.sumInsuredCurrencySymbol" bind-html-compile="selectedProduct.sumInsuredCurrencySymbol"></span>
+							{{selectedProduct.sumInsured | regexINR}}</p>
+					</md-input-container>
+					<md-input-container class="noMarBot noMarTop width100 iPad_width50">
+						<p class="pLabel">Product</p>
+						<p class="bold12">{{selectedProduct.planName}}</p>
+					</md-input-container>
+				</div>
+		
+		<ng-container ng-if="selectedProduct.benefitTableUrl">
+				<div layout="row" layout-xs="column" layout-sm="row" >
+					<div flex="35" flex-xs="100" flex-sm="35" class="propCoverageTxt">
+						<p class="noMargin resp_normFont13">Product Details</p>
+					</div>
+					<div flex="65" flex-xs="100" flex-sm="65" style="border-top: 1px solid #ddd;margin-top: 5px;"></div>
+				</div>
+				<div class="pad1020">
+					<md-input-container class="noMarBot noMarTop width100">
+						<p class="pLabel"><a href ="{{$root.wp_path}}buy/travel/pdf/{{selectedProduct.benefitTableUrl}}" target="_blank"> Features 
+							&nbsp;&nbsp;<i style="color: #FC3C3F;" class="fa fa-file" aria-hidden="true"></i></a></p>
+						<!-- <p class="bold12"></p> -->
+					</md-input-container>
+				</div>
+			</ng-container>
+			<ng-container ng-if="selectedProduct.brochureLink">
+				<div layout="row" layout-xs="column" layout-sm="row" >
+					<div flex="35" flex-xs="100" flex-sm="35" class="propCoverageTxt">
+						<p class="noMargin resp_normFont13">Product Details</p>
+					</div>
+					<div flex="65" flex-xs="100" flex-sm="65" style="border-top: 1px solid #ddd;margin-top: 5px;"></div>
+				</div>
+				<div class="pad1020">
+					<md-input-container class="noMarBot noMarTop width100">
+						<p class="pLabel"><a href ="{{selectedProduct.brochureLink}}" target="_blank">Brochure
+								&nbsp;&nbsp;<i style="color: #FC3C3F;" class="fa fa-file" aria-hidden="true"></i>
+								</a></p>
+						<!-- <p class="bold12"></p> -->
+					</md-input-container>
+				</div>
+			</ng-container>
+				<div layout="row" layout-xs="column" layout-sm="row">
+					<div flex="35" flex-xs="100" flex-sm="35" class="propCoverageTxt">
+						<p class="noMargin resp_normFont13">Trip Details</p>
+					</div>
+					<div flex="65" flex-xs="100" flex-sm="65" style="border-top: 1px solid #ddd;margin-top: 5px;"></div>
+				</div>
+				<div class="pad1020">
+					<div layout="row" layout-xs="column" layout-sm="row" class="iPad_width100">
+						<div flex="50" flex-xs="100" flex-sm="50">
+							<md-input-container class="noMarBot noMarTop width100">
+								<p class="pLabel">Destinations</p>
+								<p class="bold12"><span class="span_font" ng-repeat = "destination in travelDetails.destinations">
+										{{destination.displayField}}<span ng-if="!$last">, </span></p>
+							</md-input-container>
+						</div>
+						<div flex="50" flex-xs="100" flex-sm="50">
+							<md-input-container class="noMarBot noMarTop width100">
+								<p class="pLabel">Source</p>
+								<p class="bold12">{{travelDetails.source}}</p>								
+							</md-input-container>
+						</div>
+					</div>
+				
+					<div layout="row" layout-xs="column" layout-sm="row" class="iPad_width100">
+						<div flex="33" flex-xs="100" flex-sm="33">
+							<md-input-container class="noMarBot noMarTop width100">
+								<p class="pLabel">Trip Start Date</p>
+								<p class="bold12">{{travelDetails.startdate}}</p>
+							</md-input-container>
+						</div>
+						<div flex="33" flex-xs="100" flex-sm="33">
+							<md-input-container class="noMarBot noMarTop width100">
+								<p class="pLabel">Trip End Date</p>
+								<p class="bold12">{{travelDetails.enddate}}</p>								
+							</md-input-container>
+						</div>
+						<div flex="33" flex-xs="100" flex-sm="33">
+							<md-input-container class="noMarBot noMarTop width100">
+								<p class="pLabel">Max Trip Duration</p>
+								<p class="bold12">{{travelDetails.tripDuration}}</p>
+							</md-input-container>
+						</div>
+					</div>
+						<!-- <md-input-container class="noMarBot noMarTop width100"  >
+							<p class="pLabel">Product Details</p>
+							<p class="bold12">Click<a href ="{{$root.wp_path}}buy/travel/pdf/{{selectedProduct.benefitTableUrl}}" target="_blank"> here </a>to see benefits of this plan</p>
+						</md-input-container> -->
+				</div>
+			</div>
+		
+
+</form>

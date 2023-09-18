@@ -1,0 +1,17 @@
+{
+  "name": "policies365",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-imagemin": "^1.0.1",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-gzip": "^0.1.0",
+    "grunt-rev": "~0.1.0",
+    "grunt-update": "^0.2.3",
+    "grunt-usemin": "~2.0.2"
+  }
+}

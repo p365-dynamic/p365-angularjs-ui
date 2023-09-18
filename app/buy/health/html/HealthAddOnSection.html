@@ -1,0 +1,99 @@
+<div class="fullShadow resultBg classForTooltip">
+	<md-toolbar ng-if="!$root.wordPressEnabled"
+		class="md-theme-light resultHeader p365-light">
+	<h2 class="md-toolbar-tools" ng-click="showRiderDetails()" >
+		<span>Filter Benefits <i
+			class="fa fa-question-circle fa-sm whiteColor" data-toggle="tooltip"
+			data-html="true" title="{{tooltipContent.filterbenefits}}" tooltip></i></span>
+		<span flex></span>
+		<md-button
+			ng-if="$root.baseEnvEnabled  && riderInputSection"
+			class="md-icon-button"
+			id="riderInputExpandIcon"> <i class="material-icons">arrow_drop_down</i>
+		</md-button>
+		<md-button
+			ng-if="$root.baseEnvEnabled &&!$root.wordPressEnabled  && !riderInputSection"
+			class="md-icon-button"
+			id="riderInputCollapseIcon"> <i class="material-icons">arrow_drop_up</i>
+		</md-button>
+	</h2>
+	</md-toolbar>
+	<md-list ng-hide="$root.baseEnvEnabled && riderInputSection" class="resultPad">
+	 <md-list-item
+		class="md-1-line checkBox" ng-repeat="features in planBenefits">
+	<div layout="row" layout-wrap flex>
+		<div class="md-list-item-text" flex="100">
+			<p>
+				<md-checkbox class="blackAddon resize"
+					ng-click="featuresSelected(features, selected, true)"
+					checklist-model="selectedFeatures" checklist-value="features"
+					name='add'></md-checkbox>
+				&nbsp;{{features.name}}&nbsp;<i
+					class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip"
+					title="{{features.description}}" tooltip></i>
+			</p>
+		</div>
+	</div>
+	<md-divider></md-divider> </md-list-item> <md-list-item class="md-1-line checkBox">
+	<div class="section" style="width: 100%">
+		<div class="col col-sm-12" style="padding: 0">
+			<div class="md-list-item-text" flex="100">
+				<div ng-repeat="v in [0]">
+					<p>
+						<md-checkbox class="resize blackAddon" ng-true-value="true"
+							ng-false-value="false" ng-model="parent.roomRentFeature"
+							name="add"
+							ng-change="featuresSelected(parent.roomType, selected, true)">&nbsp;<span class="wp_addOn"></span>Room
+						Rent&nbsp;<i class="fa fa-question-circle fa-sm bluecolor"
+							data-toggle="tooltip"
+							title="It is the Cap applied by the Insurance companies in the form of room charges or room category for the hospital room that you can opt for."
+							tooltip></i> </md-checkbox>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col col-sm-12" ng-if="parent.roomRentFeature">
+			<md-select ng-model="parent.roomType"
+				ng-change="featuresSelected(parent.roomType, selected, true)"
+				required md-no-asterisk> <md-option ng-value="room"
+				ng-repeat="room in roomTypesArray">&nbsp;{{room.name}}</md-option> </md-select>
+		</div>
+	</div>
+	<md-divider></md-divider> </md-list-item> <md-list-item class="md-1-line checkBox">
+	<div class="section" style="width: 100%">
+		<div class="col col-sm-12" style="padding: 0">
+			<div class="md-list-item-text" flex="100">
+				<div ng-repeat="v in [0]">
+					<p data-toggle="tooltip" title="" tooltip>
+						<md-checkbox class="resize blackAddon" ng-true-value="true"
+							ng-false-value="false"
+							ng-model="parent.preExistingCoverageFeature" name="add"
+							ng-change="featuresSelected(features, selected, false)">&nbsp;<span class="wp_addOn"></span>Pre-Existing
+						Coverage&nbsp;<i class="fa fa-question-circle fa-sm bluecolor"
+							data-toggle="tooltip"
+							title="Pre-existing medical conditions or ailments for which you are already in medication are not covered in the plan for a specific time duration and would vary between plans. Lower the waiting period it is better."
+							tooltip></i> </md-checkbox>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col col-sm-12" ng-if="parent.preExistingCoverageFeature">
+			<md-select ng-model="parent.coverageAfter"
+				ng-change="updateFeatureList()" required md-no-asterisk>
+			<md-option ng-value="coverage"
+				ng-repeat="coverage in preExistingCoverages">&nbsp;{{coverage.display}}</md-option>
+			</md-select>
+		</div>
+	</div>
+	<md-divider></md-divider> </md-list-item> </md-list>
+	<!-- <ng-container class="wp_left wp_width100 wp_resultSticky">
+	<p ng-if="$root.wordPressEnabled" class="dialogButton" layout="row">
+		<button flex="50" ng-click="resetFeatureBenefit()"
+			class="bluebuybuttoncar wp_riderPopup" id="carBuyProductBtn"
+			style="background-color: #c4c4c4 !important;">Cancel</button>
+		<button flex="50" ng-click="singleClickHealthQuote()"
+			class="bluebuybuttoncar wp_riderPopup" id="carBuyProductBtn">Submit</button>
+	</p>
+	</ng-container> -->
+</div>

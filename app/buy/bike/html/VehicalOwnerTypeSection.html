@@ -1,0 +1,35 @@
+<div class="fullShadow resultBg">
+	<div>
+		<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">Vehicle registered in the name of</h2>
+			</div>
+			<div class='ng-modal-close closePopup' ng-click='hideVehicleOwnerModal()'>
+				<i class="material-icons">highlight_off</i>
+			</div>
+		</div>
+
+		<div class="pad10">
+			<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+				<div>
+					<md-list>
+						<md-radio-group ng-model="quoteParam.ownedBy">
+							<md-list-item class="md-1-line">
+								<md-radio-button style="padding-right:50px" value="Individual" ng-checked="true">Individual </md-radio-button>
+								<span></span>
+								<md-radio-button value="Organization">Organization </md-radio-button>
+							</md-list-item>
+						</md-radio-group>
+					</md-list>
+				</div>
+			</div>
+			<div class="center submitBtnAlign">
+				<div class="dialogButton wrap" style="display: inline;">
+					<md-button ng-click="hideVehicleOwnerModal()" class="bluebuybuttoncar wp_riderPopup pj_cancel" id="carBuyProductBtn" style="background-color: #c4c4c4 !important;">Cancel</md-button>
+					<md-button ng-click="individualClick(quoteParam.ownedBy)" class="bluebuybuttoncar wp_riderPopup pj_submit" id="carBuyProductBtn">Submit</md-button>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>

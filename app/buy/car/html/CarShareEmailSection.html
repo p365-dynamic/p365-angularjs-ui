@@ -1,0 +1,48 @@
+<!-- Commented based on Uday comments -->
+<div class="fullShadow resultBg">
+
+	<div style="padding: 5px 10px">
+		<div class="menuSubHeaderText center">
+			{{globalLabel.applicationLabels.common.shareEmailLabel}}</div>
+		<div class="resultPad" ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled">
+			<div class="md-1-line checkBox" ng-repeat="data in $root.carQuoteResult | orderBy :sortKey:sortReverse" ng-if="validatePremium(data)"
+			 ng-show="showForShare(data)">
+				<div layout="row" layout-wrap flex>
+					<div class="md-list-item-text classForTooltip" flex="100">
+						<p>
+							<md-checkbox class="resize" data-toggle="tooltip" data-html="true" title="{{data.insuranceCompany}}" tooltip checklist-model="insuranceCompanyList.selectedInsuranceCompany"
+							 checklist-value="data.carrierId" name='shareInsuranceCompany'>&nbsp;{{data.insuranceCompany}}
+							</md-checkbox>
+							<md-divider></md-divider>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<md-list class="resultPad">
+			<md-input-container data-ng-repeat="choice in EmailChoices" ng-if="EmailChoices.length >= 1" md-no-float class="md-icon-right md-block emailTextPadding wp_emailTextPadding"
+			 style="padding-right:0px;"> <input ng-model="choice.username" type="email" placeholder="Email-Id(required)" style="width:85%;">
+				<!-- <md-icon ng-if="!$root.wordPressEnabled">
+					<i class="material-icons">create</i>
+				</md-icon> -->
+				<!-- <i ng-click="deleteReceipient($index)" ng-if="EmailChoices.length > 1" class="material-icons cursor">delete</i> -->
+				<!-- <i ng-click="addNewChoice()" ng-show="!emailPopUpDisabled && choice.addNew" class="material-icons cursor">add_box</i> -->
+			</md-input-container>
+			<!-- <p ng-if="!$root.wordPressEnabled">
+				<md-button class="md-raised emailOrangeBtn" id="carShareEmailId" md-prevent-menu-close="md-prevent-menu-close" ng-click="addNewChoice()"
+				 style="background:#f7a100;" ng-disabled="emailPopUpDisabled">+ Add Another Email-Id</md-button>
+			</p> -->
+			
+			
+			<div class="center submitBtnAlign">
+				<div class="dialogButton wrap" style="display: inline;">
+					<md-button class="md-raised emailBlueBtn pj_submit" ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled" id="carShareEmailQuotes"
+					 ng-disabled="insuranceCompanyList.selectedInsuranceCompany.length == 0" ng-click="sendQuotesByEmail()">Send Quotes by Email</md-button>
+					<md-button class="md-raised emailBlueBtn pj_submit" ng-if="$root.baseEnvEnabled && $root.wordPressEnabled" id="carShareEmailQuotes"
+					 ng-click="sendQuotesByEmail()">Send Quotes by Email</md-button>
+				</div>
+			</div>
+		</md-list>
+	</div>
+</div>

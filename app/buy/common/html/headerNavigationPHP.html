@@ -1,0 +1,23 @@
+<div id="tabbed-nav">
+      <!-- condition for posp portal  -->
+	<ul class="tabs iPOSWidth crmNavi" ng-if="$root.agencyPortalEnabled && $root.pospEnabled && !$root.hideLOB">
+		<li class="iPOS14Width" ng-repeat="tab in tabsMenu" ng-if="!tab.flagToShow"
+			ng-class="{active:$root.isActiveTab2 == tab.businessLineId}" ng-click="$root.onClickTab(tab)"><span
+				class="{{tab.className}}">
+				<label class="navigationLabel"><b>
+						<h4 class="navigationTitle iPOS50Margin">{{tab.title}}</h4>
+					</b></label>
+			</span></li>
+	</ul>
+	<!-- condition for Agency portal  -->
+	<!--if  hideLOB flag will be true to hide tabs -->
+	<ul class="tabs iPOSWidth crmNavi"
+		ng-if="$root.agencyPortalEnabled && !$root.pospEnabled && !$root.hideLOB">
+		<li class="iPOS20Width" ng-if="!tab.flagToShow" ng-repeat="tab in tabsMenu"
+			ng-class="{active:$root.isActiveTab2 == tab.businessLineId}" ng-click="$root.onClickTab(tab)"><span
+				class="{{tab.className}}"> <label class="navigationLabel"><b>
+						<h4 class="navigationTitle iPOS50Margin">{{tab.title}}</h4>
+					</b></label>
+			</span></li>
+	</ul>
+</div>

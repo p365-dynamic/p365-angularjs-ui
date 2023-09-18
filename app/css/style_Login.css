@@ -1,0 +1,64 @@
+.AfterLoginTabs {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 18.5%;
+	color: #424242 !important;
+}
+
+.AfterLoginTabs li {
+	display: block;
+}
+
+.AfterLoginTabs li {
+	cursor: pointer;
+	color: #424242;
+	float: left;
+	width: 160px;
+	font-size: 20px;
+	padding: 20px 5px;
+	text-decoration: none;
+	border-radius: 6px;
+	background: #000;
+	position: relative;
+	margin-bottom: 12px;
+	text-align: center;
+}
+
+.AfterLoginTabs li:hover {
+	color: #424242;
+	background: #f7a100;
+	border-radius: 6PX;
+}
+
+.AfterLoginTabs li.active {
+	filter: none;
+	background: #f7a100;
+	box-shadow: 2px 0px 2px 0px #191919;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	margin-top: 0px;
+	color: #16a085;
+	position: relative;
+	border-radius: 6px;
+	width: 160px;
+}
+
+.AfterLoginTabs li a {
+	color: #fff;
+}
+
+.tab-contentRight {
+	float: left;
+	width: 79.5%;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-ms-border-radius: 6px;
+	margin-left: 3%;
+}
+
+.Loginlefttab {
+	width: 80%;
+}

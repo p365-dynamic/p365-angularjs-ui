@@ -1,0 +1,565 @@
+<!-- <loading></loading>
+<div class="clearfix"></div> -->
+<!-- <div
+	class="commonImage one-edge-shadow mobileInstantQuote wp_noBoxShadow">
+	 <div class="section {{$root.bgcolorFromClaimsSelection}} wp_md-content"
+		ng-if="$root.wordPressEnabled">
+		<md-content class="wp_md-content wp_noPadTop">
+		<div ng-include="currentTabClaims"
+			class="wp_padCommonClaims wp_claimColors wp_inputBorderRadius wp_upperCase"></div>
+		</md-content>
+	</div>
+	<div class="section">
+		<div>
+			<div id="tabbed-nav">
+				<ul class="tabs" >
+					<li 
+						 ng-repeat="tab in tabs"
+						ng-click="onClickTab(tab)"
+						 >
+						<span ng-if="!$root.wordPressEnabled" class="{{tab.className}}">
+					</span>
+					<div layout="row" layout-xs="column"  layout-sm="column">
+						<div flex="25">
+						<div class="claimtabbtn"><label class="navigationLabel"><h4
+								class="navigationTitle wp_uppercase">{{tab.title}}</h4></label>
+							</div>
+						</div>
+					</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col col-lg-9 instantQuoteBG"
+			ng-if="!$root.wordPressEnabled"
+			style="padding-bottom: 22px; min-height: 420px">
+			<div ng-include="currentTabClaims"></div>
+		</div>
+
+	</div>
+</div> -->
+<div class="personalInfo resp_topBot5Pad  marTop4Per" style="text-align:center;padding-bottom:2%">
+	<h2 class="chooseProfTitle ">Your Truested Partner In Speedy And Fair Claim Assistance</h2>
+</div>
+<md-content>
+		<md-tabs class="popTab garMod "  md-dynamic-height >
+			<md-tab  ng-repeat="tab in tabs" 
+			ng-click="onClickTab(tab)" ng-class="{active:isActiveTab(tab.url), disabled: tab.disabled}" label="{{tab.title}}">
+			<div class="section ">
+			<md-content class="tabBox">
+			<div ng-include="currentTabClaims"
+				class="wp_padCommonClaims wp_claimColors wp_inputBorderRadius wp_upperCase"></div>
+			</md-content>
+		</div>
+		
+			</md-tab>
+		</md-tabs>
+
+</md-content>
+<script type="text/ng-template" id="registerClaim.tpl.html">
+	<div class="section">
+			
+				<div id="tabs">
+				<div class="col col-lg-3 claimHorizontalTab " style="border-right:1px solid #ccc"> 
+					<ul>
+						<li style="border-bottom:1px solid #ccc;text-align:center" ng-repeat="tab in tabHorizontal" ng-click="onClickHorizontalTab(tab)"
+							ng-class="{active:isActiveHorizontalTab(tab.url), disabled: tab.disabled}">
+							<label class="claimNavigationTitle" ><h4
+									style="text-transform:none;font-weight:normal">{{tab.title}}</h4></label>
+						</li>
+					</ul>
+					<div class="clear"></div>
+				</div>
+			
+				<div class="col col-lg-9 ">	
+					<div ng-include="currentTab" class="wp_proposalPadTop50"></div>
+				</div>
+				
+		</div>
+		</div>
+	
+		<modal-dialog show='modalEmailConfirm' width='550px' height='auto'
+			class="ng-hide">
+		<div>
+			<div class="blueBackground one-edge-shadow" style="" layout="row">
+				<div class="" style="padding-top: 5px;" flex="90">
+					<h3 class="white popupHeading" style="text-align: center;">
+						<span>Claims Confirmation</span>
+					</h3>
+				</div>
+				<div class='ng-modal-close' ng-click='hideEmailConfirmModal()'
+					id="termsNConditionClose"
+					style="color: #fff; margin-top: 5px !important;" flex="10">
+					<i class="material-icons">close</i>
+				</div>
+			</div>
+		</div>
+		<div class="pad10 responsiveTellus newPopupInnerShadow" style="">
+			<div class="popupTableHealth popupPadding" layout="row"
+				style="padding: 3% 0% 3% 0% !important;">
+				<div flex="100" style="text-align: center; padding: 1% 0%;">
+					<p style="color: #268fe2; font-size: 16px;">Thanks for
+						your request. we would get back to you shortly</p>
+				</div>
+			</div>
+			<div class="center">
+				<button type="button" class="bluebutton"
+					ng-click="hideEmailConfirmModal()">OK</button>
+			</div>
+		</div>
+		</modal-dialog>
+
+			</script>
+	<script type="text/ng-template" id="onlineClaimForm.tpl.html">
+<div class="middleTab dashboard">
+	<div layout="row" layout-xs="column" layout="column" style="margin-right:25%" class='resp_noMar iPad_side5PerMar'>
+		<div flex="50" flex-xs="100" flex-sm="100" 
+			class="side10Mar">
+			<label
+			class="buynowSelect" style="padding: 0px;">Insurance Type
+			</label> 
+			 <md-select ng-model="selectedInsuranceType" class=" claimInputBox claimInputBoxValue" 
+				ng-model-options="{trackBy: '$value.id'}"
+				ng-init="setDefault()"
+				class="mdInputContainer_input"
+				ng-change="showRegistrationNo(selectedInsuranceType)" required
+				md-no-asterisk> <md-option ng-value="selectedType"
+				ng-repeat="selectedType in insuranceType">{{selectedType.name}}</md-option>
+			</md-select>
+		</div>
+		<div flex="50" flex-xs="100" flex-sm="100" class="side10Mar">
+			
+			<label
+			class="buynowSelect" style="padding: 0px;">Insurance Company
+			</label>
+		 <md-select  class="claimInputBox claimInputBoxValue" 
+				ng-change="showDisplayLabel(selectedCarrierName)"
+				ng-model="selectedCarrierName"
+				ng-model-options="{trackBy: '$value.carrierName'}"
+				class="mdInputContainer_input" required md-no-asterisk>
+			<md-option ng-value="carrier" ng-repeat="carrier in carrierList">{{carrier.carrierName}}</md-option>
+			</md-select>
+
+		</div>
+	</div>
+	<p class="wp_claimsEmptyPadding"></p>
+	<div ng-if="displayURL.length > 0" class="wp_respCenterText">
+		<span ng-repeat="res in displayURL | filter:filterOnlineClaimData">
+			<md-button ng-href="{{res.url}}" target="blank"
+				class=" claimDisplyLabel">
+			{{res.displayLabel}}</md-button>
+
+		</span>
+	</div>
+	<div
+		ng-if="displayURL.length == null || displayURL.length == 0 || onlineClaimLinkFlag">
+		<div style="color: red" class="wp_errorClaims">Online Claim form
+			is not available</div>
+	</div>
+
+	<div layout="row" layout-xs="column" layout="column"
+		ng-if="!$root.wordPressEnabled">
+		<div flex="100">
+			<div flex="100"
+				style="border: 1px dashed; padding: 20px; border-radius: 3px; margin-top: 2%">
+				For immediate assistance or emergency, please call our Claims
+				Assistance team at <a href="callto:02242114299">(022) 42114299 </a>
+				or email us at <a href="mailto:info@policies365.com">
+					info@policies365.com</a>
+			</div>
+			<div></div>
+		</div>
+	</div>
+</div>
+</script>
+<script type="text/ng-template" id="claimForm.tpl.html">
+			<div class="middleTab dashboard">
+			<div layout="row" layout-xs="column" layout="column"  style="margin-right:25%" class='resp_noMar iPad_side5PerMar' >
+					<div flex="50" flex-xs="100" flex-sm="100"  class="side10Mar">
+					<label class="buynowSelect" style="padding: 0px;">Insurance Type
+						</label> <md-select ng-model="selectedInsuranceType"  class="claimInputBox claimInputBoxValue" 
+						 ng-model-options="{trackBy: '$value.id'}" ng-init="selectedInsuranceType==insuranceType[0];showRegistrationNo(selectedInsuranceType)"
+						class="mdInputContainer_input"  ng-change="showRegistrationNo(selectedInsuranceType)"  required md-no-asterisk>
+						<md-option ng-value="selectedType" ng-repeat="selectedType in insuranceType" >{{selectedType.name}}</md-option> 
+						</md-select>
+					</div>
+					<div flex="50" flex-xs="100" flex-sm="100" class="side10Mar" >
+						 <label
+						class="buynowSelect" style="padding: 0px;">Insurance Company
+						</label> <md-select  ng-change="showDisplayLabel(selectedCarrierName)" class="claimInputBox claimInputBoxValue"
+						ng-model="selectedCarrierName" ng-model-options="{trackBy: '$value.carrierName'}"
+						class="mdInputContainer_input" required md-no-asterisk>
+						<md-option ng-value="carrier" ng-repeat="carrier in carrierList" >{{carrier.carrierName}}</md-option> 
+						</md-select>
+
+					</div>
+			</div>
+<p class="wp_claimsEmptyPadding"></p>
+				<div  ng-if="displayURL.length > 0" class="wp_respCenterText">
+				<span ng-repeat="res in displayURL | filter:filterClaimData">
+				<md-button ng-href="{{res.url}}" target="blank"   class="claimDisplyLabel ">
+						{{res.displayLabel}}</md-button>
+										
+				</span>
+				</div>
+				<div ng-if="displayURL.length == null || displayURL.length == 0 ">
+				<div style="color:red" class="wp_errorClaims">Claim form is  not available</div>
+				</div>
+						
+				<div layout="row" layout-xs="column" layout="column" ng-if="!$root.wordPressEnabled">
+					<div flex="100">
+					<div flex="100"
+					 style="border:1px dashed;padding:20px; border-radius: 3px;margin-top:2%"
+					>For immediate assistance or emergency, please call our
+					Claims Assistance team at <a
+					href="callto:02242114299">(022) 42114299 </a>
+					or email us at <a
+					href="mailto:info@policies365.com">
+					info@policies365.com</a>
+					</div> 
+					<div></div>
+					</div>
+			</div>
+			</div>
+			</script>
+<script type="text/ng-template" id="registerClaimForm.tpl.html">
+				<form name="claimForm">
+					<div class="contact">
+					<div class="middleTab dashboard">
+						<div layout="row" layout-xs="column" layout="column" >
+						<div flex="50" flex-xs="100" flex-sm="100" >
+							 <label
+								class="buynowSelect" style="padding: 0px;">Insurance Type
+								</label> <md-select ng-model="$parent.selectedInsuranceType" ng-model-options="{trackBy: '$value.id'}" ng-init="selectedInsuranceType==insuranceType[0];showRegistrationNo(selectedInsuranceType)"
+								lass="mdInputContainer_input"  ng-change="showRegistrationNo(selectedInsuranceType)"  required md-no-asterisk>
+								<md-option ng-value="selectedType" ng-repeat="selectedType in insuranceType" >{{selectedType.name}}</md-option> 
+							</md-select> 
+						</div>
+						<div flex="50" flex-xs="100" flex-sm="100" >
+							 <label
+								class="buynowSelect" style="padding: 0px;">Insurance Company
+								</label> <md-select
+								ng-model="$parent.selectedCarrierName" ng-model-options="{trackBy: '$value.carrierName'}"
+								class="mdInputContainer_input" required md-no-asterisk>
+								<md-option ng-value="carrier" ng-repeat="carrier in carrierList" >{{carrier.carrierName}}</md-option> 
+							 </md-select>
+						</div>
+						</div>
+						<div layout="row" layout-xs="column" layout="column" >
+							<div flex="50" flex-xs="100" flex-sm="100"  >
+								<md-input-container class="md-block wp_whiteColor">
+									<label class="buyTextPadding">First Name</label> <input
+									class="" name='firstName'
+									ng-model='$parent.claimDetailsUserInfo.firstName'
+									autocomplete='off' maxlength="35" minlength="1" 
+									ng-pattern="/^[a-zA-Z\s]*$/" capitalize-first  />
+									<div ng-messages="claimForm.firstName.$error"
+									ng-if="claimForm.firstName.$touched">
+									<div style="color: red" ng-message="pattern">Enter
+															valid first Name</div>
+									<div style="color: red" ng-message="maxlength">35
+															characters as max length</div>
+									</div>
+								</md-input-container>
+						</div>
+						<div flex="50" flex-xs="100" flex-sm="100"  >
+								<md-input-container class="md-block wp_whiteColor">
+									<label class="buyTextPadding">Last Name</label> <input
+									class="" name='lastName'
+									ng-model='$parent.claimDetailsUserInfo.lastName'
+									autocomplete='off' maxlength="35" minlength="1" 
+									ng-pattern="/^[a-zA-Z\s]*$/" capitalize-first  />
+									<div ng-messages="claimForm.lastName.$error"
+									ng-if="claimForm.lastName.$touched">
+									<div style="color: red" ng-message="pattern">Enter
+															valid last Name</div>
+									<div style="color: red" ng-message="maxlength">35
+															characters as max length</div>
+									</div>
+								</md-input-container>
+						</div>
+					</div>
+						
+						<div layout="row" layout-xs="column" layout="column" >
+							<div flex="50" flex-xs="100" flex-sm="100" >
+								<md-input-container class="md-block wp_whiteColor">
+									<label class="buyTextPadding">Mobile Number</label> <input
+									class="" name='mobileNumber'
+									ng-model='$parent.claimDetailsUserInfo.mobileNumber'
+									autocomplete='off' ng-pattern='/^[6789]\d{9}$/'
+									maxlength='10' minlength='10' required md-no-asterisk />
+									<div ng-messages="claimForm.mobileNumber.$error"
+									ng-if="claimForm.mobileNumber.$touched">
+									<div style="color: red" ng-message="required">This
+															is required</div>
+									<div style="color: red" ng-message="pattern">Enter
+															valid mobile no</div>
+									<div style="color: red" ng-message="maxlength">10
+															characters as max length</div>
+									</div>
+								</md-input-container>
+						</div>
+						<div flex="50" flex-xs="100" flex-sm="100">
+							<md-input-container class="md-block wp_whiteColor">
+									<label class="buyTextPadding">Email ID</label> 
+									<input class=""
+									ng-pattern='/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+.[a-z.]{2,5}$/'
+									autocomplete='off' maxlength='50' name='emailId'
+									ng-model='$parent.claimDetailsUserInfo.emailId' required md-no-asterisk  />
+									<div ng-messages="claimForm.emailId.$error"
+									ng-if="claimForm.emailId.$touched">
+									<div style="color: red" ng-message="required">This
+															is required</div>
+									<div style="color: red" ng-message="pattern">Enter
+									valid mail id</div>
+									<div style="color: red" ng-message="maxlength">50
+									characters as max length</div>
+									</div>
+							</md-input-container>
+						</div>
+					</div>
+							<div layout="row" layout-xs="column" layout="column" >
+						<div flex="50" flex-xs="100" flex-sm="100"  >
+								<md-input-container class="md-block wp_whiteColor">
+								<div>
+								<label class="buyTextPadding">Policy
+								Number</label> <input class="mdInputContainer_input"
+								name='policyNumber'
+								ng-model='composeEmail.paramMap.policyNumber'
+								autocomplete='off' maxlength='35' minlength='1'
+								ng-pattern='/^[a-zA-Z0-9-/_]*$/' 
+								capitalize />
+							</div>
+							</md-input-container>
+						</div>
+						<div flex="50" flex-xs="100" flex-sm="100" flex-xs="100" flex-sm="100">
+							<md-input-container class="md-block wp_whiteColor" ng-if="regNo"><div class="classForTooltip">
+							 <label class="buyTextPadding">Registration Number 
+							<i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" 
+							title="{{globalLabel.tootip.regNoTooltip}}" data-html="true" tooltip></i>
+							 </label>
+							 <input class="mdInputContainer_input\" ng-model='composeEmail.paramMap.RegistrationNumber' style='text-transform: uppercase;' 
+							 ng-change="validateRegistrationNumber(composeEmail.paramMap.RegistrationNumber)"
+							 maxlength="11" name='RegistrationNumber' id=\"field\" autocomplete='off'  md-no-asterisk/><div style="color: red" ng-show="regNumStatus">{{globalLabel.validationMessages.regNumInvalid}}</div> 
+							<div ng-messages="claimForm.RegistrationNumber.$error"> <div style="color: red"
+							 ng-message="required">This is  required</div> <div style="color: red" ng-message="pattern">Enter  valid registration number</div> 
+							</div>  </div>
+							
+						</md-input-container>
+						</div>
+						</div>
+					<div layout="row" layout-xs="column" layout="column">
+					<div flex="100">
+					<md-input-container class="md-block feedTextArea wp_whiteColor">
+						<label class="md-no-float" style="padding-left: 2px;"></label>
+							<textarea name="feedbackDescription" placeholder="Briefly tell us about what happened "
+							ng-model="$parent.composeEmail.paramMap.claimContent" rows="3"
+							autocomplete="off" class="signBoxShadow" minlength="0"
+							maxlength="250"
+							style="background: transparent !important; border-width: 1px; height: 100px !important;"
+							ng-required="true" md-no-asterisk></textarea> </md-input-container>
+							<div ng-messages="claimForm.feedbackDescription.$error"
+							ng-if="claimForm.feedbackDescription.$touched">
+							<div style="color: red" ng-message="required">This
+							is required</div>
+							<div style="color: red" ng-message="pattern">Enter
+							valid suggestion</div>
+							<div style="color: red" ng-message="maxlength">250
+							characters as max length</div>
+							</div>
+							<div></div>
+							<div>
+							<div ng-show="inputValidStatus" style="color: red">{{globalLabel.validationMessages.validInputMsg}}</div>
+							</div>
+							</div>
+				</div>
+				<div class="wp_respCenterText" >
+					<md-button type="submit" ng-disabled="disableSubmit" ng-click="sendClaimInfo(claimForm)"
+					class=" claimDisplyLabel ">Submit
+					<span ng-show="disableSubmit"><i class="fa fa-spinner fa-spin "></i></span>
+					</md-button>
+					<div class="clearfix"></div>
+					</div>
+				<p style="color: #268fe2; font-size: 16px;"
+				ng-show="emailSendCfrmStatus">Thank you for your request.
+				we would get back to you shortly</p>
+				<div layout="row" layout-xs="column" layout="column" ng-if="!$root.wordPressEnabled">
+								<div flex="100">
+									<div flex="100"
+									 style="border:1px dashed;padding:20px; border-radius: 3px;margin-top:2%"
+									 >For immediate assistance or emergency, please call our
+									 Claims Assistance team at <a
+												href="callto:02242114299">(022) 42114299 </a>
+												or email us at <a
+												href="mailto:info@policies365.com">
+								     info@policies365.com</a>
+									</div> 
+									<div></div>
+									</div>
+							</div>
+						</div>
+						</div>
+						
+				</form>
+			</script>
+<script type="text/ng-template" id="trackClaim.tpl.html">
+			
+<p class="wp_claimsEmptyPaddingSmall"></p>		
+	<div class="middleTab dashboard">
+			<div layout="row" layout-xs="column" layout="column" style="margin-right:25%" class='resp_noMar iPad_side5PerMar' >
+					<div flex="50" flex-xs="100" flex-sm="100"  class="side10Mar">
+						<label
+						class="buynowSelect" style="padding: 0px;">Insurance Type
+						</label> <md-select class="claimInputBox claimInputBoxValue" ng-model="selectedInsuranceType" ng-model-options="{trackBy: '$value.id'}" ng-init="selectedInsuranceType==insuranceType[0];showRegistrationNo(selectedInsuranceType)"
+						class="mdInputContainer_input"  ng-change="showRegistrationNo(selectedInsuranceType)"  required md-no-asterisk>
+						<md-option ng-value="selectedType" ng-repeat="selectedType in insuranceType" >{{selectedType.name}}</md-option> 
+						</md-select> 
+					</div>
+					<div flex="50" flex-xs="100" flex-sm="100" class="side10Mar">
+						<label
+						class="buynowSelect" style="padding: 0px;">Insurance Company
+						</label> <md-select class="claimInputBox claimInputBoxValue" ng-change="showDisplayLabel(selectedCarrierName)" 
+						ng-model="selectedCarrierName" ng-model-options="{trackBy: '$value.carrierName'}"
+						class="mdInputContainer_input" required md-no-asterisk>
+						<md-option ng-value="carrier" ng-repeat="carrier in carrierList" >{{carrier.carrierName}}</md-option> 
+						</md-select> 
+
+					</div>
+			</div>
+<p class="wp_claimsEmptyPadding"></p>
+				<div  ng-if="displayURL.length > 0" class="wp_respCenterText">
+				<span ng-repeat="res in displayURL | filter:filterTrackData">
+				<md-button ng-href="{{res.url}}" target="blank" class=" claimDisplyLabel ">
+						{{res.displayLabel}}</md-button>
+				</span>
+				</div>
+				<div ng-if="displayURL.length == null || displayURL.length == 0 || trackDataLinkFlag">
+				<div style="color:red" class="wp_errorClaims">Track Claim Link is  not available</div>
+				</div>
+						
+				<div layout="row" layout-xs="column" layout="column" ng-if="!$root.wordPressEnabled">
+					<div flex="100">
+					<div flex="100"
+					 style="border:1px dashed;padding:20px; border-radius: 3px;margin-top:2%"
+					>For immediate assistance or emergency, please call our
+					Claims Assistance team at <a
+					href="callto:02242114299">(022) 42114299 </a>
+					or email us at <a
+					href="mailto:info@policies365.com">
+					info@policies365.com</a>
+					</div> 
+					<div></div>
+					</div>
+			</div>
+			</div>
+
+			</script>
+<script type="text/ng-template" id="garageList.tpl.html">
+				
+<p class="wp_claimsEmptyPaddingSmall"></p>				
+<div class="middleTab dashboard">
+			<div layout="row" layout-xs="column" layout="column" style="margin-right:25%" class='resp_noMar iPad_side5PerMar' >
+					<div flex="50" flex-xs="100" flex-sm="100"  class="side10Mar">
+						<label
+						class="buynowSelect" style="padding: 0px;">Insurance Type
+						</label> <md-select class="claimInputBox claimInputBoxValue" ng-model="selectedInsuranceType" ng-model-options="{trackBy: '$value.id'}" disabled ng-init="selectedInsuranceType==insuranceType[0];showRegistrationNo(selectedInsuranceType)"
+						class="mdInputContainer_input"  ng-change="showRegistrationNo(selectedInsuranceType)"   required md-no-asterisk>
+						<md-option ng-value="selectedType" ng-repeat="selectedType in insuranceType | filter:{label:'Motor'}" >{{selectedType.name}}</md-option> 
+						</md-select> 
+					</div>
+					<div flex="50" flex-xs="100" flex-sm="100" class="side10Mar" >
+						 <label
+						class="buynowSelect" style="padding: 0px;">Insurance Company
+						</label> <md-select class="claimInputBox claimInputBoxValue" ng-change="showDisplayLabel(selectedCarrierName)" 
+						ng-model="selectedCarrierName" ng-model-options="{trackBy: '$value.carrierName'}"
+						class="mdInputContainer_input" required md-no-asterisk>
+						<md-option ng-value="carrier" ng-repeat="carrier in carrierList" >{{carrier.carrierName}}</md-option> 
+						</md-select> 
+					</div>
+			</div>
+<p class="wp_claimsEmptyPadding" ></p>
+				<div  ng-if="displayURL.length > 0" class="wp_respCenterText">
+				<span ng-repeat="res in displayURL | filter:filterGarageListData">
+				<md-button ng-href="{{res.url}}" target="blank" class=" claimDisplyLabel ">
+					 {{res.displayLabel}}</md-button>
+				</span>
+				</div>
+				<div ng-if="displayURL.length == null || displayURL.length == 0 || garageListFlag">
+				<div style="color:red" class="wp_errorClaims">Garage List Link is  not available</div>
+				</div>
+						
+				<div layout="row" layout-xs="column" layout="column" ng-if="!$root.wordPressEnabled">
+					<div flex="100">
+					<div flex="100"
+					 style="border:1px dashed;padding:20px; border-radius: 3px;margin-top:2%"
+					>For immediate assistance or emergency, please call our
+					Claims Assistance team at <a
+					href="callto:02242114299">(022) 42114299 </a>
+					or email us at <a
+					href="mailto:info@policies365.com">
+					info@policies365.com</a>
+					</div> 
+					<div></div>
+					</div>
+			</div>
+			</div>
+
+
+			</script>
+<script type="text/ng-template" id="hospitalList.tpl.html">
+					
+<p class="wp_claimsEmptyPaddingSmall"></p>				
+	<div class="middleTab dashboard">
+						<div layout="row" layout-xs="column" layout="column" style="margin-right:25%" class='resp_noMar iPad_side5PerMar'  >
+					<div flex="50" flex-xs="100" flex-sm="100"  class="side10Mar">
+						<label
+						class="buynowSelect" style="padding: 0px;">Insurance Type
+						</label> <md-select class="claimInputBox claimInputBoxValue" ng-model="selectedInsuranceType"  disabled ng-init="selectedInsuranceType==insuranceType[0]"
+						class="mdInputContainer_input"  ng-change="showRegistrationNo(selectedInsuranceType)"  required md-no-asterisk>
+						<md-option ng-value="selectedType" ng-repeat="selectedType in insuranceType | filter:{label:'Health'}" >{{selectedType.name}}</md-option> 
+						</md-select> 
+					</div>
+					<div flex="50" flex-xs="100" flex-sm="100" class="side10Mar" >
+						 <label
+						class="buynowSelect" style="padding: 0px;">Insurance Company
+						</label> <md-select  class="claimInputBox claimInputBoxValue" ng-change="showDisplayLabel(selectedCarrierName)" 
+						ng-model="selectedCarrierName" ng-model-options="{trackBy: '$value.carrierName'}"
+						class="mdInputContainer_input" required md-no-asterisk>
+						<md-option ng-value="carrier" ng-repeat="carrier in carrierList" >{{carrier.carrierName}}</md-option> 
+						</md-select> 
+
+					</div>
+			</div>
+<p class="wp_claimsEmptyPadding"></p>
+				<div  ng-if="displayURL.length > 0" class="wp_respCenterText">
+				<span  ng-repeat="res in displayURL | filter:filterHospitalListData">
+				<md-button ng-href="{{res.url}}" target="blank" class=" claimDisplyLabel ">
+					{{res.displayLabel}}</md-button>
+											
+				</span>
+				</div>
+				<div ng-if="displayURL.length == null || displayURL.length == 0 || hospitalListFlag ">
+				<div style="color:red" class="wp_errorClaims">Hospital List Link  is  not available</div>
+				</div>
+						
+				<div layout="row" layout-xs="column" layout="column" ng-if="!$root.wordPressEnabled">
+					<div flex="100">
+					<div flex="100"
+					 style="border:1px dashed;padding:20px; border-radius: 3px;margin-top:2%"
+					>For immediate assistance or emergency, please call our
+					Claims Assistance team at <a
+					href="callto:02242114299">(022) 42114299 </a>
+					or email us at <a
+					href="mailto:info@policies365.com">
+					info@policies365.com</a>
+					</div> 
+					<div></div>
+					</div>
+			</div>
+			</div>
+
+		
+			</script>
+
+
+

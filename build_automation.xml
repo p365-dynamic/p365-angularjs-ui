@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="Jenkins-Automation" basedir="." default="website-artificates">
+	<taskdef resource="net/sf/antcontrib/antlib.xml"/>
+	<tstamp>
+		<format property="RELEASE_TIME" pattern="dd_MMM_yyyy_HH_mm_ss"/>
+	</tstamp>
+	<property name="exec.dir" value="." />
+	<property name="properties_filepath" value="." />
+	<property name="workspace" value="${exec.dir}" />
+	<property name="properties.filepath" value="${workspace}/app/ApplicationLabels.json" />
+	<property name="template.filepath" value="${workspace}/tempFile.html" />
+	<property name="app.dir" value="${workspace}/app" />
+	<property name="deploy.dir" value="${workspace}/deploy" />
+	<property name="dist.dir" value="${workspace}/dist" />
+	<property name="gruntexe" value="/usr/bin/grunt" />
+	<property name="carrierlogo.imagepath" value="/opt/release/carrierlogo" />
+	<property name="website.release.dir" value="/opt/release/deployable/website/artificates/${BUILD_ID}" />
+	<property name="website.webservice.link" value="http://192.168.0.250:8981/cxf" />
+	<target name="website-artificates" depends="grunt">
+		<echo message="Creating website artificates" />
+		<copy todir="${website.release.dir}" >  
+    		<fileset dir="${dist.dir}" includes="**"/>  
+	 	</copy> 
+		<replace dir="${website.release.dir}" value="policies365-version-${BUILD_ID}-${RELEASE_TIME}">
+			<include name="**/*.js"/>
+			<replacetoken>WEB_APPLICATION_VERSION</replacetoken>
+		</replace>
+		<echo message="WEB_APPLICATION_VERSION = policies365-version-${BUILD_ID}-${RELEASE_TIME}" />
+		<replace dir="${website.release.dir}" value="${website.webservice.link}">
+			<include name="**/*.js"/>
+			<replacetoken>WEBSERVICE_URL</replacetoken>
+		</replace>
+		<echo message="Website Artificates created." />
+	</target>
+	<target name="grunt" depends="deploy">
+	<if>
+    <equals arg1="${isGruntAllowed}" arg2="Yes"/>
+	<then>
+		<echo message="Performing grunt operation." />
+		<exec executable="${gruntexe}" dir="${basedir}" outputproperty="log"></exec>
+		<echo message="Grunt Log : ${log}" />
+		<condition property="onSuccess">
+			<matches pattern="Done, without errors." string="${log}" />
+		</condition>
+		<fail message="Grunt failed!" unless="onSuccess" />
+	</then>
+	<else>
+        <echo message="Grunt option is not opted!"/>
+		<copy todir="${dist.dir}" >  
+			<fileset dir="${deploy.dir}" includes="**"/>  
+		</copy>
+    </else>
+	</if>
+	</target>
+	<target name="deploy" depends="clean">
+		<java dir="${exec.dir}" jar="${exec.dir}/lib/DeployGen.jar" fork="true"
+			failonerror="true" maxmemory="128m">
+			<arg value="${properties.filepath}" />
+			<arg value="${template.filepath}" />
+			<arg value="${app.dir}" />
+			<arg value="${deploy.dir}" />
+			<arg value="-h" />
+		</java>
+	</target>
+	<target name="clean">
+		<delete includeEmptyDirs="true">
+			<fileset dir="${dist.dir}" includes="**/*" defaultexcludes="no" />
+		</delete>
+		<delete includeEmptyDirs="true">
+			<fileset dir="${deploy.dir}" includes="**/*" defaultexcludes="no" />
+		</delete>
+		<delete includeEmptyDirs="true">
+			<fileset dir="${workspace}/deployable" includes="**/*" defaultexcludes="no" />
+		</delete>
+	</target>
+</project>

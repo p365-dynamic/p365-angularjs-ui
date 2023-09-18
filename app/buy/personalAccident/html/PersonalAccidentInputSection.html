@@ -1,0 +1,159 @@
+ <div class="fullShadow resultBg wp_resultBorder wp_InputContainer">
+	<div ng-form="personalAccidentInputForm">
+		<md-toolbar class="md-theme-light resultHeader p365-light"
+			ng-if="!$root.wordPressEnabled">
+		<h2 class="md-toolbar-tools" ng-click="showPersonalDetails()">
+			<span>Personal Accident Details</span>
+			<md-button class="md-icon-button" id="assuranceResultSaveIcon"
+				aria-label="save" ng-click="toggleChange('submit')" data-html="true"
+				data-toggle="tooltip" data-placement="right" title="Save" tooltip>
+			<i class="material-icons">save</i> </md-button>
+			<md-button class="md-icon-button" id="assuranceResultResetIcon"
+				aria-label="undo" ng-click="toggleChange('cancel')" data-html="true"
+				data-toggle="tooltip" data-placement="right" title="Reset" tooltip>
+			<i class="material-icons">undo</i> </md-button>
+			<span flex></span>
+			<md-button
+				ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled && personalAccidentInputSection"
+				class="md-icon-button"
+				id="personalAccidentInputExpandIcon"> <i class="material-icons">arrow_drop_down</i>
+			</md-button>
+			<md-button
+				ng-if="$root.baseEnvEnabled  && !$root.wordPressEnabled && !personalAccidentInputSection"
+				class="md-icon-button"
+				id="personalAccidentInputCollaseIcon"> <i class="material-icons">arrow_drop_up</i>
+			</md-button>
+		</h2>
+		</md-toolbar>
+		<md-list ng-hide="$root.baseEnvEnabled && personalAccidentInputSection"
+			class="resultPad modifyDiv classForTooltip">
+		<div ng-if="!$root.wordPressEnabled && personalAccidentInputForm.$dirty">
+			<p class="errorSmallText">
+				Changes made, please click on <i class="material-icons"
+					style="position: relative; top: 8px;">save</i> to see the updated
+				results.
+			</p>
+		</div>
+		<div ng-if="$root.wordPressEnabled && personalAccidentInputForm.$dirty">
+			<p class="errorSmallText">
+				Changes made, please click on <b>SUBMIT</b> to see the updated
+				results.
+			</p>
+		</div>
+		<ng-container class="wp_left wp_resultCol30 wp_padRgt30">
+            <md-input-container class="md-block"> <label
+                class="md-no-float classForTooltip">{{globalLabel.applicationLabels.personalAccident.genderType}}</label>
+            <md-select name="type" ng-model="quoteParam.gender" required
+                md-no-asterisk> <md-option ng-value="gender.value"
+                ng-repeat="gender in genderType">{{gender.label}}</md-option> </md-select> </md-input-container>
+		<div class="clearfix"></div>
+
+		<md-list-item class="md-1-line">
+            <div class="md-list-item-text">
+               <h3 class="classForTooltip">Members Insured <i class="fa fa-question-circle fa-sm bluecolor"
+                       data-toggle="tooltip" title="{{tooltipContent.memberInsured}}"
+                       tooltip></i> <a href="javascript:;" ng-click='toggleFamilyInfo()'>[Change]</a>
+               </h3>
+               <p class="" ng-repeat="data in familyList" ng-if="data.val==true">
+                   {{data.member}} - {{data.age}} years</p>
+           </div>
+       <md-divider ng-if="!$last"></md-divider> </md-list-item> 
+		
+		<div class="clearfix"></div>
+		 </ng-container>
+		<ng-container class="wp_left wp_resultCol30 wp_padRgt30">
+	
+            <md-input-container class="md-block"> <label class="md-no-float classForTooltip" >{{globalLabel.applicationLabels.personalAccident.occupation}}</label>
+                <md-select name="type" ng-model="personalDetails.occupation"
+                    ng-model-options="{trackBy: '$value'}"> <md-option
+                    ng-value="occupation.occupation"
+                    ng-repeat="occupation in occupationList"
+                    ng-disabled="instantQuotePersonalAccidentForm">{{occupation.display}}</md-option>
+                </md-select> </md-input-container>
+		<div class="clearfix"></div>
+
+		
+		<div class="clearfix"></div>
+
+        <md-list-item class="md-1-line">
+            <div class="md-list-item-text">
+                <h3 class="md-no-float classForTooltip">
+                    {{globalLabel.applicationLabels.personalAccident.pinCode}} <i
+                        class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip"
+                        data-html="true" title="{{tooltipContent.pincode}}" tooltip></i><a
+                        href="javascript:;" ng-click='togglePin()'> [Change]</a>
+                </h3>
+                <p>{{personalDetails.pincode}} - {{personalDetails.displayArea}}</p>
+            </div>
+            <md-divider ng-if="!$last"></md-divider></md-list-item>
+            <div ng-if="$root.wordPressEnabled" ><p style="padding:10px 0"></p></div>
+
+		<div class="clearfix"></div>	
+		</ng-container>
+
+		 <ng-container class="wp_left wp_resultCol30 wp_padRgt30">
+            <md-input-container class="md-block"> <label
+                class="md-no-float classForTooltip">{{globalLabel.applicationLabels.personalAccident.annualIncome}}
+                <i class="fa fa-question-circle fa-sm bluecolor"
+                data-toggle="tooltip" data-html="true"
+                title="{{tooltipContent.annualIncome}}" tooltip></i>			
+                <span style="color: red"  >{{message}}</span>
+            </label> 
+            <input  style="width:70% !important;" ng-pattern='/^[1-9][0-9]*$/' ng-change="checkSum(quoteParam.annualIncome);"  name="type"
+             ng-model="quoteParam.annualIncome"
+            required md-no-asterisk autocomplete='off' 	maxlength='8' minlength='1' >
+            <span style="width: 30% !important; font-weight:bold "> {{showAmount(quoteParam.annualIncome)}} Lakhs</span>
+                
+            </md-input-container>
+		
+		<div class="clearfix"></div>
+
+		<md-input-container class="md-block"> <label
+            class="buyTextPadding wp_md-no-float">{{globalLabel.applicationLabels.personalAccident.policyStartDate}}</label>
+        <input class="newDatepickerBorder" hasDatepicker
+            ng-model="quoteParam.policyStartDate" md-min-date="today"
+            ng-change="calcualtePolicyTerm(quoteParam.policyStartDate)"
+            name='startDate' p365-date-picker="policystartDateOption"
+            required md-no-asterisk />
+        <div ng-messages="personalAccidentInputForm.startDate.$error"
+            ng-if="pers.startDate.$touched">
+            <div style="color: red" ng-message="required">This is
+                required. dd/mm/yyyy format</div>
+        </div>
+        </md-input-container>
+        <div class="clearfix"></div>
+
+        <md-input-container class="md-block " ng-show="polStatus">
+            <label class="md-no-float classForTooltip">{{globalLabel.applicationLabels.bike.expiryDate}}
+                <i class="fa fa-question-circle fa-sm bluecolor"
+                data-toggle="tooltip" title="{{tooltipContent.prevPolicyExpiryDate}}"
+                tooltip></i>
+            </label> <input class="newDatepickerBorder wp_textBlack" type="text"
+                ng-model="vehicleInfo.PreviousPolicyExpiryDate"
+                ng-change="validatePrevPolicyStartDate()" readonly="readonly"
+                p365-date-picker="previousPolicyExpiryDateOptions" /> </md-input-container>
+		
+
+
+		</ng-container>
+
+		<div class="clearfix"></div>
+
+		<div class="section" ng-if="$root.wordPressEnabled && personalAccidentInputForm.$dirty">
+			<div class="col col-sm-4 fullWidth"></div>
+			<div class="col col-sm-4 fullWidth">
+				<p class="dialogButton">
+					<button ng-click="toggleChange()"
+						class="bluebuybuttoncar wp_resultInpBtn" id="carBuyProductBtn"
+						style="background-color: #c4c4c4 !important;">Cancel</button>
+					<button ng-disabled="disableSubmit" ng-click="singleClickPersonalAccidentQuote()"
+						class="bluebuybuttoncar wp_resultInpBtn" id="carBuyProductBtn">
+						Submit</button>
+				</p>
+			</div>
+			<div class="col col-sm-4 fullWidth"></div>
+			<div class="clearfix"></div>
+		</div>
+		</md-list>
+	</div>
+</div>

@@ -1,0 +1,254 @@
+<loading></loading>
+<div class="successBg ang_loginWrap" ng-if="!isFromMobileApp">
+	<div class="centerAlignTxt font15 side28PerPad resp_side5Pad">
+
+
+		<h3 ng-if="!proposalDataResponse" class="topBot3Mar paySuccessTitle">
+			Some error occred in retriving data Please Try again aftr some time
+		</h3>
+		<div ng-if="proposalDataResponse">
+			<h3 class="topBot3Mar paySuccessTitle">
+				{{p365Labels.common.paymentSuccessful}}
+			</h3>
+
+
+			<p class="wp_paySuP">
+				{{p365Labels.common.proverbThanku1}}
+				<span
+					ng-if="proposalRequest.premiumDetails.grossPremium != undefined && proposalRequest.premiumDetails.grossPremium != null">
+					{{proposalRequest.premiumDetails.grossPremium|number:0}} </span>
+				<span
+					ng-if="(proposalRequest.premiumDetails.grossPremium == undefined || proposalRequest.premiumDetails.grossPremium == null) && policyDetails.totalPremium">
+					{{proposalRequest.premiumDetails.grossPremium|number:0}} </span>
+				{{p365Labels.common.proverbThanku2}}
+			</p>
+
+			<div>
+				<p class="wp_payFlP">
+					<span class="grey666Txt">{{p365Labels.common.policyDetails}}</span>
+
+					<div layout="row" class="resp_side5Pad">
+						<div flex="45" class="leftAlignTxt">
+							<p>{{p365Labels.common.policyCertificateNumber}} </p>
+						</div>
+						<div flex="10" class="centerAlignTxt">
+							<p>:</p>
+						</div>
+						<div flex="45" class="leftAlignTxt">
+							<p class="pinkFont">
+								<p ng-click="viewPolicy()"><a href=""
+										ng-click="viewPolicy()">{{proposalDataResponse.travelPolicyResponse.policyNo}}</a>
+								</p>
+
+							</p>
+						</div>
+					</div>
+					<div layout="row" class="resp_side5Pad">
+						<div flex="45" class="leftAlignTxt">
+							<p>{{p365Labels.common.policyStartDate}}</p>
+						</div>
+						<div flex="10" class="centerAlignTxt">
+							<p>:</p>
+						</div>
+						<div flex="45" class="leftAlignTxt">
+							<p>{{proposalDataResponse.travelPolicyResponse.policyStartDate}}</p>
+						</div>
+					</div>
+
+					<div layout="row" class="resp_side5Pad">
+						<div flex="45" class="leftAlignTxt">
+							<p>{{p365Labels.common.policyTerm}}</p>
+						</div>
+						<div flex="10" class="centerAlignTxt">
+							<p>:</p>
+						</div>
+						<div flex="45" class="leftAlignTxt">
+							<p>{{proposalDataResponse.proposalRequest.premiumDetails.policyTerm}} </p>
+						</div>
+					</div>
+					<div layout="row" class="resp_side5Pad">
+						<div flex="45" class="leftAlignTxt">
+							<p>{{p365Labels.common.premiumPaid}}</p>
+						</div>
+						<div flex="10" class="centerAlignTxt">
+							<p>:</p>
+						</div>
+						<div flex="45" class="leftAlignTxt">
+							<p>₹ {{proposalDataResponse.travelPolicyResponse.totalPremium}}</p>
+						</div>
+					</div>
+				</p>
+			</div>
+
+		</div>
+		<div>
+			<p>{{p365Labels.errorMessage.helpLineMessage + " " + p365Labels.errorMessage.helpLineText }} :
+				<a class="pinkFont" href="tel:{{policies365Details.salesAssistNumber.trimed}}">
+					<u>{{policies365Details.salesAssistNumber.displayWithBracket}}</u>
+				</a>
+			</p>
+			<p>({{policies365Details.officeHours}}){{policies365Details.orWriteToUsAt}}:
+				<a class="pinkFont" href="mailto:{{policies365Details.emailId.inquiry}}">
+					<u>{{policies365Details.emailId.contact}}</u>
+
+				</a>
+			</p>
+			<div ng-if="agencyPortalEnabled">
+				<a class="pinkFont" ng-click="redirectURL()">Go Back</a>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+<div ng-if="isFromMobileApp">
+	<div class="editback">
+		<div class="widthFull resultCommon">
+			<div class="InsideWrapper">
+				<div class="additionalfeatures">
+					<div class="float1 ">
+						<img ng-src="img\clogo\{{selectedProduct.carrierId}}.png"
+							style="display: inline-block !important">
+					</div>
+					<div class="float2 " style="padding-right: 20%;">
+						<h2 style="color: #414141;">{{p365Labels.common.congratulations}}</h2>
+
+					</div>
+					<div class="clear"></div>
+					<div>
+
+						<br><br>
+						<div class="document_section1">
+							<div class="width60">
+								<label>{{p365Labels.common.policyNo}}</label>
+								<div class="">
+									<b> {{travelResponseToken.policyNo}} </b>
+								</div>
+							</div>
+							<div class="width60">
+								<label>{{p365Labels.common.sumInsured}}</label>
+								<div class="">
+									<b>{{selectedProduct.sumInsured}}</b>
+								</div>
+							</div>
+							<div class='insuredTable'>
+								<table class='insuredTableStyle'>
+									<thead>
+										<tr>
+											<th>{{p365Labels.common.Name}}</th>
+											<th>{{p365Labels.common.dateOfBirth}}</th>
+											<th>{{p365Labels.common.Relationship}}</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr data-ng-repeat='insured in proposalRequest.travellerDetails'>
+											<td>{{insured.firstName}}</td>
+											<td>{{insured.dateOfBirth}}</td>
+											<td>{{insured.relation}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="document_section2">
+							<div class="width60">
+								<label>{{p365Labels.common.productName}}</label>
+								<div class="">
+									<b>{{selectedProduct.insuranceCompany}}</b>
+								</div>
+							</div>
+							<div class="width60">
+								<label>{{p365Labels.common.premiumAmount}}</label>
+								<div class="">
+									<b>{{proposalRequest.premiumDetails.grossPremium}}</b>
+								</div>
+							</div>
+
+							<div class="width60">
+								<label>{{p365Labels.common.transactionNumber}}</label>
+								<div class="">
+									<b>{{travelResponseToken.proposalId}}</b>
+								</div>
+							</div>
+							<div class="width60">
+								<label>{{p365Labels.common.mobileNo}}</label>
+								<div class="">
+									<b>{{proposalRequest.proposerDetails.mobileNumber}}</b>
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+						<div class="float2" style="padding-right: 20%;">
+							<h5 style="color: #424242; text-align: center;">
+								<b>{{p365Labels.common.downloadAfter30Min}}</b>
+							</h5>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div>
+						<div style="text-align: center;">
+							<a class="bluebuybuttoncar" ng-click="purchaseStatement()"
+								style="margin: 10px 0px 0px 0px;">{{p365Labels.common.purchaseStatement}}</a>
+						</div>
+
+					</div>
+					<div ng-if="agencyPortalEnabled">
+						<a class="pinkFont" ng-click="redirectURL()">{{p365Labels.common.goBack}}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<modal-dialog show='modalOTP' width='450px' height='auto' class="ng-hide">
+	<div class='ng-modal-close wp_modalClose' ng-click='closeAuthenticateForm()' ng-if="$root.wordPressEnabled">
+		<i class="material-icons">close</i>
+	</div>
+	<form name="authenticateForm">
+		<div class="modalHeader  wp_noBluebackground wp_noBoxShadow">
+			<div class="blueBackground one-edge-shadow wp_noBoxShadow" style="" layout="row">
+				<div flex="85">
+					<h2 class="white popupHeading wp_popupHeading wp_OTPTitleFont">
+						{{p365Labels.common.OTPTemplateHeader}}</span>
+					</h2>
+				</div>
+				<div class='ng-modal-close' ng-click='closeAuthenticateForm()'
+					style="color: #fff; margin-top: 5px !important;" flex="10">
+					<i class="material-icons">close</i>
+				</div>
+			</div>
+		</div>
+		<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+			<div class="fullShadow resultBg familyPopup wp_signinFamilyInnerPopup"
+				style="margin-bottom: 0px !important;">
+				<div class="popupTableHealth popupPadding" layout="row" style="padding: 3% 0% 0% 0% !important;">
+					<div flex="100" style="text-align: center; padding: 1% 0%;">
+						<b>{{p365Labels.common.enterOTPCaption}}</b>
+					</div>
+				</div>
+				<md-input-container class="md-block">
+					<div class="pad10">
+						<div flex="100">
+							<input name="enteredOTP" ng-model="authenticate.enteredOTP" autocomplete="off"
+								ng-pattern="/\d{6}/" maxlength="6" minlength="6" class="signBoxShadow"
+								style="background: transparent !important; text-align: center;" required />
+						</div>
+					</div>
+				</md-input-container>
+				<div style="color: red; text-align: center; margin-bottom: 1%;">{{invalidOTPError}}</div>
+			</div>
+		</div>
+		<div class="center">
+			<button type="submit" class="bluebutton" ng-disabled="authenticateForm.$invalid"
+				ng-click="authenticateUser()">{{p365Labels.common.Submit}}</button>
+		</div>
+		<div class="pad10 center">
+			<md-button ng-click="resendOTP()" ng-disabled="disableOTP"><span
+					class="resendLink">{{p365Labels.common.resendOTP}}</span></md-button>
+		</div>
+	</form>
+</modal-dialog>

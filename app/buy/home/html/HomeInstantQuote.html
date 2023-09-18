@@ -1,0 +1,122 @@
+<div  ng-controller="homeInstantQuoteController">
+<form name="instantQuoteHomeForm" class="wp_md-content">
+<md-content
+	class="wp_md-content wp_inputBorderRadius"><!-- style="background:#fff;" -->
+<ng-container ng-if="$root.displayInstantScreen"> <md-input-container
+	style="width: 100%;"> <label>{{globalLabel.applicationLabels.home.typeOfHome}}</label>
+<md-select name="type" ng-model="quoteParam.homeType"
+	ng-change="calculateHomePremium()"> <md-option
+	ng-value="homeType.value" ng-repeat="homeType in typeOfHome"
+	>{{homeType.label}}</md-option>
+</md-select> </md-input-container>
+
+<div class="clearfix"></div>
+
+ <md-input-container ng-if="quoteParam.homeType=='Owned'"
+ class="md-block"> <label>{{globalLabel.applicationLabels.home.valueOfStructure}}&nbsp;&nbsp;</label>
+ <div class="">
+ <input style="color: #fff" ng-pattern='/^[1-9][0-9]*$/' class="" name='structueSumInsured' ng-change="checkSum(quoteParam.structureSumInsured);calculateHomePremium()" 
+ ng-model='quoteParam.structureSumInsured' autocomplete='off'
+		maxlength='9' minlength='1'
+	   required md-no-asterisk style="position: relative;" />
+ <div class="ammount-lable" style="background-color: #fbfbfbcc;position: absolute;right: 0px;width: 33%;height: 100%;border-radius: 0 24px 24px 0px;top: 0px;">
+	 <label class="ammount-lable1" style="color:#f56909 !important;font-weight:bold;font-size: 100% !important;top:30%;left:12%;">
+	 &#x20B9;&nbsp;{{showAmount(quoteParam.structureSumInsured)}} Lakhs
+	 </label>
+ </div>
+ </div> 
+</md-input-container>
+<div class="clearfix"></div>
+ 
+ <md-input-container
+ class="md-block"> <label>{{globalLabel.applicationLabels.home.valueOfContent}}&nbsp;&nbsp;</label>
+ <div class="">
+ <input  style="color: #fff" ng-pattern='/^[1-9][0-9]*$/' class="" name='contentSumInsured' ng-change="checkContentSum(quoteParam.contentSumInsured);calculateHomePremium()" 
+ ng-model='quoteParam.contentSumInsured' autocomplete='off'
+		maxlength='9' minlength='1'
+	   required md-no-asterisk style="position: relative;" />
+ <div class="ammount-lable" style="background-color: #fbfbfbcc;position: absolute;right: 0px;width: 33%;height: 100%;border-radius: 0 24px 24px 0px;top: 0px;">
+	 <label class="ammount-lable1" style="color:#f56909 !important;font-weight:bold;font-size: 100% !important;top:30%;left:12%;">
+	 &#x20B9;&nbsp;{{showContentAmount(quoteParam.contentSumInsured)}} Lakhs
+	 </label>
+ </div>
+
+ </div> 
+</md-input-container>
+ 
+<div class="clearfix"></div>
+
+<md-input-container  ng-if="quoteParam.homeType=='Owned'"
+ class="md-block"> <label>{{globalLabel.applicationLabels.home.ageOfProperty}}&nbsp;&nbsp;</label>
+ <div class="">
+ <input  style="color: #fff" ng-pattern='/^[1-9][0-9]*$/' class="" name='propertyAge' ng-change="checkPropertyAge(quoteParam.propertyAge);calculateHomePremium()" 
+ ng-model='quoteParam.propertyAge' autocomplete='off'
+		maxlength='4' minlength='1'
+	   required md-no-asterisk  />
+ <div class="ammount-lable" style="background-color: #fbfbfbcc;position: absolute;right: 0px;width: 33%;height: 100%;border-radius: 0 24px 24px 0px;top: 0px;">
+	 <label class="ammount-lable1" style="color:#f56909 !important;font-weight:bold;font-size: 100% !important;top:30%;left:12%;">
+	 &nbsp;{{showPropertyAge(quoteParam.propertyAge)}} Years
+	 </label>
+ </div>
+ </div> 
+</md-input-container>
+ 
+<div class="clearfix"></div>
+
+<md-input-container class="md-block wp_whiteColor">
+<label>{{globalLabel.applicationLabels.home.pinCode}}
+	<a class="RTOLink"
+	href="javascript:;" ng-click='togglePin()'>&nbsp;[{{globalLabel.applicationLabels.home.change}}]</a>
+</label> <input ng-model="displayPincodeInfo" placeholder="MH-01 MUMBAI TARDEO"
+	readonly> <label class="ng-binding"></label> </md-input-container>
+<div class="clearfix"></div>
+ <span ng-show="$root.disableNextScreen">{{message}}</span> </ng-container> </md-content>
+ 
+
+ <modal-dialog show='modalPIN' width='500px' height='auto !important'
+	class="ng-hide">
+<div class='ng-modal-close wp_modalClose' ng-click='hideModal()'
+	ng-if="$root.wordPressEnabled">
+	<i class="material-icons">close</i>
+</div>
+<div
+	class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow"
+	style="" layout="row">
+	<div class="wp_respWidth100 wp_Width100" style="padding: 4% 0%; text-align: center;" flex="85" flex-sm="85" flex-xs="85">
+		<h2 class="white popupHeading wp_popupHeading">
+			Enter Area or City or Pincode</span>
+		</h2>
+	</div>
+	<div class='ng-modal-close' ng-click='hideModal()' style="color: #fff;"
+
+		ng-if="!$root.wordPressEnabled" flex="15">
+		<i class="material-icons">close</i>
+	</div>
+</div>
+<div class="tab-pane">
+	<div class="">
+		<div class="pad10 pinPopup">
+			<md-input-container class="md-block">
+			<div layout="row">
+				<i class="material-icons" flex="2">room</i>
+				<div flex="95">
+					<input name="pin" ng-required="true" class="wp_healthModalPin"
+						typeahead-on-select="onSelectPinOrArea($item)" autocomplete="off"
+						typeahead-wait-ms="10" typeahead-no-results="noResults"
+						ng-model="personalDetails.pincode"
+						uib-typeahead="pin.display for pin in getPinCodeAreaList($viewValue)"
+						typeahead-show-hint="false" typeahead-min-length="3"
+						typeahead-wait-ms="10" style="background: transparent !important;" />
+				</div>
+				
+
+			</div>
+			<div class="dropdown-menu-NoResult dropdown-menu-NoResultPosition"
+					ng-if="noResults">No Results Found</div>
+			</md-input-container>
+		</div>
+	</div>
+</div>
+</modal-dialog> 
+</form>
+ </div>

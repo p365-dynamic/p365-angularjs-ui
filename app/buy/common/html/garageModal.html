@@ -1,0 +1,326 @@
+<!--     Premium Breakup Popup       -->
+<modal-dialog show='premiumModalCar' width='900px' height='80vh' class="ng-hide RTOSearchDiv" style="overflow:auto;">
+    <!-- <div class='ng-modal-close wp_modalClose' ng-click='hidePremiumModalCar()'>
+            <i class="material-icons">close</i>
+        </div> -->
+    <div class="ang_loginWrap" layout-align="center center">
+        <div layout="row" layout-xs="row" class="pad25255">
+            <div flex="40" flex-xs="45" class="leftAlignTxt">
+                <img ng-src="{{$root.wp_path}}img/clogo/{{carProductToBeAddedInCart.carrierId}}.png" />
+                <p class="font15 hideForMobile">{{carProductToBeAddedInCart.insuranceCompany}}</p>
+            </div>
+            <div flex="30" class="centerAlignTxt hideForMobile">
+                <b class="font24">&#8377; {{carProductToBeAddedInCart.insuredDeclareValue |number}}</b>
+                <div class="font13 greyb7Txt">IDV</div>
+            </div>
+            <div flex="35" flex-xs="45" class="resp_selfCenter">
+                <div class="width55 resp_width80 iPad_width40 side25Mar resp_autoMar">
+                    <div class="buyNowBtn posRel cursor">
+                        <p class="pinkFeTxt topBot1Mar popAddToCartBtn bold12 resp_font9">Premium</p>
+                        <p class="pinkFeTxt bold24 topBot5Mar resp_font14">&#8377; {{carProductToBeAddedInCart.netPremium | number:0}}</p>
+                    </div>
+                    <div class="centerAlignTxt topBot2Mar font10">Exclusive of GST</div>
+                </div>
+            </div>
+            <div flex="5" style="text-align: right;" class="cursor" ng-click='hidePremiumModalCar()'>
+                <i class="material-icons greyb7Txt">highlight_off</i>
+            </div>
+        </div>
+        <div>
+            <md-content>
+                <md-tabs class="popTab garMod greyTab" md-selected="$root.selectedTabCar" md-dynamic-height  md-swipe-content>
+                    <md-tab label="Premium Details" >
+                        <div style="max-height:50vh;overflow:auto;">
+                        <md-content class="md-padding grey4bTxt side15Mar resp_side1Mar" ng-if="(carProductToBeAddedInCart.odpremium + carProductToBeAddedInCart.llDriverCover + carProductToBeAddedInCart.paidDriverCover + carProductToBeAddedInCart.tppremium) > 0">
+                            <div class="md-body-1" layout="row">
+                                <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                    {{globalLabel.applicationLabels.car.basicCoverage}}
+                                </div>
+                                <div flex="66" flex-xs="60">
+                                    <div layout="row" ng-if="carProductToBeAddedInCart.odpremium > 0">
+                                        <div flex="50" flex-xs="70">
+                                            <p>{{globalLabel.applicationLabels.car.basicOwnDamage}}<span ng-if="data.policyType == 'new' && data.ownDamagePolicyTerm">({{data.ownDamagePolicyTerm}} Year)
+                                                </span></p>
+                                        </div>
+                                        <div flex="30" flex-xs="30" class="right">
+                                            <p>&#8377; {{carProductToBeAddedInCart.odpremium | number:0 | regexINR}}</p>
+                                        </div>
+                                    </div>
+                                    <div layout="row" ng-if="carProductToBeAddedInCart.llDriverCover > 0">
+                                        <div flex="50" flex-xs="70">
+                                            <p>{{globalLabel.applicationLabels.car.leagalLiabilityForDriver}}</p>
+                                        </div>
+                                        <div flex="30" flex-xs="30" class="right">
+                                            <p>&#8377; {{carProductToBeAddedInCart.llDriverCover | number:0 | regexINR}}</p>
+                                        </div>
+                                    </div>
+                                    <div layout="row" ng-if="carProductToBeAddedInCart.paidDriverCover > 0">
+                                        <div flex="50" flex-xs="70">
+                                            <p>{{globalLabel.applicationLabels.car.personalAccidentCover}}</p>
+                                        </div>
+                                        <div flex="30" flex-xs="30" class="right">
+                                            <p>&#8377; {{carProductToBeAddedInCart.paidDriverCover | number:0 | regexINR}}</p>
+                                        </div>
+                                    </div>
+                                    <div layout="row" ng-if="carProductToBeAddedInCart.tppremium > 0">
+                                        <div flex="50" flex-xs="70">
+                                            <p>{{globalLabel.applicationLabels.car.basicThirdParty}}<span ng-if="data.policyType == 'new' && data.liabilityPolicyTerm">({{data.liabilityPolicyTerm}} Year)
+                                                </span></p>
+                                        </div>
+                                        <div flex="30" flex-xs="30" class="right">
+                                            <p>&#8377; {{carProductToBeAddedInCart.tppremium | number:0 | regexINR}}</p>
+                                        </div>
+                                    </div>
+                                    <div layout="row" ng-if="carProductToBeAddedInCart.lpgCngKitPremium > 0">
+                                        <div flex="50" flex-xs="70">
+                                            <p>{{globalLabel.applicationLabels.car.LPGCNGKitPremium}}</p>
+                                        </div>
+                                        <div flex="30" flex-xs="30" class="right">
+                                            <span>&#8377;  {{carProductToBeAddedInCart.lpgCngKitPremium | number:0 | regexINR}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="md-body-1" layout="row">
+                                <div flex="33" flex-xs="40" class="vertAlignCenter">
+
+                                </div>
+                                <div flex="66" flex-xs="60">
+                                    <div layout="row">
+                                        <div flex="50" flex-xs="50">
+                                            <p></p>
+                                        </div>
+                                        <div flex="30" flex-xs="50" class="right">
+                                            <p><b>+ &#8377; {{carProductToBeAddedInCart.basicCoverage | number:0 | regexINR}}</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-content>
+                        <md-content class="md-padding grey4bTxt side15Mar" ng-if="carProductToBeAddedInCart.totalRiderAmount > '0'">
+                            <div class="md-body-1" layout="row">
+                                <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                    {{globalLabel.applicationLabels.common.addonCover}}</b>
+                                    <span ng-if="data.policyType == 'new' && data.ownDamagePolicyTerm">({{data.ownDamagePolicyTerm}} Year)
+                                        </span>
+                                </div>
+                                <div flex="66" flex-xs="60">
+                                    <ng-container ng-repeat="riders in carProductToBeAddedInCart.ridersList">
+                                        <div layout="row" ng-if="riders.riderValue > 0">
+                                            <div flex="50" flex-xs="70" ng-if="riders.updatedRiderName">
+                                                <p>{{riders.updatedRiderName}}</p>
+                                            </div>
+                                            <div flex="50" flex-xs="70" ng-if="!riders.updatedRiderName">
+                                                <p>{{riders.riderName}}</p>
+                                            </div>
+                                            <div flex="30" flex-xs="30" class="right">
+                                                <p ng-if="riders.riderType != 'NA' && riders.riderType != 'included' && riders.riderValue > 0">&#8377; {{riders.riderValue | number:0 | regexINR}}</p>
+                                                <p ng-if="riders.riderType == 'NA' || riders.riderType == 'included'">{{riders.riderType}}</p>
+                                            </div>
+                                        </div>
+                                        <div layout="row" ng-if="!riders.riderValue && (riders.riderType == 'NA' || riders.riderType == 'included')">
+                                            <div flex="50" flex-xs="70" ng-if="riders.updatedRiderName">
+                                                <p>{{riders.updatedRiderName}}</p>
+                                            </div>
+                                            <div flex="50" flex-xs="70" ng-if="!riders.updatedRiderName">
+                                                <p>{{riders.riderName}}</p>
+                                            </div>
+                                            <div flex="30" flex-xs="30" class="right">
+                                                <p ng-if="riders.riderType == 'NA' || riders.riderType == 'included'">{{riders.riderType}}</p>
+                                            </div>
+                                        </div>
+                                        <div layout="row" ng-repeat="dependants in riders.dependant">
+                                            <div flex="50" flex-xs="70">
+                                                <p>{{dependants.riderName}}</p>
+                                            </div>
+                                            <div flex="30" flex-xs="30" class="right">
+                                                <p>{{dependants.riderType}}</p>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="md-body-1" layout="row">
+                                <div flex="33" flex-xs="40" class="vertAlignCenter">
+
+                                </div>
+                                <div flex="66" flex-xs="60">
+                                    <div layout="row">
+                                        <div flex="50" flex-xs="50">
+                                            <p></p>
+                                        </div>
+                                        <div flex="30" flex-xs="50" class="right">
+                                            <p><b>+ &#8377; {{carProductToBeAddedInCart.totalRiderAmount | number:0 | regexINR}}</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-content>
+                        <!-- ng-if="carProductToBeAddedInCart.selectedDiscountAmount > 0" -->
+                        <md-content class="md-padding grey4bTxt side15Mar resp_side1Mar" ng-if="carProductToBeAddedInCart.totalDiscountAmount > '0'">
+                            <div class="md-body-1" layout="row">
+                                <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                    {{globalLabel.applicationLabels.common.savings}}
+                                </div>
+                                <div flex="66" flex-xs="60">
+                                    <div layout="row" ng-repeat="data in carProductToBeAddedInCart.discountList" ng-if="data.discountAmount > 0">
+                                        <div flex="50" flex-xs="70">
+                                            <p>{{data.type}}</p>
+                                        </div>
+                                        <div flex="30" flex-xs="30" class="right">
+                                            <p>&#8377; {{data.discountAmount | number:0 | regexINR}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md-body-1" layout="row">
+                                <div flex="33" flex-xs="40" class="vertAlignCenter">
+
+                                </div>
+                                <div flex="66"  flex-xs="60">
+                                    <div layout="row">
+                                        <div flex="50" flex-xs="50">
+                                            <p></p>
+                                        </div>
+                                        <div flex="30" flex-xs="50" class="right">
+                                            <p><b>- &#8377; {{carProductToBeAddedInCart.totalDiscountAmount | number:0 | regexINR}}</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-content>
+                        <md-content class="md-padding grey4bTxt side15Mar resp_side1Mar">
+                            <div class="md-body-1" layout="row">
+                                <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                    Net Premium
+                                </div>
+                                <div flex="66" flex-xs="60">
+                                    <div layout="row">
+                                        <div flex="50" flex-xs="50">
+                                            <p></p>
+                                        </div>
+                                        <div flex="30" flex-xs="50" class="right">
+                                            <p>&#8377; {{carProductToBeAddedInCart.netPremium | number:0 | regexINR}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-content>
+                        <md-content class="md-padding grey4bTxt side15Mar resp_side1Mar">
+                            <div class="md-body-1" layout="row">
+                                <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                    {{globalLabel.applicationLabels.common.serviceTax}}
+                                </div>
+                                <div flex="66" flex-xs="60">
+                                    <div layout="row">
+                                        <div flex="50" flex-xs="50">
+                                            <p></p>
+                                        </div>
+                                        <div flex="30" flex-xs="50" class="right">
+                                            <p>&#8377; {{carProductToBeAddedInCart.serviceTax | number:0 | regexINR}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-content>
+                        <md-content class="md-padding grey4bTxt side15Mar resp_side1Mar">
+                            <div class="md-body-1" layout="row">
+                                <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                    {{globalLabel.applicationLabels.car.finalPrice}}
+                                </div>
+                                <div flex="65" flex-xs="60">
+                                    <div layout="row">
+                                        <div flex="50" flex-xs="50">
+                                            <p></p>
+                                        </div>
+                                        <div flex="30"  flex-xs="50" class="right">
+                                            <p>&#8377; {{carProductToBeAddedInCart.grossPremium | number:0 | regexINR}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-content>
+                    </div>
+                    </md-tab>
+                    <md-tab label="Service Ratings"> 
+                        <md-content class="md-padding resp_servScroll">
+                            <div class="md-body-2">
+                                <div class="md-body-1" layout="row" layout-xs="column">
+                                    <div flex="20" flex-xs="100" class="centerAlignTxt selfCenter">
+                                        <img ng-src="{{$root.wp_path}}img/professionalJourney/Service_Rating_Star_ResultScreen.png">
+                                    </div>
+                                    <div flex="60" flex-xs="100">
+                                        <p class="noMargin grey4BTxt"><b>Service Ratings?</b></p>
+                                        <p class="font12 grey4BTxt">{{p365Labels.common.serviceRatingDesc1}}</p>
+                                        <p class="font12 grey4BTxt">{{p365Labels.common.serviceRatingDesc2}}</p>
+                                        <ul class="font12 grey4BTxt">
+                                            <li><span>-&nbsp;</span>{{p365Labels.common.inclurredClaimRatio}}</li>
+                                            <li><span>-&nbsp;</span>{{p365Labels.common.solvencyRatio}}</li>
+                                            <li><span>-&nbsp;</span>{{p365Labels.common.grievanceResolved}}</li>
+                                        </ul>
+                                        
+                                    </div>
+                                    <div flex="20" flex-xs="100" class="selfCenter">
+                                        <p class="font24 noMargin grey4BTxt resp_font14 center">{{carProductToBeAddedInCart.insurerIndex|number:1}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Incurred Claim Ratio">
+                        <md-content class="md-padding resp_IncurScroll">
+                            <div class="md-body-3">
+                                <div class="md-body-1" layout="row" layout-xs="column">
+                                    <div flex="20" flex-xs="100" class="centerAlignTxt selfCenter">
+                                        <img ng-src="{{$root.wp_path}}img/professionalJourney/Claim_Rating_Star_ResultScreen.png">
+                                    </div>
+                                    <div flex="60" flex-xs="100">
+                                        <p class="noMargin grey4BTxt"><b>Incurred Claim Settlement</b></p>
+                                        <p class="font12 grey4BTxt">{{p365Labels.common.incurredClaimDesc}}</p>
+                                    </div>
+                                   
+                                    <div flex="20" flex-xs="100" class="selfCenter">
+                                        <p class="font24 noMargin grey4BTxt resp_font14 center">{{carProductToBeAddedInCart.claimRatio}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Cashless Garages">
+                            <div style="max-height:50vh;overflow:auto;">
+                        <md-content class="md-padding side10PerMar">
+                            <h2 class="md-body-4" ng-if="garageDataCheck(carProductToBeAddedInCart.carrierId)">
+                                <ng-container ng-repeat="garageListData in garageDetails">
+                                    <ng-container ng-if="garageListData.carrierId == carProductToBeAddedInCart.carrierId && garageListData.garageData.length > 0">
+                                        <div class="md-body-1 garageListBorder" layout="row" ng-repeat="garage in garageListData.garageData">
+                                            <div flex="70">
+                                                <p class="noMargin grey4BTxt">
+                                                    <b>{{garage.repairerName}}</b>
+                                                </p>
+                                                <p>{{garage.address}}</p>
+                                            </div>
+                                            <div flex="5"></div>
+                                            <div flex="25">
+                                                <div><a ng-click="openMap(garage)" class="tempPos7">Get Direction</a>
+                                                <span><i class="material-icons">directions</i></span></div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container ng-if="garageListData.garageData.length == 0">
+                                        No Garage
+                                    </ng-container>
+                                </ng-container>
+                            </h2>
+                            <h2 ng-if="!garageDataCheck(carProductToBeAddedInCart.carrierId)">
+                                No Garage
+                            </h2>
+                        </md-content>
+                        </div>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+        </div>
+    </div>
+</modal-dialog>
+<!--     Premium Breakup Popup       -->

@@ -1,0 +1,141 @@
+<form name="bikeInstantQuoteForm">
+	<ng-container ng-if="$root.displayInstantScreen"
+		class="wp_inputBorderRadius"> <md-content
+		class="wp_md-content" ng-controller="bikeInstantQuoteController">
+	<md-input-container class="md-block"> <label>{{globalLabel.applicationLabels.bike.insuranceType}}</label>
+	<md-select name="type" ng-model="vehicleDetails.insuranceType"
+		ng-model-options="{trackBy: '$value.type'}" ng-change="alterRenewal()">
+	<md-option ng-value="data" ng-repeat="data in bikeInsuranceTypes"
+		ng-disabled="instantQuoteBikeForm">{{data.type}}</md-option> </md-select> </md-input-container>
+	<div class="clearfix"></div>
+	<md-input-container class="md-block wp_whiteColor"
+		ng-if="$root.showBikeRegAreaStatus == true"> <label>{{globalLabel.applicationLabels.bike.regArea}}
+		<a href="javascript:;" class="RTOLink"
+		data-ng-class="{'disabled': instantQuoteBikeForm}"
+		ng-click='toggleVehicleRegistrationPopup(false)'>[I know my
+			registration number]</a>
+	</label> <input ng-model="$root.vehicleInfo.registrationPlace"
+		placeholder="MH-01-AA-XXXX"
+		ng-click="toggleVehicleRegistrationPopup(true)" ng-readonly="true"/>
+	</md-input-container> <md-input-container class="md-block wp_whiteColor"
+		ng-if="$root.showBikeRegAreaStatus == false"> <label>{{globalLabel.applicationLabels.bike.regNumber}}
+		<a class="RTOLink" data-ng-class="{'disabled': instantQuoteBikeForm}"
+		ng-click='toggleVehicleRegistrationPopup(true)'>[I don't know my
+			registration number]</a>
+	</label> <input ng-model="$root.vehicleDetails.registrationNumber"
+		placeholder="MH-01-AA-XXXX"
+		ng-change="getRegNumber($root.vehicleDetails.registrationNumber)"
+		ng-model-options='{ debounce: 1500 }' focus-me="focusInput"
+		ng-disabled="instantQuoteBikeForm" style="text-transform: uppercase;"/>
+	<div class="errorLink" ng-if="$root.regNumStatus">{{globalLabel.validationMessages.regNumInvalid}}</div>
+	</md-input-container> <ng-container ng-if="$root.wordPressEnabled"
+		class="wp_autoCompleteWhite">
+	<div class="innerHeadDropText" flex-xs="100" flex-sm="100">
+		<md-autocomplete flex="100" md-input-name="autocompleteField"
+			md-input-minlength="2" md-no-cache="noCache"
+			md-selected-item="$parent.selectedItem.displayVehicle"
+			md-selected-item-change="selectedDisplayVehicle(item)"
+			md-search-text="searchText"
+			md-items="item in querySearch(searchText)"
+			md-item-text="item.displayVehicle"
+			md-floating-label="Make / Model / Variant / Fuel">
+		<md-item-template> <span
+			md-highlight-text="searchText">{{item.displayVehicle}}</span> </md-item-template>
+		<div ng-messages="searchForm.autocompleteField.$error"
+			ng-if="searchForm.autocompleteField.$touched">
+			<div ng-message="required">
+				You <b>must</b> have a make.
+			</div>
+			<div ng-message="md-require-match">Please select an existing
+				make.</div>
+			<div ng-message="minlength">Your entry is not long enough.</div>
+			<div ng-message="maxlength">Your entry is too long.</div>
+		</div>
+		</md-autocomplete>
+	</div>
+	</ng-container> <ng-container ng-if="!$root.wordPressEnabled"> <md-input-container
+		class="md-block"> <label>{{globalLabel.applicationLabels.bike.bikeMake}}</label>
+
+	<md-select class="invalid_border" name="make"
+		ng-model="vehicleDetails.bikeMakeObject"
+		ng-model-options="{trackBy: '$value.make'}"
+		ng-change="updateModelList(vehicleDetails.bikeMakeObject, 0)" required
+		md-no-asterisk> <md-option ng-value="makeObject"
+		ng-repeat="makeObject in makeNames | orderBy:'make'"
+		ng-disabled="instantQuoteBikeForm">{{makeObject.make}}</md-option> </md-select>
+
+	<div ng-if="bikeInstantQuoteForm.make.$error.required"
+		style="color: red;">This is required.</div>
+	<div ng-messages="bikeInstantQuoteForm.make.$error"
+		ng-if="bikeInstantQuoteForm.make.$touched">
+		<!-- <div style="color: red" ng-message="required">This is
+											required</div> -->
+	</div>
+	</md-input-container> <md-input-container class="md-block"> <label>{{globalLabel.applicationLabels.bike.bikeModel}}</label>
+
+
+
+	<md-select class="invalid_border" name="model"
+		ng-model="vehicleDetails.bikeModelObject"
+		ng-model-options="{trackBy: '$value.model'}"
+		ng-change="updateVariantList(vehicleDetails.bikeModelObject, 0)"
+		required md-no-asterisk> <md-option ng-value="modelObject"
+		ng-repeat="modelObject in modelNames  | orderBy:'model'"
+		ng-disabled="instantQuoteBikeForm">{{modelObject.model}}</md-option> </md-select>
+
+	<div ng-if="bikeInstantQuoteForm.model.$error.required"
+		style="color: red;">This is required.</div>
+	<div ng-messages="bikeInstantQuoteForm.model.$error"
+		ng-if="bikeInstantQuoteForm.model.$touched">
+		<!-- <div style="color: red" ng-message="required">This is
+											required</div> -->
+	</div>
+	</md-input-container> <md-input-container class="md-block"> <label>{{globalLabel.applicationLabels.bike.bikeVariant}}</label>
+	<md-select class="invalid_border" name="varaint"
+		ng-model="vehicleDetails.bikeVariantObject"
+		ng-change="getCubicCapacityAndCalQuote(vehicleDetails.bikeVariantObject, 1)"
+		required md-no-asterisk
+		ng-model-options="{trackBy: '$value.variantId'}"> <md-option
+		ng-value="variantObject"
+		ng-repeat="variantObject in variantNames  | orderBy:'variant'"
+		ng-disabled="instantQuoteBikeForm">{{variantObject.variant
+	+ " (" + variantObject.cubicCapacity + "cc)"}}</md-option> </md-select>
+	<div ng-if="bikeInstantQuoteForm.varaint.$error.required"
+		style="color: red;">This is required.</div>
+	<div ng-messages="bikeInstantQuoteForm.varaint.$error"
+		ng-if="bikeInstantQuoteForm.varaint.$touched">
+		<!-- <div style="color: red" ng-message="required">This is
+											required</div> -->
+	</div>
+	</md-input-container> </ng-container> <md-input-container class="md-block"> <label
+		ng-if="renewal">{{globalLabel.applicationLabels.bike.regYear}}</label>
+	<label ng-if="!renewal">{{globalLabel.applicationLabels.bike.mfgYear}}</label>
+	<md-select name="type" ng-model="vehicleDetails.regYear"
+		ng-change="changeRegYear()"> <md-option ng-value="year"
+		ng-repeat="year in yearList" ng-disabled="instantQuoteBikeForm">{{year}}</md-option>
+	</md-select> </md-input-container> <md-input-container class="md-block" ng-if="polStatus">
+	<label>{{globalLabel.applicationLabels.bike.existingPolicyStatus}}</label>
+	<md-select name="type" ng-model="vehicleDetails.policyStatus"
+		ng-model-options="{trackBy: '$value.label'}"
+		ng-change="changePolStatus()"> <md-option
+		ng-value="status" ng-repeat="status in policyStatusList"
+		ng-disabled="instantQuoteBikeForm">{{status.label}}</md-option> </md-select> </md-input-container> <ng-container
+		ng-if="!$root.wordPressEnabled"> <md-input-container
+		class="md-block" ng-if="renewal"> <label>{{globalLabel.applicationLabels.bike.insuranceClaimExist}}</label>
+	<md-select name="type" ng-model="vehicleInfo.previousClaim"
+		ng-change="singleClickBikeQuote()"> <md-option
+		ng-value="prevClaimStatus.value"
+		ng-repeat="prevClaimStatus in previousClaimStatus"
+		ng-disabled="instantQuoteCarForm">{{prevClaimStatus.label}}</md-option>
+	</md-select> </md-input-container> <md-input-container class="md-block"
+		ng-if="vehicleInfo.previousClaim == 'false' && renewal == true">
+	<label>{{globalLabel.applicationLabels.bike.ncbExist}}</label> <md-select
+		name="type" ng-model="vehicleDetails.ncb"
+		ng-model-options="{trackBy: '$value.id'}"
+		ng-change="singleClickBikeQuote()"> <md-option
+		ng-value="ncb" ng-repeat="ncb in ncbList"
+		ng-disabled="instantQuoteBikeForm">{{ncb.display}}</md-option> </md-select> </md-input-container> </ng-container> </md-content> </ng-container>
+
+
+
+</form>

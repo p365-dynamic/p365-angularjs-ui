@@ -1,0 +1,9 @@
+<h1>Please wait, you are being redirected to Payment Gateway</h1>
+
+<form style="display:none" ng-form-commit action='' method='post'
+name="paymentForm" novalidate>
+<div ng-repeat="payParam in paymentServiceResponse.paramterList">
+    <input type="hidden" name="{{payParam.name}}"
+        value="{{payParam.value}}" ng-model="payParam.ngModel">
+</div>
+</form>

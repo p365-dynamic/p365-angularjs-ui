@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="sample" basedir="." default="prod-deploy">
+	<taskdef resource="net/sf/antcontrib/antlib.xml"/>
+	<tstamp>
+		<format property="RELEASE_TIME" pattern="dd_MMM_yyyy_HH_mm_ss"/>
+	</tstamp>
+	<property name="exec.dir" value="." />
+	<property name="properties_filepath" value="." />
+	<property name="workspace" value="${exec.dir}" />
+	<property name="properties.filepath" value="${workspace}/app/ApplicationLabels.json" />
+	<property name="template.filepath" value="${workspace}/tempFile.html" />
+	<property name="app.dir" value="${workspace}/app" />
+	<property name="deploy.dir" value="${workspace}/deploy" />
+	<property name="dist.dir" value="${workspace}/dist" />
+	<property name="gruntexe" value="/usr/bin/grunt" />
+	<property name="carrierlogo.imagepath" value="/opt/release/carrierlogo" />
+	<property name="prod.final.release" value="${workspace}/deployable/prod" />
+	<property name="prod.release.dir" value="/opt/release/deployable/production/${RELEASE_TIME}" />
+	<property name="prod.webservice.link" value="https://mservices.policies365.com/cxf" />
+	<property name="prod.webapp.url" value="https://www.policies365.com/#/" />
+	<property name="prod.field.status" value="true" />
+	<property name="agencyPortalDynamicURL" value="'https://www.policies365.com/#/proposalresdata?proposalId='" />
+	<target name="prod-deploy" depends="grunt">
+		<echo message="Creating production deployable." />
+		<copy todir="${prod.release.dir}" >  
+			<fileset dir="${dist.dir}" includes="**"/>  
+		</copy>
+		<replace dir="${prod.release.dir}" value="policies365-version-${RELEASE_TIME}">
+			<include name="**/*.js"/>
+			<replacetoken>WEB_APPLICATION_VERSION</replacetoken>
+		</replace>
+		<echo message="WEB_APPLICATION_VERSION = policies365-version-${RELEASE_TIME}" />
+		<replace dir="${prod.release.dir}" value="${prod.webservice.link}">
+			<include name="**/*.js"/>
+			<replacetoken>WEBSERVICE_URL</replacetoken>
+		</replace>
+		<replace dir="${prod.release.dir}" value="${prod.field.status}">
+			<include name="**/*.js"/>
+			<replacetoken>FIELD_ENABLE_STATUS</replacetoken>
+		</replace>
+		<replace dir="${uat.release.dir}" value="${prod.webapp.url}">
+			<include name="**/*.js"/>
+			<replacetoken>WEB_APP_URL</replacetoken>
+		</replace>
+		<replace dir="${prod.release.dir}" value="${baseVariableValue}">
+		    <include name="**/*.js"/>
+		<replacetoken>$BaseVariableDefination$</replacetoken>
+		</replace>
+		<replace dir="${prod.release.dir}" value="${customVariableValue}">
+		    <include name="**/*.js"/>
+		<replacetoken>$CustomVariableDefination$</replacetoken>
+		</replace>
+		<replace dir="${prod.release.dir}" value="${agencyPortalEnabled}">
+		    <include name="**/*.js"/>
+		<replacetoken>$AgencyPortalEnabledFlag$</replacetoken>
+		</replace>
+		<replace dir="${prod.release.dir}" value="${iquoteEnabled}">
+		    <include name="**/*.js"/>
+		<replacetoken>$IquoteEnabledFlag$</replacetoken>
+		</replace>
+		<replace dir="${prod.release.dir}" value="${agencyPortalDynamicURL}">
+					<include name="**/*.js"/>
+					<replacetoken>AGENCY_PORTAL_DYNAMIC_URL</replacetoken>
+				</replace>
+		<echo message="Production deployable created." />
+		<echo message="Production deployable copy started." />
+		<copy todir="${prod.final.release}">
+			<fileset dir="${prod.release.dir}" includes="**"/>  
+		</copy>
+		<echo message="Production deployable copy completed." />
+	</target>
+	<target name="grunt" depends="deploy">
+	<if>
+    <equals arg1="${isGruntAllowed}" arg2="Yes"/>
+	<then>
+		<echo message="Performing grunt operation." />
+		<exec executable="${gruntexe}" dir="${basedir}" outputproperty="log"></exec>
+		<echo message="Grunt Log : ${log}" />
+		<condition property="onSuccess">
+			<matches pattern="Done, without errors." string="${log}" />
+		</condition>
+		<fail message="Grunt failed!" unless="onSuccess" />
+	</then>
+	<else>
+        <echo message="Grunt option is not opted!"/>
+		<copy todir="${dist.dir}" >  
+			<fileset dir="${deploy.dir}" includes="**"/>  
+		</copy>
+    </else>
+	</if>
+	</target>
+	<target name="deploy" depends="clean">
+		<java dir="${exec.dir}" jar="${exec.dir}/lib/DeployGen.jar" fork="true"
+			failonerror="true" maxmemory="128m">
+			<arg value="${properties.filepath}" />
+			<arg value="${template.filepath}" />
+			<arg value="${app.dir}" />
+			<arg value="${deploy.dir}" />
+			<arg value="-h" />
+		</java>
+	</target>
+	<target name="clean" depends="init">
+		<delete includeEmptyDirs="true">
+			<fileset dir="${dist.dir}" includes="**/*" defaultexcludes="no" />
+		</delete>
+		<delete includeEmptyDirs="true">
+			<fileset dir="${deploy.dir}" includes="**/*" defaultexcludes="no" />
+		</delete>
+		<delete includeEmptyDirs="true">
+			<fileset dir="${workspace}/deployable" includes="**/*" defaultexcludes="no" />
+		</delete>
+	</target>
+	<target name="init">
+			    <if>
+				   <equals arg1="${applicationType}" arg2="IQuote"/>
+				   <then>
+				   	  <echo message="Inside iQuote"/>
+				      <property name="customVariableValue" value="false" />
+				      <property name="baseVariableValue" value="true" />
+				    <property name="agencyPortalEnabled" value="false" />
+					 <property name="iquoteEnabled" value="false" />
+				  </then>
+			    <elseif>
+			    	<equals arg1="${applicationType}" arg2="AgencyPortal"/>
+			    				   <then>
+			    				   	  <echo message="Inside Agency Portal"/>
+			    				      <property name="customVariableValue" value="false" />
+			    				      <property name="baseVariableValue" value="true" />
+			    				   	  <property name="agencyPortalEnabled" value="true" />
+									 <property name="iquoteEnabled" value="false" />
+			    				  </then>
+			    	</elseif>
+				  <else>
+				  	 <echo message="Inside Custom"/>
+					<property name="customVariableValue" value="true" />
+					<property name="baseVariableValue" value="false" />
+				  	<property name="agencyPortalEnabled" value="false" />
+					<property name="iquoteEnabled" value="false" />
+				  </else>
+				</if>
+			</target>
+</project>

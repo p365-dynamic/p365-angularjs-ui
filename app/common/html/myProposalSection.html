@@ -1,0 +1,126 @@
+<div ng-repeat="proposal in myProposal">
+    <div>
+        <div ng-if="proposal.showProposalId" layout="row" layout-sm="column">
+            <div flex="20" flex-sm="100" flex-xs="100" class="rightBord1ddd  topBot4Pad side2Pad" style="border-bottom: 1px dotted #ddd;">
+                <div class="centerAlignTxt">
+                    <i ng-if="proposal.showProposalId && proposal.businessLineId==1" class="material-icons font30 grey63Txt">favorite</i>
+                    <i ng-if="proposal.showProposalId && proposal.businessLineId==2" class="material-icons font30 grey63Txt">directions_bike</i>
+                    <i ng-if="proposal.showProposalId && proposal.businessLineId==3" class="material-icons font30 grey63Txt">directions_car</i>
+                    <i ng-if="proposal.showProposalId && proposal.businessLineId==4" class="material-icons font30 grey63Txt">hotel</i>
+                    <i ng-if="proposal.showProposalId && proposal.businessLineId==5" class="material-icons font30 grey63Txt">airplanemode_active</i>
+                </div>
+            </div>
+            <div flex="60" flex-sm="100" flex-xs="100" class=" topBot2Pad side2Pad rightBord1ddd leftAlignTxt" style="border-bottom: 1px dotted  #ddd;">
+                <div>
+                    <!-- // cheack weather life details personalDetails  are present -->
+                    <div ng-if="proposal.showProposalId && proposal.businessLineId==1">
+                        <div>
+                            <p ng-show="familyComp">
+                                <span class="grey87Txt">Gender & DoB (self): </span>
+                                <span class='bold12'>{{commonInfo.gender}}</span>
+                                <span ng-repeat='member in familyComp' class='bold12'>
+                                    <span ng-show="member.display == 'Self'">
+                                        -&nbsp;{{member.birthYear}}
+                                    </span>
+                                </span>
+                            </p>
+                            <p ng-show="commonInfo.incomeRange.label">
+                                <span class="grey87Txt">Annual Income: </span>
+                                <span class='bold12'>{{commonInfo.incomeRange.label}}</span>
+                            </p>
+                            <p ng-show="commonInfo.weight && commonInfo.dailyActivity">
+                                    <span class="grey87Txt">Weight & Daily Acivities: </span>
+                                    <span  class='bold12'>
+                                            {{commonInfo.weight}}&nbsp;-&nbsp;{{commonInfo.dailyActivity}}
+                                    </span>
+                                </p>
+                        </div>
+                    </div>
+                    <!-- // cheack weather bike details vehicleDetails  are present -->
+                    
+                    <div ng-if="proposal.showProposalId && proposal.businessLineId==2">
+                        <div ng-show='vehicleDetails.bikeInfo'>
+                            <p ng-show='!$root.showBikeRegAreaStatus && vehicleDetails.bikeInfo.registrationNumber'>
+                                <span class="grey87Txt">Registration Number: </span>
+                                <span class="bold12">{{vehicleDetails.bikeInfo.registrationNumber}}</span>
+                            </p>
+                            <p ng-show='$root.showBikeRegAreaStatus && vehicleDetails.bikeInfo.registrationPlace'>
+                                <span class="grey87Txt">Registration Place: </span>
+                                <span class="bold12">{{vehicleDetails.bikeInfo.registrationPlace}}</span>
+                            </p>
+                            <p ng-show="vehicleDetails.bikeInfo.carrierVariantDisplayName">
+                                <span class="grey87Txt">Vehicle Name: </span>
+                                <span class="bold12">{{vehicleDetails.bikeInfo.carrierVariantDisplayName}}</span>
+                            </p>
+                            <p ng-show="vehicleDetails.bikeInfo.registrationYear">
+                                <span class="grey87Txt">Registration Year: </span>
+                                <span class="bold12">{{vehicleDetails.bikeInfo.registrationYear}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- // cheack weather car details vehicleDetails  are present -->
+                    
+                    <div ng-if="proposal.showProposalId && proposal.businessLineId==3">
+                        <div ng-show='vehicleDetails.carInfo'>
+                            <p ng-show='!$root.showCarRegAreaStatus && vehicleDetails.carInfo.registrationNumber'>
+                                <span class="grey87Txt">Registration Number: </span>
+                                <span class="bold12">{{vehicleDetails.carInfo.registrationNumber}}</span>
+                            </p>
+                            <p ng-show='$root.showCarRegAreaStatus && vehicleDetails.carInfo.registrationPlace'>
+                                <span class="grey87Txt">Registration Place: </span>
+                                <span class="bold12">{{vehicleDetails.carInfo.registrationPlace}}</span>
+                            </p>
+                            <p ng-show="vehicleDetails.carInfo.carrierVariantDisplayName">
+                                <span class="grey87Txt">Vehicle Name: </span>
+                                <span class="bold12">{{vehicleDetails.carInfo.carrierVariantDisplayName}}</span>
+                            </p>
+                            <p ng-show="vehicleDetails.carInfo.registrationYear">
+                                <span class="grey87Txt">Registration Year: </span>
+                                <span class="bold12">{{vehicleDetails.carInfo.registrationYear}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- // cheack weather health details familyDetails  are present -->
+                    <div ng-if="proposal.showProposalId && proposal.businessLineId==4">
+                        <div>
+                            <p ng-show="familyComp">
+                                <span class="grey87Txt">Family Members: </span>
+                                <span ng-repeat='member in familyComp' class='bold12'>
+                                    {{member.display}}&nbsp;-&nbsp;{{member.birthYear}}
+                                    <span ng-show="!$last">,</span>
+                                </span>
+                            </p>
+                            <p ng-show="familyComp">
+                                <span class="grey87Txt">Gender (self): </span>
+                                <span class='bold12'>{{commonInfo.gender}}</span>
+                            </p>
+                            <p ng-show="commonInfo.incomeRange.label">
+                                <span class="grey87Txt">Annual Income: </span>
+                                <span class='bold12'>{{commonInfo.incomeRange.label}}</span>
+                            </p>
+                            <p ng-show="commonInfo.familyHistory.length > 0">
+                                <span class="grey87Txt">Family History: </span>
+                                <span ng-repeat='history in commonInfo.familyHistory' class='bold12'>
+                                    {{history.label}}
+                                    <span ng-show="!$last">,</span>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- // cheack weather travel  details   are present -->
+                    <div ng-if="proposal.showProposalId && proposal.businessLineId==5">
+                        
+                    </div>
+                </div>
+            </div>
+            <div ng-if="proposal.showProposalId" flex="20" flex-sm="100" flex-xs="100" class=" topBot4Pad side2Pad topBot4Pad" style="border-bottom: 1px dotted #ddd;">
+                <div class="centerAlignTxt">
+                    <md-button class='capitalizeText norm13 resp_normFont13 pinkBgBtn' ng-click="viewProposal(proposal)">View Proposal</md-button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

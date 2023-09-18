@@ -1,0 +1,76 @@
+<!-- Wordpress -->
+<ng-container ng-if="$root.wordPressEnabled">
+		<div
+			class="wp_InsideWrapperPayFailure wp_paySectionBckgrnd wp_payBorder wp_pad20 wp_marginAutoSign wp_gradientBg">
+			<h3 class="wp_payFlH3">
+				<span><i class="fa fa-times-circle" aria-hidden="true"
+					style="color: red; font-size: 25px;"></i></span> Sorry for the inconvenience
+			</h3>
+			<p class="wp_payFlP" ng-if="!statusCode || statusCode == 'PE1021'">
+				{{globalLabel.errorMessage.customerGreet}},<br />
+				{{globalLabel.errorMessage.payFailureErrorMsgPartOne}} <b>{{PAReponseToken.proposalId}}</b>.<br />
+				{{globalLabel.errorMessage.payFailureErrorMsgPartTwo}}
+			</p>
+			<p class="wp_payFlP" ng-if="statusCode == 'PE1020'">
+				{{globalLabel.errorMessage.customerGreet}},<br />
+				{{globalLabel.errorMessage.paySuccessErrorMsgPartOne}} <b>{{PAReponseToken.proposalId}}</b>.<br />
+				{{globalLabel.errorMessage.paySuccessErrorMsgPartTwo}}
+			</p>
+			<!-- <p class="wp_payFlP" ng-if="!statusCode">
+				{{globalLabel.errorMessage.customerGreet}},<br />
+				{{globalLabel.errorMessage.payFailureErrorMsgGeneral}}<b>{{PAReponseToken.proposalId}}</b>.
+			</p> -->		
+			<div>
+				<p class="wp_payFlP">
+					{{globalLabel.errorMessage.helpLineMessage}} <span
+						class="wp_payFlDetailsP">{{globalLabel.errorMessage.helpLineText}}
+						{{globalLabel.policies365Details.salesAssistNumberLanding}}</span>
+					{{globalLabel.errorMessage.writeToUs}} <span class="wp_payFlLink">
+						<a href="mailto:{{globalLabel.policies365Details.infoEmailId}}">{{globalLabel.policies365Details.infoEmailId}}</a>
+					</span>.
+				</p>
+			</div>
+		</div>
+		</ng-container>
+		<!-- Wordpress -->
+		
+		<ng-container ng-if="!$root.wordPressEnabled">
+		<div class="editback">
+			<div class="widthFull resultCommon wp_widthFull wp_respWidthFull">
+				<div class="InsideWrapper">
+					<div class="additionalfeatures">
+						<div>
+							<div class="float1 wp_respFloat1">
+								<img ng-src="img\clogo\{{selectedProduct.carrierId}}.png"
+									style="display: inline-block !important">
+							</div>
+							<div class="float2 wp_respFloat2 wp_respFailPad"
+								style="padding-right: 20%;">
+								<h1 style="color: #414141;" class="wp_respFont1_4">
+									<i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i>
+									Sorry!
+								</h1>
+								<h4 style="color: #424242; text-align: center;">
+									<h2 class="wp_respFailSubHead">Your Payment Transaction
+										could not be completed</h2>
+								</h4>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<br>
+						<div class="contentSection">
+							<p>
+								We tried to charge Rs. <b>{{selectedProduct.netPremium}}</b>
+								from your account towards your Personal Accident  Insurance Premium however <b>{{PAReponseToken.paymentGateway}}</b>
+		
+								has rejected the payment. If the amount has been debited from you
+								account already, Please contact <b>{{PAReponseToken.paymentGateway}}</b>
+								directly to get the payment refunded. <br> Please try after
+								sometime.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</ng-container>

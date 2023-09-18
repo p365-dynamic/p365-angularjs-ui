@@ -1,0 +1,308 @@
+<div class="" layout="row" layout-xs="column" layout-sm="column">
+	<div class="headDropText EidPensionGender" flex="20" flex-xs="100"
+		flex-sm="100">
+		<form name="LifeInstantQuoteForm">
+			<div ng-controller="lifeInstantQuoteController">
+				<div class="outerHeadDropText dropHeight" layout="row"
+					layout-xs="column" layout-sm="column">
+					<div flex-xs="100" flex-sm="100">
+						<md-input-container class="md-block" style="padding:0">
+						<label class="wp_blackText">Gender</label> <md-select name="type"
+							ng-model="quoteParam.gender" ng-change="singleClickLifeQuote()">
+						<md-option ng-value="gender.value"
+							ng-repeat="gender in genderType">{{gender.label}}</md-option> </md-select> </md-input-container>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="" flex="80" flex-xs="100" flex-sm="100">
+		<form name="$root.validateUserInfo">
+			<div class="outerHeadDropText" layout="row" layout-xs="column"
+				layout-sm="column">
+				<div class="headDropTextInner EIdPensionInput" flex="20"
+					flex-xs="100" flex-sm="100">
+					<md-input-container class="md-block"> <label
+						class="wp_blackText">Name</label> <input name="name"
+						style="text-transform: capitalize;" value="" placeholder="Name"
+						class="border" ng-model="quoteUserInfo.firstName"
+						ng-pattern="/^[a-zA-Z\s]*$/" autocomplete="off" md-autofocus
+						md-no-float capitalize-first required>
+					<div ng-if="$root.validateUserInfo.name.$error.required"
+						style="color: red; font-size: 12px;">Name is required.</div>
+					<div ng-messages="$root.validateUserInfo.name.$error"
+						ng-if="$root.validateUserInfo.name.$touched">
+						<div ng-message="pattern" style="color: red;">Enter valid
+							name</div>
+					</div>
+					</md-input-container>
+				</div>
+				<div class="innerHeadDropText" flex="20" flex-xs="100" flex-sm="100">
+					<md-input-container class="md-block"> <label
+						class="wp_blackText">Mobile Number </label> <input
+						ng-model="quoteUserInfo.mobileNumber" name="mobileNo"
+						class="border" required ng-pattern="/^[6789]\d{9}$/" maxlength="10"
+						minlength="10" placeholder="XXXXXXXXXX" md-autofocus md-no-float>
+					<div ng-if="$root.validateUserInfo.mobileNo.$error.required"
+						style="color: red; font-size: 12px;">Phone number is
+						required.</div>
+					<div ng-messages="$root.validateUserInfo.mobileNo.$error"
+						ng-if="$root.validateUserInfo.mobileNo.$touched">
+						<div ng-message="pattern" style="color: red;">Enter valid
+							Mobile No</div>
+					</div>
+					</md-input-container>
+				</div>
+				<div class="innerHeadDropText" flex="20" flex-xs="100" flex-sm="100">
+					<md-input-container class="md-block"> <label
+						class="wp_blackText">Email Address </label> <input
+						ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-z.]{2,5}$/"
+						placeholder="Email-ID" autocomplete="off" maxlength="50"
+						name="emailId" ng-model="quoteUserInfo.emailId" required />
+					<div ng-if="$root.validateUserInfo.emailId.$error.required"
+						style="color: red; font-size: 12px;">Email ID is required.</div>
+					<div ng-messages="$root.validateUserInfo.emailId.$error"
+						ng-if="$root.validateUserInfo.emailId.$touched">
+						<div ng-message="pattern" style="color: red;">Enter valid
+							Email Id</div>
+					</div>
+					</md-input-container>
+				</div>
+				<div class="headRightDropText border wp_respWidth100" flex="20"
+					flex-xs="100" flex-sm="100" style="padding: 0% !important;">
+					<div class="HLViewBtn resCLViewBtn">
+						<div style="text-align: center;">
+							<md-button class="md-raised md-primary" id="CarViewQuotes"
+								ng-click="$root.validateLandingUser('')"
+								ng-disabled="validateUserInfo.$invalid"
+								style="color:#fff;background:#283172 !important;width: 96%;padding: 0;margin: 5px auto !important;padding:6px 0;border-radius: 10px;font-size: 19px;font-weight:500 !important;">
+							CALCULATE PREMIUM </md-button>
+						</div>
+					</div>
+				</div>
+				<div class="" flex="25" flex-xs="100" flex-sm="100"
+					ng-if="!$root.wordPressEnabled" style="padding: 0% !important;"></div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 
+<form name="LifeInstantQuoteForm">
+	<div ng-controller="lifeInstantQuoteController">
+		<div class="outerHeadDropText" layout="row" layout-xs="column"
+			layout-sm="column">
+			<div class="innerHeadDropText" flex="20" flex-xs="100" flex-sm="100">
+				<md-input-container class="md-block" style="padding:0">
+				<label class="wp_blackText">Age</label> <md-select name="type"
+					ng-model="quoteParam.age" ng-change="singleClickLifeQuote()">
+				<md-option ng-value="age" ng-repeat="age in ageList">{{age}}</md-option>
+				</md-select> </md-input-container>
+			</div>
+			<div class="innerHeadDropText" flex="20" flex-xs="100" flex-sm="100">
+				<md-input-container class="md-block" style="padding:0">
+				<label class="wp_blackText">{{globalLabel.applicationLabels.life.tobaccoAddiction}}</label>
+				<md-select name="type" ng-model="quoteParam.tobacoAdicted"
+					ng-change="singleClickLifeQuote()"> <md-option
+					ng-value="tobacco.value"
+					ng-repeat="tobacco in tobaccoAddictionStatus">{{tobacco.label}}</md-option>
+				</md-select> </md-input-container>
+			</div>
+			<div class="innerHeadDropText" flex="20" flex-xs="100"
+				flex-sm="100">
+				<md-input-container class="md-block" style="padding:0">
+				<label class="wp_blackText">{{globalLabel.applicationLabels.life.annualIncome}}</label>
+				<md-select name="type" ng-model="personalDetails.annualIncomeObject"
+					ng-model-options="{trackBy: '$value.display'}"
+					ng-change="calculateSumAssured()"> <md-option
+					ng-value="income" ng-repeat="income in annualIncomesRange">{{income.display}}</md-option>
+				</md-select> </md-input-container>
+			</div>
+			<div class="headRightDropText border" flex="20" flex-xs="100"
+				flex-sm="100">
+				<md-input-container class="md-block" style="padding:0">
+				<label class="wp_blackText">{{globalLabel.applicationLabels.life.sumAssured}}</label>
+				<md-select name="type" ng-model="personalDetails.sumInsuredObject"
+					ng-change="singleClickLifeQuote()"
+					ng-model-options="{trackBy: '$value.display'}"> <md-option
+					ng-repeat="sumInsured in personalDetails.sumInsuredList"
+					ng-value="sumInsured">{{sumInsured.display}}</md-option> </md-select> </md-input-container>
+			</div>
+		</div>
+	</div>
+</form>
+<form name="$root.validateUserInfo">
+	<div class="outerHeadDropText2" layout="row" layout-xs="column"
+		layout-sm="column">
+		<div class="headDropText" flex="20" flex-xs="100" flex-sm="100">
+			<md-input-container class="md-block"> <label
+				class="wp_blackText">Name </label> <input type="text" name="name1"
+				value="" placeholder="Name" class="border"
+				ng-model="firstName" ng-pattern="/^[a-zA-Z\s]*$/"
+				autocomplete="off" md-autofocus md-no-float capitalize-first
+				required> 
+				<div
+					ng-if="$root.validateUserInfo.name1.$error.required"
+					style="color: red; font-size: 12px;">Name is
+					required.</div>
+				<div ng-messages="$root.validateUserInfo.name1.$error"
+					ng-if="$root.validateUserInfo.name1.$touched">
+					<div ng-message="pattern" style="color: red;">Enter valid
+						name</div>
+				</div>
+				</md-input-container>
+		</div>
+		<div class="innerHeadDropText" flex="20" flex-xs="100" flex-sm="100">
+			<md-input-container class="md-block"> <label
+				class="wp_blackText">Mobile Number </label> <input
+				ng-model="mobileNumber" name="mobileNo" class="border"
+				required ng-pattern="/^[789]\d{9}$/" maxlength="10" minlength="10"
+				placeholder="XXXXXXXXXX" md-autofocus md-no-float>
+				<div
+					ng-if="$root.validateUserInfo.mobileNo.$error.required"
+					style="color: red; font-size: 12px;">Phone number is
+					required.</div>
+				<div ng-messages="$root.validateUserInfo.mobileNo.$error"
+					ng-if="$root.validateUserInfo.mobileNo.$touched">
+					<div ng-message="pattern" style="color: red;">Enter valid
+						Mobile No</div>
+				</div>
+				 </md-input-container>
+		</div>
+		<div class="innerHeadDropText" flex="20" flex-xs="100" flex-sm="100">
+			<md-input-container class="md-block"> <label
+				class="wp_blackText">Email Address </label> <input
+				ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-z.]{2,5}$/"
+				placeholder="Email-ID" autocomplete="off" maxlength="50"
+				name="emailId" ng-model="emailId" required />
+				<div
+					ng-if="$root.validateUserInfo.emailId.$error.required"
+					style="color: red; font-size: 12px;">Email ID  is
+					required.</div>
+				<div ng-messages="$root.validateUserInfo.emailId.$error"
+					ng-if="$root.validateUserInfo.emailId.$touched">
+					<div ng-message="pattern" style="color: red;">Enter valid
+						Email Id</div>
+				</div>
+				 </md-input-container>
+		</div>
+
+		headRightDropText viewBtn
+		<div class="headRightDropText border wp_respWidth100" flex="25"
+			flex-xs="100" flex-sm="100" style="padding: 0% !important;">
+			<div class="HLViewBtn resCLViewBtn">
+				<div style="text-align: center;">
+					<md-button class="md-raised md-primary" id="CarViewQuotes"
+						ng-click="$root.landingLead(mobileNumber,emailId,firstName);leadCreationUserInfo()"
+						ng-disabled="validateUserInfo.$invalid || disabledRedirectToResult"
+						style="color:#fff;background:#283172 !important;width: 96%;padding: 0;margin: 5px auto !important;padding:6px 0;border-radius: 10px;font-size: 19px;font-weight:500 !important;">
+					CALCULATE PREMIUM <span ng-show="disabledRedirectToResult"><i
+						class="fa fa-spinner fa-spin "></i></span> </md-button>
+				</div>
+			</div>
+		</div>
+		<div class="" flex="25" flex-xs="100" flex-sm="100"
+			ng-if="!$root.wordPressEnabled" style="padding: 0% !important;"></div>
+	</div>
+</form> 
+<div class="innerHeadDropText" flex="20" flex-xs="100" flex-sm="100">
+				<md-input-container class="md-block" style="padding:0">
+				<label class="wp_blackText">Age</label> <md-select name="type"
+					ng-model="quoteParam.age" ng-change="singleClickLifeQuote()">
+				<md-option ng-value="age" ng-repeat="age in ageList">{{age}}</md-option>
+				</md-select> </md-input-container>
+			</div>
+			<div class="innerHeadDropText" flex="20" flex-xs="100" flex-sm="100">
+				<md-input-container class="md-block" style="padding:0">
+				<label class="wp_blackText">{{globalLabel.applicationLabels.life.tobaccoAddiction}}</label>
+				<md-select name="type" ng-model="quoteParam.tobacoAdicted"
+					ng-change="singleClickLifeQuote()"> <md-option
+					ng-value="tobacco.value"
+					ng-repeat="tobacco in tobaccoAddictionStatus">{{tobacco.label}}</md-option>
+				</md-select> </md-input-container>
+			</div>
+			<div class="innerHeadDropText" flex="20" flex-xs="100"
+				flex-sm="100">
+				<md-input-container class="md-block" style="padding:0">
+				<label class="wp_blackText">{{globalLabel.applicationLabels.life.annualIncome}}</label>
+				<md-select name="type" ng-model="personalDetails.annualIncomeObject"
+					ng-model-options="{trackBy: '$value.display'}"
+					ng-change="calculateSumAssured()"> <md-option
+					ng-value="income" ng-repeat="income in annualIncomesRange">{{income.display}}</md-option>
+				</md-select> </md-input-container>
+			</div>
+			<div class="headRightDropText border" flex="20" flex-xs="100"
+				flex-sm="100">
+				<md-input-container class="md-block" style="padding:0">
+				<label class="wp_blackText">{{globalLabel.applicationLabels.life.sumAssured}}</label>
+				<md-select name="type" ng-model="personalDetails.sumInsuredObject"
+					ng-change="singleClickLifeQuote()"
+					ng-model-options="{trackBy: '$value.display'}"> <md-option
+					ng-repeat="sumInsured in personalDetails.sumInsuredList"
+					ng-value="sumInsured">{{sumInsured.display}}</md-option> </md-select> </md-input-container>
+			</div>
+			-->
+
+<modal-dialog show='Regpopup' width='500px' height='auto'
+	class="ng-hide">
+<div flex="100" class="LLHeadPatch headMarLeft resLLHeadPatch"
+	style="position: relative; margin: 0;">
+	<div class="detailHead" layout="row">
+		<div flex="90"></div>
+		<div flex="10" style="text-align: right;">
+			<a class="closePop" ng-click="closePop()"><i
+				class="material-icons">close</i></a>
+		</div>
+	</div>
+	<form name="quoteUserInfoForm">
+		<div layout="column">
+			<div flex="100" class="LLAbout" flex-xs="100" flex-sm="100"
+				style="color: #424242;">
+				<input type="text" name="name" value="" placeholder="Name"
+					class="exAdMar LLInput" capitalize-first
+					ng-model="quoteUserInfo.firstName" ng-pattern="/^[a-zA-Z\s]*$/"
+					required autocomplete="off">
+				<div ng-messages="quoteUserInfoForm.name.$error"
+					ng-if="quoteUserInfoForm.name.$touched" md-auto-hide="false"
+					class="errorMsg">
+					<div ng-message="required">Name is required</div>
+					<div ng-message="pattern">Enter valid Name</div>
+				</div>
+
+			</div>
+			<div flex="100" class="LLAbout" flex-xs="100" flex-sm="100"
+				style="color: #424242;">
+				<input type="text" ng-model="quoteUserInfo.emailId" name="emailId"
+					class="exAdMar LLInput" value="" autocomplete="off"
+					placeholder="Email Id" required
+					ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-z.]{2,5}$/">
+				<div ng-messages="quoteUserInfoForm.emailId.$error"
+					ng-if="quoteUserInfoForm.emailId.$touched" md-auto-hide="false"
+					class="errorMsg">
+					<div ng-message="required">Email Id is required</div>
+					<div ng-message="pattern">Enter valid Email Id</div>
+				</div>
+			</div>
+			<div flex="100" class="LLAbout" flex-xs="100" flex-sm="100"
+				style="color: #424242;">
+				<input type="text" name="mobileNumber"
+					ng-model="quoteUserInfo.mobileNumber" class="exAdMar HLInput"
+					autocomplete="off" value="" placeholder="Phone Number"
+					ng-pattern="/^[6789]\d{9}$/" maxlength="10" minlength="10" required>
+				<div ng-messages="quoteUserInfoForm.mobileNumber.$error"
+					ng-if="quoteUserInfoForm.mobileNumber.$touched"
+					md-auto-hide="false" class="errorMsg">
+					<div ng-message="required">Phone number is required</div>
+					<div ng-message="pattern">Enter valid Mobile No</div>
+				</div>
+			</div>
+			<div flex="100" flex-xs="100" flex-sm="100" class="LLAbout">
+				<button type="submit" ng-click="$root.validateLandingUser('')"
+					class="calcBtn" id="lifeLeadSubmissionPop"
+					style="position: unset; width: 100%;">
+					<u>SUBMIT </u>
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+</md-dialog>

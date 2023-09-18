@@ -1,0 +1,359 @@
+<div class="fullShadow resultBg"
+	ng-repeat="data in $root.bikeQuoteResult | orderBy :sortKey:sortReverse" ng-if="!$root.professionalJourney">
+	<div class="">
+		<div class="resultBGpad divForMobile" style="padding: 0">
+			<div class="clearfix"></div>
+			<div class="section showforMobile">
+				<div class="col col-sm-6"
+					style="width: 50%; border-right: 1px solid #ccc;">
+					<img data-toggle="tooltip" title="{{data.insuranceCompany}}"
+						src="img\clogo\{{data.carrierId}}.png" style="" tooltip>
+					<p style="margin: 16px auto auto;" data-toggle="tooltip"
+						title="{{tooltipContent.liabilityServiceRating}}" tooltip>
+						<ng-rate-it ng-model="data.insurerIndex" resetable="false"
+							rated="ratedCallback" min="0" max="5" step="1" read-only="true"></ng-rate-it>
+						<!-- &nbsp; {{data.insurerIndex | number:0}} -->
+
+					</p>
+					<button ng-click="buyProduct(data)" class="bluebuybuttoncar"
+						style="margin: 16px auto auto; display: block;">{{globalLabel.applicationLabels.common.buyNow}}</button>
+				</div>
+				<div class="col col-sm-6" style="width: 50%">
+					<md-list class="resultListPad"> <md-list-item
+						class="md-1-line" md-ink-ripple="false">
+					<div class="" style="width: 100%" md-ink-ripple="false">
+						<div class="">
+							<div class="md-list-item-text">
+								<h3 data-toggle="tooltip"
+									title="{{tooltipContent.liabilityTotalPremium}}" tooltip>
+									{{globalLabel.applicationLabels.bike.grossPremium}} <span
+										md-ink-ripple="false"> <span ng-repeat="v in [0]"><md-menu
+												md-offset="-100 40"> <a
+												ng-click="openMenu($mdOpenMenu, $event);getPopup(data);">
+												[+] </a> <md-menu-content width="6"
+												class="menuForCheckbox menuForPremium">
+											<div class="menuHeaderText">PREMIUM DETAILS</div>
+											<div style="padding: 0px 10px 10px 10px;">
+												<md-list class="resultPad"
+													ng-if="(data.odpremium + data.llDriverCover + data.paidDriverCover + data.tppremium) > 0">
+												<md-list-item class="md-1-line checkBox">
+												<div layout="row" layout-wrap flex>
+													<div class="md-list-item-text" flex="100">
+														<div class="section">
+															<div class="col col-lg-9">
+																<p>
+																	<b>{{globalLabel.applicationLabels.bike.basicCoverage}}</b>
+																</p>
+															</div>
+															<div class="col col-lg-3">
+																<p class="right">
+																	<b>&#8377;{{(data.odpremium + data.llDriverCover +
+																		data.paidDriverCover + data.tppremium) | number:0}}</b>
+																</p>
+															</div>
+														</div>
+														<md-divider></md-divider>
+													</div>
+												</div>
+												</md-list-item> <md-list-item class="md-1-line checkBox"
+													ng-if="data.odpremium > 0">
+												<div layout="row" layout-wrap flex>
+													<div class="md-list-item-text" flex="100">
+														<div class="section">
+															<div class="col col-lg-9">
+																<p>{{globalLabel.applicationLabels.bike.basicOwnDamage}}</p>
+															</div>
+															<div class="col col-lg-3">
+																<p class="right">&#8377;{{data.odpremium |
+																	number:0}}</p>
+															</div>
+														</div>
+														<md-divider></md-divider>
+													</div>
+												</div>
+												</md-list-item> <md-list-item class="md-1-line checkBox"
+													ng-if="data.llDriverCover > 0">
+												<div layout="row" layout-wrap flex>
+													<div class="md-list-item-text" flex="100">
+														<div class="section">
+															<div class="col col-lg-9">
+																<p>{{globalLabel.applicationLabels.bike.leagalLiabilityForDriver}}</p>
+															</div>
+															<div class="col col-lg-3">
+																<p class="right">&#8377;{{data.llDriverCover |
+																	number:0}}</p>
+															</div>
+														</div>
+														<md-divider></md-divider>
+													</div>
+												</div>
+												</md-list-item> <md-list-item class="md-1-line checkBox"
+													ng-if="data.paidDriverCover > 0">
+												<div layout="row" layout-wrap flex>
+													<div class="md-list-item-text" flex="100">
+														<div class="section">
+															<div class="col col-lg-9">
+																<p>{{globalLabel.applicationLabels.bike.personalAccidentCover}}</p>
+															</div>
+															<div class="col col-lg-3">
+																<p class="right">&#8377;{{data.paidDriverCover |
+																	number:0}}</p>
+															</div>
+														</div>
+														<md-divider></md-divider>
+													</div>
+												</div>
+												</md-list-item> <md-list-item class="md-1-line checkBox"
+													ng-if="data.tppremium > 0">
+												<div layout="row" layout-wrap flex>
+													<div class="md-list-item-text" flex="100">
+														<div class="section">
+															<div class="col col-lg-9">
+																<p>{{globalLabel.applicationLabels.bike.basicThirdParty}}</p>
+															</div>
+															<div class="col col-lg-3">
+																<p class="right">&#8377;{{data.tppremium |
+																	number:0}}</p>
+															</div>
+														</div>
+														<md-divider></md-divider>
+													</div>
+												</div>
+												</md-list-item> </md-list>
+												<br />
+												<md-list class="resultPad"> <md-list-item
+													class="md-1-line checkBox">
+												<div layout="row" layout-wrap flex>
+													<div class="md-list-item-text" flex="100">
+														<div class="section">
+															<div class="col col-lg-9">
+																<p>
+																	<b>{{globalLabel.applicationLabels.common.serviceTax}}</b>
+																</p>
+															</div>
+															<div class="col col-lg-3">
+																<p class="right">
+																	<b>+&#8377;{{data.serviceTax | number:0}}</b>
+																</p>
+															</div>
+														</div>
+														<md-divider></md-divider>
+													</div>
+												</div>
+												</md-list-item> <md-list-item class="md-1-line checkBox">
+												<div layout="row" layout-wrap flex>
+													<div class="md-list-item-text" flex="100">
+														<div class="section">
+															<div class="col col-lg-9">
+																<p>
+																	<b>{{globalLabel.applicationLabels.bike.finalPrice}}</b>
+																</p>
+															</div>
+															<div class="col col-lg-3">
+																<p class="right">
+																	<b>&#8377;{{data.grossPremium | number:0}} </b>
+															</div>
+														</div>
+														<md-divider></md-divider>
+													</div>
+												</div>
+												</md-list-item> </md-list>
+											</div>
+											<a ng-click="toggleMoreDetails" class="bluebuybuttoncar"
+												style="margin: 20px auto auto;">{{globalLabel.applicationLabels.common.popupButton}}</a>
+											</md-menu-content> </md-menu></span>
+									</span>
+								</h3>
+								<p>&#8377;{{data.grossPremium | number:0}}</p>
+							</div>
+						</div>
+					</div>
+					</md-list-item> </md-list>
+				</div>
+			</div>
+		</div>
+		<div class="section hideforMobile">
+			<div class="col col-sm-2" style="margin-top: 7.5%;">
+				<img data-toggle="tooltip" title="{{data.insuranceCompany}}"
+					src="img\clogo\{{data.carrierId}}.png" style="" tooltip>
+			</div>
+			<div class="col col-sm-10">
+				<md-list class="resultListPad"> <md-list-item
+					class="md-1-line" md-ink-ripple="false">
+				<div class="section" style="width: 100%" md-ink-ripple="false">
+					<div class="col col-sm-4 md-ink-ripple="false"">
+						<div class="md-list-item-text">
+							<h3 data-toggle="tooltip"
+								title="{{tooltipContent.liabilityTotalPremium}}" tooltip>
+								{{globalLabel.applicationLabels.bike.grossPremium}} <span
+									md-ink-ripple="false"> <span ng-repeat="v in [0]"><md-menu
+											md-offset="-100 40"> <a
+											ng-click="openMenu($mdOpenMenu, $event);getPopup(data);">
+											({{globalLabel.applicationLabels.common.quoteResultViewDetails}})
+										</a> <md-menu-content width="6"
+											class="menuForCheckbox menuForPremium">
+										<div class="menuHeaderText">PREMIUM DETAILS</div>
+										<div style="padding: 0px 10px 10px 10px;">
+											<md-list class="resultPad"
+												ng-if="(data.odpremium + data.llDriverCover + data.paidDriverCover + data.tppremium) > 0">
+											<md-list-item class="md-1-line checkBox">
+											<div layout="row" layout-wrap flex>
+												<div class="md-list-item-text" flex="100">
+													<div class="section">
+														<div class="col col-lg-9">
+															<p>
+																<b>{{globalLabel.applicationLabels.bike.basicCoverage}}</b>
+															</p>
+														</div>
+														<div class="col col-lg-3">
+															<p class="right">
+																<b>&#8377;{{(data.odpremium + data.llDriverCover +
+																	data.paidDriverCover + data.tppremium) | number:0}}</b>
+															</p>
+														</div>
+													</div>
+													<md-divider></md-divider>
+												</div>
+											</div>
+											</md-list-item> <md-list-item class="md-1-line checkBox"
+												ng-if="data.odpremium > 0">
+											<div layout="row" layout-wrap flex>
+												<div class="md-list-item-text" flex="100">
+													<div class="section">
+														<div class="col col-lg-9">
+															<p>{{globalLabel.applicationLabels.bike.basicOwnDamage}}</p>
+														</div>
+														<div class="col col-lg-3">
+															<p class="right">&#8377;{{data.odpremium | number:0}}</p>
+														</div>
+													</div>
+													<md-divider></md-divider>
+												</div>
+											</div>
+											</md-list-item> <md-list-item class="md-1-line checkBox"
+												ng-if="data.llDriverCover > 0">
+											<div layout="row" layout-wrap flex>
+												<div class="md-list-item-text" flex="100">
+													<div class="section">
+														<div class="col col-lg-9">
+															<p>{{globalLabel.applicationLabels.bike.leagalLiabilityForDriver}}</p>
+														</div>
+														<div class="col col-lg-3">
+															<p class="right">&#8377;{{data.llDriverCover |
+																number:0}}</p>
+														</div>
+													</div>
+													<md-divider></md-divider>
+												</div>
+											</div>
+											</md-list-item> <md-list-item class="md-1-line checkBox"
+												ng-if="data.paidDriverCover > 0">
+											<div layout="row" layout-wrap flex>
+												<div class="md-list-item-text" flex="100">
+													<div class="section">
+														<div class="col col-lg-9">
+															<p>{{globalLabel.applicationLabels.bike.personalAccidentCover}}</p>
+														</div>
+														<div class="col col-lg-3">
+															<p class="right">&#8377;{{data.paidDriverCover |
+																number:0}}</p>
+														</div>
+													</div>
+													<md-divider></md-divider>
+												</div>
+											</div>
+											</md-list-item> <md-list-item class="md-1-line checkBox"
+												ng-if="data.tppremium > 0">
+											<div layout="row" layout-wrap flex>
+												<div class="md-list-item-text" flex="100">
+													<div class="section">
+														<div class="col col-lg-9">
+															<p>{{globalLabel.applicationLabels.bike.basicThirdParty}}</p>
+														</div>
+														<div class="col col-lg-3">
+															<p class="right">&#8377;{{data.tppremium | number:0}}</p>
+														</div>
+													</div>
+													<md-divider></md-divider>
+												</div>
+											</div>
+											</md-list-item> </md-list>
+											<br />
+											<md-list class="resultPad"> <md-list-item
+												class="md-1-line checkBox">
+											<div layout="row" layout-wrap flex>
+												<div class="md-list-item-text" flex="100">
+													<div class="section">
+														<div class="col col-lg-9">
+															<p>
+																<b>{{globalLabel.applicationLabels.common.serviceTax}}</b>
+															</p>
+														</div>
+														<div class="col col-lg-3">
+															<p class="right">
+																<b>&#8377;{{data.serviceTax | number:0}}</b>
+															</p>
+														</div>
+													</div>
+													<md-divider></md-divider>
+												</div>
+											</div>
+											</md-list-item> <md-list-item class="md-1-line checkBox">
+											<div layout="row" layout-wrap flex>
+												<div class="md-list-item-text" flex="100">
+													<div class="section">
+														<div class="col col-lg-9">
+															<p>
+																<b>{{globalLabel.applicationLabels.bike.finalPrice}}</b>
+															</p>
+														</div>
+														<div class="col col-lg-3">
+															<p class="right">
+																<b>&#8377;{{data.grossPremium | number:0}} </b>
+														</div>
+													</div>
+													<md-divider></md-divider>
+												</div>
+											</div>
+											</md-list-item> </md-list>
+										</div>
+										<a ng-click="toggleMoreDetails" class="bluebuybuttoncar"
+											style="margin: 20px auto auto;">{{globalLabel.applicationLabels.common.popupButton}}</a>
+										</md-menu-content> </md-menu></span>
+								</span>
+							</h3>
+							<p>&#8377;{{data.grossPremium | number:0}}</p>
+						</div>
+					</div>
+				</div>
+				<md-divider></md-divider> </md-list-item> <md-list-item class="md-1-line">
+				<div class="section" style="width: 100%">
+					<div class="col col-sm-4">
+						<div class="md-list-item-text">
+							<h3 data-toggle="tooltip"
+								title="{{tooltipContent.liabilityServiceRating}}" tooltip>{{globalLabel.applicationLabels.bike.serviceRating}}</h3>
+							<p>
+								<ng-rate-it ng-model="data.insurerIndex" resetable="false"
+									rated="ratedCallback" min="0" max="5" step="1" read-only="true"></ng-rate-it>
+								<!-- &nbsp; {{data.insurerIndex | number:0}} -->
+
+							</p>
+						</div>
+					</div>
+				</div>
+				<md-divider></md-divider> </md-list-item> <md-list-item class="md-1-line">
+				<div class="section" style="width: 100%">
+					<div class="col col-sm-4">
+						<div class="md-list-item-text">
+							<button ng-click="buyProduct(data)" class="bluebuybuttoncar"
+								style="margin: 20px auto auto;">{{globalLabel.applicationLabels.common.buyNow}}</button>
+						</div>
+					</div>
+				</div>
+				<md-divider></md-divider> </md-list-item> </md-list>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+

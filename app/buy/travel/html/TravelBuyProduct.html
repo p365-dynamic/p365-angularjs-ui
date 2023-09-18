@@ -1,0 +1,1629 @@
+<loading></loading>
+<div after-render="missionCompled"></div>
+<div class="section travelBg wp_padHeaderNavi wp_innerCar"
+	ng-if="$root.wordPressEnabled && !isThirdPartyResource  && !$root.professionalJourney">
+	<ng-container ng-include="$root.headerNavigation" ng-controller='headerNavigationController'></ng-container>
+	<div class="clearfix"></div>
+</div>
+<div class="middleTab one-edge-shadow widthFull resultCommon mobileResult wp_padHeaderNavi">
+	<!-- <div class="backButtonPlacer wp_backBtnPlacer">
+		<a ng-click="backToResultScreen()" id="travelBackToResultScreen">
+			<div class="md-raised backButtonColor backButton" data-html="true"
+				data-toggle="tooltip" data-placement="right" title="Back" tooltip>
+				<i class="fa fa-chevron-left"></i>
+			</div>
+		</a>
+	</div> -->
+	<span class="cursor backBtn">
+		<span ng-click="backToResultScreen()" id="carBackToResultScreen" role="button" tabindex="0">
+			<i class="material-icons">keyboard_arrow_left</i>
+		</span>
+	</span>
+	<div>
+		<h2 class="center padBot3Per font25 resp_font20 resp_pad10">
+			<span data-bind-html-compile="p365Labels.professionalJourney.proposalDetails"
+				data-ng-bind-html="p365Labels.professionalJourney.proposalDetails">
+		</h2>
+		<div class="side5Pad">
+			<div layout="row" layout-xs="column" layout-sm="column" class="propCommonCont">
+				<div flex="30" flex-xs="100" flex-sm="100" class="whitePg">
+					<ng-container ng-include="travelProposalSectionHTML"></ng-container>
+				</div>
+				<div flex="70" flex-xs="100" flex-sm="100" class="side2Pad">
+					<div ng-show="accordion==1 && screenOneStatus">
+						<form name='proposerDetailsForm'>
+							<div class="posRel">
+								<h2 class="upperCaseText font25 boldFont grey666Txt center resp_font20 noMarBot">
+									{{globalLabel.applicationLabels.travel.proposerDetails}}</h2>
+								<span class="propPageCount resp_propPageCount">1/4</span>
+							</div>
+							<div class="font11 grey888Txt letterSpace1px centerAlignTxt">
+								Person who is owing the vehicle and contact information
+							</div>
+							<div class="proposalBorder"></div>
+							<div class="side3Pad">
+								<div layout="row" layout-xs="column" layout-sm="row">
+									<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+										<md-input-container class="width100">
+											<label>First name</label>
+											<input class="capitializeName bold12" name='proposerFirstName'
+												ng-model='proposerDetails.firstName' autocomplete='off' maxlength='35'
+												minlength='1' ng-pattern='/^[a-zA-Z ]*$/' required md-no-asterisk />
+											<div ng-messages="proposerDetailsForm.proposerFirstName.$error"
+												ng-if="proposerDetailsForm.proposerFirstName.$touched">
+												<div style="color: red" ng-message="required">
+													{{globalLabel.applicationLabels.travel.required}}</div>
+												<div style="color: red" ng-message="pattern">Enter
+													valid first name</div>
+												<div style="color: red" ng-message="maxlength">35
+													characters as max length</div>
+											</div>
+										</md-input-container>
+									</div>
+									<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+										<md-input-container class="width100">
+											<label>last name</label>
+											<input class="capitializeName bold12" name='proposerLastName'
+												ng-model='proposerDetails.lastName' autocomplete='off' maxlength='35'
+												minlength='1' ng-pattern='/^[a-zA-Z ]*$/' required md-no-asterisk />
+											<div ng-messages="proposerDetailsForm.proposerLastName.$error"
+												ng-if="proposerDetailsForm.proposerLastName.$touched">
+												<div style="color: red" ng-message="required">
+													{{globalLabel.applicationLabels.travel.required}}</div>
+												<div style="color: red" ng-message="pattern">Enter
+													valid last name</div>
+												<div style="color: red" ng-message="maxlength">35
+													characters as max length</div>
+											</div>
+										</md-input-container>
+									</div>
+									<div flex="33" flex-xs="100" flex-sm="33">
+										<md-input-container class="width100">
+											<label>Email ID</label>
+											<input class="bold12"
+												ng-pattern='/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z.]{2,5}$/'
+												autocomplete='off' maxlength='50' name='emailId'
+												ng-model='proposerDetails.emailId' required md-no-asterisk />
+											<div ng-messages="proposerDetailsForm.emailId.$error"
+												ng-if="proposerDetailsForm.emailId.$touched">
+												<div style="color: red" ng-message="required">
+													{{globalLabel.applicationLabels.travel.required}}</div>
+												<div style="color: red" ng-message="pattern">Enter
+													valid mail id</div>
+												<div style="color: red" ng-message="maxlength">50
+													characters as max length</div>
+											</div>
+										</md-input-container>
+									</div>
+								</div>
+								<div layout="row" layout-xs="column" layout-sm="row">
+									<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+										<md-input-container class="width100">
+											<label>Mobile Number</label>
+											<input class="bold12" name='mobileNumber'
+												ng-model='proposerDetails.mobileNumber' autocomplete='off'
+												ng-pattern='/^[6789]\d{9}$/' maxlength='10' minlength='10' required
+												md-no-asterisk />
+											<div ng-messages="proposerDetailsForm.mobileNumber.$error"
+												ng-if="proposerDetailsForm.mobileNumber.$touched">
+												<div style="color: red" ng-message="required">
+													{{globalLabel.applicationLabels.travel.required}}</div>
+												<div style="color: red" ng-message="pattern">Enter
+													valid mobile no</div>
+												<div style="color: red" ng-message="maxlength">10
+													characters as max length</div>
+											</div>
+										</md-input-container>
+									</div>
+									<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+										<md-input-container class="width100">
+											<label>{{globalLabel.applicationLabels.travel.dateOfBirth}}</label>
+											<input class="newDatepickerBorder bold12" type="text"
+												ng-model="proposerDetails.dateOfBirth" ng-change="validateDOB()"
+												p365-date-picker="proposerDOBOptions" name="dateOfBirth" required
+												md-no-asterisk readonly="readonly" />
+											<div ng-messages="proposerDetailsForm.dateOfBirth.$error"
+												ng-if="proposerDetailsForm.dateOfBirth.$touched">
+												<div style="color: red" ng-message="required">
+													{{globalLabel.applicationLabels.travel.required}}</div>
+											</div>
+										</md-input-container>
+									</div>
+									<div flex="33" flex-xs="100" flex-sm="33">
+										<md-input-container class="width100">
+											<label>{{globalLabel.applicationLabels.travel.genderType}}</label>
+											<md-select name="gender" ng-model="proposerDetails.gender"
+												class="mdInputContainer_input bold12 lineHgt34"
+												ng-change="validateGender()" required>
+												<md-option ng-value="gender.label" ng-repeat="gender in genderType">
+													{{gender.label}}</md-option>
+											</md-select>
+										</md-input-container>
+									</div>
+								</div>
+								<div layout="row" layout-xs="column" layout-sm="row">
+									<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+										<md-input-container class="width100">
+											<label>Marital Status</label>
+											<md-select name="maritalStatus" ng-model="proposerDetails.maritalStatus"
+												class="mdInputContainer_input bold12 lineHgt34"
+												ng-change="validateMaritalStatus()" required md-no-asterisk>
+												<md-option ng-value="maritalstatus.name"
+													ng-repeat="maritalstatus in maritalStatusType">
+													{{maritalstatus.name}} </md-option>
+											</md-select>
+										</md-input-container>
+									</div>
+									<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+										<md-input-container class="width100">
+											<div ng-if="occupationCheck" ng-bind-html="occupationDetailsTemplate"
+												bind-html-compile="occupationDetailsTemplate">
+											</div>
+										</md-input-container>
+									</div>
+									<div flex="33" flex-xs="100" flex-sm="33">
+
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div ng-if="errorMsg">
+									<div
+										style="border: 1px solid red; color: red; width: 100%; text-align: center; padding: 1%;">
+										<h5>Plan not allowed for the selected Age, Gender and Marital Status</h5>
+									</div>
+								</div>
+								<div ng-if="!errorMsg && errorMsgFlag">
+									<div
+										style="border: 1px solid red; color: red; width: 100%; text-align: center; padding: 1%;">
+										<h5>Selected Marital Status is not allowed with selected travellers</h5>
+									</div>
+								</div>
+								<div layout="row" layout-xs="column" layout-sm="row">
+									<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+										<div ng-bind-html="proposerDetailsTemplate"
+											bind-html-compile="proposerDetailsTemplate"></div>
+									</div>
+									<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+
+									</div>
+									<div flex="33" flex-xs="100" flex-sm="33">
+
+									</div>
+								</div>
+
+
+							</div>
+							<div class="right resp_center">
+								<md-button ng-disabled='proposerDetailsForm.$invalid' id="carOwnerNext"
+									ng-click="submitPersonalDetails()" class="inpSaveBtnNoWidth noMarRight">Next
+								</md-button>
+							</div>
+						</form>
+					</div>
+
+					<!--Accordion 2-->
+					<div ng-show="accordion==2 && screenTwoStatus">
+						<form name='addressDetailsForm '>
+							<div class="posRel">
+								<h2 class="upperCaseText font25 boldFont grey666Txt center resp_font20 noMarBot">
+									Communication Address</h2>
+								<span class="propPageCount resp_propPageCount">2/4</span>
+							</div>
+							<div class="font11 grey888Txt letterSpace1px centerAlignTxt">
+								Address details of the person who is owing the vehicle
+							</div>
+							<div class="proposalBorder"></div>
+							<div class="side3Pad">
+								<div layout="row" layout-xs="column" layout-sm="row">
+									<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+										<md-input-container class="width100">
+											<label>Door No/Block No/Block Name</label>
+											<input class="capitializeName bold12"
+												ng-model='communicationAddress.houseNo' autocomplete='off'
+												maxlength='50' minlength='1' name='doornoblock' required
+												md-no-asterisk />
+											<div ng-messages="addressDetailsForm.doornoblock.$error"
+												ng-if="addressDetailsForm.doornoblock.$touched">
+												<div style="color: red" ng-message="required">
+													{{globalLabel.applicationLabels.travel.required}}</div>
+												<div style="color: red" ng-message="pattern">Enter
+													valid door No.</div>
+											</div>
+										</md-input-container>
+									</div>
+									<div flex="66" flex-xs="100" flex-sm="66">
+										<md-input-container class="width100">
+											<label class="md-no-float">Address</label>
+											<input class="capitializeName bold12" details="$root.chosenCommPlaceDetails"
+												name='address' ng-model='communicationAddress.addressLine' googleplace
+												ng-change="resetCommunicationAddress()" autocomplete='off'
+												maxlength='{{areaMaxLength}}' minlength='1' style="" required
+												md-no-asterisk />
+											<div ng-messages="addressDetailsForm.address.$error"
+												ng-if="addressDetailsForm.address.$touched">
+												<div style="color: red" ng-message="required">
+													{{globalLabel.applicationLabels.travel.required}}</div>
+												<div style="color: red" ng-message="pattern">Enter
+													valid address</div>
+												<div style="color: red" ng-message="maxlength">{{areaMaxLength}}
+													characters as max length</div>
+											</div>
+										</md-input-container>
+									</div>
+								</div>
+								<div layout="row" layout-xs="column" layout-sm="row">
+									<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+										<md-input-container class="width100">
+											<label>PIN Code</label>
+											<input name="pin1" autocomplete="off" ng-required="true" class="bold12"
+												typeahead-on-select="onSelectPinOrAreaComm($item)"
+												ng-model="communicationAddress.pincode"
+												uib-typeahead="pin.displayField for pin in getPinCodeAreaList($viewValue)"
+												typeahead-show-hint="true" typeahead-min-length="3"
+												typeahead-wait-ms="5" required md-no-asterisk />
+											<div ng-messages="addressDetailsForm.pin1.$error"
+												ng-if="addressDetailsForm.pin1.$touched">
+												<div style="color: red" ng-message="required">
+													{{globalLabel.applicationLabels.travel.required}}</div>
+												<div style="color: red" ng-message="pattern">Enter
+													valid pin code</div>
+											</div>
+										</md-input-container>
+									</div>
+									<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+										<md-input-container class="width100">
+											<label>City</label>
+											<input class="bold12" name='City' ng-model='communicationAddress.city'
+												autocomplete='off' ng-disabled="true" required md-no-asterisk />
+										</md-input-container>
+									</div>
+									<div flex="33" flex-xs="100" flex-sm="33">
+										<md-input-container class="width100">
+											<label>State</label>
+											<input class="mdInputContainer_input bold12" name='State'
+												ng-model='communicationAddress.state' autocomplete='off'
+												ng-disabled="true" required md-no-asterisk />
+										</md-input-container>
+									</div>
+								</div>
+								<p class="upperCaseText subHeader">Permanent Address</p>
+								<div layout="row" layout-xs="column" layout-sm="row">
+									<div flex="100" flex-xs="100" flex-sm="100" class="right3Mar">
+										<md-checkbox ng-change="changePermentAddress()" class="blackAddon resize"
+											ng-model="isAddressSameAsCommun" name='add '>
+											<p style="text-align: left;" class="subHeader">Same as communication
+												address.</p>
+										</md-checkbox>
+									</div>
+								</div>
+								<ng-container ng-if="!isAddressSameAsCommun">
+									<div layout="row" layout-xs="column" layout-sm="row">
+										<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+											<md-input-container class="width100">
+												<label>Door No/Block No/Block Name</label>
+												<input class="capitializeName bold12"
+													ng-model='permanentAddressDetails.houseNo' autocomplete='off'
+													maxlength='50' minlength='1' name='paddressdoornoblock' required
+													md-no-asterisk />
+												<div ng-messages="addressDetailsForm.paddressdoornoblock.$error"
+													ng-if="addressDetailsForm.paddressdoornoblock.$touched">
+													<div style="color: red" ng-message="required">
+														{{globalLabel.applicationLabels.travel.required}}</div>
+													<div style="color: red" ng-message="pattern">Enter
+														valid door No.</div>
+												</div>
+											</md-input-container>
+										</div>
+										<div flex="66" flex-xs="100" flex-sm="66">
+											<md-input-container class="width100">
+												<label class="md-no-float">Address</label>
+												<input class="capitializeName bold12" name='paddressAddress'
+													details="$root.chosenRegPlaceDetails" googleregplace
+													ng-model='permanentAddressDetails.addressLine'
+													ng-change="resetPermenentAddress()" autocomplete='off'
+													maxlength='{{areaMaxLength}}' minlength='1' style="" required
+													md-no-asterisk />
+												<div ng-messages="addressDetailsForm.paddressAdress.$error"
+													ng-if="addressDetailsForm.paddressAddress.$touched">
+													<div style="color: red" ng-message="required">
+														{{globalLabel.applicationLabels.travel.required}}</div>
+													<div style="color: red" ng-message="pattern">Enter
+														valid address</div>
+													<div style="color: red" ng-message="maxlength">{{areaMaxLength}}
+														characters as max length</div>
+												</div>
+											</md-input-container>
+										</div>
+									</div>
+									<div layout="row" layout-xs="column" layout-sm="row">
+										<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+											<md-input-container class="width100">
+												<label>PIN Code</label>
+												<input name="paddresspin1" autocomplete="off" ng-required="true"
+													class="bold12" typeahead-on-select="onSelectPinOrAreaPerm($item)"
+													ng-model="permanentAddressDetails.pincode"
+													uib-typeahead="pin.displayField for pin in getPinCodeAreaList($viewValue)"
+													typeahead-show-hint="true" typeahead-min-length="3"
+													typeahead-wait-ms="5" required md-no-asterisk />
+												<div ng-messages="addressDetailsForm.paddresspin1.$error"
+													ng-if="addressDetailsForm.paddresspin1.$touched">
+													<div style="color: red" ng-message="required">
+														{{globalLabel.applicationLabels.travel.required}}</div>
+													<div style="color: red" ng-message="pattern">Enter
+														valid pin code</div>
+												</div>
+											</md-input-container>
+										</div>
+										<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+											<md-input-container class="width100">
+												<label>City</label>
+												<input class="bold12" name='paddressCity'
+													ng-model='permanentAddressDetails.city' autocomplete='off'
+													ng-disabled="true" required md-no-asterisk />
+											</md-input-container>
+										</div>
+										<div flex="33" flex-xs="100" flex-sm="33">
+											<md-input-container class="width100">
+												<label>State</label>
+												<input class="mdInputContainer_input bold12" name='paddressState'
+													ng-model='permanentAddressDetails.state' autocomplete='off'
+													ng-disabled="true" required md-no-asterisk />
+											</md-input-container>
+										</div>
+									</div>
+								</ng-container>
+							</div>
+							<div class="right resp_center">
+								<md-button id="carAddress Previous" ng-click="editProposerInfo()"
+									class="propNxtBtn noMarRight">Previous</md-button>
+								<md-button ng-disabled='addressDetailsForm.$invalid ' id="carOwnerNext"
+									ng-click="submitAddressDetails()" class="inpSaveBtnNoWidth noMarRight">Next
+								</md-button>
+							</div>
+						</form>
+					</div>
+
+					<!--Accordion 3-->
+					<div ng-show="accordion==3 && screenThreeStatus">
+						<form name='insuredTravellerDetailsForm '>
+							<div class="posRel">
+								<h2 class="upperCaseText font25 boldFont grey666Txt center resp_font20 noMarBot">
+									{{globalLabel.applicationLabels.travel.insuredDetails}}({{globalLabel.applicationLabels.travel.asPerPassport}})
+								</h2>
+								<span class="propPageCount resp_propPageCount">3/4</span>
+							</div>
+							<div class="font11 grey888Txt letterSpace1px centerAlignTxt">
+								Person who will receive the benefits in case of death of owner of the vehicle
+							</div>
+							<div class="proposalBorder"></div>
+							<div class="side3Pad">
+								<ng-container data-ng-repeat="traveller in selectedTravellers">
+									<p class="upperCaseText subHeader">
+										{{globalLabel.applicationLabels.travel.traveller}}-{{traveller.traveller_id}}
+									</p>
+
+									<div layout="row" layout-xs="column" layout-sm="row">
+										<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+											<md-input-container class="width100">
+												<label>First name</label>
+												<input class="mdInputContainer_input capitializeName bold12"
+													name='fname' ng-model='traveller.firstName' autocomplete='off'
+													maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z ]*$/' required
+													md-no-asterisk capitalize-first />
+											</md-input-container>
+										</div>
+										<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+											<md-input-container class="width100">
+												<label>Last name</label>
+												<input class="capitializeName bold12" name='lname'
+													ng-model='traveller.lastName' autocomplete='off' maxlength='35'
+													minlength='1' ng-pattern='/^[a-zA-Z ]*$/' required md-no-asterisk
+													capitalize-first />
+											</md-input-container>
+										</div>
+										<div flex="33" flex-xs="100" flex-sm="33">
+											<md-input-container class="width100">
+												<label>Relation</label>
+												<input class="capitializeName bold12" name='relation'
+													ng-model='traveller.relation' autocomplete='off' maxlength='35'
+													minlength='1' ng-pattern='/^[a-zA-Z ]*$/' readonly
+													capitalize-first />
+											</md-input-container>
+
+										</div>
+									</div>
+									<div layout="row" layout-xs="column" layout-sm="row">
+										<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+											<md-input-container class="width100">
+												<label>{{globalLabel.applicationLabels.travel.genderType}}</label>
+												<input class="mdInputContainer_input bold12" name='type'
+													ng-model='traveller.gender' autocomplete='off' readonly />
+
+											</md-input-container>
+										</div>
+										<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+											<md-input-container class="width100">
+												<label>{{globalLabel.applicationLabels.travel.dateOfBirth}}</label>
+												<input class="newDatepickerBorder bold12" type="text"
+													ng-model="traveller.dob" ng-change="changeDateOfBirth($index)"
+													p365-date-picker="travellerDOBOptions{{$index}}" name="dob"
+													readonly="readonly" required md-no-asterisk />
+											</md-input-container>
+										</div>
+										<div flex="33" flex-xs="100" flex-sm="33">
+											<md-input-container class="width100">
+												<label>Passport No</label>
+												<input class="capitializeName bold12" name='passportNumber'
+													ng-model='traveller.passportNo' autocomplete='off' maxlength='8'
+													minlength='1' ng-pattern='/^[A-Za-z][1-9]\d\s?\d{4}[1-9]$/' required
+													md-no-asterisk />
+											</md-input-container>
+										</div>
+									</div>
+									<div layout="row" layout-xs="column" layout-sm="row">
+										<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+											<md-input-container class="width100">
+												<label>Nominee First name</label>
+												<input class="mdInputContainer_input capitializeName bold12"
+													name='nomineeFirstName'
+													ng-model='traveller.nomineeDetails.firstName' autocomplete='off'
+													maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z ]*$/' required
+													md-no-asterisk capitalize-first />
+
+											</md-input-container>
+										</div>
+										<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+											<md-input-container class="width100">
+												<label>Nominee Last Name</label>
+												<input class="capitializeName bold12" name='nomineeLastName'
+													ng-model='traveller.nomineeDetails.lastName' autocomplete='off'
+													maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z ]*$/' required
+													md-no-asterisk />
+											</md-input-container>
+										</div>
+										<div flex="33" flex-xs="100" flex-sm="33">
+											<md-input-container class="width100">
+												<label>{{globalLabel.applicationLabels.travel.dateOfBirth}}</label>
+												<input class="newDatepickerBorder bold12" type="text"
+													ng-model="traveller.nomineeDetails.dateOfBirth"
+													ng-change="calculateNomineeAge(traveller.traveller_id,traveller.nomineeDetails.dateOfBirth)"
+													p365-date-picker="nomineeDOBOptions" name="nomineeDob"
+													readonly="readonly" required md-no-asterisk />
+											</md-input-container>
+										</div>
+									</div>
+									<div layout="row" layout-xs="column" layout-sm="row">
+										<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+											<md-input-container class="width100">
+												<label>Relation
+													with Traveller</label>
+												<md-select name="reltn" ng-model="traveller.nomineeDetails.relation"
+													class="mdInputContainer_input bold12 lineHgt34" ng-change=""
+													required md-no-asterisk>
+													<md-option ng-value="rel.relation"
+														ng-repeat="rel in nomineeRelationType">
+														{{rel.display}}</md-option>
+												</md-select>
+
+											</md-input-container>
+										</div>
+										<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+
+										</div>
+										<div flex="33" flex-xs="100" flex-sm="33">
+
+										</div>
+									</div>
+									<!--Appointee-->
+									<div ng-if='traveller.nomineeAge < 18'>
+										<p class="upperCaseText subHeader">Appointee Details</p>
+										<span>Appoint a guardian to receive the claim benefits on
+											behalf of the minor nominee</span>
+
+										<div layout="row" layout-xs="column" layout-sm="row">
+											<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+												<md-input-container class="width100">
+													<label>First name</label>
+													<input class="mdInputContainer_input capitializeName bold12"
+														name='AppfirstName'
+														ng-model='traveller.nomineeDetails.apointeeDetails.firstName'
+														autocomplete='off' maxlength='35' minlength='1'
+														ng-pattern='/^[a-zA-Z ]*$/' required md-no-asterisk
+														capitalize-first />
+												</md-input-container>
+											</div>
+											<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+												<md-input-container class="width100">
+													<label>Last name</label>
+													<input class="mdInputContainer_input capitializeName bold12"
+														name='lastName'
+														ng-model='traveller.nomineeDetails.apointeeDetails.lastName'
+														autocomplete='off' maxlength='35' minlength='1'
+														ng-pattern='/^[a-zA-Z ]*$/' required md-no-asterisk
+														capitalize-first />
+												</md-input-container>
+											</div>
+											<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+												<md-input-container class="width100">
+													<label>{{globalLabel.applicationLabels.travel.dateOfBirth}}</label>
+													<input class="newDatepickerBorder bold12" type="text" name='date1'
+														ng-model="traveller.nomineeDetails.apointeeDetails.dateOfBirth"
+														ng-change="calculateApointeeAge(traveller.nomineeDetails.apointeeDetails.dateOfBirth)"
+														p365-date-picker="appointeeDOBOptions" readonly="readonly" />
+												</md-input-container>
+											</div>
+										</div>
+										<div layout="row" layout-xs="column" layout-sm="row">
+											<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar">
+												<md-input-container class="width100">
+													<label>Relation
+														with Nominee</label>
+													<md-select name="appointeeRelation"
+														class="mdInputContainer_input bold12 lineHgt34"
+														ng-model="traveller.nomineeDetails.apointeeDetails.relation"
+														required md-no-asterisk>
+														<md-option ng-value="rel.relation"
+															ng-repeat="rel in appointeeRelationType">
+															{{rel.display}}</md-option>
+													</md-select>
+												</md-input-container>
+											</div>
+											<div flex="33" flex-xs="100" flex-sm="33" class="right3Mar"></div>
+											<div flex="33" flex-xs="100" flex-sm="33"></div>
+										</div>
+									</div>
+								</ng-container>
+							</div>
+
+							<div class="right resp_center">
+								<md-button id="carAddress Previous" ng-click="editAddressInfo()"
+									class="propNxtBtn noMarRight">Previous</md-button>
+								<md-button ng-disabled='insuredTravellerDetailsForm.$invalid ' id="carNomineeNext"
+									ng-click="submitInsuredDetails()" class="inpSaveBtnNoWidth noMarRight">Next
+								</md-button>
+							</div>
+						</form>
+					</div>
+
+					<!--Accordion 4-->
+					<div ng-show="accordion==4 && screenFourStatus">
+						<form name='medicalDetailsForm '>
+							<div class="posRel">
+								<h2 class="upperCaseText font25 boldFont grey666Txt center resp_font20 noMarBot">Medical
+									Details </h2>
+								<span class="propPageCount resp_propPageCount">4/4</span>
+							</div>
+							<div class="font11 grey888Txt letterSpace1px centerAlignTxt">
+								Medical History
+							</div>
+							<div class="proposalBorder"></div>
+							<div class="side3Pad">
+
+								<div class="wp_proposalPadTop50">
+									<div
+										ng-repeat="mQuestion in medicalQuestionarrier | orderBy : 'questionId' track by $index">
+
+										<!-- mQuestion.inputType -->
+
+										<div ng-if="mQuestion.inputType">
+											<div layout="row" layout-xs="column" layout-sm="row">
+												<div flex="80" flex-xs="100" flex-sm="80" class="right3Mar">
+													<p class="font13">
+														<b>{{mQuestion.question}} </b>
+													</p>
+													<p class="font12">{{mQuestion.description}}</p>
+												</div>
+												<div flex="20" flex-xs="100" flex-sm="20">
+													<md-input-container class="md-block">
+														<md-radio-group
+															ng-change="inputTypeCheck(medicalInfo.medicalQuestionarrie[$index].applicable,mQuestion.questionId,mQuestion)"
+															ng-model="medicalInfo.medicalQuestionarrie[$index].applicable"
+															ng-init="medicalInfo.medicalQuestionarrie[$index].question=mQuestion.question;
+														medicalInfo.medicalQuestionarrie[$index].questionCode=mQuestion.questionCode;
+														medicalInfo.medicalQuestionarrie[$index].applicable=mQuestion.applicable" layout="row">
+															<md-radio-button value="true">Yes</md-radio-button>
+															<md-radio-button value="false">No</md-radio-button>
+														</md-radio-group>
+													</md-input-container>
+												</div>
+												<div class="section group padBottom10"
+													ng-show="medicalInfo.medicalQuestionarrie[$index].applicable=='true' && mQuestion.isRegret && productValidation.proceedWithN">
+													<span style="color:red;">{{regretErrorMessage}}</span>
+												</div>
+											</div>
+											<div class="section group padBottom10"
+												ng-show="medicalInfo.medicalQuestionarrie[$index].applicable=='true' && (!mQuestion.isRegret || mQuestion.isRegret=='undefined' || mQuestion.isRegret==undefined)">
+												<div class="menuForCheckbox medicalBuyDiseasePopup">
+													<div layout="row">
+														<div flex="100">
+															<div class="section">
+																<!-- ng-repeat="diseaseinfo in diseaseList | orderBy : 'diseaseId' track by $index"> -->
+
+																<md-list class="resultPad medicalPopup">
+																	<div class="col span_1_of_3"
+																		ng-repeat='member in selectedTravellers'>
+																		<md-input-container class="md-block"
+																			style="margin: 0px 0 0px 0 !important;">
+																			<md-checkbox class="blackAddon resize"
+																				ng-change="stateChangedMedical(mQuestion,member.carrierMedicalQuestion[$parent.$index].applicable,member.relationship)"
+																				ng-init="member.carrierMedicalQuestion[$parent.$index].questionCode=mQuestion.questionCode;
+																				 member.carrierMedicalQuestion[$parent.$index].applicable=false"
+																				ng-model='member.carrierMedicalQuestion[$parent.$index].applicable'
+																				name='add'
+																				style="margin-bottom:0px !important;">
+																				<p
+																					style="text-align: left; font-weight: 600;">
+																					{{member.firstName}}
+																					{{member.lastName}}</p>
+																			</md-checkbox>
+																			<div ng-if="mQuestion.inputType=='2text'">
+																				<div class="section" layout-xs="row">
+																					<div flex="50"
+																						class="col span_1_of_2"
+																						style="width: 100%;"
+																						class="alignColumn">
+																						<md-input-container
+																							class="md-block">
+																							<label
+																								class="buyTextPadding wp_md-no-float">{{mQuestion.labelOne}}</label>
+																							<input
+																								class="mdInputContainer_input"
+																								name='diseaseInput'
+																								ng-model="member.carrierMedicalQuestion[$parent.$parent.$index].count1"
+																								autocomplete='off'
+																								maxlength='50'
+																								minlength='1'
+																								ng-pattern='/^[0-9]*$/'
+																								style="box-shadow: unset; color: #424242;" />
+																						</md-input-container>
+																					</div>
+																					<div flex="50"
+																						class="col span_1_of_2"
+																						style="width: 100%;"
+																						class="alignColumn">
+																						<md-input-container
+																							class="md-block">
+
+																							<label
+																								class="buyTextPadding wp_md-no-float">{{mQuestion.labelTwo}}</label>
+																							<input
+																								class="mdInputContainer_input"
+																								name='diseaseInput'
+																								ng-model="member.carrierMedicalQuestion[$parent.$parent.$index].count2"
+																								autocomplete='off'
+																								maxlength='50'
+																								minlength="1"
+																								ng-pattern='/^[0-9]*$/'
+																								style="box-shadow: unset; color: #424242;" />
+																						</md-input-container>
+																					</div>
+																				</div>
+																			</div>
+																			<div
+																				ng-if="mQuestion.inputType=='diseaseDesc'">
+																				<div class="section" layout-xs="row">
+																					<div flex="50"
+																						class="col span_1_of_2"
+																						style="width: 100%;"
+																						class="alignColumn">
+																						<md-input-container
+																							class="md-block">
+																							<label
+																								class="buyTextPadding wp_md-no-float">{{mQuestion.labelOne}}</label>
+																							<input
+																								class="mdInputContainer_input"
+																								name='diseaseInput'
+																								ng-model="member.carrierMedicalQuestion[$parent.$parent.$index].count1"
+																								autocomplete='off'
+																								maxlength='50'
+																								minlength='1'
+																								style="box-shadow: unset; color: #424242;" />
+																						</md-input-container>
+																					</div>
+																					<div flex="50"
+																						class="col span_1_of_2"
+																						style="width: 100%;"
+																						class="alignColumn">
+																						<md-input-container
+																							class="md-block">
+
+																							<label
+																								class="buyTextPadding wp_md-no-float">{{mQuestion.labelTwo}}</label>
+																							<input
+																								class="mdInputContainer_input"
+																								name='diseaseInput'
+																								ng-model="member.carrierMedicalQuestion[$parent.$parent.$index].count2"
+																								autocomplete='off'
+																								maxlength='50'
+																								minlength="1"
+																								style="box-shadow: unset; color: #424242;" />
+																						</md-input-container>
+																					</div>
+																				</div>
+																			</div>
+																			<div
+																				ng-if="mQuestion.inputType2=='2dropDown'">
+																				<md-input-container>
+																					<label>{{mQuestion.labelThree}}</label>
+																					<md-select name="treatment"
+																						ng-init="member.carrierMedicalQuestion[$parent.$index].value=setDropDown3(mQuestion.dropdownValue3)"
+																						ng-model="member.carrierMedicalQuestion[$parent.$parent.$index].dropDownAns3"
+																						class="mdInputContainer_input">
+																						<md-option
+																							ng-value="status.value"
+																							ng-repeat="status in dropdownValue3">
+																							{{status.value}}</md-option>
+																					</md-select>
+																				</md-input-container>
+																			</div>
+																			<div
+																				ng-if="mQuestion.inputType2=='2dropDown'">
+																				<md-input-container>
+																					<label>{{mQuestion.labelFour}}</label>
+																					<md-select name="treatment"
+																						ng-model="member.carrierMedicalQuestion[$parent.$parent.$index].dropDownAns4"
+																						ng-init="member.carrierMedicalQuestion[$parent.$index].value=setDropDown4(mQuestion.dropdownValue4)"
+																						class="mdInputContainer_input">
+																						<md-option
+																							ng-value="status.value"
+																							ng-repeat="status in dropdownValue4">
+																							{{status.value}}</md-option>
+																					</md-select>
+																				</md-input-container>
+																			</div>
+																			<div class="clearfix"></div>
+																			<div
+																				ng-if="member.relationshipCode == 'SP'">
+																				<div
+																					ng-if="mQuestion.inputType3=='datePick'">
+																					<md-input-container
+																						class="md-block">
+																						<label
+																							class="buyTextPadding wp_md-no-float">Existing
+																							Since</label> <input
+																							class="newDatepickerBorder"
+																							placeholder="Last Consultation Date"
+																							ng-required="member.carrierMedicalQuestion[$parent.$parent.$parent.$index].date"
+																							ng-model="member.carrierMedicalQuestion[$parent.$parent.$parent.$index].date"
+																							p365-date-picker="travellerDOBOptions{{$index}}"
+																							readonly="readonly" />
+																					</md-input-container>
+																				</div>
+																			</div>
+																			<div class="clearfix"></div>
+																			<div ng-if="member.relationshipCode == 'S'">
+																				<div
+																					ng-if="mQuestion.inputType3=='datePick'">
+																					<md-input-container
+																						class="md-block">
+																						<label
+																							class="buyTextPadding wp_md-no-float">Existing
+																							Since</label> <input
+																							class="newDatepickerBorder"
+																							placeholder="Last Consultation Date"
+																							ng-required="member.carrierMedicalQuestion[$parent.$parent.$parent.$index].date"
+																							ng-model="member.carrierMedicalQuestion[$parent.$parent.$parent.$index].date"
+																							p365-date-picker="travellerDOBOptions{{$index}}"
+																							readonly="readonly" />
+																					</md-input-container>
+																				</div>
+																			</div>
+																			<div class="clearfix"></div>
+																			<div
+																				ng-if="member.relationshipCode == 'CH'">
+																				<div
+																					ng-if="mQuestion.inputType3=='datePick'">
+																					<md-input-container
+																						class="md-block">
+																						<label
+																							class="buyTextPadding wp_md-no-float">Existing
+																							Since</label> <input
+																							class="newDatepickerBorder"
+																							placeholder="Last Consultation Date"
+																							ng-required="member.carrierMedicalQuestion[$parent.$parent.$parent.$index].date"
+																							ng-model="member.carrierMedicalQuestion[$parent.$parent.$parent.$index].date"
+																							p365-date-picker="travellerDOBOptions{{$index}}"
+																							readonly="readonly" />
+																					</md-input-container>
+																				</div>
+																			</div>
+
+																			<div ng-if="mQuestion.isExistingSince=='Y'">
+																				<p style="font-size: 12px;">Existing
+																					Since</p>
+																				<div class="section" layout-xs="row">
+																					<div class="col span_1_of_2"
+																						flex-xs="50">
+																						<md-input-container style="">
+																							<label
+																								class="buyTextPadding wp_md-no-float">mmm</label>
+																							<md-select name="type"
+																								ng-model="member.carrierMedicalQuestion[$parent.$parent.$index].startMonth"
+																								class="mdInputContainer_input"
+																								style="">
+																								<md-option
+																									ng-value="m.mCount"
+																									ng-repeat="m in monthList track by $index">
+																									{{m.month}}
+																								</md-option>
+																							</md-select>
+																						</md-input-container>
+																					</div>
+																					<div class="col span_1_of_2"
+																						flex-xs="50" flex-sm="50">
+																						<md-input-container style="">
+																							<label
+																								class="buyTextPadding wp_md-no-float">yyyy</label>
+																							<md-select name="type"
+																								ng-model="member.carrierMedicalQuestion[$parent.$parent.$index].startYear"
+																								class="mdInputContainer_input"
+																								style="width:100% !important;">
+																								<md-option
+																									ng-value="year"
+																									ng-repeat="year in getYearList(member.dateOfBirth)">
+																									{{year}}</md-option>
+																							</md-select>
+																						</md-input-container>
+																					</div>
+																				</div>
+																			</div>
+																			<div ng-if="mQuestion.inputType=='1text'">
+																				<div class="section" layout-xs="row">
+																					<div flex="100"
+																						class="col span_1_of_2"
+																						style="width: 100%;"
+																						class="alignColumn">
+																						<md-input-container
+																							class="md-block">
+																							<label
+																								class="buyTextPadding wp_md-no-float">{{mQuestion.labelOne}}</label>
+																							<input
+																								class="mdInputContainer_input"
+																								name='diseaseInput'
+																								ng-model="member.carrierMedicalQuestion[$parent.$parent.$index].desc"
+																								autocomplete='off'
+																								maxlength='50'
+																								minlength='1'
+																								style="box-shadow: unset; color: #424242;" />
+																						</md-input-container>
+																					</div>
+																				</div>
+																			</div>
+																			<div
+																				ng-if="mQuestion.inputType=='singleText'">
+																				<div class="section" layout-xs="row">
+																					<div flex="100"
+																						class="col span_1_of_2"
+																						style="width: 100%;"
+																						class="alignColumn">
+																						<md-input-container
+																							class="md-block">
+																							<label
+																								class="buyTextPadding wp_md-no-float">{{mQuestion.labelOne}}</label>
+																							<input
+																								class="mdInputContainer_input"
+																								name='diseaseInput'
+																								no-special-char="no-special-char"
+																								ng-model="member.carrierMedicalQuestion[$parent.$parent.$index].description"
+																								autocomplete='off'
+																								maxlength='50'
+																								ng-pattern='/^[a-zA-Z0-9]*$/'
+																								minlength='1'
+																								style="box-shadow: unset; color: #424242;" />
+																						</md-input-container>
+																					</div>
+																				</div>
+																			</div>
+
+																			<div
+																				ng-if="mQuestion.inputType=='textArea'">
+																				<div class="section" layout-xs="row">
+																					<div class="col span_1_of_2"
+																						flex-xs="50">
+																						<md-input-container style="">
+																							<label
+																								class="buyTextPadding wp_md-no-float">Description</label>
+																							<textarea
+																								ng-model="member.carrierMedicalQuestion[$parent.$parent.$index].desc"
+																								md-maxlength="150"
+																								rows="3"
+																								md-select-on-focus
+																								style="box-shadow: unset;"></textarea>
+																						</md-input-container>
+																					</div>
+																				</div>
+																			</div>
+																		</md-input-container>
+																	</div><!-- ./Member repeater -->
+																</md-list>
+															</div><!-- ./section -->
+														</div>
+													</div><!-- ./Row -->
+												</div><!-- medical popup -->
+											</div> <!-- ./medicalBuyDiseasePopup -->
+										</div>
+										<!-- ./mQuestion.inputType -->
+
+										<!-- !mQuestion.inputType  -->
+										<div ng-if="!mQuestion.inputType">
+											<div ng-if="mQuestion.questionCode == 'PREXDISEA'">
+												<div layout="row" layout-xs="column" layout-sm="row">
+													<div flex="80" flex-xs="100" flex-sm="80" class="right3Mar">
+														<p class="font13">
+															<b>{{mQuestion.question}} <a
+																	ng-if="preExistingDiseases == 'Y'"
+																	ng-click="clicktoShowDisease()">
+																	[{{globalLabel.applicationLabels.travel.change}}]
+																</a></b>
+														</p>
+														<p class="font12">{{mQuestion.description}}</p>
+													</div>
+													<div flex="20" flex-xs="100" flex-sm="20">
+
+														<md-input-container class="md-block">
+															<md-radio-group
+																ng-model="medicalInfo.medicalQuestionarrie[$index].applicable"
+																ng-init="medicalInfo.medicalQuestionarrie[$index].question=mQuestion.question;
+																		 medicalInfo.medicalQuestionarrie[$index].questionCode=mQuestion.questionCode;
+																		 medicalInfo.medicalQuestionarrie[$index].applicable=preDiseaseApplicable" layout="row">
+																<md-radio-button value="true"
+																	ng-click="clicktoShowDisease()">Yes
+																</md-radio-button>
+																<md-radio-button value="false"
+																	ng-click="clicktoHideDisease()">No</md-radio-button>
+															</md-radio-group>
+														</md-input-container>
+													</div>
+												</div>
+												<div class="section group padBottom10" ng-show="diseaseShow==true">
+													<div class="menuForCheckbox medicalBuyDiseasePopup">
+														<!-- row1 -->
+														<div layout="row">
+															<div flex="100">
+																<div class='ng-modal-close closeDisease'
+																	ng-click='clicktoHideDisease()'>
+																	<i class="material-icons">close</i>
+																</div>
+																<md-list class="resultPad medicalPopup">
+																	<div class="section"
+																		ng-repeat="diseaseinfo in diseaseList | orderBy : 'preference' track by $index"
+																		ng-show="(($index < (page * numRecords)) && ($index >= ((page - 1) * numRecords)))">
+																		<p ng-if="diseaseList.length>1">
+																			{{($index+1) + '.'+ diseaseinfo.disease}}
+																		</p>
+																		<div class="col span_1_of_3"
+																			ng-repeat='member in selectedTravellers'>
+																			<md-input-container class="md-block"
+																				style="margin: 0px 0 0px 0 !important;">
+																				<md-checkbox class="blackAddon resize"
+																					ng-model='member.diseaseDetails[$parent.$index].applicable'
+																					ng-init="member.diseaseDetails[$parent.$index].diseaseId = diseaseinfo.diseaseId;
+																									 member.diseaseDetails[$parent.$index].diseaseCode = diseaseinfo.diseaseCode;
+																									 member.diseaseDetails[$parent.$index].diseaseDesc = diseaseinfo.description;
+																									 member.diseaseDetails[$parent.$index].diseaseName = diseaseinfo.disease;
+																									 member.diseaseDetails[$parent.$index].applicable = isDiseaseApplicable(member.relationshipCode,diseaseinfo.diseaseCode);
+																									 member.diseaseDetails[$parent.$index].diseaseType = diseaseinfo.diseaseType;
+																									 member.dieaseDetails[$parent.$index].disable = isDisableApplicable(diseaseinfo.parentId);
+																									 member.diseaseDetails[$parent.$index].masterDiseaseCode = diseaseinfo.diseaseCode;"
+																					ng-disabled="member.diseaseDetails[$parent.$index].disable"
+																					name='add'
+																					style="margin-bottom:0px !important;">
+																					<p
+																						style="text-align: left; font-weight: 600;">
+																						{{member.firstName}}
+																						{{member.lastName}}
+																					</p>
+																				</md-checkbox>
+																				<div
+																					ng-if="diseaseinfo.inputType2=='dropDown'">
+																					<md-input-container> <label
+																							class="buyTextPadding wp_md-no-float">Please
+																							Select</label>
+																						<md-select name="treatment"
+																							ng-model="member.diseaseDetails[$parent.$parent.$index].selected"
+																							ng-init="member.diseaseDetails[$parent.$parent.$index].selected = 'No'"
+																							class="mdInputContainer_input">
+																							<md-option
+																								ng-value="status.value"
+																								ng-repeat="status in yesNoStatus track by $index">
+																								{{status.value}}
+																							</md-option>
+																						</md-select>
+																					</md-input-container>
+																				</div>
+																				<div ng-if="(diseaseinfo.inputType==null || diseaseinfo.inputType=='undefined'
+																											|| diseaseinfo.inputType=='') && diseaseinfo.isExistingSince!='N'">
+																					<p style="font-size: 12px;">Existing
+																						Since</p>
+																					<div class="section"
+																						layout-xs="row">
+																						<div class="col span_1_of_2"
+																							flex-xs="50">
+																							<md-input-container
+																								style="">
+																								<label
+																									class="buyTextPadding wp_md-no-float">mmm</label>
+																								<md-select name="mmm"
+																									ng-model="member.diseaseDetails[$parent.$parent.$index].startMonth"
+																									ng-disabled="!member.diseaseDetails[$parent.$parent.$index].applicable"
+																									class="mdInputContainer_input"
+																									ng-required="member.diseaseDetails[$parent.$parent.$index].applicable"
+																									style="">
+																									<md-option
+																										ng-value="m.mCount"
+																										ng-repeat="m in monthList track by $index">
+																										{{m.month}}
+																									</md-option>
+																								</md-select>
+																							</md-input-container>
+																						</div>
+																						<div class="col span_1_of_2"
+																							flex-xs="50" flex-sm="50">
+																							<md-input-container
+																								style="">
+																								<label
+																									class="buyTextPadding wp_md-no-float">yyyy</label>
+																								<md-select name="yyyy"
+																									ng-model="member.diseaseDetails[$parent.$parent.$index].startYear"
+																									ng-disabled="!member.diseaseDetails[$parent.$parent.$index].applicable"
+																									class="mdInputContainer_input"
+																									ng-required="member.diseaseDetails[$parent.$parent.$index].applicable"
+																									style="width:100% !important;"
+																									ng-selected="setDieaseStartDate(member.diseaseDetails[$parent.$parent.$index])">
+																									<md-option
+																										ng-value="year"
+																										ng-repeat="year in getYearList(member.dob)">
+																										{{year}}
+																									</md-option>
+																								</md-select>
+																							</md-input-container>
+																						</div>
+																					</div>
+																					<!--  </div><!-- ./existing since -->
+																				</div>
+																			</md-input-container>
+																			<!-- new Code block-->
+																			<div
+																				ng-if="diseaseinfo.inputType=='textArea'">
+																				<md-input-container class="md-block">
+																					<label
+																						class="buyTextPadding wp_md-no-float">Description</label>
+																					<textarea
+																						ng-model="member.diseaseDetails[$parent.$parent.$index].desc"
+																						md-maxlength="150" rows="3"
+																						md-select-on-focus
+																						style="box-shadow: unset;"
+																						ng-required="member.diseaseDetails[$parent.$parent.$index].applicable"></textarea>
+																				</md-input-container>
+																			</div>
+
+																			<div
+																				ng-if="diseaseinfo.inputType=='textField'">
+																				<md-input-container class="md-block">
+																					<label
+																						class="buyTextPadding wp_md-no-float">Description</label>
+																					<textarea
+																						ng-init="member.diseaseDetails[$parent.$parent.$index].desc='Confirmed'"
+																						ng-model="member.diseaseDetails[$parent.$parent.$index].desc"
+																						md-maxlength="150" rows="3"
+																						md-select-on-focus
+																						style="box-shadow: unset;"
+																						ng-required="member.diseaseDetails[$parent.$parent.$index].applicable"></textarea>
+																				</md-input-container>
+
+																			</div>
+
+																			<div
+																				ng-if="diseaseinfo.inputType=='dropDown'">
+																				<md-input-container class="md-block">
+																					<label
+																						class="buyTextPadding wp_md-no-float"></label>
+																					<md-select name="type"
+																						ng-required="member.diseaseDetails[$parent.$parent.$index].applicable"
+																						ng-init="member.diseaseDetails[$parent.$parent.$index].desc"
+																						ng-model="member.diseaseDetails[$parent.$parent.$index].desc"
+																						placeholder="Select Treatment"
+																						class="mdInputContainer_input">
+																						<md-option
+																							ng-value="treatment.value"
+																							ng-repeat="treatment in treatmentGiven">
+																							{{treatment.value}}
+																						</md-option>
+																					</md-select>
+																				</md-input-container>
+
+																			</div>
+
+																			<div
+																				ng-if="diseaseinfo.inputType=='datePick'">
+																				<md-input-container class="md-block">
+																					<label></label> <input
+																						class="newDatepickerBorder"
+																						placeholder="Last Consultation Date"
+																						ng-required="member.diseaseDetails[$parent.$parent.$index].applicable"
+																						ng-model="member.diseaseDetails[$parent.$parent.$index].desc"
+																						p365-date-picker="regularDOBOptions"
+																						readonly="readonly" />
+																				</md-input-container>
+																			</div>
+
+																			<div ng-if="diseaseinfo.inputType=='2text'"
+																				layout="row">
+																				<div flex="50">
+																					<md-input-container
+																						class="md-block">
+																						<label
+																							class="buyTextPadding wp_md-no-float">No.of
+																							units per day</label> <input
+																							ng-model="member.diseaseDetails[$parent.$parent.$index].count"
+																							ng-required="member.diseaseDetails[$parent.$parent.$index].applicable" />
+																					</md-input-container>
+																				</div>
+																				<div flex="50">
+																					<md-input-container
+																						class="md-block">
+																						<label
+																							class="buyTextPadding wp_md-no-float">No.of
+																							Years</label> <input
+																							ng-model="member.diseaseDetails[$parent.$parent.$index].numberYears"
+																							ng-required="member.diseaseDetails[$parent.$parent.$index].applicable" />
+																					</md-input-container>
+																				</div>
+																			</div>
+
+																			<md-input-container class="md-block">
+																				<div
+																					ng-if="diseaseinfo.diseaseCode == 'AODI' || diseaseinfo.diseaseCode == 'OTSM'">
+																					<div
+																						ng-if="member.diseaseDetails[$parent.$parent.$index].applicable == true">
+																						<input
+																							class="mdInputContainer_input"
+																							name='diseaseName'
+																							ng-required="member.diseaseDetails[$parent.$parent.$index].applicable"
+																							ng-model='member.diseaseDetails[$parent.$parent.$parent.$index].diseaseDesc'
+																							autocomplete='off'
+																							maxlength='60' minlength='1'
+																							ng-pattern='/^[a-zA-Z ]*$/'
+																							required md-no-asterisk />
+																					</div>
+																				</div>
+																			</md-input-container>
+																		</div>
+
+																	</div>
+																	<div class="clearfix"></div>
+																	<div style="text-align: right">
+																		<button ng-hide="page=='1'"
+																			id="medicalDetailsPopupPrevious"
+																			class="buyEdit emailOrangeBtn cancelbuybuttoncar wp_borderRadius25 wp_btnPad"
+																			md-prevent-menu-close="md-prevent-menu-close"
+																			ng-click="back()"
+																			style="background: #f7a100;">
+																			<span ng-if="!$root.wordPressEnabled">
+																				&lt;&lt; </span>Previous<span
+																				ng-if="!$root.wordPressEnabled">
+																				Page</span>
+																		</button>
+																		<button
+																			class="md-raised emailOrangeBtn bluebuybuttoncar wp_borderRadius25 wp_btnPad"
+																			ng-if="diseaseList.length >= 4"
+																			id="medicalDetailsPopupNext"
+																			ng-hide="page == numberOfPages"
+																			md-prevent-menu-close="md-prevent-menu-close"
+																			ng-click="next()"
+																			style="background: #f7a100;">
+																			{{page}}/{{numberOfPages}} Next <span
+																				ng-if="!$root.wordPressEnabled">&gt;&gt;</span>
+																		</button>
+																		<button
+																			class="md-raised emailOrangeBtn bluebuybuttoncar wp_borderRadius25"
+																			id="medicalDetailsPopupSubmit"
+																			md-prevent-menu-close=""
+																			ng-click="submitDieaseList()"
+																			style="background: #f7a100;">
+																			Submit</button>
+																		<!-- EnableSubmit || -->
+																	</div>
+																</md-list>
+																<!-- ./new code block -->
+															</div>
+															<!-- ./member repeater  -->
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- ./PREXDISEA -->
+											<div ng-if="mQuestion.questionCode == 'TERMCOND'">
+												<div class="col span_3_of_4">
+													<p class="small">
+														<b>{{mQuestion.question}} <a href=""
+																ng-click="showTerms(mQuestion.termsCondDescription,medicalInfo.medicalQuestionarrie[$index].applicable)">Terms
+																& Conditions</a></b>
+													</p>
+													<p class="small">{{mQuestion.description}}</p>
+												</div>
+												<div class="col span_1_of_4">
+													<md-input-container class="md-block">
+														<md-radio-group
+															ng-change="TermsCheck(medicalInfo.medicalQuestionarrie[$index].applicable)"
+															ng-model="medicalInfo.medicalQuestionarrie[$index].applicable"
+															ng-init="medicalInfo.medicalQuestionarrie[$index].question=mQuestion.question;
+																		medicalInfo.medicalQuestionarrie[$index].questionCode=mQuestion.questionCode;
+																		medicalInfo.medicalQuestionarrie[$index].applicable='true'" layout="row">
+															<md-radio-button value="true">Yes</md-radio-button>
+															<md-radio-button value="false">No</md-radio-button>
+														</md-radio-group>
+													</md-input-container>
+												</div>
+											</div>
+											<!-- ./TERMCOND -->
+
+
+											<div
+												ng-if="mQuestion.questionCode != 'TERMCOND' && mQuestion.questionCode != 'PREXDISEA' && mQuestion.questionCode != 'MEDICOND'">
+												<div class="col span_3_of_4">
+													<p class="small">
+														<b>{{mQuestion.question}}</b>
+													</p>
+													<p class="small">{{mQuestion.description}}</p>
+												</div>
+												<div class="col span_1_of_4">
+													<md-input-container class="md-block">
+														<md-radio-group
+															ng-model="medicalInfo.medicalQuestionarrie[$index].applicable"
+															ng-init="medicalInfo.medicalQuestionarrie[$index].question=mQuestion.question;
+																		medicalInfo.medicalQuestionarrie[$index].questionCode=mQuestion.questionCode;
+																		medicalInfo.medicalQuestionarrie[$index].applicable=mQuestion.applicable;" layout="row">
+															<md-radio-button value="true">Yes</md-radio-button>
+															<md-radio-button value="false">No</md-radio-button>
+														</md-radio-group>
+													</md-input-container>
+												</div>
+											</div>
+											<!-- ./!TERMCOND && !PREXDISEA && !MEDICOND -->
+
+										</div>
+										<!-- ./!mQuestion.inputType -->
+									</div>
+									<!-- ./Question repeater -->
+								</div>
+								<div class="clearfix"></div>
+								<div ng-if="bmiError">
+									<div
+										style="border: 1px solid red; color: red; width: 100%; text-align: center; padding: 1%;">
+										<h5>{{globalLabel.applicationLabels.health.bmiProposalMsg}}</h5>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+
+
+								<div ng-bind-html="prevPolicyDetailsTemplate"
+									bind-html-compile="prevPolicyDetailsTemplate"></div>
+								<div class='section group' ng-repeat="undertaking in undertakingList track by $index">
+									<div style="width: 100%;">
+										<md-input-container class="md-block">
+											<md-checkbox class="blackAddon resize"
+												ng-model='declarationDetails[$index].accepted'
+												ng-init="declarationDetails[$index]=undertaking" name='undertaking'
+												style="margin-bottom:0px !important;" required='undertaking.required'>
+												<p style="text-align: left;" class="lineHeight17em">
+													{{undertaking.undertaking}}</p>
+											</md-checkbox>
+											<div ng-messages="medicalDetailsForm.undertaking.$error"
+												ng-if="medicalDetailsForm.undertaking.$touched">
+												<div style="color: red" ng-message="required">Please accept above
+													declaration to proceed</div>
+											</div>
+										</md-input-container>
+									</div>
+
+									<div flex="50" style="width: 100%;"></div>
+								</div>
+							</div>
+
+							<div class="right resp_center">
+								<md-button id="medicalInsuer" class='propNxtBtn noMarRight'
+									ng-click="editInsuredInfo()"> &lt;&lt; Previous
+								</md-button>
+								<md-button class='inpSaveBtnNoWidth noMarRight'
+									ng-if="!$root.baseEnvEnabled || $root.wordPressEnabled && !alreadyExpiredPolicyError"
+									ng-click="proceedForPayment()" id="travelMakePayment"
+									ng-disabled='medicalDetailsForm.$invalid || disablePaymentButton || termsAndConditionsAgree || isRegreatPolicyMsg'>
+									Proceed to make payment
+								</md-button>
+								<md-button class='inpSaveBtnNoWidth noMarRight'
+									ng-if=" !$root.wordPressEnabled && $root.agencyPortalEnabled && !alreadyExpiredPolicyError"
+									ng-click="proceedForPayment()" id="travelMakePayment"
+									ng-disabled='medicalDetailsForm.$invalid || disablePaymentButton || termsAndConditionsAgree || isRegreatPolicyMsg'>
+									Proceed to make payment
+								</md-button>
+								<md-button
+									ng-if="$root.baseEnvEnabled  && !$root.wordPressEnabled && !alreadyExpiredPolicyError && !$root.agencyPortalEnabled"
+									id="medicalMakePayment"
+									ng-disabled='medicalDetailsForm.$invalid || disablePaymentButton || termsAndConditionsAgree || isRegreatPolicyMsg'
+									class='inpSaveBtnNoWidth noMarRight' ng-click="submitProposalRequest()"
+									style="height: 10px;text-align: center;line-height: inherit;">Submit Proposal
+								</md-button>
+								<md-button
+									ng-if="$root.baseEnvEnabled  && !$root.wordPressEnabled && !alreadyExpiredPolicyError && $root.agencyPortalEnabled"
+									id="medicalMakePayment"
+									ng-disabled='medicalDetailsForm.$invalid || disablePaymentButton || termsAndConditionsAgree || isRegreatPolicyMsg'
+									class='inpSaveBtnNoWidth noMarRight' ng-click="submitProposalRequest()">Submit
+									Proposal</md-button>
+
+
+							</div>
+						</form>
+					</div>
+
+					<div ng-if="proposalStatus.statusPaym =='completed'" ng-show="proposalStatusForm">
+						<h3 class="accordionBuy buySub" ng-class="{active:accordion==3}">Proposal Status</h3>
+						<div class='section group' layout="row" layout-xs="column" layout-sm="column">
+							<table class='insuredTableStyle divForMobileTable' border="0" cellspacing="0"
+								cellpadding="0">
+								<thead>
+									<tr>
+										<th>Stage</th>
+										<th>Status</th>
+										<th style="width: 17.5%;">Date</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="vertical-align: middle;">Policy</td>
+										<td style="width: 25%; vertical-align: middle;">
+											<md-input-container class="md-block">
+												<input ng-model="proposalStatus.statusPoli" autocomplete='off'
+													name="fname" maxlength='35' minlength='1' />
+											</md-input-container>
+										</td>
+										<td style="width: 25%; vertical-align: middle;">
+											<md-input-container class="md-block">
+												<input ng-model="proposalStatus.statusDatePoli" autocomplete='off'
+													name="dobb" maxlength='35' minlength='1' />
+											</md-input-container>
+										</td>
+									</tr>
+									<tr>
+										<td style="vertical-align: middle;">Payment</td>
+										<td style="width: 25%; vertical-align: middle;">
+											<md-input-container class="md-block">
+												<input ng-model="proposalStatus.statusPaym" autocomplete='off'
+													name="fname" maxlength='35' minlength='1' />
+											</md-input-container>
+										</td>
+										<td style="width: 25%; vertical-align: middle;">
+											<md-input-container class="md-block">
+												<input ng-model="proposalStatus.statusDatePaym" autocomplete='off'
+													name="dobb" maxlength='35' minlength='1' />
+											</md-input-container>
+										</td>
+									</tr>
+									<tr>
+										<td style="vertical-align: middle;">Proposal</td>
+										<td style="width: 25%; vertical-align: middle;">
+											<md-input-container class="md-block">
+												<input ng-model="proposalStatus.statusProp" autocomplete='off'
+													name="fname" maxlength='35' minlength='1' />
+											</md-input-container>
+										</td>
+										<td style="width: 25%; vertical-align: middle;">
+											<md-input-container class="md-block">
+												<input ng-model="proposalStatus.statusDateProp" autocomplete='off'
+													name="dobb" maxlength='35' minlength='1' />
+											</md-input-container>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!-- modal OTP -->
+<modal-dialog show='modalOTP' width='500px' height='auto' class="ng-hide">
+	<div class='ng-modal-close wp_modalClose' ng-click='hideModal()' ng-if="$root.wordPressEnabled">
+		<i class="material-icons">close</i>
+	</div>
+	<form name="authenticateForm">
+
+		<div class="modalHeader wp_noBluebackground wp_noBoxShadow">
+			<div class="blueBackground one-edge-shadow wp_noBoxShadow" style="" layout="row">
+				<div flex="85">
+					<h2 class="white popupHeading wp_popupHeading wp_OTPTitleFont">
+						{{globalLabel.applicationLabels.login.OTPTemplateHeader}}</span>
+					</h2>
+				</div>
+				<div class='ng-modal-close' ng-click='hideModal()' style="color: #fff;" flex="15">
+					<i class="material-icons">close</i>
+				</div>
+			</div>
+		</div>
+
+		<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+			<div class="fullShadow resultBg familyPopup wp_signinFamilyInnerPopup"
+				style="margin-bottom: 0px !important;">
+				<div class="popupTableHealth popupPadding" layout="row" style="padding: 3% 0% 0% 0% !important;">
+					<div flex="100" style="text-align: center; padding: 1% 0%;">
+						<b>{{globalLabel.applicationLabels.login.enterOTPCaption}}</b>
+
+					</div>
+				</div>
+				<md-input-container class="md-block">
+					<div class="pad10">
+						<div flex="100">
+							<input name="mobileOTP" ng-model="authenticate.enteredOTP" autocomplete="off"
+								ng-pattern="/\d{6}/" maxlength="6" minlength="6" class="signBoxShadow"
+								style="background: transparent !important; text-align: center;" required />
+
+						</div>
+					</div>
+				</md-input-container>
+				<div style="color: red; text-align: center; margin-bottom: 1%;">{{invalidOTPError}}</div>
+				<div style="color: green; text-align: center; margin-bottom: 1%;">
+					{{globalLabel.validationMessages.otpValidPeriod}}</div>
+			</div>
+
+		</div>
+		<div class="center">
+			<button type="submit" class="bluebutton" id="travelProceedForPayment"
+				ng-disabled="authenticateForm.$invalid" ng-click="proceedForConfirm()">Submit</button>
+			<button type="button" id="carCancelPaymentProcess" class="bluebutton" ng-if="!$root.wordPressEnabled"
+				ng-click="hideModal()">Cancel</button>
+		</div>
+		<div class="pad10 center">
+			<a ng-click="resendOTP()" id="carBuyResendOTP">Resend OTP</a>
+		</div>
+	</form>
+</modal-dialog>
+<!-- ./modal OTP -->
+
+<!-- OTP Error Popup -->
+<modal-dialog show='modalOTPError' width='500px' height='auto' class="ng-hide">
+	<div class="modalHeader">
+		<div class="blueBackground one-edge-shadow" style="padding: 3%;" layout="row">
+			<h2 class="white popupHeading"></h2>
+		</div>
+	</div>
+
+	<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+
+		<div class="" style="margin-bottom: 0px !important;">
+			<div class="popupTableHealth popupPadding" layout="row" style="">
+				<div flex="100" style="text-align: center; padding: 1% 0%;">
+					<p>{{createOTPError}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="center">
+		<button type="button" id="travelCancelPaymentProcess" class="bluebutton" ng-click="hideModalError()"
+			style="padding: 7px 20px;">Ok</button>
+	</div>
+</modal-dialog>
+<!-- ./OTP Error Popup -->
+
+<!-- modal proposal Screen error -->
+<modal-dialog show='modalPropScreenError' width='500px' height='auto' class="ng-hide">
+	<div class="modalHeader">
+		<div class="blueBackground one-edge-shadow" style="padding: 3%;" layout="row">
+			<h2 class="white popupHeading"></h2>
+		</div>
+	</div>
+
+	<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+
+		<div class="" style="margin-bottom: 0px !important;">
+			<div class="popupTableHealth popupPadding" layout="row" style="">
+				<div flex="100" style="text-align: center; padding: 1% 0%;">
+					<p>{{propScreenError}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="center">
+		<button type="button" id="travelCancelPaymentProcess" class="bluebutton" ng-click="redirectToQuote()"
+			style="padding: 7px 20px;">Ok</button>
+	</div>
+</modal-dialog>
+<!-- ./modal proposal Screen error -->
+
+<!-- modal show Terms & conditions -->
+<modal-dialog show='showTermsDiv' width='650px' height='auto' class="ng-hide">
+	<div class='ng-modal-close wp_modalClose' ng-click='closeTerms()' ng-if="$root.wordPressEnabled">
+		<i class="material-icons">close</i>
+	</div>
+	<div class="">
+		<div class="blueBackground one-edge-shadow" style="" layout="row">
+			<div class="" style="padding-top: 5px;" flex="90">
+				<h2 class="white popupHeading">
+					<span>Terms & Conditions</span>
+				</h2>
+			</div>
+			<div class='ng-modal-close' ng-click='closeTerms()' id="termsNConditionClose"
+				style="color: #fff; margin-top: 5px !important;" flex="10">
+				<i class="material-icons">close</i>
+			</div>
+		</div>
+	</div>
+	<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+		<div class="resultBg familyPopup" style="margin-bottom: 0px !important;">
+			<div class="popupTableHealth popupPadding" layout="row" style="padding: 3% 0% 0% 0% !important;">
+				<div flex="100" style="padding: 1% 0%;" class="termsPopup">
+					<div ng-bind-html="termsAndConditions" bind-html-compile="termsAndConditions">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="center">
+		<button type="button" id="travelTermsAndConditions" class="bluebutton" ng-click="closeTerms()"
+			style="padding: 7px 20px;">OK</button>
+	</div>
+</modal-dialog>
+<!-- ./modal show Terms & conditions -->
+
+<!-- Proposal Id  Pop Up-->
+<form name="proposalForm">
+	<modal-dialog show='modalIPOS' width='500px' height='auto' class="ng-hide">
+		<div class="modalHeader">
+			<div class="blueBackground one-edge-shadow" style="" layout="row">
+				<div class="" style="padding-top: 5px;" flex="100">
+					<h2 class="white popupHeading">Proposal Submission
+						Confirmation</h2>
+				</div>
+			</div>
+		</div>
+		<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+			<div class="fullShadow resultBg familyPopup" style="margin-bottom: 0px !important;">
+				<div flex="100" style="text-align: center; padding: 1% 0%;">
+					<b>Proposal {{responseToken.proposalId}} has been successfully
+						submitted</b>
+					<b ng-if="redirectForPayment == true">Proposal {{responseToken.proposalId}} has been successfully
+						submitted.
+						Please note it down for your reference.&nbsp;Click OK to complete your payment</b>
+				</div>
+			</div>
+		</div>
+		<div class="center">
+			<button type="button" class="bluebutton" id="proposalId" ng-click="hideModalIPOS()">OK</button>
+		</div>
+	</modal-dialog>
+</form>
+<!-- End of  Proposal Id  Pop Up-->
+
+<!-- Payment Form -->
+<form style="display: hidden" ng-form-commit action='' method='post' name="paymentForm" novalidate>
+	<div ng-repeat="payParam in paymentServiceResponse.paramterList">
+		<input type="hidden" name="{{payParam.name}}" value="{{payParam.value}}" ng-model="payParam.ngModel">
+	</div>
+</form>
+<!-- ./Payment Form -->
+<form name="agencyproposalForm">
+	<modal-dialog show='modalAP' width='500px' height='auto' class="ng-hide">
+		<div class="modalHeader">
+			<div class="blueBackground one-edge-shadow" style="" layout="row">
+				<div class="" style="padding-top: 5px;" flex="100">
+					<h2 class="white popupHeading">Proposal Submission Confirmation</h2>
+				</div>
+			</div>
+		</div>
+		<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+			<div class="fullShadow resultBg familyPopup" style="margin-bottom: 0px !important;">
+				<div flex="100" style="text-align: center; padding: 1% 0%;">
+					<b>Payment link has been sent to customer's </b>
+					<p><b>Email-id :</b> {{proposerDetails.emailId}}</p>
+					<p><b>Link :</b><a href='{{URLforPayment}}' target="_blank"> {{URLforPayment}}</a></p>
+				</div>
+			</div>
+		</div>
+		<div class="center">
+			<button type="button" class="bluebutton" id="proposalId" ng-click="hideModalAP()">OK</button>
+		</div>
+	</modal-dialog>
+</form>

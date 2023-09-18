@@ -1,0 +1,157 @@
+<form name="carInstantQuoteForm">
+<ng-container ng-if="$root.displayInstantScreen">	
+	<md-content class="wp_md-content wp_inputBorderRadius" ng-controller="carInstantQuoteController"
+		> <md-input-container
+		class="md-block"> <label>{{p365Labels.common.insuranceType}}</label>
+	<md-select name="type" ng-model="vehicleDetails.insuranceType"
+		ng-model-options="{trackBy: '$value.type'}" ng-change="alterRenewal()">
+	<md-option ng-value="data" ng-repeat="data in carInsuranceTypes"
+		ng-disabled="instantQuoteCarForm">{{data.type}}</md-option> </md-select> </md-input-container>
+		<div class="clearfix"></div>
+		<md-input-container
+		class="md-block wp_whiteColor" ng-if="$root.showCarRegAreaStatus == true">
+	<label>{{p365Labels.common.regArea}} <a
+		href="javascript:;" class="RTOLink"
+		data-ng-class="{'disabled': instantQuoteCarForm}"
+		ng-click='toggleVehicleRegistrationPopup(false)'>[I know my	registration number]</a></label> <input
+		ng-model="$root.vehicleInfo.registrationPlace"
+		placeholder="MH-01-AA-XXXX"
+		ng-click="toggleVehicleRegistrationPopup(true)" ng-readonly="true"
+		capitalize> </md-input-container> <md-input-container class="md-block wp_whiteColor"
+		ng-if="$root.showCarRegAreaStatus == false"> <label>{{p365Labels.common.regNumber}}
+		<a class="RTOLink" data-ng-class="{'disabled': instantQuoteCarForm}"
+		ng-click='toggleVehicleRegistrationPopup(true)'>[I don't know my
+			registration number]</a>
+	</label> <input ng-model="$root.vehicleDetails.registrationNumber"
+		placeholder="MH-01-AA-XXXX" ng-model-options='{ debounce: 1500 }'
+		ng-change="getRegNumber($root.vehicleDetails.registrationNumber)"
+		focus-me="focusInput" name="regNumber"
+		ng-disabled="instantQuoteCarForm" style="text-transform: uppercase;"
+		required>
+	<div class="errorLink" ng-if="$root.regNumStatus">{{p365Labels.common.regNumInvalid}}</div>
+	<div ng-if="carInstantQuoteForm.regNumber.$error.required"
+		style="color: red;">This is required.</div>
+	</md-input-container> <ng-container ng-if="!$root.wordPressEnabled"> <md-input-container
+		class="md-block"> <label>{{p365Labels.common.carMake}}</label>
+	<md-select name="Make" ng-model="vehicleDetails.carMakeObject"
+		placeholder="Select Make" ng-model-options="{trackBy: '$value.make'}"
+		ng-change="updateModelList(vehicleDetails.carMakeObject, 0)" required
+		md-no-asterisk> <md-option ng-value="makeObject"
+		ng-repeat="makeObject in makeNames | orderBy: 'make'"
+		ng-disabled="instantQuoteCarForm">{{makeObject.make}}</md-option> </md-select>
+	<div ng-if="carInstantQuoteForm.Make.$error.required"
+		style="color: red;">This is required.</div>
+	<div ng-messages="carInstantQuoteForm.Make.$error"
+		ng-if="carInstantQuoteForm.Make.$touched">
+		<!-- <div style="color: red" ng-message="required">This is
+											required</div> -->
+	</div>
+	</md-input-container> <md-input-container class="md-block"> <label>{{p365Labels.common.carModel}}</label>
+	<md-select class="invalid_border" name="Model"
+		ng-model="vehicleDetails.carModelObject" placeholder="Select Model"
+		ng-model-options="{trackBy: '$value.model'}"
+		ng-change="updateFuelList(vehicleDetails.carModelObject, 0)" required
+		md-no-asterisk> <md-option ng-value="modelObject"
+		ng-repeat="modelObject in modelNames  | orderBy: 'model'"
+		ng-disabled="instantQuoteCarForm">{{modelObject.model}}</md-option> </md-select>
+	<div ng-if="carInstantQuoteForm.Model.$error.required"
+		style="color: red;">This is required.</div>
+	<div ng-messages="carInstantQuoteForm.Model.$error"
+		ng-if="carInstantQuoteForm.Model.$touched">
+		<!-- <div style="color: red" ng-message="required">This is
+											required</div> -->
+	</div>
+	</md-input-container> <md-input-container class="md-block"> <label>{{p365Labels.common.fuelType}}</label>
+	<md-select class="invalid_border" name="Fuel"
+		ng-model="vehicleDetails.carFuelObject" placeholder="Select Fuel Type"
+		ng-model-options="{trackBy: '$value.type'}"
+		ng-change="updateVariantList(vehicleDetails.carFuelObject, 0)"
+		required md-no-asterisk> <md-option ng-value="fuel"
+		ng-repeat="fuel in fuelNames  | orderBy: 'type'"
+		ng-disabled="instantQuoteCarForm">{{fuel.type}}</md-option> </md-select>
+	<div ng-if="carInstantQuoteForm.Fuel.$error.required"
+		style="color: red;">This is required.</div>
+	<div ng-messages="carInstantQuoteForm.Fuel.$error"
+		ng-if="carInstantQuoteForm.Fuel.$touched">
+		<!-- <div style="color: red" ng-message="required">This is
+											required</div> -->
+	</div>
+	</md-input-container> <md-input-container class="md-block"> <label>{{p365Labels.common.carVariant}}</label>
+	<md-select class="invalid_border" name="Variant"
+		ng-model="vehicleDetails.carVariantObject"
+		placeholder="Select Variant"
+		ng-change="getCubicCapacityAndCalQuote(vehicleDetails.carVariantObject, 1)"
+		required md-no-asterisk
+		ng-model-options="{trackBy: '$value.variantId'}"> <md-option
+		ng-value="variantObject"
+		ng-repeat="variantObject in variantNames  | orderBy: 'variant'"
+		ng-disabled="instantQuoteCarForm">{{variantObject.variant
+	+ " (" + variantObject.cubicCapacity + "cc)"}}</md-option> </md-select>
+	<div ng-if="carInstantQuoteForm.Variant.$error.required"
+		style="color: red;">This is required.</div>
+	<div ng-messages="carInstantQuoteForm.Variant.$error"
+		ng-if="carInstantQuoteForm.Variant.$touched">
+		<!-- <div style="color: red" ng-message="required">This is
+											required</div> -->
+	</div>
+	</md-input-container> </ng-container> <ng-container ng-if ="$root.wordPressEnabled" class="wp_autoCompleteWhite">
+	<div class="innerHeadDropText"  flex-xs="100" flex-sm="100">
+		<md-autocomplete flex md-input-name="autocompleteField"
+			md-input-minlength="2"  md-no-cache="noCache"
+			md-selected-item="$parent.selectedItem.displayVehicle"
+			md-selected-item-change="selectedDisplayVehicle(item)"
+			md-search-text="searchText"
+			md-items="item in querySearch(searchText)"
+			md-item-text="item.displayVehicle"
+			md-floating-label="Make / Model / Variant / Fuel" required>
+		<md-item-template> <span
+			md-highlight-text="searchText">{{item.displayVehicle}}</span> </md-item-template>
+		<div ng-messages="carInstantQuoteForm.autocompleteField.$error"
+			ng-if="carInstantQuoteForm.autocompleteField.$touched">
+			<div ng-message="required">
+				You <b>must</b> have a make.
+			</div>
+			<div ng-message="md-require-match">Please select an existing
+				make.</div>
+			<div ng-message="minlength">Your entry is not long enough.</div>
+		</div>
+		</md-autocomplete>
+	</div>
+	</ng-container> <md-input-container class="md-block"> <label
+		ng-if="renewal">{{p365Labels.common.regYear}}</label>
+	<label ng-if="!renewal">{{p365Labels.common.mfgYear}}</label>
+	<md-select name="regYear" ng-model="vehicleInfo.regYear"
+		ng-change="changeRegYear()" required md-no-asterisk>
+	<md-option ng-value="year" ng-repeat="year in yearList"
+		ng-disabled="instantQuoteCarForm">{{year}}</md-option> </md-select>
+	<div ng-if="carInstantQuoteForm.regYear.$error.required"
+		style="color: red;">This is required.</div>
+	<div ng-messages="carInstantQuoteForm.regYear.$error"
+		ng-if="carInstantQuoteForm.regYear.$touched">
+		<!-- <div style="color: red" ng-message="required">This is
+											required</div> -->
+	</div>
+	 </md-input-container> <md-input-container
+		class="md-block" ng-if="polStatus"> <label>{{p365Labels.common.existingPolicyStatus}}</label>
+	<md-select name="type" ng-model="vehicleDetails.policyStatus"
+		ng-model-options="{trackBy: '$value.label'}"
+		ng-change="changePolStatus()"> <md-option
+		ng-value="status" ng-repeat="status in policyStatusList"
+		ng-disabled="instantQuoteCarForm">{{status.label}}</md-option> </md-select> </md-input-container> 
+		<ng-container ng-if="!$root.wordPressEnabled"><md-input-container
+		class="md-block" ng-if="renewal"> <label>{{p365Labels.common.insuranceClaimExist}}</label>
+	<md-select name="type" ng-model="vehicleInfo.previousClaim"
+		ng-change="singleClickCarQuote()"> <md-option
+		ng-value="prevClaimStatus.value"
+		ng-repeat="prevClaimStatus in previousClaimStatus"
+		ng-disabled="instantQuoteCarForm">{{prevClaimStatus.label}}</md-option>
+	</md-select> </md-input-container> <md-input-container class="md-block"
+		ng-if="vehicleInfo.previousClaim == 'false' && renewal == true">
+	<label>{{p365Labels.common.ncbExist}}</label> <md-select
+		name="type" ng-model="vehicleDetails.ncb"
+		ng-model-options="{trackBy: '$value.id'}"
+		ng-change="singleClickCarQuote()"> <md-option
+		ng-value="ncb" ng-repeat="ncb in ncbList"
+		ng-disabled="instantQuoteCarForm">{{ncb.display}}</md-option> </md-select> </md-input-container> </ng-container> </md-content>
+</ng-container>		
+</form>

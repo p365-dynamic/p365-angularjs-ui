@@ -1,0 +1,48 @@
+<div class="fullShadow resultBg">
+	<md-toolbar ng-if="!$root.wordPressEnabled"
+		class="md-theme-light resultHeader p365-light">
+	<h2 class="md-toolbar-tools" ng-click="showRiderDetails()" >
+		<span>{{globalLabel.applicationLabels.common.extraRiderFeatures}}
+			<i class="fa fa-question-circle fa-sm whiteColor"
+			data-toggle="tooltip" data-html="true"
+			title="{{tooltipContent.rideroptions}}" tooltip></i>
+		</span> <span flex></span>
+		<md-button
+			ng-if="$root.baseEnvEnabled &&!$root.wordPressEnabled && riderInputSection"
+			class="md-icon-button"
+			id="riderInputExpandIcon"> <i class="material-icons">arrow_drop_down</i>
+		</md-button>
+		<md-button
+			ng-if="$root.baseEnvEnabled &&!$root.wordPressEnabled && !riderInputSection"
+			class="md-icon-button"
+			id="riderInputCollaseIcon"> <i class="material-icons">arrow_drop_up</i>
+		</md-button>
+	</h2>
+	</md-toolbar>
+	
+	<md-list ng-hide="$root.baseEnvEnabled && riderInputSection" class="resultPad"> <md-list-item
+		class="md-1-line checkBox" ng-repeat="addOnCover in addOnCovers">
+	<div layout="row" layout-wrap flex>
+		<div class="md-list-item-text" flex="100">
+			<p ng-if="addOnCover.isEnable == 'Y'">
+				<md-checkbox class="blackAddon resize"
+					checklist-model="personalDetails.selectedAddOnCovers" checklist-value="addOnCover"
+					name='add' ng-change="updateRiders(addOnCover)"></md-checkbox>
+				{{addOnCover.riderName}} <i
+					class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip"
+					data-html="true" title="{{addOnCover.description}}" tooltip></i>
+				<md-divider ng-if="!$last"></md-divider>
+			</p>
+		</div>
+	</div>
+	</md-list-item> </md-list>
+	<!-- <ng-container class="wp_left wp_width100 wp_resultSticky">
+	<p ng-if="$root.wordPressEnabled" class="dialogButton" layout="row">
+		<button flex="50" ng-click="resetRiderDetails()"
+			class="bluebuybuttoncar wp_riderPopup" id="carBuyProductBtn"
+			style="background-color: #c4c4c4 !important;">Cancel</button>
+		<button flex="50" ng-click="singleClickLifeQuote()"
+			class="bluebuybuttoncar wp_riderPopup" id="carBuyProductBtn">Submit</button>
+	</p>
+	</ng-container> -->
+</div>

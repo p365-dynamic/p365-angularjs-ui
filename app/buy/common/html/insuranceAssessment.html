@@ -1,0 +1,96 @@
+<div flex='100'>
+    <div layout="row" layout-xs="row" flex='100' style="flex-wrap:wrap;">
+        <div flex="50" class="flip-card" ng-repeat="dataElement in insuranceAssessmentRes | orderBy:'displayOrder'">
+            <div class="flip-card-inner" ng-if="dataElement.insuranceLabel != 'Critical Illness'" >
+                <div class="white_chips flip-card-front">
+                    <div layout="row" class="hgt30px">
+                        <div flex="80" class="marTop3Per leftAlignTxt">
+                            <!-- Bike and car should be by default nice to have -->
+                            <img ng-show="dataElement.insuranceLabel == 'Bike' || dataElement.insuranceLabel == 'Car'" ng-src="{{$root.wp_path}}img/icons/MustHave.png"
+                                class="marLeftNeg">
+                            <!-- <img ng-show="(dataElement.range == '40-100') && (dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')"
+                                ng-src="{{$root.wp_path}}img/icons/MustHave.png" class="marLeftNeg">
+                            <img ng-show="(dataElement.range == '25-40') && (dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')"
+                                ng-src="{{$root.wp_path}}img/icons/NiceToHave.png" class="marLeftNeg"> -->
+							<img ng-show="(dataElement.insCatAsPerRisk == 'high' || dataElement.insCatAsPerRisk == 'veryHigh') && (dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')"
+                                ng-src="{{$root.wp_path}}img/icons/MustHave.png" class="marLeftNeg">
+                            <img ng-show="(dataElement.insCatAsPerRisk == 'medium') && (dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')" ng-src="{{$root.wp_path}}img/icons/NiceToHave.png" class="marLeftNeg">
+                            <!-- <img ng-show="dataElement.insuranceCat == 'Minimum'" ng-src="{{$root.wp_path}}img/icons/NeedToHave.png"> -->
+                            <div ng-show="(dataElement.range == '0-25') && (dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')"
+                                class="marLeftNeg"></div>
+                                <span class="greyb7Txt font9 marRightTop3" >{{dataElement.insuranceLabel}}</span>
+                        </div>
+                        <div flex="20" class="marTop3Per">
+                            <i ng-show="dataElement.insuranceLabel == 'Bike'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip" title="Bike"
+                                tooltip>directions_bike</i>
+                            <i ng-show="dataElement.insuranceLabel == 'Car'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip" title="Car"
+                                tooltip>directions_car</i>
+                            <i ng-show="dataElement.insuranceLabel == 'Health'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip"
+                                title="Health" tooltip>hotel</i>
+                            <i ng-show="dataElement.insuranceLabel == 'Life'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip" title="Life"
+                                tooltip>favorite</i>
+                            <i ng-show="dataElement.insuranceLabel == 'Retirement'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip"
+                                title="Retirement" tooltip>airline_seat_recline_extra</i>
+								 <i ng-show="dataElement.insuranceLabel == 'Critical Illness'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip"
+                                title="Critical Illness" tooltip>add_box</i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="ins_Text" ng-show="dataElement.sumInsured">
+                            <p class="font12 noMargin pad1 minimumColor" ng-show="minimumFlag">&#8377; {{dataElement.sumInsured.MinimumSumInsured | number:0 | regexINR}}</p>
+                            <p class="font12 noMargin pad1 recommendColor" ng-show="recommendedFlag">&#8377; {{dataElement.sumInsured.RecommendedSumInsured | number:0 | regexINR}}</p>
+                            <p class="font12 noMargin pad1 comprehensiveColor" ng-show="comprehensiveFlag">&#8377; {{dataElement.sumInsured.ComprehensiveSumInsured | number:0 | regexINR}}</p>
+                            <p class="font10 greyb7Txt mar5top" ng-show="dataElement.insuranceLabel == 'Bike' || dataElement.insuranceLabel == 'Car'">Insured declared value</p>
+                            <p class="font10 greyb7Txt mar5top" ng-show="dataElement.insuranceLabel == 'Health' || dataElement.insuranceLabel == 'Life'">Sum Insured</p>
+                            <p class="font10 greyb7Txt mar5top" ng-show="dataElement.insuranceLabel == 'Retirement'">Investment amount</p>
+							<p class="font10 greyb7Txt mar5top" ng-show="dataElement.insuranceLabel == 'Critical Illness'">Sum Insured</p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="white_chips flip-card-back">
+                    <div layout="row">
+                        <div flex="80" class="marTop3Per rightAlignTxt">
+                            <p class="topBot2Mar greyb7Txt font9">{{dataElement.insuranceLabel}}</p>
+                        </div>
+                        <div flex="20" class="marTop3Per">
+                            <i ng-show="dataElement.insuranceLabel == 'Bike'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip" title="Bike"
+                                tooltip>directions_bike</i>
+                            <i ng-show="dataElement.insuranceLabel == 'Car'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip" title="Car"
+                                tooltip>directions_car</i>
+                            <i ng-show="dataElement.insuranceLabel == 'Health'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip"
+                                title="Health" tooltip>hotel</i>
+                            <i ng-show="dataElement.insuranceLabel == 'Life'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip" title="Life"
+                                tooltip>favorite</i>
+                            <i ng-show="dataElement.insuranceLabel == 'Retirement'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip"
+                                title="Retirement" tooltip>airline_seat_recline_extra</i>
+								 <i ng-show="dataElement.insuranceLabel == 'Critical Illness'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip"
+                                title="Critical Illness" tooltip>add_box</i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pad20">
+                            <p class="font12 noMargin pad1 recommendColor">
+                                <span ng-show="dataElement.insuranceLabel == 'Bike' || dataElement.insuranceLabel == 'Car'">Mandatary by law</span>
+                                <span ng-show="(dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')">Your {{dataElement.insuranceLabel}} risk is {{dataElement.insCatAsPerRiskDisplayLabel}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div layout="row" flex="100" class="center" ng-show="insuranceAssessmentRes">
+        <!-- ng-click="toggleMinimum()" ng-click="toggleRecommended()" ng-click="toggleComprehensive()"-->
+        <p flex="33" flex-sm="100" flex-xs="100" class="font12 cursor">
+            <i class="material-icons font12 minimumColor">fiber_manual_record</i> Minimum
+        </p>
+        <p flex="33" flex-sm="100" flex-xs="100" class="font12 cursor">
+            <i class="material-icons font12 recommendColor">fiber_manual_record</i> Recommended
+        </p>
+        <p flex="33" flex-sm="100" flex-xs="100" class="font12 cursor">
+            <i class="material-icons font12 comprehensiveColor">fiber_manual_record</i> Comprehensive
+        </p>
+    </div>
+   
+</div>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="policies365">
+
+<head>
+    <!--base tag added for opening payment gateway in iframe in same tab for agencyPortal & droom -->
+    <base target="_parent">
+    <link rel="icon" href="img/p365_icon.png" type="image/png" sizes="16x16">
+    <title ng-bind="$root.title"></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name='keywords' content='{{ngMeta.keyword}}' />
+    <meta name='description' content='{{ngMeta.description}}' />
+    <meta property="og:title" content="{{$root.title}}">
+    <meta property="og:image" content="https://www.policies365.com/img/logo.png">
+    <meta property="og:description" content="{{ngMeta.description}}">
+    <meta property="og:url" content="https://www.policies365.com/">
+    <link rel="canonical" href="https://www.policies365.com/" />
+
+    <!-- build:css css/policies365.core-1.0.min.css -->
+    <link href="css/BOOTSTRAP_VAL" rel="stylesheet" />
+    <link href="css/jquery-ui.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/LATO_FONT" rel="stylesheet" type="text/css" />
+    <link href="css/professionalStyles.css" rel="stylesheet" type="text/css" />
+    <link href="css/professional_responsive.css" rel="stylesheet" type="text/css" />
+    <link href="css/style3.css" rel="stylesheet" type="text/css" />
+    <link href="css/col.css" rel="stylesheet" type="text/css" media="all">
+    <link href="css/elastislide.css" rel="stylesheet" type="text/css">
+    <link href="css/modal.css" rel="stylesheet" type="text/css">
+    <link href="css/ng-rateit.css" rel="stylesheet" type="text/css">
+    <link href="css/ng-scrollable.css" rel="stylesheet" type="text/css">
+    <!-- endbuild -->
+
+    <!-- build:css css/policies365.core-1.1.min.css -->
+    <link rel="stylesheet" href="css/datepicker.css">
+    <link rel="stylesheet" href="css/angular-carousel.css">
+    <link rel="stylesheet" type="text/css" href="css/opensans.css" />
+    <link rel="stylesheet" type="text/css" href="css/fontcssMaterial.css">
+    <link rel="stylesheet" type="text/css" href="css/angular-material.css" />
+    <link rel="stylesheet" type="text/css" href="material.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/nz-tour.css">
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.core-1.0.min.js -->
+    <script src="common/js/DefaultQuoteParamsCar.js" ></script>
+    <script src="common/js/DefaultQuoteParamsBike.js" ></script>
+    <script src="common/js/DefaultQuoteParamsLife.js" ></script>
+    <script src="common/js/DefaultQuoteParamsHealth.js" ></script>
+    <script src="common/js/DefaultQuoteParamsTravel.js" ></script>
+    <script src="common/js/DefaultQuoteParamsCriticalIllness.js"> </script>
+    <script src="common/js/DropdownListManager.js" ></script>
+    <script src="common/js/ui/jquery.js"></script>
+    <script src="common/js/ui/jquery-ui.js"></script>
+    <script src="common/js/ui/crypto-aes.js"></script>
+    <script src="common/js/transaction.js"></script>
+    <script src="common/js/ApplicationCommonFunctions.js"></script>
+    <script src="common/js/imatp365-integration.js"></script>
+    <script src="common/js/imatIntegration.js"></script>
+    <script src="common/js/ui/p365.analytics.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <!-- <script src="common/js/ui/jspdf.js"></script> -->
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.core-1.1.min.js -->
+    <script src="common/js/ui/easing.js"></script>
+    <script src="common/js/ui/angular.js"></script>
+    <script src="common/js/ui/angular-route.js"></script>
+    <script src="common/js/ui/angular-touch.js"></script>
+    <script src="common/js/ui/angular-cookies.js"></script>
+    <script src="common/js/ui/angular-animate.js"></script>
+    <script src="common/js/ui/angular-aria.min.js"></script>
+    <script src="common/js/ui/angular-messages.js"></script>
+    <script src="common/js/ui/dirPagination.js"></script>
+    <script src="common/js/ui/angular-filter.js"></script>
+    <script src="common/js/ui/angular-sanitize.js"></script>
+    <script src="common/js/ui/highcharts.js"></script>
+    <script src="common/js/ui/nz-tour.js"></script>
+    <script src="common/js/ui/ng-rateit.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.core-1.2.min.js -->
+    <script src="common/js/ui/lodash.min.js"></script>
+    <script src="common/js/ui/ui-bootstrap-tpls-0.6.0.js"></script>
+    <script src="common/js/ui/ApplicationLayoutManager.js"></script>
+    <script src="common/js/lokijs.min.js"></script>
+    <script src="common/js/ui/idep-encryption-standards.js"></script>
+    <script src="common/js/ui/idep-encryption-algorithm.js"></script>
+    <script src="common/js/custom-idep-localstorage.js"></script>
+    <script src="common/js/ui/checklist-model.js"></script>
+    <script src="common/js/ui/bootstrap.min.js"></script>
+    <script src="common/js/ui/angular-drag-resize.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.core-1.3.min.js -->
+    <script src="common/js/ui/angular-material.js"></script>
+    <script src="common/js/ui/impetus.js"></script>
+    <script src="common/js/ui/scrollable.js"></script>
+    <script src="common/js/ui/ng-scrollable.js"></script>
+    <script src="common/js/ui/moment.js"></script>
+    <script src="common/js/ui/p365.datepicker-1.0.js"></script>
+    <script src="common/js/ui/ngMeta.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.common.min.js -->
+    <script src="common/js/CoreComponents.js"></script>
+    <script src="common/js/ContantUsController.js"></script>
+    <script src="common/js/DashboardController.js"></script>
+	<script src="buy/common/js/defaultMetroList.js"></script>
+    <script src="buy/common/js/claimsController.js"></script>
+    <script src="buy/common/js/headerController.js"></script>
+    <script src="buy/common/js/headerNavigationPHP.js"></script>
+    <script src="buy/common/js/GetQuoteTemplateController.js"></script>
+    <script src="buy/common/js/signInController.js"></script>
+    <script src="buy/common/js/logoutController.js"></script>
+    <script src="buy/common/js/PaySuccessController.js"></script>
+    <script src="buy/common/js/PayFailureController.js"></script>
+    <script src="buy/common/js/proposalResponseDataController.js"></script>
+    <script src="buy/common/js/iposController.js"></script>
+    <script src="buy/common/js/ShareQuoteByEmailController.js"></script>
+    <script src="buy/common/js/DCPResultController.js"></script>
+    <script src="buy/common/js/campaignController.js"></script>
+	<script src="buy/common/js/iquoteNavigation.js"></script>
+    <script src="buy/common/js/iquoteTabNavigation.js"></script>
+    <script src="buy/paymentMobile/paymentMobileCtrl.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.professionalJourney.min.js -->
+    <script src="buy/common/js/ShareProfessionalQuoteByEmailController.js"></script>
+    <script src="buy/common/js/professionalJourneyController.js"></script>
+    <script src="buy/common/js/professionalJourneyConfig.js"></script>
+    <script src="buy/common/js/professionalJourneyResultController.js"></script>
+    <script src="buy/common/js/motorController.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js js/Policies365.labels.min.js -->
+    <script src="buy/Labels/en/application-en-common.js" ></script>
+    <script src="buy/Labels/en/application-en-myPolicy.js" ></script>
+    <script src="buy/Labels/en/application-en-carLanding.js" ></script>
+    <script src="buy/Labels/en/application-en-carProposal.js" ></script>
+    <script src="buy/Labels/en/application-en-carPolicy.js" ></script>
+    <script src="buy/Labels/en/application-en-bikeLanding.js" ></script>
+    <script src="buy/Labels/en/application-en-bikeProposal.js" ></script>
+    <script src="buy/Labels/en/application-en-bikePolicy.js" ></script>
+    <script src="buy/Labels/en/application-en-lifeLanding.js"></script>
+    <script src="buy/Labels/en/application-en-lifeProposal.js" ></script>
+    <script src="buy/Labels/en/application-en-lifePolicy.js" ></script>
+    <script src="buy/Labels/en/application-en-healthLanding.js" ></script>
+    <script src="buy/Labels/en/application-en-healthProposal.js" ></script>
+    <script src="buy/Labels/en/application-en-healthPolicy.js" ></script>
+    <script src="buy/Labels/en/application-en-contactDetails.js" ></script>
+    <script src="buy/Labels/en/application-en-travelPolicy.js" ></script>
+    
+
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.lifeQuote.min.js -->
+    <script src="buy/life/js/AssuranceInstantQuoteController.js"></script>
+    <script src="buy/life/js/AssuranceResultController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.lifeProposal.min.js -->
+    <script src="buy/life/js/AssuranceBuyProductController.js"></script>
+    <script src="buy/life/js/AssuranceResponseDataController.js"></script>
+
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.lifePayment.min.js -->
+    <script src="buy/life/js/AssurancePaySuccessController.js"></script>
+    <script src="buy/life/js/AssurncePayFailureController.js"></script>
+    <script src="buy/life/js/AssurancePurchasingStatementController.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js js/Policies365.bikeQuote.min.js -->
+    <script src="buy/bike/js/TwoWheelerInstantQuoteController.js"></script>
+    <script src="buy/bike/js/TwoWheelerResultController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.bikeProposal.min.js -->
+    <script src="buy/bike/js/TwoWheelerBuyProductController.js"></script>
+    <script src="buy/bike/js/TwoWheelerResponseDataController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.bikePayment.min.js -->
+    <script src="buy/bike/js/TwoWheelerPaySuccessController.js"></script>
+    <script src="buy/bike/js/TwoWheelerPayFailureController.js"></script>
+    <script src="buy/bike/js/TwoWheelerPolicyPurchaseController.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js js/Policies365.carQuote.min.js -->
+    <script src="buy/car/js/FourWheelerInstantQuoteController.js"></script>
+    <script src="buy/car/js/FourWheelerResultController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.carProposal.min.js -->
+    <script src="buy/car/js/FourWheelerBuyProductController.js"></script>
+    <script src="buy/car/js/FourWheelerscheduleInspectionController.js"></script>
+    <script src="buy/car/js/FourWheelerResponseDataController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.carPayment.min.js -->
+    <script src="buy/car/js/FourWheelerPaySuccessController.js"></script>
+    <script src="buy/car/js/FourWheelerPayFailureController.js"></script>
+    <script src="buy/car/js/FourWheelerPolicyPurchaseController.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js js/Policies365.healthQuote.min.js -->
+    <script src="buy/health/js/MedicalInstantQuoteController.js"></script>
+    <script src="buy/health/js/MedicalResultController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.healthProposal.min.js -->
+    <script src="buy/health/js/MedicalPropsalRequest.js"></script>
+    <script src="buy/health/js/MedicalBuyProductController.js"></script>
+    <script src="buy/health/js/MedicalResponseDataHealthController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.healthPayment.min.js -->
+    <script src="buy/health/js/MedicalPaySuccessController.js"></script>
+    <script src="buy/health/js/MedicalPayFailureController.js"></script>
+    <script src="buy/health/js/medicalPurchasingController.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js js/Policies365.travelQuote.min.js -->
+    <script src="buy/travel/js/TravelInstantQuoteController.js"></script>
+    <script src="buy/travel/js/TravelResultController.js"></script>
+    <script src="buy/travel/js/TravelCommonFunctions.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.travelProposal.min.js -->
+    <script src="buy/travel/js/TravelProposalRequest.js"></script>
+    <script src="buy/travel/js/TravelBuyProductController.js"></script>
+    <script src="buy/travel/js/TravelResponseDataController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.travelPayment.min.js -->
+    <script src="buy/travel/js/TravelPaySuccessController.js"></script>
+    <script src="buy/travel/js/TravelPayFailureController.js"></script>
+    <script src="buy/travel/js/TravelPolicyPurchaseController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.homeQuote.min.js -->
+    <script src="buy/home/js/HomeInstantQuoteController.js"></script>
+    <script src="buy/home/js/HomeResultController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.criticalIllnessQuote.min.js -->
+    <script src="buy/criticalIllness/js/CriticalIllnessInstantQuoteController.js"></script>
+    <script src="buy/criticalIllness/js/criticalIllnessResultController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.personalAccidentQuote.min.js -->
+    <script src="buy/personalAccident/js/PersonalAccidentInstantQuoteController.js"></script>
+    <script src="buy/personalAccident/js/PersonalAccidentResultController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.personalAccidentProposal.min.js -->
+    <script src="buy/personalAccident/js/PersonalAccidentBuyProductController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/Policies365.personalAccidentPayment.min.js -->
+    <!-- <script src="buy/personalAccident/js/PersonalAccidentPayFailureController.js"></script>
+    <script src="buy/personalAccident/js/PersonalAccidentPaySuccessController.js"></script>
+     <script src="buy/personalAccident/js/PersonalAccidentPurchasingStatementController.js"></script>  -->
+
+
+    <!-- endbuild -->
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHs_Er19ZT9lozf3_yFlxkFncMqHUEbd8&libraries=places"></script>
+<!--    <script type="text/javascript">
+        var drProfession = {
+          "professionImg": "VectorSmart_Doctor.png",
+          "professionName": "Healthcare & Doctors",
+          "professionId": 1,
+          "professionCode": "DR"
+        };
+        var itProfession = {
+          "professionImg": "VectorSmart_Doctor.png",
+          "professionName": "IT, ITES & Tech Startup",
+          "professionId": 2,
+          "professionCode": "IT"
+        };
+        var caProfession = {
+          "professionImg": "VectorSmart_Doctor.png",
+          "professionName": "CA & Financial Services",
+          "professionId": 3,
+          "professionCode": "CA"
+        };
+        var armyProfession = {
+          "professionImg": "VectorSmart_Doctor.png",
+          "professionName": "ArmedForces",
+          "professionId": 14,
+          "professionCode": "ARMY"
+        };
+        var govtProfession = {
+          "professionImg": "VectorSmart_Doctor.png",
+          "professionName": "Govt & Public Sector",
+          "professionId": 14,
+          "professionCode": "GOVT"
+        };
+        var saleProfession = {
+          "professionImg": "VectorSmart_Doctor.png",
+          "professionName": "Sales & Marketing",
+          "professionId": 5,
+          "professionCode": "SALES"
+        };
+        localStorage.setItem("profession", JSON.stringify(saleProfession));
+      </script>-->
+    
+</head> 
+
+<body ng-controller="headerController">
+    <div ng-view id="home" autoscroll="true" ng-if="$root.professionalJourneyInit"></div>
+</body>
+
+<!-- Added by gauri for iMAT application -->
+<!-- <script>
+    (function(w, d, t, u, n, a, m) {
+        w['MauticTrackingObject'] = n;
+        w[n] = w[n] || function() {
+                (w[n].q = w[n].q || []).push(arguments)
+            }, a = d.createElement(t),
+            m = d.getElementsByTagName(t)[0];
+        a. = 1;
+        a.src = u;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'http://imatuat.policies365.com/mtc.js', 'mt');
+
+    //     mt('send', 'pageview', {
+    //         channel: 'P365Website'
+    //     });
+</script> -->
+<!-- <script type="text/javascript" src="http://imatuat.policies365.com/form/generate.js?id=6"></script> -->
+
+
+</html>

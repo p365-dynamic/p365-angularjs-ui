@@ -1,0 +1,1199 @@
+<loading></loading>
+<div after-render="missionCompled"></div>
+<div class="section termBg wp_padHeaderNavi wp_innerLife"
+	ng-if="$root.wordPressEnabled">
+	<ng-container ng-include="$root.headerNavigation"
+		ng-controller='headerNavigationController'></ng-container>
+	<div class="clearfix"></div>
+</div>
+<div
+	class="middleTab one-edge-shadow widthFull resultCommon mobileResult wp_padHeaderNavi">
+	<div class="backButtonPlacer wp_backBtnPlacer">
+		<a ng-click="backToResultScreen()" id="lifeBackToResultScreen">
+			<div class="md-raised backButtonColor backButton" data-html="true"
+				data-toggle="tooltip" data-placement="right" title="Back" tooltip>
+				<i class="fa fa-chevron-left"></i>
+			</div>
+			
+		</a>
+	</div>
+
+	<div class="">
+		<div class="section" ng-if="$root.wordPressEnabled">
+			<ng-container ng-include="paProposalSectionHTML"></ng-container>
+		</div>
+		<div class="section group viewDiv">
+			<div class="col col col-sm-3 fullWidth"
+				ng-if="!$root.wordPressEnabled">
+				<ng-container ng-include="paProposalSectionHTML"></ng-container>
+
+			</div>
+
+			<!-- proposal form start here -->
+
+			<div class="col col-sm-9 fullWidth wp_width100 wp_NoPad">
+				<div class="">
+					<div class="fullShadow resultBg wp_NoBg">
+						<div class="pad10 labelSetting wp_NoPad">
+							<div ng-init="accodion=1" class="">
+								<h3
+									class="accordionBuy buyAccordianH3 wp_proposalAccordian wp_proposalAccordian"
+									ng-class="{active:accordion==1}">
+									<a href ng-click="accordion = 1"
+										class="wp_proposalAccordianText"><span
+										class="wp_proposalNumStyle">1</span><span
+										ng-if="!$root.wordPressEnabled">.</span> Proposal Info & Contact Details <md-button
+											class="md-icon-button editBtnBlack wp_accordianIcon wp_right"
+											id="lifeOwnerEditIcon" aria-label="create"> <i
+											class="material-icons">create</i> </md-button> </a>
+								</h3>
+								<div class="wp_proposalBorder wp_whiteBg wp_border7 wp_pad25">
+									<div class="accordion-contentBuy"
+										ng-show="accordion==1 && screenOneStatus">
+										<form name='ownerDetailsForm'>
+											<div class="wp_proposalPadTop50">
+												<div class='section group' layout="row" layout-xs="column"
+													layout-sm="column">
+													<div flex="25" flex-xs="100" flex-sm="100"
+														style="width: 100%;" class="alignColumn">
+														<md-input-container class="md-block">
+														<div class="">
+															<!--ng-class="{ 'formError': ownerDetailsForm.OwnerfirstName.$invalid}">-->
+															<label class="buyTextPadding wp_md-no-float">First
+																name</label> <input class="capitializeName"
+																name='OwnerfirstName'
+																ng-model='proposerDetails.firstName' autocomplete='off'
+																maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z ]*$/'
+																required md-no-asterisk />
+															<div ng-messages="ownerDetailsForm.OwnerfirstName.$error"
+																ng-if="ownerDetailsForm.OwnerfirstName.$touched">
+																<div style="color: red" ng-message="required">This
+																	is required</div>
+																<div style="color: red" ng-message="pattern">Enter
+																	valid first name</div>
+																<div style="color: red" ng-message="maxlength">35
+																	characters as max length</div>
+															</div>
+														</div>
+														</md-input-container>
+													</div>
+													<!-- <div flex="25" flex-xs="100" flex-sm="100"
+														style="width: 100%;" class="alignColumn">
+														<md-input-container class="md-block">
+														<div class="">
+															<label class="buyTextPadding wp_md-no-float">Middle
+																name</label> <input class="capitializeName"
+																name='OwnerMiddleName' name='middlename'
+																ng-model="proposerDetails.middleName"
+																ng-value="proposerDetails.middleName" required md-no-asterisk/>
+														</div>
+														</md-input-container>
+													</div> -->
+													<div flex="25" flex-xs="100" flex-sm="100"
+														style="width: 100%;" class="alignColumn">
+														<md-input-container class="md-block">
+														<div class="">
+															<label class="buyTextPadding wp_md-no-float">Last
+																name</label> <input class="capitializeName" name='OwnerlastName'
+																ng-model='proposerDetails.lastName' autocomplete='off'
+																maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z ]*$/'
+																required md-no-asterisk />
+															<div ng-messages="ownerDetailsForm.OwnerlastName.$error"
+																ng-if="ownerDetailsForm.OwnerlastName.$touched">
+																<div style="color: red" ng-message="required">This
+																	is required</div>
+																<div style="color: red" ng-message="pattern">Enter
+																	valid last name</div>
+																<div style="color: red" ng-message="maxlength">35
+																	characters as max length</div>
+															</div>
+														</div>
+													</div>
+
+													
+												
+												<div flex="25" flex-xs="100" flex-sm="100"
+													style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding wp_md-no-float">Mobile
+															Number</label> <input class="" name='mobileNumber'
+															ng-model='proposerDetails.mobileNumber'
+															autocomplete='off' ng-pattern='/^[6789]\d{9}$/'
+															maxlength='10' minlength='10' required md-no-asterisk />
+														<div ng-messages="ownerDetailsForm.mobileNumber.$error"
+															ng-if="ownerDetailsForm.mobileNumber.$touched">
+															<div style="color: red" ng-message="required">This
+																is required</div>
+															<div style="color: red" ng-message="pattern">Enter
+																valid mobile no</div>
+															<div style="color: red" ng-message="maxlength">10
+																characters as max length</div>
+														</div>
+													</div>
+													</md-input-container>
+												</div>
+
+												<div flex="25" flex-xs="100" flex-sm="100"
+													style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding wp_md-no-float">Email
+															ID</label> <input class=""
+															ng-pattern='/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z.]{2,5}$/'
+															autocomplete='off' maxlength='50' name='emailId'
+															ng-model='proposerDetails.emailId' required
+															md-no-asterisk />
+														<div ng-messages="ownerDetailsForm.emailId.$error"
+															ng-if="ownerDetailsForm.emailId.$touched">
+															<div style="color: red" ng-message="required">This
+																is required</div>
+															<div style="color: red" ng-message="pattern">Enter
+																valid mail id</div>
+															<div style="color: red" ng-message="maxlength">50
+																characters as max length</div>
+														</div>
+													</div>
+													</md-input-container>
+												</div>
+
+
+													
+												</div>
+
+												<div class="section group ng-scope layout-xs-column layout-sm-column layout-row"
+													layout="row" layout-xs="column" layout-sm="column">
+													
+													<!-- <div flex="25" flex-xs="100" flex-sm="100"
+														style="width: 100%;" class="alignColumn">
+														<md-input-container class="md-block">
+														<div class="">
+															<label class="buyTextPadding wp_md-no-float">Mother's Maiden First Name</label>
+															 <input class="capitializeName"
+																name='motherFirstName'
+																ng-model="proposerDetails.motherFirstName" required md-no-asterisk/>
+														</div>
+														</md-input-container>
+													</div> -->
+													
+													<!-- <div flex="25" flex-xs="100" flex-sm="100"
+														style="width: 100%;" class="alignColumn">
+														<md-input-container class="md-block">
+														<div class="">
+															<label class="buyTextPadding wp_md-no-float">Mother's Maiden Last Name</label> 
+															<input class="capitializeName"
+																name='motherLastName'
+																ng-model="proposerDetails.motherLastName" required md-no-asterisk/>
+														</div>
+														</md-input-container>
+													</div> -->
+			
+
+												</div>
+											</div>
+											<div
+												class="section group ng-scope layout-xs-column layout-sm-column layout-row"
+												layout="row" layout-xs="column" layout-sm="column">
+									
+												
+
+												<div flex="25" flex-xs="100" style="width: 100%;"
+												class="alignColumn">
+												<md-input-container class="md-block">
+												<label class="buyTextPadding wp_md-no-float">{{globalLabel.applicationLabels.life.dateOfBirth}}</label>
+												<input class="newDatepickerBorder" hasDatepicker
+												personalDetails
+													ng-model="selectedProductInputParam.quoteParam.dob"
+													ng-change="calculateProposerAge()" name='dateofbirth'
+													p365-date-picker="proposerDOBOptions" required
+													md-no-asterisk />
+												<div ng-messages="ownerDetailsForm.dateofbirth.$error"
+													ng-if="ownerDetailsForm.dateofbirth.$touched">
+													<div style="color: red" ng-message="required">This
+														is required. dd/mm/yyyy format</div>
+												</div>
+												</md-input-container>
+											</div>
+
+											<div flex="25" style="width: 100%;" class="alignColumn">
+												<md-input-container class="md-block">
+												<label class="buyTextPadding wp_md-no-float">Gender</label>
+												<md-select name="type" ng-model="proposerDetails.gender"
+													class="mdInputContainer_input" ng-change="changeGender()"
+													required> <md-option
+													ng-value="genderType.label"
+													ng-repeat="genderType in gender">{{genderType.label}}</md-option>
+												</md-select> </md-input-container>
+											</div>
+
+
+												<div flex="25" flex-xs="100" flex-sm="100" style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<label class="buyTextPadding wp_md-no-float">PAN Number</label> 
+														<input class="mdInputContainer_input" ng-model="proposerDetails.pancard" autocomplete='off' maxlength='10' 
+															   minlength='10' name='pannumber1' ng-pattern='/[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}/' required />
+														<div ng-messages="ownerDetailsForm.pannumber1.$error" ng-if="ownerDetailsForm.pannumber1.$touched">
+															<div style="color: red" ng-message="required">This is required</div>
+															<div style="color: red" ng-message="pattern">Enter valid PAN no. XXXXX1111X</div>
+															<div style="color: red" ng-message="maxlength">10 characters as max length</div>
+														</div>
+													</md-input-container>
+												</div>
+
+
+
+												<div flex="25" style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<label class="buyTextPadding wp_md-no-float">Occupation</label>
+													<md-select name="type"
+														ng-model="personalDetails.occupation"
+														class="mdInputContainer_input"
+														ng-change="recalculateProposerOccupation()" required> 
+														<md-option
+														ng-value="occupation.display" name='occupation1'
+														ng-repeat="occupation in occupationList">{{occupation.display}}</md-option>
+													</md-select> </md-input-container>
+												</div>
+											</div>
+											<div class='section group ng-scope layout-xs-column layout-sm-column layout-row' 
+												layout="row" layout-xs="column"	layout-sm="column">
+												
+												
+												<div flex="25" style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<label class="buyTextPadding wp_md-no-float">Annual	Income</label>	
+														
+														<input  style="position: relative;" class="mdInputContainer_input capitializeName"
+																name='type' ng-change="checkSum(personalDetails.annualIncome);"
+																ng-model='personalDetails.annualIncome'
+																autocomplete='off' maxlength='8' minlength='1'
+																ng-pattern='/^[1-9][0-9]*$/'  required md-no-asterisk
+																 />	
+																<span style=" position: absolute; right: 0px; font-weight:bold "> {{showAmount(personalDetails.annualIncome)}} Lakhs</span>
+																<span style="color: red"  >{{message}}</span>
+														
+														
+															</md-input-container>
+
+		
+												</div>
+												<!-- <div class="col col-sm-4">
+														<md-input-container class="md-block"> <label
+														   class="md-no-float classForTooltip">{{globalLabel.applicationLabels.personalAccident.annualIncome}}
+														   <i class="fa fa-question-circle fa-sm bluecolor"
+														   data-toggle="tooltip" data-html="true"
+														   title="{{tooltipContent.annualIncome}}" tooltip></i>			
+														   <span style="color: red"  >{{message}}</span>
+													   </label> 
+													   <input type="number" style="width:70% !important;" ng-pattern='/^[1-9][0-9]*$/' ng-change="checkSum(quoteParam.annualIncome);"  name="type"
+														ng-model="quoteParam.annualIncome"
+													   required md-no-asterisk autocomplete='off' 	maxlength='8' minlength='1' >
+													   <span style="width: 30% !important; font-weight:bold "> {{showAmount(quoteParam.annualIncome)}} Lakhs</span>
+														   
+													   </md-input-container>
+													   <div class="clearfix"></div> -->
+												   <!-- </div> -->
+
+												<div flex="25" flex-xs="100" style="width: 100%;"
+												class="alignColumn">
+												<md-input-container class="md-block">
+												<label class="buyTextPadding wp_md-no-float">{{globalLabel.applicationLabels.personalAccident.policyStartDate}}</label>
+												<input class="newDatepickerBorder" hasDatepicker
+													ng-model="coverageDetails.policyStartDate"
+													md-min-date="today"
+													ng-change="calcualtePolicyTerm(coverageDetails.policyStartDate)" name='dateofbirth'
+													p365-date-picker="policystartDateOption" required
+													md-no-asterisk />
+												<div ng-messages="ownerDetailsForm.dateofbirth.$error"
+													ng-if="pers.dateofbirth.$touched">
+													<div style="color: red" ng-message="required">This
+														is required. dd/mm/yyyy format</div>
+												</div>
+												</md-input-container>
+											</div>
+												<div flex="25" style="width: 100%;" class="alignColumn">
+												</div>
+											</div>											
+											
+											<h3 class="accordionBuy buySub"
+												ng-class="{active:accordion==1}">Communication Address</h3>
+											<div class='section group' layout="row" layout-xs="column"
+												layout-sm="column">
+												<div flex="35" flex-xs="100" flex-sm="100"
+													style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding wp_md-no-float">Door
+															No/Block No/Block Name</label> <input class="capitializeName"
+															ng-model='addressDetails.communicationAddress.houseNo' autocomplete='off'
+															maxlength='50' minlength='1' name='doornoblock' required
+															md-no-asterisk />
+														<div ng-if="ownerDetailsForm.doornoblock.$error.required"
+															style="color: red;">This is required.</div>
+														<div ng-messages="ownerDetailsForm.doornoblock.$error"
+															ng-if="ownerDetailsForm.doornoblock.$touched">
+															<div style="color: red" ng-message="pattern">Enter
+																valid door No.</div>
+														</div>
+													</div>
+													</md-input-container>
+												</div>
+												<div flex="70" flex-xs="100" flex-sm="100"
+													style="width: 100%;">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding md-no-float wp_md-no-float">Address</label>
+														<input class="capitializeName"
+															details="chosenCommPlaceDetails" name='address'
+															ng-model='addressDetails.communicationAddress.address' googleplace
+															ng-change="resetCommunicationAddress()"
+															autocomplete='off' maxlength='250' minlength='1' style=""
+															required md-no-asterisk />
+														<div ng-if="ownerDetailsForm.address.$error.required"
+															style="color: red;">This is required.</div>
+														<div ng-messages="ownerDetailsForm.address.$error"
+															ng-if="ownerDetailsForm.address.$touched">
+															<!-- <div style="color: red" ng-message="required">This is required</div> -->
+															<div style="color: red" ng-message="pattern">Enter
+																valid address</div>
+															<div style="color: red" ng-message="maxlength">250
+																characters as max length</div>
+														</div>
+														<!-- ng-pattern='/^[A-Za-z0-9_@#./\(\)\-.,:;\+\s]*$/' -->
+													</div>
+													</md-input-container>
+												</div>
+											</div>
+											<div class='section group' layout="row" layout-xs="column"
+												layout-sm="column">
+												<div flex="33" flex-xs="100" flex-sm="100"
+													style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding wp_md-no-float">PIN
+															Code</label> <input name="pin1" ng-required="true"
+															typeahead-on-select="onSelectPinOrAreaComm($item)"
+															ng-model="addressDetails.communicationAddress.pincode"
+															uib-typeahead="pin.displayField for pin in getPinCodeAreaList($viewValue)"
+															typeahead-show-hint="true" autocomplete="off" typeahead-min-length="3"
+															typeahead-wait-ms="10" required md-no-asterisk />
+														<div ng-if="ownerDetailsForm.pin1.$error.required"
+															style="color: red;">This is required.</div>
+														<div ng-messages="ownerDetailsForm.pin1.$error"
+															ng-if="ownerDetailsForm.pin1.$touched">
+															<!-- <div style="color: red" ng-message="required">This is required</div> -->
+															<div style="color: red" ng-message="pattern">Enter
+																valid pin code</div>
+														</div>
+													</div>
+													</md-input-container>
+												</div>
+												<div flex="33" flex-xs="100" flex-sm="100"
+													style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding wp_md-no-float">City</label>
+														<input class="" name='City'
+															ng-model='addressDetails.communicationAddress.city' autocomplete='off'
+															
+															ng-disabled="true" required md-no-asterisk />
+													</div>
+													</md-input-container>
+												</div>
+												<div flex="33" flex-xs="100" flex-sm="100"
+													style="width: 100%;">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding wp_md-no-float">State</label>
+														<input class="mdInputContainer_input" name='State'
+															ng-model='addressDetails.communicationAddress.state' autocomplete='off'
+															ng-disabled="true" ng-disabled="true" required
+															md-no-asterisk />
+													</div>
+													</md-input-container>
+												</div>
+											</div>
+											<h3 class="accordionBuy buySub"
+												ng-class="{active:accordion==1}">Permanent Address</h3>
+											<div class='section group' layout="row">
+												<div flex="100" style="width: 100%;">
+													<md-input-container class="md-block">
+													<md-checkbox ng-change="changePermanentAddress()"
+														class="blackAddon resize"
+														ng-model="addressDetails.isAddressSameAsCommun"
+														name='add'>
+													<p style="text-align: left;">Same as communication
+														address.</p>
+													</md-checkbox></md-input-container>
+												</div>
+											</div>
+											<div class='section group' layout="row" layout-xs="column"
+												layout-sm="column" ng-if="!addressDetails.isAddressSameAsCommun"
+													ng-show="!addressDetails.isAddressSameAsCommun">
+												<div flex="35" flex-xs="100" flex-sm="100"
+													style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div>
+														<label class="buyTextPadding wp_md-no-float">Door
+															No/Block No/Block Name</label> <input
+															class="mdInputContainer_input capitializeName"
+															name='houseNo' ng-model='permanentAddressDetails.houseNo'
+															autocomplete='off' required md-no-asterisk />
+														<div ng-if="ownerDetailsForm.houseNo.$error.required"
+															style="color: red;">This is required.</div>
+														<div ng-messages="ownerDetailsForm.houseNo.$error"
+															ng-if="ownerDetailsForm.houseNo.$touched">
+															<div style="color: red" ng-message="pattern">Enter
+																valid door No.</div>
+														</div>
+													</div>
+													</md-input-container>
+												</div>
+												<div flex="70" flex-xs="100" flex-sm="100"
+													style="width: 100%;">
+													<md-input-container class="md-block">
+													<div>
+														<label class="buyTextPadding md-no-float wp_md-no-float">Address</label> <input
+															class="mdInputContainer_input capitializeName"
+															name='registrationAddress'
+															ng-model='permanentAddressDetails.address'
+															details="chosenRegPlaceDetails" googleregplace
+															ng-change="resetPermanentAddress()" autocomplete='off'
+															maxlength='250' minlength='1' required md-no-asterisk />
+													</div>
+													</md-input-container>
+												</div>
+											</div>
+											<div class='section group' layout="row" layout-xs="column"
+												layout-sm="column" ng-if="!addressDetails.isAddressSameAsCommun"
+													ng-show="!addressDetails.isAddressSameAsCommun">
+												<div flex="33" flex-xs="100" flex-sm="100"
+													style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div>
+														<label class="buyTextPadding wp_md-no-float">PIN
+															Code</label> <input name="pin" ng-required="true"
+															typeahead-on-select="onSelectPinOrAreaPerm($item)"
+															ng-model="permanentAddressDetails.pincode"
+															uib-typeahead="pin.displayField for pin in getPinCodeAreaList($viewValue)"
+															typeahead-show-hint="true" autocomplete="off" typeahead-min-length="3"
+															typeahead-wait-ms="10" required md-no-asterisk />
+													</div>
+													</md-input-container>
+												</div>
+												<div flex="33" flex-xs="100" flex-sm="100"
+													style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div>
+														<label class="buyTextPadding wp_md-no-float">City</label>
+														<input class="mdInputContainer_input"
+															name='registrationCity' ng-model='permanentAddressDetails.city'
+															autocomplete='off' maxlength='35' minlength='1'
+															ng-change="$scope.recalculateProposerAddress()"
+															ng-disabled="true" required md-no-asterisk />
+													</div>
+													</md-input-container>
+												</div>
+												<div flex="33" flex-xs="100" flex-sm="100"
+													style="width: 100%;">
+													<md-input-container class="md-block">
+													<div>
+														<label class="buyTextPadding wp_md-no-float">State</label>
+														<input class="mdInputContainer_input"
+															name='registrationState'
+															ng-model='permanentAddressDetails.state' autocomplete='off'
+															maxlength='35' minlength='1' ng-disabled="true" required
+															md-no-asterisk />
+													</div>
+													</md-input-container>
+												</div>
+											</div>
+
+											<div class='buyOwnerBtn'>
+												<md-input-container class="md-block">
+												<button ng-disabled='ownerDetailsForm.$invalid'
+													class='md-raised md-primary bluebuybuttoncar wp_borderRadius25 wp_btnPad'
+													id="lifeOwnerNext" ng-click="submitPersonalDetails()">
+													Next<span ng-if="!$root.wordPressEnabled"> Page >></span>
+												</button>
+												</md-input-container>
+											</div>
+										</form>
+									</div>
+								</div>
+								
+
+
+
+
+<!-- med  details -->
+								<h3	class="accordionBuy buyAccordianH3 wp_proposalAccordian wp_proposalAccordian"
+									ng-class="{active:accordion==2}" ng-disabled="Section2Inactive">
+									<a href ng-click="accordion = 2" ng-disabled="Section2Inactive"
+										class="wp_proposalAccordianText"><span
+										class="wp_proposalNumStyle">2</span><span
+										ng-if="!$root.wordPressEnabled">.</span> Medical Details<md-button
+											ng-if="!Section2Inactive"
+											class="md-icon-button editBtnBlack wp_accordianIcon wp_right"
+											id="medicalDetailsEditIcon" aria-label="create"> <i
+											class="material-icons">create</i> </md-button> </a>
+								</h3>
+								<div class="wp_proposalBorder wp_whiteBg wp_border7 wp_pad25">
+									<div class="accordion-contentBuy"
+										ng-show="accordion==2 && screenTwoStatus">
+										<form name="medicalDetailsForm">
+											<div class="wp_proposalPadTop50">
+													
+												<div ng-repeat="mQuestion in medicalQuestionarrie | orderBy : 'questionId' track by $index">
+														
+													<div ng-if="mQuestion.inputType">
+														<div class="col span_3_of_4">
+															<p class="small">
+																<b>{{mQuestion.question}} </b>
+															</p>
+															<p class="small">{{mQuestion.description}}</p>
+														</div>
+														<div class="col spngan_1_of_4">
+															<md-input-container class="md-block">
+															<md-radio-group
+																ng-change="inputTypeCheck(medicalInfo.medicalQuestionarrier[$index].applicable,mQuestion.questionId,mQuestion)"
+																ng-model="medicalInfo.medicalQuestionarrier[$index].applicable"
+																ng-init="medicalInfo.medicalQuestionarrier[$index].question=mQuestion.question;
+																	     medicalInfo.medicalQuestionarrier[$index].questionCode=mQuestion.questionCode;
+																		 medicalInfo.medicalQuestionarrier[$index].applicable=mQuestion.applicable"
+																layout="row"> 
+																<md-radio-button ng-value="true">Yes</md-radio-button> 
+																<md-radio-button ng-value="false">No</md-radio-button>
+															</md-radio-group>
+															</md-input-container>
+														</div>
+														<div class="section group padBottom10" ng-if="medicalInfo.medicalQuestionarrier[$index].applicable=='true'">
+															<div class="menuForCheckbox medicalBuyDiseasePopup">
+																<div layout="row">
+																	<div flex="100">
+																		<div class="section"> 
+																			<md-list class="resultPad medicalPopup">
+																				<div class="section" layout-xs="row">
+																					 <div ng-if="mQuestion.inputType=='textarea'">
+																						<div class="section" layout-xs="row">
+																							<div flex="100">
+																								<md-input-container class="md-block" style="width:100%;">
+																									<label class="buyTextPadding wp_md-no-float">Description</label>
+																										<textarea ng-model="medicalInfo.medicalQuestionarrier[$index].desc"
+																										  md-maxlength="150" rows="2" md-select-on-focus
+																										  style="box-shadow: unset;" required></textarea>
+																							    </md-input-container>
+																							</div>
+																						</div>
+																					</div>
+																					<div ng-if="mQuestion.inputType=='1text'">
+																						<div class="section" layout-xs="row">
+																							<div flex="100">
+																								<md-input-container class="md-block" style="width:100%;">
+																								<label class="buyTextPadding wp_md-no-float">{{mQuestion.labelOne}}</label> <input
+																									class="mdInputContainer_input" name='diseaseInput'
+																									ng-model="member.carrierMedicalQuestion[$parent.$parent.$index].desc"
+																									autocomplete='off' maxlength='50' minlength='1'
+																									style="box-shadow: unset; color: #424242;" required /> </md-input-container>
+																							</div>
+																						</div>
+																					</div>
+																				
+																				</div>
+																			</md-list>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div ng-if="!mQuestion.inputType">
+														
+														
+														
+															
+															<div class="col span_3_of_4">
+																	<p class="small">
+																		<b>{{mQuestion.question}} </b>
+																	</p>
+																	<p class="small">{{mQuestion.description}}</p>
+																</div>
+																<div class="col span_1_of_4">
+																	<md-input-container class="md-block">
+																		<md-radio-group
+																			ng-model="medicalInfo.medicalQuestionarrier[$index].applicable"
+																			ng-init="medicalInfo.medicalQuestionarrier[$index].question=mQuestion.question;
+																					 medicalInfo.medicalQuestionarrier[$index].questionCode=mQuestion.questionCode;
+																					 medicalInfo.medicalQuestionarrier[$index].applicable=mQuestion.applicable"
+																			layout="row"> 
+																			<md-radio-button ng-value="true">Yes</md-radio-button>
+																			<md-radio-button ng-value="false">No</md-radio-button> 
+																		</md-radio-group> 
+																	</md-input-container>
+																</div>
+															
+															
+															
+															
+															
+													</div>
+												</div>
+											<div class="clearfix"></div>
+											<div class='buyOwnerBtn'>
+												<md-input-container class="md-block">
+												<button ng-disabled='medicalDetailsForm.$invalid'
+													class='md-raised md-primary bluebuybuttoncar wp_borderRadius25 wp_btnPad'
+													id="lifeMedicalNext" ng-click="submitMedicalDetails()">
+													Next<span ng-if="!$root.wordPressEnabled"> Page >></span>
+												</button>
+												</md-input-container>
+											</div>											
+											</div>
+										</form>
+									</div>
+								</div>
+													
+<!-- nom  details -->
+								<h3 class="accordionBuy buyAccordianH3 wp_proposalAccordian"
+									ng-class="{active:accordion==3}" ng-disabled="Section3Inactive">
+									<a href ng-click="accordion = 3; screenThreeStatus = true" ng-disabled="Section3Inactive"
+										class="wp_proposalAccordianText"><span
+										class="wp_proposalNumStyle">3</span><span
+										ng-if="!$root.wordPressEnabled">.</span> Nomination Details <md-button
+											ng-if="!Section3Inactive" id="lifeNomineeEditIcon"
+											class="md-icon-button editBtnBlack wp_accordianIcon wp_right"
+											aria-label="create"> <i class="material-icons">create</i>
+										</md-button> </a>
+								</h3>
+								<div class="wp_proposalBorder wp_whiteBg wp_border7 wp_pad25">
+									<div class="accordion-contentBuy"
+										ng-show="accordion==3 && screenThreeStatus">
+										<form name="nomineeDetailsForm">
+											<div class="wp_proposalPadTop50">
+												<div class='section group' layout="row" layout-xs="column"
+													layout-sm="column">
+													<div flex="25" flex-xs="100" flex-sm="100"
+														style="width: 100%;" class="alignColumn">
+														<md-input-container class="md-block">
+														<div>
+															<label class="buyTextPadding wp_md-no-float">First
+																name</label> <input
+																class="mdInputContainer_input capitializeName"
+																name='nomineeFirstName'
+																ng-model='nominationDetails.firstName'
+																autocomplete='off' maxlength='35' minlength='1'
+																ng-pattern='/^[a-zA-Z ]*$/' required md-no-asterisk
+																capitalize-first />
+															<div
+																ng-if="nomineeDetailsForm.nomineeFirstName.$error.required"
+																style="color: red;">This is required.</div>
+															<div
+																ng-messages="nomineeDetailsForm.nomineeFirstName.$error"
+																ng-if="nomineeDetailsForm.nomineeFirstName.$touched">
+																<!-- <div style="color: red" ng-message="required">This is required</div> -->
+																<div style="color: red" ng-message="pattern">Enter
+																	valid nominee first name</div>
+															</div>
+														</div>
+														</md-input-container>
+													</div>
+													<div flex="25" flex-xs="100" flex-sm="100"
+														style="width: 100%;" class="alignColumn">
+														<md-input-container class="md-block">
+														<div>
+															<label class="buyTextPadding wp_md-no-float">Last
+																name</label> <input
+																class="mdInputContainer_input capitializeName"
+																name='nomineeLastName'
+																ng-model='nominationDetails.lastName' autocomplete='off'
+																maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z ]*$/'
+																required md-no-asterisk capitalize-first />
+															<div
+																ng-if="nomineeDetailsForm.nomineeLastName.$error.required"
+																style="color: red;">This is required.</div>
+															<div
+																ng-messages="nomineeDetailsForm.nomineeLastName.$error"
+																ng-if="nomineeDetailsForm.nomineeLastName.$touched">
+																<!-- <div style="color: red" ng-message="required">This is required</div> -->
+																<div style="color: red" ng-message="pattern">Enter
+																	valid nominee last name</div>
+															</div>
+														</div>
+													</div>
+
+													<div flex="25" flex-xs="100" style="width: 100%;"
+														class="alignColumn">
+														<md-input-container class="md-block">
+														<label class="buyTextPadding wp_md-no-float">{{globalLabel.applicationLabels.life.dateOfBirth}}</label>
+														<input class="newDatepickerBorder" hasDatepicker
+															ng-model="nominationDetails.dateOfBirth"
+															ng-change="validateNomineeDateOfBirth()"
+															name='dateofbirth' p365-date-picker="nomineeDOBOptions"
+															required md-no-asterisk />
+																													
+															<div ng-show="nomineeDateOfBirthMinLimit">
+																<div style="color: red" >
+																	Should be more than 18 years
+	
+																</div>
+
+														<div ng-messages="nomineeDetailsForm.dateofbirth.$error"
+															ng-if="nomineeDetailsForm.dateofbirth.$touched">
+															<div style="color: red" ng-message="required">This
+																is required. dd/mm/yyyy format</div>
+														</div>
+
+														
+														</div>
+														</md-input-container>
+													</div>
+
+
+													<div flex="25" style="width: 100%;" class="alignColumn">
+														<md-input-container class="md-block">
+														<label class="buynowSelect wp_md-no-float">Relation
+															with Proposer</label> <md-select name="type"
+															ng-model="nominationDetails.proposerRelationship"
+															class="mdInputContainer_input"
+															ng-change="updateSalutation(nominationDetails.proposerRelationship)" required>
+														<md-option ng-value="relationList.relationNominee"
+															ng-repeat="relationList in nomineeRelList">{{relationList.relationNominee}}</md-option>
+														</md-select> </md-input-container>
+													</div>
+
+												</div>
+												<div ng-if='nominationDetails.appointeeStatus'>
+													<div class='orangetitle magintop10'>
+														Appointee Details <img
+															src='{{$root.wp_path}}img/icons/info.png'
+															style='display: inline-block !important'>&nbsp;
+														Appoint a guardian to receive the claim benefits on behalf
+														of the minor nominee
+													</div>
+													<div class='section group' layout="row" layout-xs="column"
+														layout-sm="column">
+														<div flex="25" flex-xs="100" flex-sm="100"
+															style="width: 100%;" class="alignColumn">
+															<md-input-container class="md-block">
+															<div>
+																<label class="buyTextPadding wp_md-no-float">First
+																	name</label> <input
+																	class="mdInputContainer_input capitializeName"
+																	name='appointeeFirstName'
+																	ng-model='nominationDetails.appointeeDetails.firstName'
+																	autocomplete='off' maxlength='35' minlength='1'
+																	ng-pattern='/^[a-zA-Z ]*$/' required md-no-asterisk
+																	capitalize-first />
+																<div
+																	ng-if="nomineeDetailsForm.appointeeFirstName.$error.required"
+																	style="color: red;">This is required.</div>
+																<div
+																	ng-messages="nomineeDetailsForm.appointeeFirstName.$error"
+																	ng-if="nomineeDetailsForm.appointeeFirstName.$touched">
+																	<!-- <div style="color: red" ng-message="required">This is required</div> -->
+																	<div style="color: red" ng-message="pattern">Enter
+																		valid nominee First name</div>
+																</div>
+															</div>
+															</md-input-container>
+														</div>
+														<div flex="25" flex-xs="100" flex-sm="100"
+															style="width: 100%;" class="alignColumn">
+															<md-input-container class="md-block">
+															<div class="">
+																<label class="buyTextPadding wp_md-no-float">Last
+																	name</label> <input
+																	class="mdInputContainer_input capitializeName"
+																	name='appointeeLastName'
+																	ng-model='nominationDetails.appointeeDetails.lastName' autocomplete='off'
+																	maxlength='35' minlength='1'
+																	ng-pattern='/^[a-zA-Z ]*$/' required md-no-asterisk
+																	capitalize-first />
+																<div
+																	ng-if="nomineeDetailsForm.appointeeLastName.$error.required"
+																	style="color: red;">This is required.</div>
+																<div
+																	ng-messages="nomineeDetailsForm.appointeeLastName.$error"
+																	ng-if="nomineeDetailsForm.appointeeLastName.$touched">
+																	<!-- <div style="color: red" ng-message="required">This is required</div> -->
+																	<div style="color: red" ng-message="pattern">Enter
+																		valid nominee last name</div>
+																</div>
+															</div>
+														</div>
+														<div flex="50" flex-xs="100" flex-xs="100"
+															style="width: 100%;" class="alignColumn">
+															<md-input-container class="md-block">
+															<label class="buyTextPadding wp_md-no-float">{{globalLabel.applicationLabels.life.dateOfBirth}}</label>
+															<input class="newDatepickerBorder" type="text"
+																name='date1' ng-change="calculateAppointeeAge()"
+																ng-model="nominationDetails.appointeeDetails.dateOfBirth"
+																p365-date-picker="appointeeDOBOptions" required
+																md-no-asterisk />
+															<div ng-if="nomineeDetailsForm.date1.$error.required"
+																style="color: red;">This is required.</div>
+															<div ng-messages="nomineeDetailsForm.date1.$error"
+																ng-if="nomineeDetailsForm.date1.$touched">
+																<!-- <div style="color: red" ng-message="required">This is
+													required</div> -->
+																<div style="color: red" ng-message="pattern">Enter
+																	valid date</div>
+															</div>
+															</md-input-container>
+														</div>
+														<div flex="25" style="width: 100%;" class="alignColumn">
+															<md-input-container class="md-block">
+															<label class="buyTextPadding wp_md-no-float">Relation
+																with Proposer</label> <md-select name="appointeeRelation1"
+																ng-model="nominationDetails.appointeeDetails.appointeeRelation"
+																class="mdInputContainer_input"
+																ng-change="changeAppointeeRelation()" required>
+															<md-option ng-value="relationList.relationAppointee"
+																ng-repeat="relationList in appointeeRelList">{{relationList.relationAppointee}}</md-option>
+															</md-select> </md-input-container>
+														</div>
+
+													</div>
+												</div>
+												
+
+											</div>
+											<div class="clearfix"></div>
+											<div class='buyOwnerBtn'>
+
+												<!-- <md-input-container class="md-block">
+												<button ng-disabled="nomineeDetailsForm.$invalid || nomineeDateOfBirthMinLimit"
+													class='md-raised md-primary bluebuybuttoncar wp_borderRadius25 wp_btnPad'
+													id="lifeMedicalNext" ng-click="submitNomineeDetails()">
+													Next<span ng-if="!$root.wordPressEnabled"> Page >></span>
+												</button>
+												</md-input-container> -->
+
+												<div class='btn-group btn-group' data-toggle='buttons'
+												style="font-size: 14px;">
+												<md-input-container class="md-block">
+												<md-checkbox class="blackAddon resize"
+													ng-model="declartionDetails.accepted" name='add' required
+													md-no-asterisk>
+												<p style="text-align: left;">I Confirm that the
+													information provided above is true. I am also aware of the
+													impact on claims and other benefits of the new insurance
+													policy due to false information. I authorize Policies365
+													to share these details with insurance companies and
+													represent me with insurer for any insurance needs.</p>
+												</md-checkbox></md-input-container>
+											</div>
+	
+											<div class='buyOwnerBtn buyBtnAlign'>
+												<md-input-container class="md-block">
+												<button id="life1EditVehicleDetails"
+													ng-if="!previousPolicyStatus"
+													class='buyEdit cancelbuybuttoncar wp_borderRadius25 wp_btnPad'
+													ng-click="editNomineeInfo()">
+													<span ng-if="!$root.wordPressEnabled"> << </span> Previous
+													Page
+												</button>
+												<button id="lifeNomineePrevious"
+													class='buyEdit cancelbuybuttoncar wp_borderRadius25 wp_btnPad'
+													ng-click="editPesonalInfo()">
+													<span ng-if="!$root.wordPressEnabled"> << </span> Previous
+													Page
+												</button>
+												<button id="lifePayment" ng-if="$root.baseEnvEnabled && $root.wordPressEnabled "
+													ng-disabled='nomineeDetailsForm.$invalid || !proceedPaymentStatus'
+													class='md-raised md-primary bluebuybuttoncar wp_borderRadius25'
+													ng-click="showAuthenticateForm()">
+													Make payment<span ng-if="!$root.wordPressEnabled">
+														>></span>
+												</button>
+												
+												<button id="lifePayment" ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled"
+													ng-disabled='nomineeDetailsForm.$invalid || !proceedPaymentStatus'
+													class='md-raised md-primary bluebuybuttoncar wp_borderRadius25'
+													ng-click="submitProposalData()">Submit Proposal</button>
+												</md-input-container>
+											
+											
+											
+											</div>
+
+
+
+											</div>	
+										</form>
+									</div>
+
+
+									
+
+								</div>
+
+<!-- previous policy   details -->
+
+<!-- 
+								<h3 ng-show="previousPolicyStatus"
+								class="accordionBuy buyAccordianH3 wp_proposalAccordian wp_proposalAccordian"
+								ng-class="{active:accordion==4}" ng-disabled="Section4Inactive">
+								<a href ng-click="accordion = 4 ; screenFourStatus =true" ng-disabled="Section4Inactive"
+									class="wp_proposalAccordianText"><span
+									class="wp_proposalNumStyle">4</span><span
+									ng-if="!$root.wordPressEnabled">.</span> Previous Policy
+									Details <md-button id="carPrevPolicyEditIcon"
+										class="md-icon-button editBtnBlack wp_right wp_accordianIcon"
+										ng-if="!Section4Inactive" aria-label="create"> <i
+										class="material-icons">create</i> </md-button> </a>
+							</h3> -->
+
+							<!-- <div class="wp_proposalBorder wp_whiteBg wp_border7 wp_pad25"
+								ng-show="previousPolicyStatus">
+								<div  class="accordion-contentBuy"
+									ng-show="accordion == 4 && screenFourStatus">
+									<form name="prevPolicyDetailsForm">
+										<div class="wp_proposalPadTop50">
+											<div class='section group' layout="row" layout-xs="column"
+												layout-sm="column">
+												 <div flex="33" flex-xs="100" flex-sm="100"
+													style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div>
+														<label class="buyTextPadding wp_md-no-float">Previous
+															Policy Number</label> <input class="mdInputContainer_input"
+															name='previousPolicyNumber'
+															ng-model='previouspolicyobj.policyNumber'
+															autocomplete='off' maxlength='35' minlength='1'
+															ng-pattern='/^[a-zA-Z0-9-/_]*$/'  md-no-asterisk
+															capitalize />
+														<div
+															ng-if="prevPolicyDetailsForm.previousPolicyNumber.$error.required"
+															style="color: red;">This is required.</div>
+														<div
+															ng-messages="prevPolicyDetailsForm.previousPolicyNumber.$error"
+															ng-if="prevPolicyDetailsForm.previousPolicyNumber.$touched">
+															<div style="color: red" ng-message="pattern">Enter
+																valid policy number</div>
+															<div style="color: red" ng-message="maxlength">35
+																characters as max length</div>
+														</div>
+													</div>
+													</md-input-container>
+												</div> 
+												 <div flex="33" flex-xs="100" flex-sm="100"
+													style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<label class="buynowSelect wp_md-no-float">Previous
+														Policy Insurer Name</label> <md-select
+														name="previousPolicyInsurerName"
+														class="mdInputContainer_input"
+														ng-model-options="{trackBy: '$value.carrierName'}"
+														ng-model="previouspolicyobj.insurerName"
+														ng-change="changePrevInsurer()"  md-no-asterisk>
+													<md-option ng-value="carrier"
+														ng-repeat="carrier in carrierList">
+													{{carrier.carrierName}}</md-option></md-select>
+													<div
+														ng-if="prevPolicyDetailsForm.previousPolicyInsurerName.$error.required"
+														style="color: red;">This is required.</div>
+													<div
+														ng-messages="prevPolicyDetailsForm.previousPolicyInsurerName.$error"
+														ng-if="prevPolicyDetailsForm.previousPolicyInsurerName.$touched">
+													</div>
+
+													</md-input-container>
+												</div> 
+											
+											</div>
+											
+
+										
+
+
+
+
+										</div>
+									</form>
+								</div>
+
+
+
+							
+
+
+							</div> -->
+
+<!-- previous policy   details END  -->
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Enter OTP End -->
+<modal-dialog show='modalOTP' width='500px' height='auto'
+	class="ng-hide">
+<div class='ng-modal-close wp_modalClose' ng-click='hideModal()'
+	ng-if="$root.wordPressEnabled">
+	<i class="material-icons">close</i>
+</div>
+<form name="authenticateForm">
+
+	<div class="modalHeader wp_noBluebackground wp_noBoxShadow">
+		<div class="blueBackground one-edge-shadow wp_noBoxShadow" style=""
+			layout="row">
+			<div flex="85">
+				<h2 class="white popupHeading wp_popupHeading wp_OTPTitleFont">
+					{{globalLabel.applicationLabels.login.OTPTemplateHeader}}</span>
+				</h2>
+			</div>
+			<div class='ng-modal-close' ng-click='hideModal()'
+				style="color: #fff;" flex="15">
+				<i class="material-icons">close</i>
+			</div>
+		</div>
+	</div>
+
+	<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+		<div class="fullShadow resultBg familyPopup wp_signinFamilyInnerPopup"
+			style="margin-bottom: 0px !important;">
+			<div class="popupTableHealth popupPadding" layout="row"
+				style="padding: 3% 0% 0% 0% !important;">
+				<div flex="100" style="text-align: center; padding: 1% 0%;">
+					<b>{{globalLabel.applicationLabels.login.enterOTPCaption}}</b>
+
+				</div>
+			</div>
+			<md-input-container class="md-block">
+			<div class="pad10">
+				<div flex="100">
+					<input name="mobileOTP" ng-model="authenticate.enteredOTP"
+						autocomplete="off" ng-pattern="/\d{6}/" maxlength="6"
+						minlength="6" class="signBoxS
+						
+						hadow"
+						style="background: transparent !important; text-align: center;"
+						required />
+
+				</div>
+			</div>
+			</md-input-container>
+			<div style="color: red; text-align: center; margin-bottom: 1%;">{{invalidOTPError}}</div>
+			<div style="color: green; text-align: center; margin-bottom: 1%;">{{globalLabel.validationMessages.otpValidPeriod}}</div>
+		</div>
+
+	</div>
+	<div class="center">
+		<button type="submit" class="bluebutton" id="carProceedForPayment"
+			ng-disabled="authenticateForm.$invalid"
+			ng-click="proceedForPayment()">Submit</button>
+		<button type="button" id="carCancelPaymentProcess" class="bluebutton"
+			ng-if="!$root.wordPressEnabled" ng-click="hideModal()">Cancel</button>
+	</div>
+	<div class="pad10 center">
+		<a ng-click="resendOTP()" id="carBuyResendOTP">Resend OTP</a>
+	</div>
+</form>
+</modal-dialog>
+<!-- OTP Error Popup -->
+
+<!-- OTP Error Popup -->
+<modal-dialog show='modalOTPError' width='500px' height='auto'
+	class="ng-hide">
+<div class="modalHeader">
+	<div class="blueBackground one-edge-shadow" style="padding: 3%;"
+		layout="row">
+		<h2 class="white popupHeading"></h2>
+	</div>
+</div>
+
+<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+
+	<div class="" style="margin-bottom: 0px !important;">
+		<div class="popupTableHealth popupPadding" layout="row" style="">
+			<div flex="100" style="text-align: center; padding: 1% 0%;">
+				<p>{{createOTPError}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="center">
+	<button type="button" id="carCancelPaymentProcess" class="bluebutton"
+		ng-click="hideModalError()" style="padding: 7px 20px;">Ok</button>
+</div>
+</modal-dialog>
+<!-- OTP Error Popup -->
+
+<!--  -->
+<modal-dialog show='modalPropScreenError' width='500px' height='auto'
+	class="ng-hide">
+<div class="modalHeader">
+	<div class="blueBackground one-edge-shadow" style="padding: 3%;"
+		layout="row">
+		<h2 class="white popupHeading"></h2>
+	</div>
+</div>
+
+<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+
+	<div class="" style="margin-bottom: 0px !important;">
+		<div class="popupTableHealth popupPadding" layout="row" style="">
+			<div flex="100" style="text-align: center; padding: 1% 0%;">
+				<p>{{propScreenError}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="center">
+	<button type="button" id="lifeCancelPaymentProcess" class="bluebutton"
+		ng-click="redirectToQuote()" style="padding: 7px 20px;">Ok</button>
+</div>
+</modal-dialog>
+<form style="display: hidden" ng-form-commit action='' method='post'
+	name="paymentForm" novalidate>
+	<div ng-repeat="payParam in paymentServiceResponse.paramterList">
+		<input type="hidden" name="{{payParam.name}}"
+			value="{{payParam.value}}" ng-model="payParam.ngModel">
+	</div>
+</form>
+
+<!-- Proposal Id  Pop Up-->
+<form name="proposalForm">
+	<modal-dialog show='modalIPOS' width='500px' height='auto'
+		class="ng-hide">
+	<div class="modalHeader">
+		<div class="blueBackground one-edge-shadow" style="" layout="row">
+			<div class="" style="padding-top: 5px;" flex="100">
+				<h2 class="white popupHeading">Proposal Submission Confirmation</h2>
+			</div>
+		</div>
+	</div>
+	<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+		<div class="fullShadow resultBg familyPopup"
+			style="margin-bottom: 0px !important;">
+			<div flex="100" style="text-align: center; padding: 1% 0%;">
+				<b>Proposal {{responseToken.proposalId}} has been successfully
+					submitted</b>
+			</div>
+		</div>
+	</div>
+	<div class="center">
+		<button type="button" class="bluebutton" id="proposalId"
+			ng-click="hideModalIPOS()">OK</button>
+	</div>
+	</modal-dialog>
+</form>
+<script>
+$(document).ready(function(){
+  $("#demo").on("hide.bs.collapse", function(){
+    $(".btn").html('<span class="glyphicon glyphicon-collapse-down"></span>');
+  });
+  $("#demo").on("show.bs.collapse", function(){
+    $(".btn").html('<span class="glyphicon glyphicon-collapse-up"></span>');
+  });
+});
+</script>

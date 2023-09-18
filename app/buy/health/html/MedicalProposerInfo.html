@@ -1,0 +1,201 @@
+							<h3 class="accordionBuy buyAccordianH3"
+								ng-class="{active:accordion==1}">
+								<a href ng-click="accordion = 1">1. Proposer Info <md-button
+										class="md-icon-button editBtnBlack" aria-label="create">
+									<i class="material-icons">create</i> </md-button>
+								</a>
+							</h3>
+							<div class="accordion-contentBuy"
+								ng-show="accordion == 1 && screenOneStatus">
+								<form name='proposalDetailsForm'>
+									<div>
+										<!-- <div ng-bind-html="proposalDetailsTemplate" bind-html-compile></div> -->
+										<div class='section group' layout="row">
+											<div flex="50" style="width: 100%;" class="alignColumn">
+												<md-input-container class="md-block"> <!--ng-class="{ 'formError': ownerDetailsForm.OwnerfirstName.$invalid}">-->
+												<label class="buyTextPadding">First name</label> <input
+													class="mdInputContainer_input"
+													ng-change="changeFirstName()"
+													ng-model='proposerDetails.firstName' autocomplete='off'
+													maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z ]*$/'
+													required /> </md-input-container>
+											</div>
+											<div flex="50" style="width: 100%;">
+												<md-input-container class="md-block"> <label
+													class="buyTextPadding">Last name</label> <input
+													class="mdInputContainer_input"
+													ng-change="changeFirstName()"
+													ng-model='proposerDetails.lastName' autocomplete='off'
+													maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z ]*$/' />
+											</div>
+										</div>
+										<div class='section group' layout="row">
+											<div flex="50" style="width: 100%;" class="alignColumn">
+												<md-input-container class="md-block"> <!--ng-class="{ 'formError': ownerDetailsForm.OwnerfirstName.$invalid}">-->
+												<label class="buyTextPadding">Gender</label> <md-select
+													name="type" ng-model="proposerDetails.gender"
+													class="mdInputContainer_input" ng-change="changeGender()"
+													required> <md-option ng-value="gender.label"
+													ng-repeat="gender in genderType">{{gender.label}}</md-option>
+												</md-select> </md-input-container>
+												<div class="clearfix"></div>
+											</div>
+											<div flex="50" style="width: 100%;">
+												<md-input-container class="md-block"> <label
+													class="">Marital Status</label> <md-select name="type"
+													ng-model="proposerDetails.maritalStatus"
+													class="mdInputContainer_input"
+													ng-change="changeMaritalStatus()" required> <md-option
+													ng-value="maritalstatus.name"
+													ng-repeat="maritalstatus in maritalStatusType">{{maritalstatus.name}}</md-option>
+												</md-select>
+											</div>
+										</div>
+										<div class='section group' layout="row" class="alignColumn">
+											<div flex="50" style="width: 100%;">
+												<md-input-container class="md-block"> <!--ng-class="{ 'formError': ownerDetailsForm.OwnerfirstName.$invalid}">-->
+												<label class="buyTextPadding">Date of Birth</label> <md-datepicker
+													ng-model="proposerInfo.dateOfBirth"
+													ng-change="validateProposerDateOfBirth()"
+													md-placeholder="Enter date" md-open-on-focus required>
+												</md-datepicker>
+												<div style='color: red;'>{{proposerDateOfBirthError}}</div>
+												</md-input-container>
+											</div>
+											<div flex="50" style="width: 100%;">
+												<md-input-container class="md-block"> <label
+													class="buyTextPadding">PAN Number</label> <input
+													class="mdInputContainer_input"
+													ng-model='proposerDetails.panNumber' autocomplete='off'
+													maxlength='10' minlength='10' ng-change="changePancard()"
+													ng-pattern='/[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}/' />
+											</div>
+										</div>
+										<div class='section group' layout="row">
+											<div flex="50" style="width: 100%;" class="alignColumn">
+												<md-input-container class="md-block"> <!--ng-class="{ 'formError': ownerDetailsForm.OwnerfirstName.$invalid}">-->
+												<label class="">Occupation</label> <md-select name="type"
+													ng-model="proposerDetails.occupation"
+													class="mdInputContainer_input"
+													ng-change="changeOccupation()" required
+													style="margin:0px !important;"> <md-option
+													ng-value="occupation.occupation"
+													ng-repeat="occupation in occupationList">{{occupation.occupation}}</md-option>
+												</md-select> </md-input-container>
+											</div>
+											<div flex="50" style="width: 100%;">
+												<md-input-container class="md-block"> <label
+													class="buyTextPadding">Annual Income</label> <input
+													class="mdInputContainer_input"
+													ng-change="changeAnnualIncome()" name='Annual Income'
+													ng-model='proposerDetails.annualIncome' autocomplete='off'
+													maxlength='35' minlength='1' ng-pattern='/^[0-9]*$/' />
+											</div>
+										</div>
+										<h2 style="text-align: left;">
+											Proposer Contact Info
+											</h3>
+											<div class='section group' layout="row">
+												<div flex="50" style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding">Door No/Block
+															No/Block Name</label> <input class="mdInputContainer_input"
+															ng-model='proposerDetails.addressLine1'
+															autocomplete='off' maxlength='50' minlength='1'
+															ng-change="changeAddressLine1()" required />
+													</div>
+													</md-input-container>
+												</div>
+												<div flex="50" style="width: 100%;">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding">Society Name/ Street
+															Name</label> <input class="mdInputContainer_input"
+															ng-model='proposerDetails.addressLine2'
+															autocomplete='off' maxlength='50' minlength='1'
+															ng-change="changeAddressLine2()" required />
+													</div>
+												</div>
+											</div>
+											<div class='section group' layout="row">
+												<div flex="50" style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding">Pincode</label> <input
+															class="mdInputContainer_input"
+															ng-model='proposerDetails.pincode' autocomplete='off'
+															ng-change="changePincode()" ng-pattern='/[0-9]{6}/'
+															maxlength='6' minlength='6' required />
+													</div>
+													</md-input-container>
+												</div>
+												<div flex="50" style="width: 100%;">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding">Area of residence</label> <input
+															class="mdInputContainer_input"
+															ng-model='proposerDetails.area' autocomplete='off'
+															maxlength='35' ng-change="changeResidenceArea()"
+															minlength='1' required />
+													</div>
+												</div>
+											</div>
+											<div class='section group' layout="row">
+												<div flex="50" style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding">City/Town/Village</label> <input
+															class="mdInputContainer_input"
+															ng-model='proposerDetails.residencePlace'
+															autocomplete='off' maxlength='35' minlength='1'
+															ng-change="changeResidencePlace()"
+															ng-pattern='/^[A-Za-z0-9_@#./\(\)\-.,:;\+]*$/' required />
+													</div>
+													</md-input-container>
+												</div>
+												<div flex="50" style="width: 100%;">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding">State</label> <input
+															class="mdInputContainer_input" ng-change="changeState()"
+															ng-model='proposerDetails.state' autocomplete='off'
+															maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z. ]*$/'
+															required />
+													</div>
+												</div>
+											</div>
+											<div class='section group' layout="row">
+												<div flex="50" style="width: 100%;" class="alignColumn">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding">Email-ID</label> <input
+															class="mdInputContainer_input"
+															ng-pattern='/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z.]{2,5}$/'
+															autocomplete='off' maxlength='35' name='emailId'
+															ng-model='proposerDetails.emailId'
+															ng-change="changeEmailId()" required />
+													</div>
+													</md-input-container>
+												</div>
+												<div flex="50" style="width: 100%;">
+													<md-input-container class="md-block">
+													<div class="">
+														<label class="buyTextPadding">Mobile Number</label> <input
+															class="mdInputContainer_input"
+															ng-model='proposerDetails.mobileNumber'
+															autocomplete='off' ng-pattern='/[0-9]{10}/'
+															maxlength='10' minlength='10'
+															ng-change="changeMobileNumber()" required />
+													</div>
+												</div>
+											</div>
+											<div class='buyOwnerBtn'>
+												<md-input-container class="md-block"> <md-button
+													class='md-raised md-primary'
+													ng-click="submitProposerInfo()">Next Page >></md-button> </md-input-container>
+												<!--ng-disabled='proposalDetailsForm.$invalid' -->
+											</div>
+									</div>
+								</form>
+							</div>

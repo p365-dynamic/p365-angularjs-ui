@@ -1,0 +1,1491 @@
+<loading></loading>
+<!-- get quote code starts here -->
+<div class="clearfix"></div>
+<div
+	class="commonImage one-edge-shadow mobileInstantQuote wp_noBoxShadow">
+
+	<!--<h2 class="bluecolor orangeShadow" style="font-weight: bold;">
+		{{$root.instantQuoteScreenHeader}}
+		<div class="greyh">Please edit the values to personalize it
+			further</div>
+	</h2>-->
+	<div class="{{dynamicColor}}">
+		<div class="section">
+			<ng-container ng-if="!$root.wordPressEnabled">
+			<div class="col col-lg-3 angularMaterial angularTab padrightleft">
+				<div id="tabbed-nav">
+					<div class="angularTabTitle blackText">
+						<h2 style="color: #fff !important;" ng-if="$root.customEnvEnabled">
+							<span><img ng-src="{{$root.wp_path}}img/icons/1.png">Select
+								products</span>
+						</h2>
+					</div>
+					<h4 id="toggle-tab" class="toggle-tab-menu">TAB MENU</h4>
+					<ul class="tabs">
+						<li ng-repeat="tab in tabs" ng-if="!tab.flagToShow"
+							ng-class="{active:isActiveTab(tab.url), disabled: tab.disabled}"
+							ng-click="onClickTab(tab)"><span class="{{tab.className}}">
+						</span><label class="navigationLabel"><b><h4
+										class="navigationTitle">{{tab.title}}</h4></b></label></li>
+					</ul>
+
+				</div>
+			</div>
+			</ng-container>
+			<div
+				class="col col-lg-9 instantQuoteBG divForMobile pad_btm15 wp_Width100 wp_NoPad">
+				<div class="section sectionMob" ng-if="!$root.wordPressEnabled">
+					<div class="col col-lg-7 hideforMobile marginAdd">
+						<div class="pad20New">
+							<div class="angularTabTitle blackText">
+								<h2 ng-if="$root.customEnvEnabled">
+									<span><img ng-src="{{$root.wp_path}}img/icons/2.png">Confirm
+										{{inputTitle}} details</span>
+								</h2>
+							</div>
+						</div>
+					</div>
+					<div class="col col-lg-5 hideforMobile marginAdd">
+						<div class="pad20New">
+							<div class="angularTabTitle blackText">
+								<h2 ng-if="$root.customEnvEnabled">
+									<span><img ng-src="{{$root.wp_path}}img/icons/3.png">See
+										quotes</span>
+								</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="section sectionWeb">
+					<div class="col col-lg-7 showforMobile"
+						ng-if="!$root.wordPressEnabled">
+						<div class="angularTabTitle blackText showforMobile">
+							<h2 ng-if="$root.customEnvEnabled">
+								<span><img ng-src="{{$root.wp_path}}img/icons/2.png">Confirm
+									{{inputTitle}} details</span>
+							</h2>
+						</div>
+					</div>
+					<div class="col col-lg-7 middleTabInstant marginAdd wp_Section40">
+						<!-- added for wp navigation -->
+						<ng-container ng-if="$root.wordPressEnabled">
+						<div id="tabbed-nav">
+							<ul class="tabs" ng-style="width: {{tabsWidth}}">
+								<li class="" ng-repeat="tab in tabs" ng-if="!tab.flagToShow"
+									ng-class="{active:isActiveTab(tab.url), disabled: tab.disabled}"
+									ng-click="onClickTab(tab);slickConfig.method.slickGoTo(tab.tabImgId)" ng-style="width: {{tabs_li_width}};">
+									<span class="{{tab.className}}"> 
+										<label class="navigationLabel"><b>
+											<h4	class="navigationTitle noLetterSpacing">{{tab.title}}</h4>
+										</b></label>
+									</span>
+								</li>
+							</ul>
+						</div>
+						<div class="clearfix"></div>
+						</ng-container>
+						<div class="">
+							<div id="mainView" class="">
+								<div class="active newWidthLabel clearfix">
+									<div ng-include="currentTab"></div>
+									<div ng-form="createLeadForm">
+										<ng-container ng-if="createLeadScreen" ng-include="leadHTML"></ng-container>
+									</div>
+									<div ng-if="$root.wordPressEnabled">
+										<md-button ng-disabled="$root.disableNextScreen" ng-if="!createLeadScreen" ng-click='toggleView()'
+											id="viewOptionAndCompare"
+											class="md-raised md-primary homeBtn wp_viewBtn"
+											style="display: block;"> <label><b>Next</b></label>
+										</md-button>
+									</div>
+									<!--  <p class="compareMsg">All prices are exclusive of GST</p>-->
+									<!-- <p class="compareMsg">Please click on "More Details & Compare" to view all product details</p> -->
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="col col-lg-5 showforMobile wp_Section60"
+						ng-if="!$root.wordPressEnabled">
+						<div class="angularTabTitle blackText showforMobile">
+							<h2 ng-if="$root.customEnvEnabled">
+								<span><img ng-src="{{$root.wp_path}}img/icons/3.png">See
+									quotes</span>
+							</h2>
+						</div>
+					</div>
+					<div
+						class="col col-lg-5 middleTabInstant instantTopPadRem wp_Section60 wp-Noflex {{dynamicInnerBg}}"
+						style="display: flex; flex-direction: column;">
+
+						<div ng-if="!displayResult">
+
+							<!-- this block of code is used to display regular slider  -->
+							<slick class="slider wp-slick" settings="slickConfig"
+								slides-to-show=1 touch-move="false" slides-to-scroll=1
+								class="slider one-time" ng-if="slickConfig1Loaded"
+								data="number1">
+							<div ng-repeat="i in number1  track by $index" style="">
+								<img ng-src="{{i.img}}" style="width: 100%;" />
+							</div>
+							</slick>
+							<!-- this block of code is used to display only single image on special day with social media links  -->
+							<!-- <div style="position: relative">
+								<img ng-src="{{wp_path}}img/HappyDiwali_p365_2018.jpg"
+									style="width: 100%;" />
+								<div class="socialPlaceContainer">
+									<div class="followMsg">
+										<h2 class="msgColor msg">Follow us on</h2>
+									</div>
+									<div layout="row" class="socialPlaceNewTop socialPlaceNew">
+										<a href="https://www.facebook.com/policies365/"><i
+											class="fa fa-facebook"></i></a> <a
+											href="https://twitter.com/policies365"><i
+											class="fa fa-twitter"></i></a> <a
+											href="https://www.linkedin.com/company/policies365-insurance-web-aggregators-pvt.-ltd?trk=top_nav_home"><i
+											class="fa fa-linkedin" ></i></a>
+									</div>
+								</div>
+							</div> -->
+
+
+						</div>
+						<!--  end -->
+						<!--  start -->
+						<div ng-if="displayResult">
+							<div class="">
+								<div class="forTooltip">
+									<!-- Instant Summary Section -->
+									<div
+										ng-if="$root.instantQuoteSummaryStatus && $root.customEnvEnabled && !$root.wordPressEnabled"
+										style="margin-top: auto">
+										<md-button ng-click='toggleView()' id="viewOptionAndCompare"
+											class="md-raised md-primary homeBtn"
+											style="display: block; background-color: #2991ea;">
+										<label><b>{{globalLabel.applicationLabels.common.viewOptionAndCompare}}</b></label>
+										</md-button>
+										<!--  <p class="compareMsg">All prices are exclusive of GST</p>-->
+										<!-- <p class="compareMsg">Please click on "More Details & Compare" to view all product details</p> -->
+									</div>
+									<div class="divForMobile"
+										ng-if="$root.instantQuoteSummaryStatus">
+										<div
+											ng-if="$root.resultCarrierId.length > 6  && !$root.wordPressEnabled">
+											<div class="section">
+												<div class="col col-sm-4"></div>
+												<div class="col col-sm-4 zebraBlue">
+													<div class="textMid srollP" style="text-align: center">
+														<i class="material-icons"
+															onMouseover="scrollv.scrollContent('up')"
+															onMouseout="scrollv.stopScroll()"
+															style="font-size: 35px;">keyboard_arrow_up</i>
+													</div>
+												</div>
+												<div class="col col-sm-4"></div>
+											</div>
+											<div class="section instantQuoteDisplay instantFlex">
+												<div class="col col-sm-4">
+													<md-list class="resultListPad"> <md-list-item
+														class="md-1-line">
+													<div class="md-list-item-text">
+														<!-- <span class="instantHeadTitle"><b
+													style="font-size: 1.3em !important;">{{$root.calculatedQuotesLength}}</b></span> -->
+														<span class="instantHeadTitle">Quote</span>
+													</div>
+													</md-list-item> </md-list>
+												</div>
+												<div class="col col-sm-4 zebraBlue">
+													<md-list class="resultListPad"> <md-list-item
+														class="md-1-line">
+													<div class="md-list-item-text"
+														ng-if="!$root.resultCarrierId[0].isMonthlyPremium">
+														<span class="instantHeadTitle">Annual Premium</span>
+													</div>
+													<div class="md-list-item-text"
+														ng-if="$root.resultCarrierId[0].isMonthlyPremium">
+														<span class="instantHeadTitle"> Monthly Premium</span>
+													</div>
+													</md-list-item> </md-list>
+												</div>
+												<div class="col col-sm-4 hideforMobile">
+													<md-list class="resultListPad"> <md-list-item
+														class="md-1-line">
+													<div class="md-list-item-text">
+														<span class="instantHeadTitle">Service Rating</span>
+													</div>
+													</md-list-item> </md-list>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+											<!-- <md-divider></md-divider> -->
+											<div id="scrollable-v" class="instant_scrollable section">
+												<div class="belt">
+													<div ng-repeat="display in $root.resultCarrierId"
+														ng-if="display.annualPremium > 0">
+														<div
+															class="section instantQuoteDisplay instantFlex flexBody">
+															<div class="col col-sm-4">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text">
+																	<img
+																		ng-src="{{$root.wp_path}}img\clogo\{{display.id}}.png"
+																		data-toggle="tooltip" title="{{display.name}}"
+																		data-placement="right" tooltip>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div class="col col-sm-4 zebraBlue">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text">
+																	<b class="instantPremium">&#8377;
+																		{{display.annualPremium | number:0 | regexINR}}</b>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div class="col col-sm-4 hideforMobile classForTooltip">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text"
+																	ng-if="display.claimsRating>0">
+																	<ng-rate-it ng-model="display.claimsRating"
+																		data-placement="top" data-toggle="tooltip"
+																		title="{{tooltipContent.serviceRating}}" tooltip
+																		resetable="false" min="0" max="5" step="1"
+																		read-only="true"></ng-rate-it>
+																	<!-- &nbsp;&nbsp;<span style="position: relative; top: 4px">{{display.claimsRating
+																| number:1}}</span> -->
+																</div>
+																<div class="md-list-item-text"
+																	ng-if="display.claimsRating==0.0">
+																	<span style="position: relative; top: 4px"><b
+																		data-placement="top" data-toggle="tooltip"
+																		title="{{tooltipContent.NATooltip}}" tooltip>NA</b></span>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div class="clearfix"></div>
+														</div>
+														<md-divider></md-divider>
+													</div>
+												</div>
+											</div>
+
+											<div class="section">
+												<div class="col col-sm-4"></div>
+												<div class="col col-sm-4">
+													<div class="textMid srollP" style="text-align: center">
+														<i class="material-icons"
+															onMouseover="scrollv.scrollContent('down')"
+															onMouseout="scrollv.stopScroll()"
+															style="font-size: 35px;">keyboard_arrow_down</i>
+													</div>
+												</div>
+												<div class="col col-sm-4"></div>
+											</div>
+										</div>
+
+										<div
+											ng-if="$root.resultCarrierId.length <= 6 && !$root.wordPressEnabled">
+											<div class="section instantQuoteDisplay instantFlex">
+												<div class="col col-sm-4">
+													<md-list class="resultListPad"> <md-list-item
+														class="md-1-line">
+													<div class="md-list-item-text">
+														<!-- <span class="instantHeadTitle"><b
+													style="font-size: 18px !important;">{{$root.calculatedQuotesLength}}</b></span> -->
+														<span class="instantHeadTitle">Quotes</span>
+													</div>
+													</md-list-item> </md-list>
+												</div>
+												<div class="col col-sm-4 zebraBlue">
+													<md-list class="resultListPad"> <md-list-item
+														class="md-1-line">
+													<div class="md-list-item-text"
+														ng-if="!$root.resultCarrierId[0].isMonthlyPremium">
+														<span class="instantHeadTitle">Premium</span>
+													</div>
+													<div class="md-list-item-text"
+														ng-if="$root.resultCarrierId[0].isMonthlyPremium">
+														<span class="instantHeadTitle"> Monthly Premium</span>
+													</div>
+													</md-list-item> </md-list>
+												</div>
+												<div class="col col-sm-4 hideforMobile">
+													<md-list class="resultListPad"> <md-list-item
+														class="md-1-line">
+													<div class="md-list-item-text">
+														<span class="instantHeadTitle">Service Rating</span>
+													</div>
+													</md-list-item> </md-list>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+											<md-divider></md-divider>
+											<div id="" class="section">
+												<div class="">
+													<div ng-repeat="display in $root.resultCarrierId"
+														ng-if="display.annualPremium > 0">
+
+														<div
+															class="section instantQuoteDisplay instantFlex flexBody">
+															<div class="col col-sm-4">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text classForTooltip ">
+																	<img
+																		ng-src="{{$root.wp_path}}img\clogo\{{display.id}}.png"
+																		width="90%" data-toggle="tooltip"
+																		title="{{display.name}}" data-placement="right"
+																		tooltip>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div class="col col-sm-4 zebraBlue">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text">
+																	<b class="instantPremium">&#8377;
+																		{{display.annualPremium | number:0 | regexINR}}</b>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div class="col col-sm-4 hideforMobile classForTooltip">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text"
+																	ng-if="display.claimsRating>0">
+																	<ng-rate-it ng-model="display.claimsRating"
+																		data-placement="top" data-toggle="tooltip"
+																		title="{{tooltipContent.serviceRating}}" tooltip
+																		resetable="false" min="0" max="5" step="1"
+																		read-only="true"></ng-rate-it>
+																	<!-- 	&nbsp;&nbsp;<span style="position: relative; top: 4px">{{display.claimsRating
+																| number:1}}</span> -->
+																</div>
+																<div class="md-list-item-text"
+																	ng-if="display.claimsRating==0.0">
+																	<span style="position: relative; top: 4px"><b
+																		data-placement="top" data-toggle="tooltip"
+																		title="{{tooltipContent.NATooltip}}" tooltip>NA</b></span>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div class="clearfix"></div>
+														</div>
+
+														<md-divider></md-divider>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- <p style="padding: 1%"></p> -->
+
+										<!-- for wordpress -->
+										<div ng-if="$root.wordPressEnabled">
+											<div class="section wp_Width100">
+												<div class="textMid srollP wp_loader">
+													<md-progress-circular ng-if="enabledProgressLoader"
+														md-mode="indeterminate"></md-progress-circular>
+												</div>
+												<div class="clear"></div>
+											</div>
+											<div class="clear"></div>
+											<!-- loader End -->
+											<div class="section">
+												<div class="col col-sm-4"></div>
+												<div class="col col-sm-4 zebraBlue">
+													<div ng-if="$root.resultCarrierId.length > 6"
+														class="textMid srollP" style="text-align: center">
+														<i class="material-icons"
+															onMouseover="scrollv.scrollContent('up')"
+															onMouseout="scrollv.stopScroll()"
+															style="font-size: 35px;">keyboard_arrow_up</i>
+													</div>
+												</div>
+												<div class="col col-sm-4"></div>
+											</div>
+
+											<div class="divForMobile">
+												<div id="scrollable-v"
+													class="instant_scrollable section hideforMobile">
+													<div class="belt quotePad">
+														<div class="block">
+															<div class="quoteMenus"
+																ng-repeat="display in $root.resultCarrierId"
+																ng-if="display.annualPremium > 0">
+																<div class="quoteWhite">
+																	<div class="Pad_10">
+																		<div layout="row" layout-xs="column"
+																			layout-sm="column" layout-md="column">
+																			<div flex="50" flex-xs="100" flex-sm="100"
+																				flex-md="100" class="wp_Quotes">
+																				<img
+																					ng-src="{{$root.wp_path}}img\clogo\{{display.id}}.png"
+																					data-toggle="tooltip" title="{{display.name}}"
+																					data-placement="right" tooltip>
+																			</div>
+																			<div flex="50" flex-xs="100" flex-sm="100"
+																				flex-md="100" class="wp_Quotes">
+																				<div class="quoteServiceRate_15">Service
+																					Rating</div>
+																				<div class="md-list-item-text"
+																					ng-if="display.claimsRating>0">
+																					<ng-rate-it ng-model="display.claimsRating"
+																						data-placement="top" data-toggle="tooltip"
+																						title="{{tooltipContent.serviceRating}}" tooltip
+																						resetable="false" min="0" max="5" step="1"
+																						read-only="true"></ng-rate-it>
+																					<!-- &nbsp;&nbsp;
+																		 <span style="position: relative; top: 4px">{{display.claimsRating
+																| number:1}}</span> -->
+																				</div>
+																				<div class="md-list-item-text"
+																					ng-if="display.claimsRating==0.0">
+																					<span style="position: relative; top: 4px"><b
+																						data-placement="top" data-toggle="tooltip"
+																						title="{{tooltipContent.NATooltip}}" tooltip>NA</b></span>
+																				</div>
+																			</div>
+																		</div>
+																		<md-divider></md-divider>
+																		<div layout="row" class="quotePadTB">
+																			<div flex="50" class="wp_Quotes">
+																				<div class="quoteIDV instantPremium"
+																					ng-if="(display.businessLineId=='2'||display.businessLineId=='3')">
+																					&#8377; {{display.insuredDeclareValue | number:0|regexINR}}</div>
+																				
+																					<div class="quoteIDV instantPremium"
+																					ng-if="(display.businessLineId=='6')">
+																					&#8377; {{display.sumInsured | number:0 | regexINR}}
+																					
+																					
+																				</div>
+																				<div class="quoteIDV instantPremium"
+																					ng-if="(display.businessLineId=='8')">
+																					&#8377; {{display.sumInsured | number:0 | regexINR}}
+																					
+																					
+																				</div>
+																				
+																				<div class="quoteIDV instantPremium"
+																					ng-if="(display.businessLineId=='7')">
+																					&#8377; {{display.sumInsured | number:0 | regexINR}}
+																					
+																					
+																				</div>
+																				
+																				<div class="quoteIDV instantPremium"
+																					ng-if="(display.businessLineId=='1') || (display.businessLineId=='4')">
+																					&#8377; {{display.sumInsured | number:0 | regexINR}}</div>
+     																			<div class="quoteIDV instantPremium" ng-if="(display.businessLineId=='5')">
+																					<span ng-bind-html="display.sumInsuredCurrencySymbol"
+																						bind-html-compile="display.sumInsuredCurrencySymbol"></span>
+																					{{display.sumInsured | number:0 | regexINR}}
+																				</div>
+
+																				<div class="quoteText_12 IDVQuoteText">
+																					<span
+																						ng-if="(display.businessLineId=='2'||display.businessLineId=='3')"
+																						class="instantHeadTitle">Insured Declared
+																						Value</span> <span ng-if="display.businessLineId=='1' || display.businessLineId=='6'||display.businessLineId=='8' || display.businessLineId=='7'"
+																						class="instantHeadTitle">Sum Assured</span> <span
+																						ng-if="display.businessLineId=='4'"
+																						class="instantHeadTitle">Hospitalization
+																						limit</span> <span ng-if="display.businessLineId=='5' " 
+																						class="instantHeadTitle">Sum Insured</span>
+																				</div>
+																			</div>
+																			<div flex="50" class="wp_Quotes">
+																				<div class="instantPremium quotePremium">
+																					&#8377; {{display.annualPremium | number:0 |
+																					regexINR}}</div>
+																				<div class="quoteText_12 premiumQuoteText">Premium</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="clearfix"></div>
+														</div>
+													</div>
+												</div>
+												<!-- Quote Screen for mobile -->
+												<div id="scrollable-v"
+													class="instant_scrollable section showforMobile">
+													<div class="block quotePad">
+														<div class="quoteMenus"
+															ng-repeat="display in $root.resultCarrierId"
+															ng-if="display.annualPremium > 0">
+															<div class="quoteWhite Pad_10">
+																<div class="">
+																	<div layout="row" layout-xs="column" layout-sm="column">
+																		<div flex="50" flex-xs="100" flex-sm="100"
+																			flex-md="100" class="wp_Quotes">
+																			<img
+																				ng-src="{{$root.wp_path}}img\clogo\{{display.id}}.png"
+																				data-toggle="tooltip" title="{{display.name}}"
+																				data-placement="right" tooltip>
+																		</div>
+																		<div flex="50" flex-xs="100" flex-sm="100"
+																			flex-md="100" class="wp_Quotes">
+																			<div class="quoteServiceRate_15">Service Rating</div>
+																			<div class="md-list-item-text"
+																				ng-if="display.claimsRating>0">
+																				<ng-rate-it ng-model="display.claimsRating"
+																					data-placement="top" data-toggle="tooltip"
+																					title="{{tooltipContent.serviceRating}}" tooltip
+																					resetable="false" min="0" max="5" step="1"
+																					read-only="true"></ng-rate-it>
+																			</div>
+																			<div class="md-list-item-text"
+																				ng-if="display.claimsRating==0.0">
+																				<span style="position: relative; top: 4px"><b
+																					data-placement="top" data-toggle="tooltip"
+																					title="{{tooltipContent.NATooltip}}" tooltip>NA</b></span>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="clearfix"></div>
+																	<md-divider></md-divider>
+																	<div layout="row" class="quotePadTB">
+																		<div flex="50" class="wp_Quotes">
+																			<div class="quoteIDV instantPremium"
+																				ng-if="(display.businessLineId=='2'||display.businessLineId=='3')">
+																				&#8377; {{display.insuredDeclareValue | number:0
+																				|regexINR}}</div>
+																			<div class="quoteIDV instantPremium"
+																				ng-if="(display.businessLineId=='1') || (display.businessLineId=='4')">
+																				&#8377; {{display.sumInsured | number:0 | regexINR}}
+																			</div>
+																			<div class="quoteIDV instantPremium"
+																				ng-if="(display.businessLineId=='6')">
+																				&#8377; {{display.sumInsured | number:0 | regexINR}}
+
+																				
+																			</div>
+																			<div class="quoteIDV instantPremium"
+																				ng-if="(display.businessLineId=='8')">
+																				&#8377; {{display.sumInsured | number:0 | regexINR}}
+
+																				
+																			</div>
+																		
+	                                                                         <div class="quoteIDV instantPremium"
+																				ng-if="(display.businessLineId=='7')">
+																				&#8377; {{display.sumInsured | number:0 | regexINR}}
+
+																				
+																			</div>
+	                                                                         
+																			<div class="quoteIDV instantPremium"
+																				ng-if="(display.businessLineId=='5')">
+																				<span
+																					ng-bind-html="display.sumInsuredCurrencySymbol"
+																					bind-html-compile="display.sumInsuredCurrencySymbol"></span>
+																				{{display.sumInsured | number:0 | regexINR}}
+																			</div>
+																			
+																			<div class="quoteText_12 IDVQuoteText">
+																				<span
+																					ng-if="(display.businessLineId=='2'||display.businessLineId=='3')"
+																					class="instantHeadTitle">Insured Declared
+																					Value</span> <span ng-if="display.businessLineId=='1' || display.businessLineId=='6'"
+																					class="instantHeadTitle">Sum Assured</span> <span
+																					ng-if="display.businessLineId=='4'"
+																					class="instantHeadTitle">Hospitalization
+																					limit</span> <span ng-if="display.businessLineId=='5'"
+																					class="instantHeadTitle">Sum Insured</span>
+																			</div>
+																			
+																		</div>
+																		<div flex="50" class="wp_Quotes">
+																			<div class="instantPremium quotePremium">
+																				&#8377; {{display.annualPremium | number:0 |
+																				regexINR}}</div>
+																			<div class="quoteText_12 premiumQuoteText">Premium</div>
+																		</div>
+																		{{}}
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="clearfix"></div>
+													</div>
+												</div>
+
+												<!-- Quote Screen for Mobile -->
+											</div>
+
+
+											<!-- <div ng-repeat="display in $root.resultCarrierId"
+														ng-if="display.annualPremium > 0" class="wp_Quotes">
+														for wordpress
+														<div ng-if="$root.wordPressEnabled">
+															<div class="section instantQuoteDisplay instantFlex">
+																<div class="col col-sm-4 wp_respNoPadLeft wp_respNoPadRight">
+																	<md-list class="resultListPad wp_resultListPad">
+																	<md-list-item class="md-1-line">
+																	<div class="md-list-item-text">
+																		<span class="instantHeadTitle"><b
+													style="font-size: 18px !important;">{{$root.calculatedQuotesLength}}</b></span>
+																		<span class="instantHeadTitle">Quote</span>
+																	</div>
+																	</md-list-item> </md-list>
+																</div>
+																<div class="col col-sm-4 wp_respNoPadLeft wp_respNoPadRight">
+																	<md-list class="resultListPad wp_resultListPad">
+																	<md-list-item class="md-1-line">
+																	<div class="md-list-item-text">
+																		<span class="instantHeadTitle"><b
+													style="font-size: 1.3em !important;">{{$root.calculatedQuotesLength}}</b></span>
+																		<span
+																			ng-if="(display.businessLineId=='2'||display.businessLineId=='3')"
+																			class="instantHeadTitle">Insured Declared Value</span> <span
+																			ng-if="display.businessLineId=='1'"
+																			class="instantHeadTitle">Sum Assured</span> <span
+																			ng-if="display.businessLineId=='4'"
+																			class="instantHeadTitle">Hospitalization limit</span>
+																			<span ng-if="display.businessLineId=='5'"
+																			class="instantHeadTitle">Sum Insured</span>
+																	</div>
+																	</md-list-item> </md-list>
+																</div>
+																<div class="col col-sm-4 zebraBlue wp_respNoPadLeft wp_respNoPadRight">
+																	<md-list class="resultListPad wp_resultListPad">
+																	<md-list-item class="md-1-line">
+																	<div class="md-list-item-text"
+																		ng-if="!$root.resultCarrierId[0].isMonthlyPremium">
+																		<span class="instantHeadTitle">Premium</span>
+																	</div>
+																	<div class="md-list-item-text"
+																		ng-if="$root.resultCarrierId[0].isMonthlyPremium">
+																		<span class="instantHeadTitle"> Monthly Premium</span>
+																	</div>
+																	</md-list-item> </md-list>
+																</div>
+																<div class="col col-sm-4 hideforMobile">
+																	<md-list class="resultListPad wp_resultListPad">
+																	<md-list-item class="md-1-line">
+																	<div class="md-list-item-text">
+																		<span class="instantHeadTitle">Service Rating</span>
+																	</div>
+																	</md-list-item> </md-list>
+																</div>
+																<div class="clearfix"></div>
+															</div>
+															<md-divider></md-divider>
+														</div>
+														<div
+															class="section instantQuoteDisplay instantFlex flexBody wp_pad1_5">
+															<div class="col col-sm-4 wp_quotesBorderRight wp_respNoPadLeft wp_respNoPadRight">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text classForTooltip ">
+																	<img
+																		ng-src="{{$root.wp_path}}img\clogo\{{display.id}}.png"
+																		data-toggle="tooltip" title="{{display.name}}"
+																		data-placement="right" tooltip>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div
+																ng-if="(display.businessLineId=='2'||display.businessLineId=='3')"
+																class="col col-sm-4 zebraBlue wp_quotesBorderRight wp_respNoPadLeft wp_respNoPadRight">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text">
+																	<b class="instantPremium">&#8377;
+																		{{display.insuredDeclareValue | number:0 | regexINR}}</b>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div ng-if="display.businessLineId=='1'"
+																class="col col-sm-4 zebraBlue wp_quotesBorderRight wp_respNoPadLeft wp_respNoPadRight">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text">
+																	<b class="instantPremium">&#8377;
+																		{{display.sumInsured | number:0 | regexINR}}</b>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div ng-if="display.businessLineId=='4'"
+																class="col col-sm-4 zebraBlue wp_quotesBorderRight  wp_respNoPadLeft wp_respNoPadRight">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text">
+																	<b class="instantPremium">&#8377;
+																		{{display.sumInsured | number:0 | regexINR}}</b>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div ng-if="display.businessLineId=='5'"
+																class="col col-sm-4 zebraBlue wp_quotesBorderRight wp_respNoPadLeft wp_respNoPadRight">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text">
+																	<b class="instantPremium"><span ng-bind-html="display.sumInsuredCurrencySymbol"
+																					 bind-html-compile="display.sumInsuredCurrencySymbol"></span>
+																		{{display.sumInsured | number:0 | regexINR}}</b>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															
+															<div class="col col-sm-4 zebraBlue wp_quotesBorderRight wp_respNoPadLeft wp_respNoPadRight">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text">
+																	<b class="instantPremium">&#8377;
+																	{{display.annualPremium | number:0 | regexINR}}</b>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div class="col col-sm-4 hideforMobile classForTooltip">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text"
+																	ng-if="display.claimsRating>0">
+																	<ng-rate-it ng-model="display.claimsRating"
+																		data-placement="top" data-toggle="tooltip"
+																		title="{{tooltipContent.serviceRating}}" tooltip
+																		resetable="false" min="0" max="5" step="1"
+																		read-only="true"></ng-rate-it>
+																		&nbsp;&nbsp;<span style="position: relative; top: 4px">{{display.claimsRating
+																| number:1}}</span>
+																</div>
+																<div class="md-list-item-text"
+																	ng-if="display.claimsRating==0.0">
+																	<span style="position: relative; top: 4px"><b
+																		data-placement="top" data-toggle="tooltip"
+																		title="{{tooltipContent.NATooltip}}" tooltip>NA</b></span>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div class="clearfix"></div>
+														</div>
+														<md-divider></md-divider>
+													</div> -->
+
+
+											<div class="section">
+												<div class="col col-sm-4"></div>
+												<div class="col col-sm-4">
+													<div ng-if="$root.resultCarrierId.length > 6"
+														class="textMid srollP" style="text-align: center">
+														<i class="material-icons"
+															onMouseover="scrollv.scrollContent('down')"
+															onMouseout="scrollv.stopScroll()"
+															style="font-size: 35px;">keyboard_arrow_down</i>
+													</div>
+												</div>
+												<div class="col col-sm-4"></div>
+											</div>
+										</div>
+									</div>
+
+									<div ng-if="!$root.instantQuoteSummaryStatus"
+										style="padding: 10% 0;">
+										<div class="quoteStatus wp_quoteError">
+											<div class="blink">
+												<i class="fa fa-exclamation-triangle fa-lg"
+													aria-hidden="true"></i>
+											</div>
+											<br />
+											<div ng-if="$root.instantQuoteSummaryError">
+												<div ng-bind-html="$root.instantQuoteSummaryError"
+													bind-html-compile="$root.instantQuoteSummaryError"></div>
+											</div>
+											<div ng-if="!$root.instantQuoteInvalidSummaryStatus">
+												<div
+													ng-bind-html="$root.instantQuoteInvalidFormSummaryError"
+													bind-html-compile="$root.instantQuoteInvalidFormSummaryError"></div>
+											</div>
+										</div>
+									</div>
+									<!-- <div ng-if="!$root.instantQuoteInvalidSummaryStatus" style="padding:10% 0;">
+								<div class="quoteStatus">
+									<div class="blink">
+										<i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i>
+									</div>
+									<br/>
+									<div ng-bind-html="$root.instantQuoteInvalidFormSummaryError"
+								bind-html-compile="$root.instantQuoteInvalidFormSummaryError"></div>
+								</div>
+							</div> -->
+									<!-- Instant Summary Section -->
+								</div>
+								<!--  for wordpres -->
+								<div
+									ng-if="$root.instantQuoteSummaryStatus && $root.wordPressEnabled"
+									style="margin-top: auto" class="wp_knowMoreBtn"></div>
+								<div class="clearfix"></div>
+								<div layout="row" class="wp_respDisplayNone"
+									style="text-align: right; padding: 4% 1% 2% 1%;"
+									ng-if="$root.instantQuoteSummaryStatus && $root.wordPressEnabled">
+									<div flex="20"></div>
+									<div flex="15">
+										<span class="white">Contact us : </span>
+									</div>
+									<div flex="35" class="white">
+										<span class="phone" style="color: #fff;"></span> Sales Assist:
+										<a class="white" href="callto:{{globalLabel.policies365Details.salesAssistNumberTrim}}">{{globalLabel.policies365Details.salesAssistNumber}}</a>
+									</div>
+									<div flex="30" class="white">
+										<span class="mail" style="color: #fff;"></span> <a
+											href="mailto:{{globalLabel.policies365Details.infoEmailId}}" class="white">{{globalLabel.policies365Details.infoEmailId}}</a>
+									</div>
+								</div>
+							</div>
+							<div
+								ng-if="$root.instantQuoteSummaryStatus && $root.baseEnvEnabled && !$root.wordPressEnabled"
+								style="margin-top: auto;">
+								<md-button ng-click='redirectToIQResult()'
+									id="viewOptionAndCompare" class="md-raised md-primary homeBtn"
+									style="display: block; background-color: #2991ea;">
+								<label><b>{{globalLabel.applicationLabels.common.viewOptionAndCompare}}</b></label>
+								</md-button>
+							</div>
+						</div>
+					</div>
+					<!--  end -->
+				</div>
+				<!-- 	</ng-container> -->
+			</div>
+
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<div class="clearfix"></div>
+<div class="section one-edge-shadow" ng-if="$root.customEnvEnabled">
+	<div class="promiseDiv">THE 'Policies365' PROMISE</div>
+	<div class="InsideWrapper newWidth divForMobile">
+		<div class="section group showforMobile">
+			<div class="col span_1_of_3">
+				<img alt="" ng-src="{{$root.wp_path}}img/best-price.png">
+				<!--<div class="bottomForMobile">
+					<b>BEST PRICE, ALWAYS
+						<p class="emptySpace"></p>
+					</b>
+					<hr>
+					<p>Our virtually enabled intelligent quote engine and multiple
+						discount options provide with the best quote.</p>
+				</div>-->
+			</div>
+			<div class="col span_1_of_3">
+				<img alt="" ng-src="{{$root.wp_path}}img/advice.png">
+				<!--<div class="bottomForMobile">
+					<b>TRUSTED ADVISOR</b>
+					<hr>
+					<p>Our technology led AI algorithms supported by insurance
+						experts provide advice for the most suited products & add-ons.</p>
+				</div>-->
+
+			</div>
+			<div class="col span_1_of_3">
+				<img alt="" ng-src="{{$root.wp_path}}img/meals.png">
+				<!--<div class="bottomForMobile">
+					<b>QUICK CLAIMS</b>
+					<hr>
+					<p>Our exclusive technology enabled expert claims help desk and
+						a strong partnership with insurers enables hassle free claim
+						settlement.</p>
+				</div>-->
+			</div>
+		</div>
+
+		<div class="section group hideforMobile">
+			<div class="col span_1_of_3">
+				<figure style="border-radius: 3px !important;">
+					<img alt="" ng-src="{{$root.wp_path}}img/best-price.png">
+					<!--<figcaption>
+						<b>BEST PRICE ALWAYS
+							<p class="emptySpace"></p>
+						</b>
+						<hr>
+						<p>Our virtually enabled intelligent quote engine and multiple
+							discount options provide with the best quote.</p>
+					</figcaption>-->
+				</figure>
+			</div>
+			<div class="col span_1_of_3">
+				<figure style="border-radius: 3px !important;">
+					<img alt="" ng-src="{{$root.wp_path}}img/advice.png">
+					<!--<figcaption>
+						<b>TRUSTED ADVISOR</b>
+						<hr>
+						<p>Our technology led AI algorithms supported by insurance
+							experts provide advice for the most suited products & add-ons.</p>
+					</figcaption>-->
+				</figure>
+
+			</div>
+			<div class="col span_1_of_3">
+				<figure style="border-radius: 3px !important;">
+					<img alt="" ng-src="{{$root.wp_path}}img/meals.png">
+					<!--<figcaption>
+						<b>QUICK CLAIMS</b>
+						<hr>
+						<p>Our exclusive technology enabled expert claims help desk
+							and a strong partnership with insurers enables hassle free claim
+							settlement.</p>
+					</figcaption>-->
+				</figure>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="clearfix"></div>
+<div class="section one-edge-shadow" ng-if="$root.customEnvEnabled">
+	<div class="promiseDiv">What our customers are saying...</div>
+	<div class="InsideWrapper newWidth">
+		<div class="section group">
+			<div class="carousel-demo">
+				<ul rn-carousel rn-carousel-index="carouselIndex2"
+					rn-carousel-auto-slide rn-carousel-pause-on-hover
+					rn-carousel-buffered class="carousel2">
+					<li ng-repeat="slide in slides2" ng-class="'id-' + slide.id">
+						<div class="sliderContent">"{{slide.content}}"</div>
+						<div class="sliderPerson">- {{slide.person}}</div>
+					</li>
+				</ul>
+				<div rn-carousel-indicators ng-if="slides2.length > 1"
+					slides="slides2" rn-carousel-index="carouselIndex2"></div>
+			</div>
+		</div>
+	</div>
+	<br />
+</div>
+<div class="clearfix"></div>
+<!-- ends here -->
+
+<div class="whitegradient" ng-if="$root.customEnvEnabled">
+	<!-- Reena.S..........Our Partners........... -->
+	<div class="partnerDiv">Our Partners</div>
+	<div class="InsideWrapper">
+		<div class="demo-3">
+			<div class="fixed-bar divForMobile">
+				<div class="partnerLogo hideforMobile">
+					<ul>
+						<li><a target="_blank" href="https://www.iciciprulife.com/"><img ng-src="{{$root.wp_path}}img/clogo/4.png" alt="ICICI" /></a></li>
+						<li><a target="_blank"
+							href="https://www.cignattkinsurance.in/home"><img
+								ng-src="{{$root.wp_path}}img/clogo/35.png" alt="Cigna" /></a></li>
+						<li><a target="_blank" href="https://www.hdfclife.com/"><img
+								ng-src="{{$root.wp_path}}img/clogo/3.png" alt="HDFC Life" /></a></li>
+						<li><a target="_blank"
+							href="https://www.reliancegeneral.co.in/Insurance/Home.aspx"><img
+								ng-src="{{$root.wp_path}}img/clogo/47.png"
+								alt="Reliance General" /></a></li>
+						<li><a target="_blank"
+							href="https://onlineplans.maxlifeinsurance.com/online-term-plan?CompanyID=3&ChannelID=3&SourceID=6&utm_source=Google+Search&utm_medium=SEM&utm_term=Keyword+category+1&utm_campaign=brand&utm_content=1336&cid=ps003006&device=d&gclid=CLWJ1_bV1tUCFRAfaAod0cYDlQ&gclsrc=aw.ds&dclid=CJiK0vfV1tUCFUkNaAodUk8LfA"><img
+								ng-src="{{$root.wp_path}}img/clogo/7.png" alt="Max Life" /></a></li>
+						<li><a target="_blank" href="https://www.aegonlife.com/"><img
+								ng-src="{{$root.wp_path}}img/clogo/20.png" alt="Aegon Life" /></a></li>
+						<li><a target="_blank" href="https://www.hdfcergo.com/"><img
+								ng-src="{{$root.wp_path}}img/clogo/28.png" alt="HDFC General" /></a></li>
+						<li><a target="_blank"
+							href="http://www.newindia.co.in/index.aspx"><img
+								ng-src="{{$root.wp_path}}img/clogo/25.png" alt="New Indian" /></a></li>
+						<li><a target="_blank" href="http://www.starhealth.in/"><img
+								ng-src="{{$root.wp_path}}img/clogo/34.png" alt="star Health" /></a></li>
+						<li><a target="_blank"
+							href="https://www.royalsundaram.in/?se=GE&cl=royalsundaram&cp=Google_GI_General_Insurance_EX&ag=Royal_Sudaram_General_Insurance&st=SE&kd=royal%20sundaram%20general%20insurance&gclid=EAIaIQobChMI7tn5q9jW1QIVmIizCh0hPAjuEAAYASAAEgKWGfD_BwE"><img
+								ng-src="{{$root.wp_path}}img/clogo/39.png"
+								alt="Royal Sundaram General" /></a></li>
+						<li><a target="_blank"
+							href="http://www.religare.com/Health-Insurance.aspx"><img
+								ng-src="{{$root.wp_path}}img/clogo/46.png" alt="religare" /></a></li>
+						<li><a href="#"><img src="img/small/TATA_AIG_General.png"
+								alt="TATA AIG General" /></a></li>
+						<li><a target="_blank"
+							href="https://www.kotakgeneralinsurance.com/"><img
+								ng-src="{{$root.wp_path}}img/clogo/53.png" alt="kotak general" /></a></li>
+						<li><a target="_blank" href="https://www.edelweisstokio.in/"><img
+								ng-src="{{$root.wp_path}}img/clogo/24.png" alt="Edelweiss" /></a></li>
+						<li><a target="_blank" href="https://www.bharti-axagi.co.in/"><img
+								ng-src="{{$root.wp_path}}img/clogo/36.png" alt="Bharti General" /></a></li>
+						<li><a target="_blank"
+							href="https://www.adityabirlahealth.com/healthinsurance/#!/home"><img
+								ng-src="{{$root.wp_path}}img/clogo/60.png"
+								alt="AdityaBirlaHealth" /></a></li>
+						<li ng-if="!$root.idepProdEnv"><a target="_blank" href="#"><img
+								src="{{$root.wp_path}}img/clogo/digit.png"
+								alt="AdityaBirlaHealth" /></a></li>
+						<li><a target="_blank" href="#"><img
+								ng-src="{{$root.wp_path}}img/clogo/FutureG.png"
+								alt="FutureGenerali" /></a></li>
+					</ul>
+				</div>
+				<div class="clear"></div>
+				<div class="showforMobile">
+					<ul id="carousel" class="elastislide-list">
+						<li><a target="_blank" href="https://www.iciciprulife.com/"><img
+								ng-src="{{$root.wp_path}}img/clogo/4.png" alt="ICICI" /></a></li>
+						<li><a target="_blank"
+							href="https://www.cignattkinsurance.in/home"><img
+								ng-src="{{$root.wp_path}}img/clogo/35.png" alt="Cigna" /></a></li>
+						<li><a target="_blank" href="https://www.hdfclife.com/"><img
+								ng-src="{{$root.wp_path}}img/clogo/3.png" alt="HDFC Life" /></a></li>
+						<!-- <li><a  target="_blank"
+							    href="#"><img
+								src="{{$root.wp_path}}img/small/RelianceGeneralInsurance.jpg"
+								alt="Reliance General" /></a></li> -->
+						<li><a target="_blank"
+							href="https://onlineplans.maxlifeinsurance.com/online-term-plan?CompanyID=3&ChannelID=3&SourceID=6&utm_source=Google+Search&utm_medium=SEM&utm_term=Keyword+category+1&utm_campaign=brand&utm_content=1336&cid=ps003006&device=d&gclid=CLWJ1_bV1tUCFRAfaAod0cYDlQ&gclsrc=aw.ds&dclid=CJiK0vfV1tUCFUkNaAodUk8LfA"><img
+								ng-src="{{$root.wp_path}}img/clogo/7.png" alt="Max Life" /></a></li>
+						<li><a target="_blank" href="https://www.aegonlife.com/"><img
+								ng-src="{{$root.wp_path}}img/clogo/20.png" alt="Aegon Life" /></a></li>
+						<li><a target="_blank" href="https://www.hdfcergo.com/"><img
+								ng-src="{{$root.wp_path}}img/clogo/28.png" alt="HDFC General" /></a></li>
+						<li><a target="_blank"
+							href="http://www.newindia.co.in/index.aspx"><img
+								ng-src="{{$root.wp_path}}img/clogo/25.png" alt="New Indian" /></a></li>
+						<li><a target="_blank" href="http://www.starhealth.in/"><img
+								ng-src="{{$root.wp_path}}img/clogo/34.png" alt="star Health" /></a></li>
+						<li><a target="_blank"
+							href="https://www.royalsundaram.in/?se=GE&cl=royalsundaram&cp=Google_GI_General_Insurance_EX&ag=Royal_Sudaram_General_Insurance&st=SE&kd=royal%20sundaram%20general%20insurance&gclid=EAIaIQobChMI7tn5q9jW1QIVmIizCh0hPAjuEAAYASAAEgKWGfD_BwE"><img
+								ng-src="{{$root.wp_path}}img/clogo/39.png"
+								alt="Royal Sundaram General" /></a></li>
+						<li><a target="_blank"
+							href="http://www.religare.com/Health-Insurance.aspx"><img
+								ng-src="{{$root.wp_path}}img/clogo/46.png" alt="religare" /></a></li>
+						<!-- <li><a  target="_blank"
+								href="#"><img src="img/small/TATA_AIG_General.png"
+								alt="TATA AIG General" /></a></li> -->
+						<li><a target="_blank"
+							href="https://www.kotakgeneralinsurance.com/"><img
+								ng-src="{{$root.wp_path}}img/clogo/53.png" alt="kotak general" /></a></li>
+						<li><a target="_blank" href="https://www.edelweisstokio.in/"><img
+								ng-src="{{$root.wp_path}}img/clogo/24.png" alt="Edelweiss" /></a></li>
+						<li><a target="_blank" href="https://www.bharti-axagi.co.in/"><img
+								ng-src="{{$root.wp_path}}img/clogo/36.png" alt="Bharti General" /></a></li>
+						<li><a target="_blank"
+							href="https://www.adityabirlahealth.com/healthinsurance/#!/home"><img
+								ng-src="{{$root.wp_path}}img/clogo/60.png"
+								alt="Aditya Birla Health" /></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="clearfix"></div>
+<!-- Reena.S..........Our Partners........... -->
+<!-- new div added as part of campaign -->
+<div ng-include="" ng-controller="campaignController"
+	ng-if="$root.campaignFlag && $root.customEnvEnabled"></div>
+<form name="quoteUserInfoForm">
+	<modal-dialog show='modalView' width='550px' height='auto'
+		class="ng-hide">
+	<div class="blueBackground one-edge-shadow" style="" layout="row">
+		<div class="" style="padding-top: 5px;" flex="90">
+			<h2 class="white popupHeading">
+				{{globalLabel.applicationLabels.common.userInfoModalLabel1}}</h2>
+		</div>
+		<div class='ng-modal-close' ng-click='hideModal()'
+			style="color: #fff; margin-top: 5px !important; text-align: center;"
+			flex="10">
+			<i class="material-icons">close</i>
+		</div>
+	</div>
+	<div class="pad10 responsiveTellus newPopupInnerShadow" style="">
+		<div class="leadCaptureBox leadScrollMobile">
+			<div class="pad10 leftnoborder paddingWebNew leadCapturePadding">
+
+				<div class="section group">
+					<div layout="row">
+						<md-input-container flex="50" style="width: 100%;">
+						<div class="">
+							<input type="text" class="capitializeName"
+								placeholder="First name" name="firstName"
+								ng-model="quoteUserInfo.firstName" autocomplete="off"
+								maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/"
+								required capitalize-first />
+							<div ng-messages="quoteUserInfoForm.firstName.$error"
+								ng-if="quoteUserInfoForm.firstName.$touched">
+								<div style="color: red" ng-message="required">{{globalLabel.validationMessages.firstNameRequired}}</div>
+								<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+								<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+								<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+							</div>
+						</div>
+						</md-input-container>
+						<md-input-container flex="50" style="width: 100%;">
+						<div class="">
+							<input type="text" class="capitializeName"
+								placeholder="Last name" name="lastName"
+								ng-model="quoteUserInfo.lastName" autocomplete="off"
+								maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/"
+								style="box-shadow: 0px;" capitalize-first />
+
+							<div ng-messages="quoteUserInfoForm.lastName.$error"
+								ng-if="quoteUserInfoForm.lastName.$touched">
+								<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+								<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+								<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+							</div>
+						</div>
+						</md-input-container>
+
+					</div>
+				</div>
+				<md-input-container style="width: 100%;">
+				<div class="section group">
+					<div class="col span_3_of_3">
+						<input type="text"
+							ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z.]{2,5}$/"
+							placeholder="Email-ID" autocomplete="off" maxlength="50"
+							name="emailId" ng-model="quoteUserInfo.emailId" required />
+						<div ng-messages="quoteUserInfoForm.emailId.$error"
+							ng-if="quoteUserInfoForm.emailId.$touched">
+							<div style="color: red" ng-message="required">{{globalLabel.validationMessages.emailIdRequired}}</div>
+							<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.emailIdInvalid}}</div>
+							<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.emailIdInvalid}}</div>
+						</div>
+					</div>
+				</div>
+				</md-input-container>
+				<br />
+				<md-input-container style="width: 100%;">
+				<div class="section group">
+					<div class="col span_3_of_3">
+						<input type="text" placeholder="Mobile Number" name="mobileNumber"
+							ng-model="quoteUserInfo.mobileNumber" autocomplete="off"
+							ng-pattern="/^[6789]\d{9}$/" maxlength="10" minlength="10"
+							required />
+						<div ng-messages="quoteUserInfoForm.mobileNumber.$error"
+							ng-if="quoteUserInfoForm.mobileNumber.$touched">
+							<div style="color: red" ng-message="required">{{globalLabel.validationMessages.mobileNumberRequired}}</div>
+							<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+							<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+							<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+						</div>
+					</div>
+				</div>
+				</md-input-container>
+				<br />
+				<md-input-container class="md-block divForMobile"
+					style="width:100%;font-size:13px;"> <md-checkbox
+					style="display:block" class="blackAddon resize"
+					ng-model="quoteUserInfo.termsCondition" name='termsCondition'
+					required>
+				<p style="text-align: left;" class="showforMobile">Accept Terms
+					& Conditions and Privacy Policy</p>
+				<p style="text-align: left;" class="hideforMobile">
+					Accept <a href="common/html/TermsNConditions.html" target="blank">Terms
+						& Conditions </a>and <a target="blank"
+						href="privacy-policy/PrivacyPolicy.html">Privacy Policy</a>
+				</p>
+				</md-checkbox>
+				<div ng-messages="quoteUserInfoForm.termsCondition.$error"
+					ng-if="quoteUserInfoForm.termsCondition.$touched">
+					<div style="color: red" ng-message="required">This is
+						required</div>
+				</div>
+				</md-input-container>
+
+				<md-button type="submit" ng-click="redirectToResult()"
+					id="aboutLeadBtn" ng-disabled="disabledRedirectToResult"
+					class="md-raised md-primary leadBtnPadding"
+					style="display: block; background-color: #2991ea; width:100% !important;">
+				<b>{{globalLabel.applicationLabels.common.viewBuyQuote}}</b> <span
+					ng-show="disabledRedirectToResult"><i
+					class="fa fa-spinner fa-spin "></i></span> </md-button>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	</modal-dialog>
+</form>
+
+<modal-dialog show='modalVehicleRegistration' width='900px'
+	height='auto' class="ng-hide RTOSearchDiv" style="overflow:auto;">
+<div class='ng-modal-close wp_modalClose' ng-click='hideModal()'
+	ng-if="$root.wordPressEnabled">
+	<i class="material-icons">close</i>
+</div>
+<div
+	class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow"
+	style="" layout="row">
+	<div class="noFlex wp_respWidth100"
+		style="padding: 4% 0%; text-align: center;" flex="90" flex-sm="85"
+		flex-xs="85">
+		<h2
+			class="white popupHeading wp_popupHeading blueTextColor popularHeadRto">
+			{{globalLabel.applicationLabels.common.regPlaceModalLabel1}}</h2>
+	</div>
+	<div class='ng-modal-close' ng-click='hideModal()'
+		ng-if="!$root.wordPressEnabled"
+		style="color: #fff; margin-top: 5px !important; text-align: center;"
+		flex="10" flex-sm="15" flex-xs="15">
+		<i class="material-icons">close</i>
+	</div>
+</div>
+
+<div
+	class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop"
+	style="">
+	<div class="pad30 wp_noPadTop wp_RtoMetro">
+		<div>
+			<p class="RTOHeading blueTextColor">Search for your RTO or City
+				using search option below</p>
+		</div>
+		<div class="inner-addon right-addon posRel">
+				<i class="material-icons RTOSearchIcon">search</i> <input type="text" class="form-control wp_borRadius30 wp_noBoxShadow" placeholder="Search"
+				autocomplete="off" placeholder="Search" ng-required="true" name="search" ng-model="$root.selectedRegData" typeahead-on-select="onSelect($item)"
+				 typeahead-wait-ms="10" typeahead-no-results="noResults" uib-typeahead="reg.display for reg in getRegPlaceList($viewValue)"
+				 typeahead-show-hint="true" typeahead-min-length="2" style="width: 100%;" />
+			</div>
+		<div class="dropdown-menu-NoResult" ng-if="noResults">No Results
+			Found</div>
+		<div class="RTOPopup">
+			<p class="RTOHeading blueTextColor popularHeadRto">Popular Cities</p>
+		</div>
+		<div class="RTOMiddleTab">
+			<div class="gallery-items" style="padding-bottom: 5px;">
+				<div class="gallery-item clickMetro"
+					ng-click="selectedMetroRTO(metros)"
+					ng-repeat="metros in defaultMetroList" style="height: 55px">
+					<div class="gallery-contents">
+						<div class="thumbnail gallery-trigger wp_RTOThumbnail">{{metros.cityName}}</div>
+						<input type="hidden" ng-value="$index" class="rowCount" />
+						<!-- <div style="width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-left:10px solid red;position:absolute;top:10px;left:10px;"></div> -->
+					</div>
+					<div class="showMetro">
+						<div class="info-bg" ng-hide="hideStatus" style="display: block;">
+
+							<div class="section group divForMobile">
+								<div class="col span_1_of_3 borderBtmRTO"
+									ng-repeat="rto in metros.RTODetails">
+									<a ng-click="onSelect(rto)" class="hiddencities">{{rto.display}}</a>
+								</div>
+								<div ng-if="dummyLength==1" class="hideforMobile">
+									<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+								</div>
+								<div ng-if="dummyLength==2" class="hideforMobile">
+									<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+									<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="clear"></div>
+</modal-dialog>
+
+<form name="loginForm">
+	<modal-dialog show='modalLogin' width='450px' height='auto'
+		class="ng-hide">
+	<div class="">
+		<div class="blueBackground one-edge-shadow" style="" layout="row">
+			<div flex="85">
+				<h2 class="white popupHeading">
+					<span>{{globalLabel.applicationLabels.login.loginTemplateHeader}}</span>
+				</h2>
+			</div>
+			<div class='ng-modal-close' ng-click='closeLoginForm()'
+				style="color: #fff;" flex="15">
+				<i class="material-icons">close</i>
+			</div>
+		</div>
+	</div>
+	<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+		<div class="fullShadow resultBg familyPopup"
+			style="margin-bottom: 0px !important;">
+			<div class="popupTableHealth popupPadding" layout="row"
+				style="padding: 3% 0% 0% 0% !important;">
+				<div flex="100" style="text-align: center; padding: 1% 0%;">
+					<b>{{globalLabel.applicationLabels.login.registeredNumber}}</b>
+				</div>
+			</div>
+			<md-input-container class="md-block">
+			<div layout="row" class="pad10">
+				<div flex="15" class="mobileNoIcon">
+					<i class="material-icons">call</i>
+				</div>
+				<div flex="75">
+					<input name="loginMobileNumber" ng-model="login.MobileNumber"
+						autocomplete="off" ng-pattern="/^[6789]\d{9}$/" maxlength="10"
+						class="signBoxShadow" minlength="10"
+						style="background: transparent !important; text-align: center;"
+						required />
+				</div>
+			</div>
+			</md-input-container>
+			<div style="color: red; text-align: center; margin-bottom: 1%;">{{createOTPError}}</div>
+		</div>
+	</div>
+
+	<div class="center">
+		<button type="submit" class="orangebutton" id="loginForm"
+			ng-disabled="loginForm.$invalid" ng-click="validateLogin()">Submit</button>
+	</div>
+	</modal-dialog>
+</form>
+
+<form name="authenticateForm">
+	<modal-dialog show='modalOTP' width='500px' height='auto'
+		class="ng-hide">
+	<div class="modalHeader">
+		<div class="blueBackground one-edge-shadow" style="" layout="row">
+			<div flex="85">
+				<h2 class="white popupHeading wp_popupHeading">
+					{{globalLabel.applicationLabels.login.OTPTemplateHeader}}</h2>
+			</div>
+			<div class='ng-modal-close' ng-click='closeAuthenticateForm()'
+				style="color: #fff;" flex="15">
+				<i class="material-icons">close</i>
+			</div>
+		</div>
+	</div>
+
+	<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+		<div class="fullShadow resultBg familyPopup"
+			style="margin-bottom: 0px !important;">
+			<div class="popupTableHealth popupPadding" layout="row"
+				style="padding: 3% 0% 0% 0% !important;">
+				<div flex="100" style="text-align: center; padding: 1% 0%;">
+					<b>{{globalLabel.applicationLabels.login.enterOTPCaption}}</b>
+				</div>
+			</div>
+			<md-input-container class="md-block">
+			<div class="pad10">
+				<div flex="100">
+					<input name="loginMobileNumber" ng-model="authenticate.enteredOTP"
+						autocomplete="off" ng-pattern="/\d{6}/" maxlength="6"
+						minlength="6" class="signBoxShadow"
+						style="background: transparent !important; text-align: center;"
+						required />
+				</div>
+			</div>
+			</md-input-container>
+			<div style="color: red; text-align: center; margin-bottom: 1%;">{{invalidOTPError}}</div>
+			<div style="color: green; text-align: center; margin-bottom: 1%;">{{globalLabel.validationMessages.otpValidPeriod}}</div>
+		</div>
+	</div>
+	<div class="center">
+		<button type="submit" class="bluebutton" id="authenticateUser"
+			ng-disabled="authenticateForm.$invalid" ng-click="authenticateUser()">Submit</button>
+	</div>
+	<div class="pad10 center">
+		<md-button ng-click="resendOTP()" ng-disabled="disableOTP">
+		<span class="resendLink">Resend OTP</span></md-button>
+	</div>
+	</modal-dialog>
+</form>
+
+
+<script>
+/*First we tell older browsers that read the figure
+and figcaption elements to add them to the DOM.*/
+document.createElement('figure');
+document.createElement('figcaption');
+
+$(document).ready(function(){
+	var x = screen.width;
+	var figCaptionTop;
+	var figCaptionTopNew;
+	var figCaptionTopDiv;
+	if(x>1025 ){
+		figCaptionTop='218px';
+		figCaptionTopNew='218px';
+		figCaptionTopDiv='70px';
+	}
+	else if(x<359){
+		figCaptionTop='180px';
+		figCaptionTopNew='180px';
+		figCaptionTopDiv='35px';
+	}
+	else if(x<767){
+		figCaptionTop='242px';
+		figCaptionTopNew='242px';
+		figCaptionTopDiv='80px';
+	}
+	else if(x>768 || x<1024){
+		figCaptionTop='180px';
+		figCaptionTopNew='180px';
+		figCaptionTopDiv='35px';
+	}
+/*For browsers that understand javascript
+position the caption below the image where 
+it will be hidden from view*/
+$('figcaption').css('top',figCaptionTopNew);
+
+/*Create a function when someone hovers over
+the figure element*/
+$('figure').hover(function(){
+
+/*Select the figcaption element that
+is inside the figure element hovered
+hover. Then we stop any animation that
+might be happening with that element
+(this prevents animation looping) and
+animate it to be 140px from the top of
+the figure element.*/
+$(this).find('figcaption').stop().animate({'top':figCaptionTopDiv}, 200, function(){});
+
+/*When someone is done hovering over
+a figure element fire the function
+below*/
+},function(){
+
+/*Animate the figcaption back out of
+view which is 200px from the top of
+the figure element. We also stop any
+animation that might be happening with
+the element first to prevent looping.*/
+$(this).find('figcaption').stop().animate({'top':figCaptionTop}, 200, function(){});
+});
+});
+</script>
+
+
+<script type="text/javascript">
+
+
+ 	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();
+	}); 
+    
+    $(document).ready(function() {
+    	/* setTimeout(function(){ 
+		$('[data-toggle="tooltip"]').tooltip({
+		    delay: { show: 100, hide: 0 },
+		    placement: function(tip, element) { //$this is implicit
+		        var position = $(element).position();
+		        console.log(position)
+		        if (position.left > 515) {
+		            return "left";
+		        }
+		        if (position.left < 515) {
+		            return "right";
+		        }
+		        if (position.top < 110){
+		            return "bottom";
+		        }
+		        return "top";
+		    },
+		    selector: '[rel=tooltip]:not([disabled])'
+			, trigger: "click"
+			    
+		});
+    	},1000); */
+	});
+
+    
+   /*  window.onbeforeunload = function(event){
+    	// do some stuff here, like reloading your current state
+      //this would work only if the user chooses not to leave the page
+      return 'why would you do that???';
+    } */
+</script>

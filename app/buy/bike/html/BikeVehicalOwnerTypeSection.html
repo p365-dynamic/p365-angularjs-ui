@@ -1,0 +1,63 @@
+<div class="fullShadow resultBg">
+<div ng-if="$root.wordPressEnabled">
+<div
+			class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow"
+			style="" layout="row">
+			<div flex="85" flex-sm="85" class="wp_respWidth100 wp_Width100"
+				flex-xs="85" style="padding: 4% 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">Select
+				Type Of Owner </h2>
+			</div>
+			<div class='ng-modal-close' ng-click='hideVehicleOwnerModal()'
+				style="color: #fff;" flex="15" ng-if="!$root.wordPressEnabled">
+				<i class="material-icons">close</i>
+			</div>
+		</div>
+		<div class="pad10">
+			<div class="leadCaptureBox familyPopup"
+				style="padding: 0% !important;">
+				<div>
+				<md-list>
+					<md-radio-group ng-model="quoteParam.ownedBy" > <md-list-item
+						class="md-1-line"> <md-radio-button style="padding-right:50px"
+						value="Individual" ng-checked="true">Individual </md-radio-button>
+						<span></span> 
+					<md-radio-button value="Organization">Organization </md-radio-button>
+					</md-list-item> </md-radio-group></md-list>
+				</div>
+			</div>
+		<div class="center submitBtnAlign" layout="row">
+				<button flex="50" ng-click="hideVehicleOwnerModal()"
+					class="bluebuybuttoncar wp_riderPopup" id="carBuyProductBtn"
+					style="background-color: #c4c4c4 !important;">Cancel</button>
+				<button flex="50" ng-click="individualClick(quoteParam.ownedBy)"
+					class="bluebuybuttoncar wp_riderPopup" id="carBuyProductBtn">Submit</button>
+			</div>
+      </div>
+     </div>
+     <div ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled">
+			<md-toolbar ng-if="!$root.wordPressEnabled" class="md-theme-light resultHeader p365-light">
+					<h2 class="md-toolbar-tools" ng-click="showOwnerDetails()" >
+						<span>Owner Type</span>
+						<span flex></span>
+						<md-button
+							ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled && ownerInputSection"
+							class="md-icon-button"
+							id="bikeInsuranceInputExpandIcon"> <i
+							class="material-icons">arrow_drop_down</i> </md-button>
+						<md-button
+							ng-if="$root.baseEnvEnabled &&!$root.wordPressEnabled && !ownerInputSection"
+							class="md-icon-button"
+							id="bikeInsuranceInputCollapseIcon"> <i
+							class="material-icons">arrow_drop_up</i> </md-button>
+					</h2>
+					</md-toolbar>
+							<md-list ng-hide="$root.baseEnvEnabled && ownerInputSection" class="resultPad viewReportDiv">
+					<md-radio-group ng-model="quoteParam.ownedBy" ng-change="individualClick(quoteParam.ownedBy)"> <md-list-item
+						class="md-1-line"> <md-radio-button style="padding-right:50px"
+						value="Individual" ng-checked="true">Individual </md-radio-button>
+						<span></span> 
+					<md-radio-button value="Organization">Organization </md-radio-button>
+					</md-list-item> </md-radio-group></md-list>
+			</div>
+</div>

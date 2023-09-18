@@ -1,0 +1,351 @@
+<ng-container ng-controller="headerController">
+	<div class="feedForm">
+		<div class="centerAlignTxt marTop4Per">
+			<p class="font40 resp_font20">Leave us a message</p>
+		</div>
+		<div class="pj_width70 autoMargin pad3Per feedbackForm resp_width90 resp_pad15">
+			<form name="contactUsForm">
+				<div layout="row" layout-xs="column">
+					<div flex="40" flex-xs="100" class="right2Mar">
+						<div layout="row" layout-xs="column" class="marBot5Per">
+							<div flex="50" flex-xs="100" class="right5Mar resp_noMar">
+								<input class="normInput resp_mar8Bot lineHeight28 borRad7" name='uname' ng-model='composeEmail.paramMap.USERNAME' autocomplete='off'
+								 maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z ]*$/' required capitalize-first md-no-asterisk placeholder="Name">
+								<div ng-messages="contactUsForm.uname.$error" ng-if="contactUsForm.uname.$touched" class="wp_errorClaims">
+									<div style="color: red" ng-message="required">This is required
+									</div>
+									<div style="color: red" ng-message="pattern">Enter valid first name</div>
+								</div>
+							</div>
+							<div flex="50" flex-xs="100" class="resp_noMar">
+								<input class="normInput resp_noMarBot lineHeight28 borRad7 " placeholder="Mobile Number" name='mobileNumber' ng-model='composeEmail.paramMap.mobileNumber'
+								 autocomplete='off' ng-pattern='/^[6789]\d{9}$/' maxlength='10' minlength='10' required md-no-asterisk>
+								<div ng-messages="contactUsForm.mobileNumber.$error" class="wp_errorClaims" ng-if="contactUsForm.mobileNumber.$touched">
+									<div style="color: red" ng-message="required">This is required
+									</div>
+									<div style="color: red" ng-message="pattern">Enter valid mobile no</div>
+									<div style="color: red" ng-message="maxlength">10 characters as max length</div>
+								</div>
+							</div>
+						</div>
+						<div class="marBot5Per">
+							<div class="input-group-pretend resp_inputGroupPretend noMar resp_mar8Bot">
+								<span class="input-group-text font14 resp_font12 whiteBg">
+							<!-- <span class="zeroLineHeight "><i class="material-icons font18 hideForMobile">cake</i></span> --> Service
+								Type
+								</span>
+								<md-select ng-model="composeEmail.paramMap.ticketType" class="normInput resp_padLf5 noMargin bordRad07" required md-no-asterisk>
+									<md-option value="query">Query</md-option>
+									<md-option value="complaint">Complaint</md-option>
+									<md-option value="request">Request</md-option>
+								</md-select>
+								<!-- <input type="name" numbers-only="" ng-model="member.birthYear" autocomplete="off" maxlength="4" minlength="4"
+									 ng-disabled="!member.val" ng-change="validateAge(member)" ng-model-options="{ debounce: 1500 }" required="" 
+									 class="form-control resp_padLf5 ng-pristine ng-valid ng-not-empty ng-valid-required ng-valid-minlength ng-valid-maxlength ng-touched"
+									 placeholder="YYYY" aria-relation="Date of Birth" aria-describedby="basic-addon1" aria-invalid="false"></div> -->
+							</div>
+						</div>
+						<div>
+							<div class="input-group-pretend resp_inputGroupPretend noMar resp_mar8Bot">
+								<span class="input-group-text font14 resp_font12 whiteBg">
+							<!-- <span class="zeroLineHeight "><i class="material-icons font18 hideForMobile">cake</i></span> --> Service
+								On
+								</span>
+								<md-select ng-model="composeEmail.paramMap.insuranceType" class="normInput resp_padLf5 noMargin bordRad07" required md-no-asterisk>
+									<md-option value="car">Buy Car Insurance</md-option>
+									<md-option value="bike">Buy Two-Wheeler Insurance</md-option>
+									<md-option value="life">Buy Life Insurance</md-option>
+									<md-option value="health">Buy Health Insurance</md-option>
+									<md-option value="others">Others</md-option>
+								</md-select>
+							</div>
+						</div>
+					</div>
+					<div flex="40" flex-xs="100" class="right2Mar">
+						<div flex="100" class="marBot5Per">
+							<input class="normInput resp_noMarBot lineHeight28 borRad7" placeholder="Email ID" ng-pattern='/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+.[a-z.]{2,5}$/'
+							 autocomplete='off' maxlength='50' name='emailId' ng-model='composeEmail.userEmail' required md-no-asterisk>
+							<div ng-messages="contactUsForm.emailId.$error" class="wp_errorClaims" ng-if="contactUsForm.emailId.$touched">
+								<div style="color: red" ng-message="required">This is required
+								</div>
+								<div style="color: red" ng-message="pattern">Enter valid mail id</div>
+								<div style="color: red" ng-message="maxlength">50 characters as max length</div>
+							</div>
+						</div>
+						<div>
+							<textarea class="normInput borRad7 signBoxShadow" placeholder="Feedback / Suggestions / Queries" name="feedbackDescription"
+							 ng-model="composeEmail.emailContent" rows="3" autocomplete="off" minlength="0" maxlength="250" ng-required="true"
+							 md-no-asterisk style="min-height:104px;"></textarea>
+							<div ng-messages="contactUsForm.feedbackDescription.$error" ng-if="contactUsForm.feedbackDescription.$touched" class="wp_errorClaims">
+								<div style="color: red" ng-message="required">This is required
+								</div>
+								<div style="color: red" ng-message="pattern">Enter valid suggestion</div>
+								<div style="color: red" ng-message="maxlength">250 characters as max length</div>
+							</div>
+						</div>
+					</div>
+					<div flex="20" flex-xs="100" class="selfCenter">
+						<div class="center submitBtnAlign marTop3Per">
+							<md-button type="submit" ng-disabled="disableSubmit" ng-click="sendEmail(contactUsForm)" class="md-raised md-primary popupSubmitBtn font12 capitalTxt">Send </md-button>
+							<p style="color: #268fe2; font-size: 16px;" ng-show="emailSendCfrmStatus">Thank you for contacting us. we will reach out to you shortly</p>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- <div flex="40" flex-xs="100" flex-sm="40">
+			<div layout="row" layout-xs="column" layout-sm="row">
+				<div flex="50" flex-xs="100" flex-sm="50" class="mar10">
+					<input class="normInput" placeholder="sdfgh">
+				</div>
+				<div flex="50" flex-xs="100" flex-sm="50" class="mar10">
+					<input class="normInput" placeholder="sdfgh">
+				</div>
+			</div>
+			<div>
+				<div class="mar10">
+					<div class='input-group-pretend resp_inputGroupPretend'><span class='input-group-text font13'><span class='zeroLineHeight '><i class='material-icons font18'>cake</i></span>
+						<span class='hideForMobile'>&nbsp;Birth Year</span>
+						</span>
+						<input class='normInput resp_padLf5' placeholder='YYYY' />
+					</div>
+				</div>
+			</div>
+			<div>
+					<div class="mar10">
+						<div class='input-group-pretend resp_inputGroupPretend'><span class='input-group-text font13'><span class='zeroLineHeight '><i class='material-icons font18'>cake</i></span>
+							<span class='hideForMobile'>&nbsp;Birth Year</span>
+							</span>
+							<input class='normInput resp_padLf5' placeholder='YYYY' />
+						</div>
+					</div>
+				</div>
+		</div> -->
+	<!-- <div flex="40" flex-xs="100" flex-sm="40">
+			<div class="mar10">
+				<input class="normInput" placeholder="sdfgh">
+			</div>
+			<div class="mar10">
+					<textarea class="normInput" placeholder="sdfgh"></textarea>
+				</div>
+		</div>
+		<div flex="20" flex-xs="100" flex-sm="20" class="mar10">
+			<div class="center submitBtnAlign ">
+				<md-button class="md-raised md-primary popupSubmitBtn capitalizeText bold12" id="carSubmitPACoverForm">Send</md-button>
+			</div>
+		</div> -->
+
+	<!-- <div class="editBackWhite" >
+		<div class="">
+			<div class="">
+				<div class="">
+					<div class="">
+						<div class="section group wp_pinkBg wp_Width100 wp_contactSection instantFlex wp_respDispBlock">
+							<div class="col span_1_of_3 buyborderright wp_blueBg">
+								<div class="wp_padCommon">
+								<div class="contactmail">
+									<div class="">
+										<i class="fa fa-phone"></i> Sales Assist: <a
+											href="callto:02242114211">(022) 42114211</a>
+									</div>
+									<br>
+									<div class="">
+										<i class="fa fa-phone"></i> Claims/Service: <a
+											href="callto:02242114299">(022) 42114299</a>
+									</div>
+									<br>
+									<div class="">
+										<i class="fa fa-envelope"></i> <a
+											href="mailto:contact@policies365.com">contact@policies365.com</a>
+									</div>
+									<br>
+									<div class="">
+										<i class="fa fa-phone"></i> Toll free number: <a
+											href="callto:18001026234">18001026234</a>
+									</div>
+								</div>
+								<div class="paddingboth" style="margin-top:20px;">
+									<div class="map">
+										<iframe
+											src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.8617980821896!2d72.85858221490177!3d19.11371788706631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c830e0b492fd%3A0xd2f86f42b023c233!2sNavnit+Insurance+Broking+Private+Limited!5e0!3m2!1sen!2s!4v1507713910131"
+											width="100%" height="370" frameborder="0" style="border: 0"
+											allowfullscreen> </iframe>
+										<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d941.916698283083!2d72.9775678291724!3d19.209750565620997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b95bffffffff%3A0x1a3f09b23b28d6b6!2sNavnit+Group!5e0!3m2!1sen!2sin!4v1534487047347"
+											 width="100%" height="370" frameborder="0" style="border:0"
+											 allowfullscreen></iframe>
+									</div>
+								</div>
+								</div>
+							</div>
+
+							<div class="col span_2_of_3 wp_pinkBg">
+							<div class="wp_padCommon">
+								<form name="contactUsForm">
+								<md-content class="wp_md-content wp_inputBorderRadius wp_upperCase" style="padding:0">
+									<div class="contact">
+										<div class="wp_header">
+											<h5 class="font34" style="margin:0;">Reach Out to Us</h5>
+										</div>
+										<div layout="row" layout-sm="column" layout-xs="column" layout-md="column">
+											<div flex="30" flex-sm="100" flex-md="100" flex-xs="100" style="width: 100%;" class="alignColumn">
+												<md-input-container class="md-block wp_whiteColor"> <label
+													class="buyTextPadding">Name</label> <input class=""
+													name='uname' ng-model='composeEmail.paramMap.USERNAME'
+													autocomplete='off' maxlength='35' minlength='1'
+													ng-pattern='/^[a-zA-Z ]*$/' required capitalize-first
+													md-no-asterisk />
+												</md-input-container>
+												<div ng-messages="contactUsForm.uname.$error"
+													ng-if="contactUsForm.uname.$touched" class="wp_errorClaims">
+													<div style="color: red" ng-message="required">This is
+														required</div>
+													<div style="color: red" ng-message="pattern">Enter
+														valid first name</div>
+												</div>
+											</div>
+											<div flex="30" flex-sm="100" flex-md="100" flex-xs="100" style="width: 100%;" class="alignColumn">
+												<md-input-container class="md-block wp_whiteColor"> <label
+													class="buyTextPadding">Mobile Number</label> <input
+													class="" name='mobileNumber'
+													ng-model='composeEmail.paramMap.mobileNumber'
+													autocomplete='off' ng-pattern='/^[6789]\d{9}$/'
+													maxlength='10' minlength='10' required md-no-asterisk />
+												</md-input-container>
+												<div ng-messages="contactUsForm.mobileNumber.$error" class="wp_errorClaims"
+													ng-if="contactUsForm.mobileNumber.$touched">
+													<div style="color: red" ng-message="required">This is
+														required</div>
+													<div style="color: red" ng-message="pattern">Enter
+														valid mobile no</div>
+													<div style="color: red" ng-message="maxlength">10
+														characters as max length</div>
+												</div>
+											</div>
+											<div flex="40" flex-sm="100" flex-md="100" flex-xs="100" style="width: 100%;" class="">
+												<md-input-container class="md-block wp_whiteColor"> <label
+													class="buyTextPadding">Email ID</label> <input class=""
+													ng-pattern='/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+.[a-z.]{2,5}$/'
+													autocomplete='off' maxlength='50' name='emailId'
+													ng-model='composeEmail.userEmail' required md-no-asterisk />
+												
+												</md-input-container>
+												<div ng-messages="contactUsForm.emailId.$error" class="wp_errorClaims"
+													ng-if="contactUsForm.emailId.$touched">
+													<div style="color: red" ng-message="required">This is
+														required</div>
+													<div style="color: red" ng-message="pattern">Enter
+														valid mail id</div>
+													<div style="color: red" ng-message="maxlength">50
+														characters as max length</div>
+												</div>
+											</div>
+										</div>
+										<div layout="column">
+											<md-input-container class="md-block"> <label
+												class="buynowSelect" style="padding: 0px;">Service
+												Type</label><md-select ng-model="composeEmail.paramMap.ticketType"
+												class="mdInputContainer_input" required md-no-asterisk>
+											<md-option value="query">Query</md-option> <md-option
+												value="complaint">Complaint</md-option> <md-option
+												value="request">Request</md-option> </md-select> </md-input-container>
+										</div>
+										<div layout="column">
+											<md-input-container class="md-block"> <label
+												class="buynowSelect" style="padding: 0px;">Service
+												On</label> <md-select ng-model="composeEmail.paramMap.insuranceType"
+												class="mdInputContainer_input" required md-no-asterisk>
+											<md-option value="car">Buy Car Insurance</md-option> <md-option
+												value="bike">Buy Two-Wheeler Insurance</md-option> <md-option
+												value="life">Buy Life Insurance</md-option> <md-option
+												value="health">Buy Health Insurance</md-option> <md-option
+												value="others">Others</md-option> </md-select> </md-input-container>
+										</div>
+										<div layout="row">
+											<div flex="100">
+												<md-input-container class="md-block feedTextArea">
+												<label class="md-no-float" style="font-size: 12px !important;font-weight: normal;color: #fff !important">Feedback / Suggestions / Queries</label>
+												<textarea name="feedbackDescription"
+													ng-model="composeEmail.emailContent" rows="3"
+													autocomplete="off" class="signBoxShadow" minlength="0"
+													maxlength="250"
+													style="background: transparent !important; border-width: 1px; height: 100px !important;color:#fff;"
+													ng-required="true" md-no-asterisk></textarea> </md-input-container>
+												<div ng-messages="contactUsForm.feedbackDescription.$error"
+													ng-if="contactUsForm.feedbackDescription.$touched" class="wp_errorClaims">
+													<div style="color: red" ng-message="required">This is
+														required</div>
+													<div style="color: red" ng-message="pattern">Enter
+														valid suggestion</div>
+													<div style="color: red" ng-message="maxlength">250
+														characters as max length</div>
+												</div>
+												<div></div>
+												<div>
+													<div ng-show="inputValidStatus" style="color: red" class="wp_errorClaims">{{globalLabel.validationMessages.validInputMsg}}</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="" >
+											<md-button type="submit" ng-disabled="disableSubmit" ng-click="sendEmail(contactUsForm)"
+												class="md-raised md-primary claimDisplyLabel wp_viewBtn wp_contactMargin">Submit
+												<span ng-show="disableSubmit"><i class="fa fa-spinner fa-spin "></i></span>
+												</md-button>
+										</div>
+										<p style="color: #268fe2; font-size: 16px;"
+											ng-show="emailSendCfrmStatus">Thank you for contacting
+											us. we will reach out to you shortly</p>
+									</div>
+									</md-content>
+								</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+	<modal-dialog show='modalEmailConfirm' width='550px' height='auto'>
+		<div class="blueBackground one-edge-shadow">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">Contact Us-Confirmation</h2>
+			</div>
+			<div class='ng-modal-close closePopup' ng-click='hideEmailConfirmModal()'>
+				<i class="material-icons">highlight_off</i>
+			</div>
+		</div>
+		<!-- <div>
+			<div class='ng-modal-close wp_modalClose' ng-click='hideEmailConfirmModal()' ng-if="$root.wordPressEnabled">
+				<i class="material-icons">close</i>
+			</div>
+			<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow" style="" layout="row">
+				<div flex="90" flex-sm="85" class="wp_respWidth100 wp_Width100" flex-xs="85" style="padding: 4% 0%; text-align: center;">
+					<h3 class="white popupHeading wp_popupHeading" style="text-align: center;">
+						<span>Contact Us-Confirmation</span>
+					</h3>
+				</div>
+				<div class='ng-modal-close' ng-click='hideEmailConfirmModal()' id="termsNConditionClose" ng-if="!$root.wordPressEnabled"
+				 style="color: #fff;" flex="10">
+					<i class="material-icons">close</i>
+				</div>
+			</div>
+		</div> -->
+		<div class="pad10 responsiveTellus newPopupInnerShadow" style="">
+			<div class="popupTableHealth popupPadding" layout="row" style="padding: 3% 0% 3% 0% !important;">
+				<div flex="100" style="text-align: center; padding: 1% 0%;">
+					<p style="font-size: 16px;">Thank you for contacting us. we will reach out to you shortly</p>
+				</div>
+			</div>
+
+			<div class="center submitBtnAlign marTop3Per">
+				<md-button type="submit" ng-disabled="disableSubmit" ng-click="hideEmailConfirmModal()" class="md-raised md-primary popupSubmitBtn font14">OK </md-button>
+			</div>
+
+		</div>
+	</modal-dialog>
+</ng-container>

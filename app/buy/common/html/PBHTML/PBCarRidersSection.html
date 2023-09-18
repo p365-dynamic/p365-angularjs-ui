@@ -1,0 +1,201 @@
+<div>
+	<div class="side10PerMar center resp_noMar resp_topBot5Pad padBot3Per marTop4Per">
+		<h2 class="chooseProfTitle resp_font18">
+			<span data-bind-html-compile="p365Labels.professionalJourney.addOnDetails" data-ng-bind-html="p365Labels.professionalJourney.addOnDetails"></span>
+		</h2>
+	</div>
+	<div ng-form='carInputForm'>
+		<!-- <div class="side10PerMar">
+			<p class="greyc9Txt font10 topBot5pxMar">{{p365Labels.common.recommendedAddOn}}</p>
+		</div> -->
+		<div layout="row" layout-xs="column" layout-sm="column" class="addOnSec pad10 recomdAddonMotor">
+			<div flex="100" class="recomdAddonRgt">
+				<div layout="row" layout-xs="column" layout-sm="column" style="flex-wrap: wrap">
+					<div flex="50" flex-xs="100" flex-sm="100" style="padding-right: 10px;">
+						<div layout="row" layout-xs="column" layout-sm="column">
+							<md-checkbox class="blackAddon resize" ng-true-value="true" ng-false-value="false" ng-change="togglePACover();isRiderFormDirty=true" ng-model="CarPACoverDetails.isPACoverApplicable"
+							 name='add'>
+								<span class="font15 marTopBot10" layout="row">{{p365Labels.common.personalAccidentCover}}</span>
+							</md-checkbox>
+						</div>
+						<p class="font11 marginCheckbox">{{p365Labels.common.personalAccidentCoverDesc}}</p>
+					</div>
+					<div flex="50" flex-xs="100" flex-sm="100" style="padding-right: 10px;" class="md-1-line checkBox" ng-repeat="addOnCover in addOnCovers"
+					 ng-if="addOnCover.isEnable == 'Y' && !carIgnoredRiders.includes(addOnCover.riderId)">
+						<div layout="row" layout-xs="column" layout-sm="column" layout-wrap flex>
+							<div class="classForTooltip" flex="100">
+								<div ng-if="addOnCover.riderId != 6">
+									<div layout="row" layout-xs="column" layout-sm="column">
+										<md-checkbox class="blackAddon resize" checklist-model="$root.carAddOnCoversList.selectedAddOnCovers" checklist-value="addOnCover"
+										 name='add' checklist-change="calculateQuoteOnAddOnCover(addOnCover);isRiderFormDirty=true;">
+											<span class="font15 marTopBot10" layout="row">{{addOnCover.riderName}}</span>
+										</md-checkbox>
+										<span style='margin-left: 10px;font-size: 10px;margin-top: 15px' class="pinkFont" ng-show="addOnCover.isRecommended == true">(P365 Recommended)</span>
+									</div>
+									<p class="font11 marginCheckbox">{{addOnCover.description}}</p>
+								</div>
+
+								<div ng-if="addOnCover.riderId == 6">
+									<div layout="row" layout-xs="column" layout-sm="row" layout-md="row">
+										<md-checkbox class="blackAddon resize" checklist-model="$root.carAddOnCoversList.selectedAddOnCovers" checklist-value="addOnCover"
+										 name='add' ng-model="vehicleDetails.checkZeroDepCover" ng-change="showPrevPolZeroDepCoverModal(addOnCover.riderId);isRiderFormDirty=true;">
+											<span class="font15 marTopBot10" layout="row">{{addOnCover.riderName}}</span>
+										</md-checkbox>
+										<span style='margin-left: 10px;font-size: 10px;margin-top: 15px' class="pinkFont" ng-show="addOnCover.isRecommended == true">(P365 Recommended)</span>
+									</div>
+									<p class="font11 marginCheckbox">{{addOnCover.description}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div flex="50" flex-xs="100" flex-sm="100" style="padding-right: 10px;">
+
+						<!-- <div ng-repeat="v in [0]"> -->
+						<div layout="row" layout-xs="column" layout-sm="column">
+							<md-checkbox class="blackAddon resize" ng-true-value="true" ng-false-value="false" ng-change="calculateQuoteOnClick()" ng-model="vehicleDetails.checkforDriverAccCover"
+							 name='add'>
+								<span class="font15 marTopBot10" layout="row">{{p365Labels.common.driverAccidentCover}}</span>
+							</md-checkbox>
+							<span class="marLeft20" ng-if="vehicleDetails.checkforDriverAccCover">
+								<md-select name="type" class="noMargin" ng-model="vehicleDetails.driverAccidentCover" ng-change="calculateQuoteOnClick();isRiderFormDirty=true;"
+								 required md-no-asterisk>
+									<md-option ng-value="driverAccident" ng-repeat="driverAccident in driverAccidentSAList">{{driverAccident}}
+									</md-option>
+								</md-select>
+							</span>
+						</div>
+						<p class="font11 marginCheckbox">{{p365Labels.common.driverAccidentCoverDesc}}</p>
+						<!-- </div> -->
+					</div>
+					<div flex="50" flex-xs="100" flex-sm="100" style="padding-right: 10px;">
+						<!-- <div ng-repeat="v in [0]" class="wrap"> -->
+						<div layout="row" layout-xs="column" layout-sm="row">
+							<md-checkbox class="blackAddon resize" ng-true-value="true" ng-false-value="false" ng-model="vehicleDetails.checkforPsgCover"
+							 name='add' ng-change="calculateQuoteOnClick()">
+								<span class="font15 marTopBot10" layout="row">{{p365Labels.common.passengerCover}}</span>
+							</md-checkbox>
+							<span style='margin-left: 10px;font-size: 10px;margin-top: 15px' class="pinkFont" ng-show="addOnCover.isRecommended == true">(P365 Recommended)</span>
+							<span class="marLeft20" ng-show="vehicleDetails.checkforPsgCover">
+								<md-select name="type" class="noMargin" ng-model="vehicleDetails.passengerCover" ng-change="calculateQuoteOnClick();isRiderFormDirty=true;" required
+								 md-no-asterisk>
+									<md-option ng-value="passengerCover" ng-repeat="passengerCover in passengerCoverSAList">{{passengerCover}}</md-option>
+								</md-select>
+							</span>
+						</div>
+						<!-- </div> -->
+						<p class="font11 marginCheckbox">{{p365Labels.common.passengerCoverDesc}}</p>
+					</div>
+					<div flex="50" flex-xs="100" flex-sm="100" style="padding-right: 10px;">
+						<!-- <div ng-repeat="v in [0]" class=""> -->
+						<div layout="row" layout-xs="column" layout-sm="row">
+							<md-checkbox class="resize blackAddon" ng-true-value="true" ng-false-value="false" ng-model="vehicleDetails.checkforLpgCngCover"
+							 name='add' ng-change="validateLpgCngKitCover();isRiderFormDirty=true;">
+								<span class="font15 marTopBot10" layout="row">{{p365Labels.common.lpgCngKitCover}}</span>
+							</md-checkbox>
+							<span class="marLeft20" ng-show="vehicleDetails.checkforLpgCngCover">
+								<md-input-container class="noMargin">
+									<input ng-model="vehicleDetails.lpgCngKitCover" class="ridersBottomBorder" ng-pattern="/^[0-9]*$/" ng-change="validateLpgCngKitCover()"
+									 required md-no-asterisk> </md-input-container>
+								<span style="color: red">{{invalidLpgCngKitCoverAmount}}</span>
+							</span>
+						</div>
+						<p class="font11 marginCheckbox">{{p365Labels.common.lpgCngKitCoverDesc}}</p>
+						<!-- </div> -->
+					</div>
+					<div flex="50" flex-xs="100" flex-sm="100" style="padding-right: 10px;">
+						<!-- <div ng-repeat="v in [0]"> -->
+						<div layout="row" layout-xs="column" layout-sm="row">
+							<md-checkbox class="resize blackAddon" ng-true-value="true" ng-false-value="false" ng-change="validateAccessories();isRiderFormDirty=true;" ng-model="vehicleDetails.checkforAccessoriesCover"
+							 name="add">
+								<span class="font15 marTopBot10" layout="row">{{p365Labels.common.accessories}}</span>
+							</md-checkbox>
+						</div>
+						<p class="font11 marginCheckbox">{{p365Labels.common.accessoriesDesc}}</p>
+						<!-- </div> -->
+
+						<div style="margin-left:35px" ng-if="vehicleDetails.checkforAccessoriesCover">
+							<!-- <div ng-repeat="v in [0]"> -->
+							<div layout="row" layout-xs="column" layout-sm="row">
+								<md-checkbox class="resize blackAddon" ng-true-value="true" ng-false-value="false" ng-model="vehicleDetails.checkforElectrical"
+								 name="add" ng-change="updateQuoteResultStatus();isRiderFormDirty=true">
+									<span class="font15 marTopBot10" layout="row">{{p365Labels.common.accessoriesElectrical}}</span>
+								</md-checkbox>
+								<span class="marLeft20" ng-if="vehicleDetails.checkforElectrical">
+									<md-input-container class="md-block noMargin">
+										<input ng-model="vehicleDetails.electricalAccessories" class="ridersBottomBorder" ng-change="validateElectricalAccessories()"
+										 required>
+										<span style="color: red">{{invalidElectricalAccessoriesAmount}}</span>
+								</md-input-container>
+								</span>
+							</div>
+							<p class="font11 marginCheckbox">{{p365Labels.common.accessoriesElectricalDesc}}</p>
+							<!-- </div> -->
+
+							<!-- <div ng-repeat="v in [0]"> -->
+							<div layout="row" layout-xs="column" layout-sm="row">
+								<md-checkbox class="resize blackAddon" ng-true-value="true" ng-false-value="false" ng-model="vehicleDetails.checkforNonElectrical"
+								 name="add" ng-change="updateQuoteResultStatus();isRiderFormDirty=true">
+									<span class="font15 marTopBot10" layout="row">{{p365Labels.common.accessoriesNoElectrical}}</span>
+								</md-checkbox>
+								<span class="marLeft20" ng-if="vehicleDetails.checkforNonElectrical">
+									<md-input-container class="md-block noMargin">
+										<input type="text" class="ridersBottomBorder" ng-model="vehicleDetails.nonElectricalAccessories" ng-change="validateNonElectricalAccessories()"
+										 style="box-shadow: none !important;" required>
+										<span style="color: red">{{invalidNonElectricalAccessoriesAmount}}</span>
+								</md-input-container>
+								</span>
+							</div>
+							<p class="font11 marginCheckbox">{{p365Labels.common.accessoriesNoElectricalDesc}}</p>
+							<!-- </div> -->
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<ng-container class="section padRig15 width100 center">
+			<div class="">
+				<p class="dialogButton">
+					<md-button class='width20_per capitalTxt resp_normFont13 inpCancelBtn iPad_btnAutoWid' ng-click="showEditInputSection()">{{p365Labels.common.back}}</md-button>
+					<md-button class='width20_per capitalTxt resp_normFont13 inpSaveBtn iPad_btnAutoWid' ng-click="callSingleClickCarQuote()">{{p365Labels.common.confirm}}</md-button>
+				</p>
+			</div>
+		</ng-container>
+	</div>
+</div>
+
+
+<modal-dialog show="PACoverModal" width='800px' height='auto' class="ng-hide RTOSearchDiv">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">Personal Accident ( PA ) Cover ?</h2>
+		</div>
+		<div class='ng-modal-close closePopup' ng-click='hidePACoverModal()'>
+			<i class="material-icons greyb7Txt">highlight_off</i>
+		</div>
+	</div>
+	<div class="pad10 borderf2Top">
+		<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+			<div class="centerAlignTxt">
+				<div class="PACoverTxt grey63Txt">
+					<p class="font15 greyb9Txt">
+						This policy covers the owner for death or disability due to an accident. Owner(in case of disability) or nominee(in case
+						of death) will get <span class="font17 grey666Txt">15 lakhs</span>.
+					</p>
+					<p class="font16 grey63Txt">YOU CAN BUY A PLAN WITHOUT PA COVER IN FOLLOWING CASES.</p>
+					<p class="font15 greyb9Txt">1. The car is registered in a company's name.</p>
+					<p class="font15 greyb9Txt">2. You already have a PA Cover of 15 lakhs.</p>
+					<p class="font15 greyb9Txt">3. You don't have valid driving license.</p>
+				</div>
+				<md-checkbox class="font12 grey63Txt" ng-model='PACoverDeclaration'>
+					<p>I declare that the vehicle is either company owned by an individual with existing Personal Accident(PA) cover of Rs.15 lakhs</p>
+				</md-checkbox>
+
+			</div>
+			<div class="center submitBtnAlign ">
+				<md-button class="md-raised md-primary popupSubmitBtn capitalizeText bold12" ng-click="submitPACoverDetails('existingInsurance')" ng-disabled='!PACoverDeclaration' id="carSubmitPACoverForm">No Need</md-button>
+			</div>
+		</div>
+	</div>
+</modal-dialog>

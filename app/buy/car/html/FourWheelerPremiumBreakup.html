@@ -1,0 +1,209 @@
+<div style="overflow: auto; width: 100%;">
+	<div class="pad10">
+		<div class="border robo marginbot10">
+			<div class="section group">
+				<div class="col span_1_of_3">
+					<!-- img title="{{selectPremiumFromResult.insuranceCompany}}"
+						src="{{carrierLogoList[selectPremiumFromResult.carrierId]}}"
+						width="120" height="55"> -->
+				</div>
+				<div class="col span_1_of_3">
+					<div class="section group value">
+						<div>{{p365Labels.common.idvValue}}</div>
+						<b>&#8377; {{selectPremiumFromResult.insuredDeclareValue |
+							number:0}}</b>
+					</div>
+				</div>
+				<div class="col span_1_of_3">
+					<div class="section group value">
+						<div>{{p365Labels.common.finalPrice}}</div>
+						<b> &#8377; {{selectPremiumFromResult.grossPremium |
+							number:0}} </b>
+					</div>
+				</div>
+			</div>
+
+			<div class="section group padBtm10">
+				<div class="col span_1_of_3">
+					<div class="label_Font">{{p365Labels.common.insuranceType}}</div>
+					<b class="label_textBox">{{vehicleDetails.insuranceType.type}}</b>
+				</div>
+				<div class="col span_1_of_3">
+					<div class="label_Font">{{p365Labels.common.vehicle}}</div>
+					<b class="label_textBox">{{vehicleDetails.carMakeObject.make +
+						" " + vehicleDetails.carModelObject.model + " " +
+						vehicleDetails.carVariantObject.variant + " " +
+						vehicleDetails.fuel}}</b>
+				</div>
+				<div ng-if="$root.showCarRegAreaStatus == true"
+					class="col span_1_of_3">
+					<div class="label_Font">{{p365Labels.common.regArea}}</div>
+					<b class="label_textBox">{{vehicleInfo.registrationPlace}}</b>
+				</div>
+				<div ng-if="$root.showCarRegAreaStatus == false"
+					class="col span_1_of_3">
+					<div class="label_Font">{{p365Labels.common.regNumber}}</div>
+					<b class="label_textBox" style="text-transform: uppercase;">{{vehicleDetails.registrationNumber}}</b>
+				</div>
+			</div>
+
+			<div class="section group padBtm10">
+				<div class="col span_1_of_3">
+					<div class="label_Font">{{p365Labels.common.idv}}</div>
+					<span ng-show="vehicleDetails.idvOption == '1'"> <b
+						class="label_textBox">{{p365Labels.common.bestDeal}}</b>
+					</span> <span ng-show="vehicleDetails.idvOption == '2'"> <b>&#8377; {{(quoteParam.userIdv)
+							| number:0}}</b>
+					</span>
+				</div>
+				<div class="col span_1_of_3">
+					<div class="label_Font">{{p365Labels.common.regDate}}</div>
+					<b class="label_textBox">{{calculatedVehicleRegistrationDate}}</b>
+				</div>
+				<div class="col span_1_of_3"
+					ng-show="vehicleDetails.previousClaim == 'No' && renewal == true">
+					<div class="label_Font">{{p365Labels.common.ncbExist}}</div>
+					<b class="label_textBox">{{vehicleDetails.ncb.display}}</b>
+				</div>
+			</div>
+		</div>
+		<div style="width: 100%; margin: auto;">
+			<div class="border robo marginbot10">
+				<div style="height: auto; overflow: auto;">
+					<table class="plaintable"
+						ng-if="(selectPremiumFromResult.odpremium + selectPremiumFromResult.llDriverCover + 
+						selectPremiumFromResult.paidDriverCover + selectPremiumFromResult.tppremium) > 0">
+						<tr>
+							<td><b> <a ng-click="toggleBasicExpanded()"> <i
+										ng-if="basicExpanded" class="fa fa-minus"
+										style="font-size: 10px;" aria-hidden="true"></i> <i
+										ng-if="!basicExpanded" class="fa fa-plus"
+										style="font-size: 10px;" aria-hidden="true"></i>
+										{{p365Labels.common.basicCoverage}}
+								</a>
+							</b>
+							<td><span class="right"><b>{{(selectPremiumFromResult.odpremium
+										+ selectPremiumFromResult.llDriverCover +
+										selectPremiumFromResult.paidDriverCover +
+										selectPremiumFromResult.tppremium) | number:2}}</b></span></td>
+						</tr>
+					</table>
+					<div ng-show="basicExpanded">
+						<div class="marLeft10">
+							<table class="plaintable">
+								<tr ng-if="selectPremiumFromResult.odpremium > 0">
+									<td>{{p365Labels.common.basicOwnDamage}}</td>
+									<td><span class="right">{{selectPremiumFromResult.odpremium
+											| number:2}}</span></td>
+								</tr>
+								<tr ng-if="selectPremiumFromResult.llDriverCover > 0">
+									<td>{{p365Labels.common.leagalLiabilityForDriver}}</td>
+									<td><span class="right">{{selectPremiumFromResult.llDriverCover
+											| number:2}}</span></td>
+								</tr>
+								<tr ng-if="selectPremiumFromResult.paidDriverCover > 0">
+									<td>{{p365Labels.common.personalAccidentCover}}</td>
+									<td><span class="right">{{selectPremiumFromResult.paidDriverCover
+											| number:2}}</span></td>
+								</tr>
+								<tr ng-if="selectPremiumFromResult.tppremium > 0">
+									<td>{{p365Labels.common.basicThirdParty}}</td>
+									<td><span class="right">{{selectPremiumFromResult.tppremium
+											| number:2}}</span></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+					<table class="plaintable"
+						ng-if="selectPremiumFromResult.selectedRiderAmount > 0">
+						<tr>
+							<td><b> <a
+									ng-if="selectPremiumFromResult.premBreakRidersExpand"
+									ng-click="selectPremiumFromResult.premBreakRidersExpand = false">
+										<i class="fa fa-minus" style="font-size: 10px;"
+										aria-hidden="true"></i>
+										{{p365Labels.common.addonCover}}
+								</a> <a ng-if="!selectPremiumFromResult.premBreakRidersExpand"
+									ng-click="selectPremiumFromResult.premBreakRidersExpand = true">
+										<i class="fa fa-plus" style="font-size: 10px;"
+										aria-hidden="true"></i>
+										{{p365Labels.common.addonCover}}
+								</a>
+							</b></td>
+							<td><span class="right"><b>{{selectPremiumFromResult.selectedRiderAmount
+										| number:2}}</b></span></td>
+
+
+						</tr>
+					</table>
+					<div ng-show="selectPremiumFromResult.premBreakRidersExpand">
+						<div class="marLeft10">
+							<div ng-repeat="riders in selectPremiumFromResult.ridersList">
+								<div class="col11" style="font-size: 12px;">{{riders.riderName}}</div>
+								<div class="col12">
+									<span ng-if="riders.riderType != 'NA'" class="right strong">&#8377; {{riders.totalValue | number:0}}</span> <span
+										ng-if="riders.riderType == 'NA'" class="right strong">{{riders.riderType}}</span>
+								</div>
+								<div ng-repeat="dependantRider in riders.dependant">
+									<div class="col11" style="font-size: 12px;">{{dependantRider.riderName}}</div>
+									<div class="col12">
+										<span class="right strong">{{dependantRider.riderType}}</span>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</div>
+					<table class="plaintable"
+						ng-if="selectPremiumFromResult.selectedDiscountAmount > 0">
+						<tr>
+							<!--  <td><b>{{globalLabel.applicationLabels.common.savings}}</b></td> -->
+							<td><b> <a ng-click="toggleSavingsExpanded()"> <i
+										ng-if="savingsExpanded" class="fa fa-minus"
+										style="font-size: 10px;" aria-hidden="true"></i> <i
+										ng-if="!savingsExpanded" class="fa fa-plus"
+										style="font-size: 10px;" aria-hidden="true"></i>
+										{{p365Labels.common.savings}}
+								</a>
+							</b></td>
+
+							<td><span class="right"><b>-{{selectPremiumFromResult.selectedDiscountAmount
+										| number:2}}</b></span></td>
+						</tr>
+					</table>
+					<div ng-show="savingsExpanded">
+						<div class="marLeft10">
+							<table class="plaintable">
+								<tr ng-repeat="data in selectPremiumFromResult.discountList"
+									ng-if="data.discountAmount > 0">
+									<td>{{data.type}}</td>
+									<td><span class="right">{{data.discountAmount |
+											number:2}}</span></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<table class="plaintable">
+						<tr>
+							<td><b>{{p365Labels.common.serviceTax}}</b></td>
+							<td><span class="right"><b>+{{selectPremiumFromResult.serviceTax
+										| number:2}}</b></span></td>
+						</tr>
+					</table>
+					<table class="plaintable">
+						<tr>
+							<td><b>{{p365Labels.common.finalPrice}}</b></td>
+							<td><span class="right"><b> &#8377; {{selectPremiumFromResult.grossPremium | number:0}} </b></span></td>
+						</tr>
+					</table>
+
+					<br />
+				</div>
+			</div>
+		</div>
+		<div class="center">
+			<a class="orangebutton" ng-click="toggleMoreDetails()">{{p365Labels.common.popupButton}}</a>
+		</div>
+	</div>
+</div>

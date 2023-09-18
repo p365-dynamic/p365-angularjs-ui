@@ -1,0 +1,29 @@
+<div>
+    <div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop resp_riskpopupHgt scrollHgt450" ng-show="profQuoteIdAvailable">
+        <div layout="row" layout-xs="column">
+            <div flex="50" flex-xs="100" class="" style="position: relative;">
+                <p365-pie-chart items="dataItems" chart-title="chartTitle" display-legends="false" display-lables="true" display-width="auto"
+                    display-height="450" ng-if="isChartReady == true" class="" pie-size="60"></p365-pie-chart>
+            </div>
+            <div flex="50" flex-xs="100" class="" style="position: relative;">
+                    <ng-container ng-include="insuranceAssessmentHTML"></ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop resp_riskpopupHgt scrollHgt450" ng-show="!profQuoteIdAvailable">
+        <div layout="row" layout-xs="column">
+        	<div class="centerAlignTxt" flex="100">
+        		We not able to fetch your Risk Profile right now,please try after some time.
+        		<p class="centerAlignTxt" >Or</p>
+        		You can click on "Create New One" to see what are the risks that your profile contains. 
+        		
+        	</div>
+        </div>
+        <div layout="row" layout-xs="column" >
+        <div class="centerAlignTxt" flex="100">
+        <md-button class='capitalizeText norm13 resp_normFont13 pinkBgBtn'ng-click="createRiskProfile()">Create New One</md-button>
+        </div>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,210 @@
+<div style="overflow: auto; width: 100%;">
+	<div class="pad10">
+		<div class="border robo marginbot10">
+			<div class="section group">
+				<div class="col span_1_of_3">
+					<!-- <img title="{{selectPremiumFromResult.insuranceCompany}}"
+						ng-src="{{carrierLogoList[selectPremiumFromResult.carrierId]}}"
+						width="120" height="55"> -->
+				</div>
+				<div class="col span_1_of_3">
+					<div class="section group value">
+						<div>{{globalLabel.applicationLabels.bike.idv}}</div>
+						<b>&#8377; {{selectPremiumFromResult.insuredDeclareValue |
+							number:0}}</b>
+					</div>
+				</div>
+				<div class="col span_1_of_3">
+					<div class="section group value">
+						<div>{{globalLabel.applicationLabels.bike.finalPrice}}</div>
+						<b> &#8377; {{selectPremiumFromResult.grossPremium |
+							number:0}} </b>
+					</div>
+				</div>
+			</div>
+
+			<div class="section group padBtm10">
+				<div class="col span_1_of_3">
+					<div class="label_Font">{{globalLabel.applicationLabels.bike.insuranceType}}</div>
+					<b class="label_textBox">{{vehicleDetails.insuranceType.type}}</b>
+				</div>
+				<div class="col span_1_of_3">
+					<div class="label_Font">{{globalLabel.applicationLabels.bike.vehicle}}</div>
+					<b class="label_textBox">{{vehicleDetails.bikeMakeObject.make +
+						" " + vehicleDetails.bikeModelObject.model + " " +
+						vehicleDetails.bikeVariantObject.variant + " " +
+						vehicleDetails.fuel}}</b>
+				</div>
+				<div ng-if="$root.showbikeRegAreaStatus == true"
+					class="col span_1_of_3">
+					<div class="label_Font">{{globalLabel.applicationLabels.bike.regArea}}</div>
+					<b class="label_textBox">{{vehicleInfo.registrationPlace}}</b>
+				</div>
+				<div ng-if="$root.showbikeRegAreaStatus == false"
+					class="col span_1_of_3">
+					<div class="label_Font">{{globalLabel.applicationLabels.bike.regNumber}}</div>
+					<b class="label_textBox" style="text-transform: uppercase;">{{vehicleDetails.registrationNumber}}</b>
+				</div>
+			</div>
+
+			<div class="section group padBtm10">
+				<div class="col span_1_of_3">
+					<div class="label_Font">{{globalLabel.applicationLabels.bike.idv}}</div>
+					<span ng-show="vehicleDetails.idvOption == '1'"> <b
+						class="label_textBox">{{globalLabel.applicationLabels.bike.bestDeal}}</b>
+					</span> <span ng-show="vehicleDetails.idvOption == '2'"> <b>&#8377;{{(vehicleInfo.IDV)
+							| number:0}}</b>
+					</span>
+				</div>
+				<div class="col span_1_of_3">
+					<div class="label_Font">{{globalLabel.applicationLabels.bike.regDate}}</div>
+					<b class="label_textBox">{{calculatedVehicleRegistrationDate}}</b>
+				</div>
+				<div class="col span_1_of_3"
+					ng-show="vehicleDetails.previousClaim == 'No' && renewal == true">
+					<div class="label_Font">{{globalLabel.applicationLabels.bike.ncbExist}}</div>
+					<b class="label_textBox">{{vehicleDetails.ncb.display}}</b>
+				</div>
+			</div>
+		</div>
+		<div style="width: 100%; margin: auto;">
+			<div class="border robo marginbot10">
+				<div style="height: auto; overflow: auto;">
+					<table class="plaintable"
+						ng-if="(selectPremiumFromResult.odpremium + selectPremiumFromResult.llDriverCover + 
+						selectPremiumFromResult.paidDriverCover + selectPremiumFromResult.tppremium) > 0">
+						<tr>
+							<td><b> <a ng-click="toggleBasicExpanded()"> <i
+										ng-if="basicExpanded" class="fa fa-minus"
+										style="font-size: 10px;" aria-hidden="true"></i> <i
+										ng-if="!basicExpanded" class="fa fa-plus"
+										style="font-size: 10px;" aria-hidden="true"></i>
+										{{globalLabel.applicationLabels.bike.basicCoverage}}
+								</a>
+							</b>
+							<td><span class="right"><b>{{(selectPremiumFromResult.odpremium
+										+ selectPremiumFromResult.llDriverCover +
+										selectPremiumFromResult.paidDriverCover +
+										selectPremiumFromResult.tppremium) | number:2}}</b></span></td>
+						</tr>
+					</table>
+					<div ng-show="basicExpanded">
+						<div class="marLeft10">
+							<table class="plaintable">
+								<tr ng-if="selectPremiumFromResult.odpremium > 0">
+									<td>{{globalLabel.applicationLabels.bike.basicOwnDamage}}</td>
+									<td><span class="right">{{selectPremiumFromResult.odpremium
+											| number:2}}</span></td>
+								</tr>
+								<tr ng-if="selectPremiumFromResult.llDriverCover > 0">
+									<td>{{globalLabel.applicationLabels.bike.leagalLiabilityForDriver}}</td>
+									<td><span class="right">{{selectPremiumFromResult.llDriverCover
+											| number:2}}</span></td>
+								</tr>
+								<tr ng-if="selectPremiumFromResult.paidDriverCover > 0">
+									<td>{{globalLabel.applicationLabels.bike.personalAccidentCover}}</td>
+									<td><span class="right">{{selectPremiumFromResult.paidDriverCover
+											| number:2}}</span></td>
+								</tr>
+								<tr ng-if="selectPremiumFromResult.tppremium > 0">
+									<td>{{globalLabel.applicationLabels.bike.basicThirdParty}}</td>
+									<td><span class="right">{{selectPremiumFromResult.tppremium
+											| number:2}}</span></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+					<table class="plaintable"
+						ng-if="selectPremiumFromResult.selectedRiderAmount > 0">
+						<tr>
+							<td><b> <a
+									ng-if="selectPremiumFromResult.premBreakRidersExpand"
+									ng-click="selectPremiumFromResult.premBreakRidersExpand = false">
+										<i class="fa fa-minus" style="font-size: 10px;"
+										aria-hidden="true"></i>
+										{{globalLabel.applicationLabels.common.addonCover}}
+								</a> <a ng-if="!selectPremiumFromResult.premBreakRidersExpand"
+									ng-click="selectPremiumFromResult.premBreakRidersExpand = true">
+										<i class="fa fa-plus" style="font-size: 10px;"
+										aria-hidden="true"></i>
+										{{globalLabel.applicationLabels.common.addonCover}}
+								</a>
+							</b></td>
+							<td><span class="right"><b>{{selectPremiumFromResult.selectedRiderAmount
+										| number:2}}</b></span></td>
+
+
+						</tr>
+					</table>
+					<div ng-show="selectPremiumFromResult.premBreakRidersExpand">
+						<div class="marLeft10">
+							<div ng-repeat="riders in selectPremiumFromResult.ridersList">
+								<div class="col11" style="font-size: 12px;">{{riders.riderName}}</div>
+								<div class="col12">
+									<span ng-if="riders.riderType != 'NA'" class="right strong">&#8377;
+										{{riders.riderValue | number:0}}</span> <span
+										ng-if="riders.riderType == 'NA'" class="right strong">{{riders.riderType}}</span>
+								</div>
+								<div ng-repeat="dependantRider in riders.dependant">
+									<div class="col11" style="font-size: 12px;">{{dependantRider.riderName}}</div>
+									<div class="col12">
+										<span class="right strong">{{dependantRider.riderType}}</span>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</div>
+					<table class="plaintable"
+						ng-if="selectPremiumFromResult.selectedDiscountAmount > 0">
+						<tr>
+							<td><b> <a ng-click="toggleSavingsExpanded()"> <i
+										ng-if="savingsExpanded" class="fa fa-minus"
+										style="font-size: 10px;" aria-hidden="true"></i> <i
+										ng-if="!savingsExpanded" class="fa fa-plus"
+										style="font-size: 10px;" aria-hidden="true"></i>
+										{{globalLabel.applicationLabels.common.savings}}
+								</a>
+							</b></td>
+
+							<td><span class="right"><b>-{{selectPremiumFromResult.selectedDiscountAmount
+										| number:2}}</b></span></td>
+						</tr>
+					</table>
+					<div ng-show="savingsExpanded">
+						<div class="marLeft10">
+							<table class="plaintable">
+								<tr ng-repeat="data in selectPremiumFromResult.discountList"
+									ng-if="data.discountAmount > 0">
+									<td>{{data.type}}</td>
+									<td><span class="right">{{data.discountAmount |
+											number:2}}</span></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<table class="plaintable">
+						<tr>
+							<td><b>{{globalLabel.applicationLabels.common.serviceTax}}</b></td>
+							<td><span class="right"><b>+{{selectPremiumFromResult.serviceTax
+										| number:2}}</b></span></td>
+						</tr>
+					</table>
+					<table class="plaintable">
+						<tr>
+							<td><b>{{globalLabel.applicationLabels.bike.finalPrice}}</b></td>
+							<td><span class="right"><b> &#8377;
+										{{selectPremiumFromResult.grossPremium | number:0}} </b></span></td>
+						</tr>
+					</table>
+
+					<br />
+				</div>
+			</div>
+		</div>
+		<div class="center">
+			<a class="orangebutton" ng-click="toggleMoreDetails()">{{globalLabel.applicationLabels.common.popupButton}}</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,261 @@
+<loading></loading>
+<div class="e8e8Container">
+    <div class="side10PerMar center resp_noMar resp_topBot5Pad padBot5Per">
+            <div class="clearfix"></div>
+        <h2 class="chooseProfTitle padTop4Per resp_font18">
+            <span data-bind-html-compile="globalLabel.applicationLabels.professionalJourney.car.bestResultDetails" data-ng-bind-html="globalLabel.applicationLabels.professionalJourney.car.bestResultDetails">
+                 </span>
+        </h2>
+    </div>
+    <div>
+        <div layout="row" layout-xs="column" class="bestQuote pad10 recomdAddon resp_noMar">
+            <div flex="50" flex-xs="100" class="grey87Txt">
+                <div class="centerAlignTxt bold13 grey63Txt">Previous Quote </div>
+                <div class="resFrameAlignment" ng-if="productInCart">
+                    <div class="whiteBg borRad10 posRel">
+                        <div class="bluredSec"></div>
+                        <div class="innerResultFrame pad20 padBot10 resp_pad10">
+                            <div class="wrap">
+                                <div class="pj_width25 lobResult">
+                                    <span><i class="material-icons lobIcon">hotel</i></span>
+                                    <span class="lobTitle"> Health </span>
+                                </div>
+                                <div class="pj_width37 centerAlignTxt resp_width45Per">
+                                    <img class="" ng-src="{{$root.wp_path}}img/clogo/{{productInCart.carrierId}}.png">
+                                </div>
+                                <div class="pj_width37 centerAlignTxt resp_width30Per">
+                                    <div class="buyNowBtn posRel cursor">
+                                        <p class="pinkFont topBot5PerMar bold17">&#8377; {{productInCart.basicPremium|number:0}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="row">
+                                <p class="noMarTopBot font11">
+                                    <a class="pinkFont textItalic" ng-click="viewBeneFeature(productInCart)">{{productInCart.planName}}</a>
+                                </p>
+                            </div>
+                            <div layout="row">
+                                <div flex="20" flex-xs="30" flex-sm="15">
+                                    <p>Insurance For</p>
+                                </div>
+                                <div flex="80" flex-xs="70" flex-sm="85" class="mar18Bot resp_mar18Bot" style="border-bottom: 1px solid #ddd;"></div>
+                            </div>
+                            <div>
+                                <p class="font12" style="margin: 0;">
+                                    <span ng-repeat="member in healthInfo.selectedFamilyMembers | orderBy:'id'">
+                                            <span class="grey4bTxt boldFont"></span>
+                                    <span class="grey41Txt boldFont "><span class="capitalizeText">{{member.gender}}</span>&nbsp;({{member.age+"Years"}}),
+                                    </span>                             
+                                    </span>
+                                    <span class="grey63Txt">&nbsp;Residing at </span>
+                                    <span class="grey41Txt boldFont">{{addressDetails.streetDetails}}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="innerResultFrame">
+                            <div class="resIdvSec pad20 padBot10 resp_pad10" layout="row">
+                                <div flex="70" layout="row" class="padRig15Per resp_zeroPadRight">
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{productInCart.netPremiumMean|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt"><span>Premium</span></p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{productInCart.insurerIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt"><span>Service</span></p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{productInCart.benefitIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt"><span>Benefits</span></p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{productInCart.hospitalIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt"><span>Cashless</span></p>
+                                    </div>
+
+                                </div>
+                                <div flex="30" class="center">
+                                    <p class="grey4bTxt bold17 noMargin">&#8377; {{productInCart.sumInsured | number}}</p>
+                                    <p class="noMargin greyc9Txt">SUM INSURED</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="innerResultFrame pad7_20 left">
+                            <p class="noMargin font9 pinkFont"> &nbsp;</p>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- added to display loader -->
+
+            <!-- end -->
+            <div flex="50" flex-xs="100" class="grey87Txt">
+                <div class="centerAlignTxt bold13 grey63Txt">Updated Quote </div>
+                <div class="resFrameAlignment">
+                    <div class="whiteBg borRad10" ng-if="isGotHealthQuotes && validatePremium($root.healthQuote)">
+                        <div class="innerResultFrame pad20 padBot10 resp_pad10">
+                            <div class="wrap">
+                                <div class="pj_width25 lobResult">
+                                    <span>
+                                        <i class="material-icons lobIcon">hotel</i>
+                                    </span>
+                                    <span class="lobTitle">
+                                        Health
+                                    </span>
+                                </div>
+                                <div class="pj_width37 centerAlignTxt resp_width45Per">
+                                    <img ng-src="{{$root.wp_path}}img/clogo/{{$root.healthQuote.carrierId}}.png">
+                                </div>
+                                <div class="pj_width37 centerAlignTxt resp_width30Per">
+                                    <div class="buyNowBtn posRel cursor">
+                                        <p class="pinkFont topBot5PerMar bold17">&#8377; {{$root.healthQuote.basicPremium|number:0}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="row">
+                                <p class="noMarTopBot font11">
+                                    <a class="pinkFont textItalic" ng-click="viewBeneFeature($root.healthQuote)">{{$root.healthQuote.planName}}</a>
+                                </p>
+                            </div>
+                            <div layout="row">
+                                <div flex="20" flex-xs="30" flex-sm="15">
+                                    <p>Insurance For</p>
+                                </div>
+                                <div flex="80" flex-xs="70" flex-sm="85" class="mar18Bot resp_mar18Bot" style="border-bottom: 1px solid #ddd;"></div>
+                            </div>
+                            <div>
+                                <p class="font12" style="margin: 0;">
+                                    <span ng-repeat="member in personalInfo.selectedFamilyMembers | orderBy:'id'">
+                                            <span class="grey4bTxt boldFont"></span>
+                                    <span class="grey41Txt boldFont"><span class="capitalizeText">{{member.gender}}</span>&nbsp;({{member.age+"Years"}}),
+                                    </span>
+                                    </span>
+
+                                    <span class="grey63Txt">&nbsp;Residing at </span>
+                                    <span class="grey41Txt boldFont">{{personalInfo.displayArea}}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="innerResultFrame">
+                            <div class="resIdvSec pad20 padBot10 resp_pad10" layout="row">
+                                <div flex="70" layout="row">
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{$root.healthQuote.netPremiumMean|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt"><span>Premium</span></p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{$root.healthQuote.insurerIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt"><span>Service</span></p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{$root.healthQuote.benefitIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt"><span>Benefits</span></p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{$root.healthQuote.hospitalIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt"><span>Cashless</span></p>
+                                    </div>
+
+                                </div>
+                                <div flex="30" class="center">
+                                    <p class="grey4bTxt bold17 noMargin">&#8377; {{$root.healthQuote.sumInsured}}</p>
+                                    <p class="noMargin greyc9Txt">SUM INSURED</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- riders text -->
+                        <!-- <div layout="row" class="innerResultFrame side5MarPer">
+                            <md-menu ng-if="quoteParam.riders.length > 0 && isGotHealthQuotes" md-offset="0 40" class="width100 rightAlignTxt">
+                                You Selected {{quoteParam.riders.length}} riders
+                                <a ng-click="openMenu($mdOpenMenu, $event)" class="cursor pinkFont">
+                              View </a>
+                                <md-menu-content width="2" class="menuForCheckbox">
+                                    <div class="menuHeaderText pinkFont font15 center">List of Riders</div>
+                                    <md-list class="resultPad">
+                                        <md-list-item class="md-1-line checkBox" ng-repeat="rider in $root.healthQuoteResult[0].riderList">
+                                            <div layout="row" layout-wrap flex>
+                                                <div class="md-list-item-text" flex="50">
+                                                    <p>
+                                                        <a>{{rider.riderName}}</a>
+                                                    </p>
+                                                </div>
+                                                <div class="md-list-item-text" flex="50">
+                                                    <p>
+                                                        <a ng-if="rider.riderPremiumAmount > 0">{{rider.riderPremiumAmount}}</a>
+                                                        <a ng-if="rider.riderPremiumAmount == 0">{{rider.riderPremiumAmount}}</a>
+                                                    </p>
+                                                </div>
+                                                <md-divider ng-if="!$last"></md-divider>
+                                            </div>
+                                        </md-list-item>
+                                    </md-list>
+                                </md-menu-content>
+                            </md-menu>
+                        </div>   -->
+                        <!-- end -->
+                    </div>
+                    <div class="whiteBg borRad10 center" ng-if="!isGotHealthQuotes" style="min-height:250px;display: flex;" layout-align="center center">
+                        <img ng-src="{{$root.wp_path}}img/svg/eclipse.svg" alt="">
+                    </div>
+                    <div class="whiteBg borRad10" ng-if="$root.healthQuote.length==0">
+                        <div class="innerResultFrame pad20 padBot10">
+                            <div class="wrap">
+                                <!-- <div class="pj_width37 center">
+                                    <img src="{{$root.wp_path}}img/clogo/{{$root.carQuoteRequest[0].carrierId}}.png">
+                                </div> -->
+                            </div>
+                            <!-- <div layout="row">
+                                    <div class="center">
+                                            <div ng-if="$root.healthQuoteRequest[0].status == 0">
+                                                <md-progress-circular class="md-accent md-hue-1" md-diameter="60"></md-progress-circular>
+                                            </div>
+                                            <div ng-if="$root.healthQuoteRequest[0].status == 2">
+                                                <div ng-bind-html="$root.healthQuoteRequest[0].message" bind-html-compile="$root.healthQuoteRequest[0].message"></div>
+                                            </div>
+                                    </div>
+                            </div> -->
+                        </div>
+                        <div class="innerResultFrame">
+                            <div class="resIdvSec pad20 padBot10 resp_pad10" layout="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <ng-container class="section padRig15 resp_zeroPadRight width100 center">
+            <div class="">
+                <p class="dialogButton">
+                    <md-button class='width20_per capitalTxt resp_normFont13 inpCancelBtn' ng-click="backToRiderSection()">BACK</md-button>
+                    <md-button class='width20_per capitalTxt resp_normFont13 inpSaveBtn' ng-disabled="$root.healthQuote.length==0" ng-click="buyProduct($root.healthQuote)">CONFIRM</md-button>
+                </p>
+            </div>
+        </ng-container>
+    </div>
+    <!--     health Features Popup       -->
+    <ng-container ng-include="healthFeaturesTemplate"></ng-container>
+    <!--     Premium Breakup Popup       -->

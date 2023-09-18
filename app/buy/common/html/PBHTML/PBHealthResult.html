@@ -1,0 +1,5 @@
+<form name="quoteHealthInputForm">
+<ng-container ng-include="PBHealthInputSection" ng-if="inputSectionEnabled && !ridersSectionEnabled"></ng-container>
+<ng-container ng-include="PBHealthRidersSection" ng-if="!inputSectionEnabled && ridersSectionEnabled"></ng-container>
+<ng-container ng-include="PBHealthBestResultSection" ng-if="resultSectionEnabled"></ng-container>
+</form>

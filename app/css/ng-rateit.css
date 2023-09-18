@@ -1,0 +1,80 @@
+/* .ngrateit{
+    cursor: pointer;
+    display: inline-block;
+}
+	.ngrateit-readonly{
+		cursor: default;
+	}
+
+	.ngrateit-star_wrapper{
+		position: relative;
+		display: inline-block;
+		overflow: hidden;
+	}
+	.ngrateit-background, .ngrateit-value, .ngrateit-hover{
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: url("../img/star.gif");
+		background-repeat: repeat-x;
+		height: 100%;
+	}
+	.ngrateit-background{
+		width: 100%;
+	}
+	.ngrateit-reset{
+		display: inline-block;
+	    background-repeat:no-repeat;
+	    position: relative;
+	}
+	.ngrateit-value{
+		background-repeat: repeat-x;
+	}
+	.ngrateit-value{
+		background-repeat: repeat-x;
+	} */
+
+	.ngrateit-rating {
+		display: inline-block;
+		overflow: hidden;
+	}
+	
+	/* Reset button */
+	/* .ngrateit-reset{
+		background-image: url("../img/cancel-icon.svg");
+		display: inline-block;
+		background-position:  0 0;
+	} */
+	.ngrateit-reset:hover{
+		background-position:  0 100%;
+	}
+	
+	/* star */
+	.ngrateit-star{
+		display: block;
+		float: left;
+		overflow: hidden;
+		background-repeat: repeat-x;
+	}
+	
+	/* Background */
+	.ngrateit-bg-star{
+		background-image: url("../img/No_fill_outline12x12.png");
+	}
+	
+	/* Selected state */
+	.ngrateit-selected {
+		background-image: url("../img/Fill_Star_12x12.png");
+	}
+	
+	/* Cancelation of hover styling */
+	.ngrateit:not(.ngrateit-readonly) .ngrateit-hashover.ngrateit-rating span:hover ~ span {
+		background-image: url("../img/No_fill_outline12x12.png");
+	}
+	
+	/* Hover styling */
+	/* .ngrateit:not(.ngrateit-readonly) .ngrateit-hashover.ngrateit-rating:hover span {
+		cursor: pointer;
+		background-image: url("../img/hover-star.svg");
+	} */
+	

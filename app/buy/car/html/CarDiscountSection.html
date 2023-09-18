@@ -1,0 +1,89 @@
+<div class="fullShadow resultBg classForTooltip">
+	<div ng-form="carDiscountForm">
+		<md-toolbar ng-if="!wordPressEnabled" class="md-theme-light resultHeader p365-light">
+			<h2 class="md-toolbar-tools" ng-click="showDiscountInfoDetails()">
+				<span>{{globalLabel.applicationLabels.car.bestProdForMe}}</span>
+				<md-button class="md-icon-button" id="carDiscountSave" aria-label="save" ng-click="toggleReportChange()"> <i class="material-icons">save</i> </md-button>
+				<md-button class="md-icon-button" id="carDiscountReset" aria-label="undo" ng-click="toggleReportClose()"> <i class="material-icons">undo</i> </md-button>
+				<span flex></span>
+				<md-button ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled && discountInfoInputSection" class="md-icon-button" id="discountInfoInputExpandIcon">
+					<i class="material-icons">arrow_drop_down</i> </md-button>
+				<md-button ng-if="$root.baseEnvEnabled &&!$root.wordPressEnabled && !discountInfoInputSection" class="md-icon-button" id="discountInfoInputCollaseIcon">
+					<i class="material-icons">arrow_drop_up</i> </md-button>
+			</h2>
+		</md-toolbar>
+		<md-list ng-hide="$root.baseEnvEnabled && discountInfoInputSection" class="resultPad modifyReportDiv">
+			<div ng-if="!$root.wordPressEnabled && carDiscountForm.$dirty">
+				<p class="errorSmallText">
+					Changes made, please click on <i class="material-icons" style="position: relative; top: 8px;">save</i> to see the updated
+					results.
+				</p>
+			</div>
+			<div ng-if="$root.wordPressEnabled && carDiscountForm.$dirty">
+				<p class="errorSmallText">
+					Changes made, please click on <b>SUBMIT</b> to see the updated results.
+				</p>
+			</div>
+			<!-- <p class="smallText center">
+				{{globalLabel.applicationLabels.car.addInfoDiscount1}} {{globalLabel.applicationLabels.car.addInfoDiscount2}}
+			</p> -->
+			<div class="pad2TopBot">
+			<md-input-container class="md-block"> 
+				<label class="md-no-float">{{globalLabel.applicationLabels.car.deductibleAmount}}
+					<i class="fa fa-question-circle fa-sm bluecolor"
+					data-toggle="tooltip" data-html="true"
+					title="{{tooltipContent.voluntaryDeductible}}" tooltip></i>
+				</label>
+				<md-select ng-model="vehicleDetails.deductibleObject" ng-model-options="{trackBy: '$value.actualValue'}">
+					<md-option ng-value="deductible" ng-repeat="deductible in deductibleList">
+						{{deductible.actualValue}} </md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label class="md-no-float">{{globalLabel.applicationLabels.car.occupation}}
+					<i class="fa fa-question-circle fa-sm bluecolor"
+					data-toggle="tooltip" title="{{tooltipContent.occupation}}" tooltip></i>
+				</label>
+				<md-select ng-model="vehicleDetails.occupationObject" ng-model-options="{trackBy: '$value.occupation'}">
+					<md-option ng-value="occ" ng-repeat="occ in occupationList">
+						{{occ.occupation}} </md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label class="md-no-float">{{globalLabel.applicationLabels.car.dateOfBirth}}</label>
+				<input class="newDatepickerBorder" type="text" ng-model="vehicleInfo.dateOfBirth" ng-change="calculatePersonAge()" readonly="readonly"
+				 p365-date-picker="userDateOfBirthOptions" /> </md-input-container>
+			<md-input-container class="md-block"> 
+				<label class="md-no-float">{{globalLabel.applicationLabels.car.approvedAntiTheft}}
+					<i class="fa fa-question-circle fa-sm bluecolor"
+					data-toggle="tooltip"
+					title="{{tooltipContent.approvedAntiTheftDevice}}" tooltip></i>
+				</label>
+				<md-select name="isAntiTheftDevice" ng-model="vehicleDetails.isAntiTheftDevice">
+					<md-option ng-value="antiTheftDevice.value" ng-repeat="antiTheftDevice in antiTheftDeviceStatus">
+						{{antiTheftDevice.label}} </md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label class="md-no-float">{{globalLabel.applicationLabels.car.autoAssociation}}
+					<i class="fa fa-question-circle fa-sm bluecolor"
+					data-toggle="tooltip"
+					title="{{tooltipContent.automobileAssociationMember}}" tooltip></i>
+				</label>
+				<md-select name="isAutoAssociation" ng-model="vehicleDetails.isAutoAssociation">
+					<md-option ng-value="autoAssociation.value" ng-repeat="autoAssociation in autoAssociationStatus">
+						{{autoAssociation.label}} </md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		</md-list>
+	</div>
+	<ng-container class="wp_left wp_width100 wp_resultSticky">
+		<div class="center submitBtnAlign">
+			<div ng-if="$root.wordPressEnabled" class="dialogButton wrap" style="display:inline;">
+				<md-button ng-click="toggleReportClose()" class="bluebuybuttoncar wp_riderPopup pj_cancel" id="carBuyProductBtn" style="background-color: #c4c4c4 !important;">Cancel</md-button>
+				<md-button ng-click="toggleReportChange()" class="bluebuybuttoncar wp_riderPopup pj_submit" id="carBuyProductBtn">Submit</md-button>
+			</div>
+		</div>
+	</ng-container>
+</div>

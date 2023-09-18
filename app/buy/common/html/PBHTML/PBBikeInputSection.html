@@ -1,0 +1,195 @@
+<div>
+	<div class="side10PerMar center resp_noMar resp_topBot5Pad padBot3Per marTop4Per">
+		<h2 class="chooseProfTitle resp_font18">
+			<span data-bind-html-compile="p365Labels.professionalJourney.confirmDetailsBeforeAddOns" data-ng-bind-html="p365Labels.professionalJourney.confirmDetailsBeforeAddOns">
+				</span>
+		</h2>
+	</div>
+	<div ng-form="bikeInputForm">
+		<div layout="row" layout-xs="column" layout-sm="row" class="addOnSec">
+			<div flex="65" flex-xs="100" flex-sm="65" class="addOnInputRgt addOnInputRgt iPad_noBoder">
+				<div layout="row" layout-xs="column" layout-sm="column" layout-md="row">
+					<div flex="50" flex-xs="100" flex-sm="50" flex-md="50" class="mar10PerRight resp_noMar">
+						<md-input-container class="md-block" ng-if="$root.showBikeRegAreaStatus == true">
+							<label class="md-no-float classForTooltip font11">{{p365Labels.common.regArea}}
+								<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+											data-toggle="tooltip"
+											data-original-title="{{tooltipContent.registeredRTO}}" tooltip></i> -->
+							</label>
+							<input ng-model="vehicleInfo.registrationPlace" ng-click="toggleVehicleRegistrationPopup(true)" class="wp_textBlack bold12" ng-readonly="true"
+							 placeholder='{{p365Labels.common.regArea}}'>
+							<a class="left font12" href="javascript:;" class='RTOLink pinkFont' ng-click='toggleVehicleRegistrationPopup(false)' data-ng-class='{disabled: bikeDetailsForm}'>[I Know my registration number]</a>
+						</md-input-container>
+						<md-input-container class="md-block" ng-if="$root.showBikeRegAreaStatus == false">
+							<label class="md-no-float classForTooltip">{{p365Labels.common.regNumber}}
+								<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+											data-toggle="tooltip"
+											data-original-title="{{tooltipContent.registrationNumber}}" tooltip></i> -->
+							</label>
+							<input ng-model="$root.vehicleDetails.registrationNumber" ng-change="getRegNumber($root.vehicleDetails.registrationNumber)"
+							 ng-model-options='{ debounce: 2000 }' style="text-transform: uppercase;" class="bold12">
+							<div class='left font12 pinkFont'>
+								<a ng-click='toggleVehicleRegistrationPopup(true)' data-ng-class='{disabled: bikeDetailsForm}'>[Don't know my registration number]</a>
+							</div>
+							<div style="color: red" ng-show="$root.regNumStatus">{{p365Labels.validationMessages.regNumInvalid}}</div>
+						</md-input-container>
+					</div>
+					<div flex="50" flex-xs="100" flex-sm="50" flex-md="50" class="mar10PerRight resp_noMar">
+						<md-input-container class="width100">
+							<label>{{p365Labels.common.insuranceClaimExist}}</label>
+							<md-select name="type" ng-model="vehicleInfo.previousClaim" class="bold12 lineHgt34">
+								<md-option ng-value="prevClaimStatus.value" ng-repeat="prevClaimStatus in previousClaimStatus" ng-disabled="instantQuoteBikeForm">{{prevClaimStatus.label}}</md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+				</div>
+				<div layout="row" layout-xs="column" layout-sm="column" layout-md="row">
+					<div flex="50" flex-xs="100" flex-sm="100" flex-md="50" class="mar10PerRight resp_noMar">
+						<div class="innerHeadDropText">
+							<md-input-container class="width100 ">
+								<label>{{p365Labels.common.makeModelVariantFuel}}</label>
+								<md-autocomplete class='bold12 md-block wp_whiteColor noMargin noPadtop' flex md-input-name='autocompleteField' md-input-minlength='2'
+								 md-no-cache='noCache' md-selected-item='$parent.$parent.selectedItem.displayVehicle' md-selected-item-change='selectedDisplayVehicle(item)'
+								 md-search-text='searchText' md-clear-button="false" md-items='item in querySearch(searchText)' md-item-text='item.displayVehicle'>
+									<md-item-template>
+										<span md-highlight-text='searchText'>{{item.displayVehicle}}</span>
+									</md-item-template>
+									<div ng-messages='bikeInputForm.autocompleteField.$error' ng-if='bikeInputForm.autocompleteField.$touched'>
+										<div ng-message="required"> You<b>must</b> have a make. </div>
+										<div ng-message="md-require-match">Please select an existing make.</div>
+										<div ng-message="minlength">Your entry is not long enough.</div>
+									</div>
+								</md-autocomplete>
+							</md-input-container>
+						</div>
+					</div>
+					<div flex="50" flex-xs="100" flex-sm="100" flex-md="50" class="mar8PerRight resp_noMar">
+						<md-input-container class="width100" ng-show="vehicleInfo.previousClaim == 'false' && renewal == true">
+							<label>{{p365Labels.common.ncbExist}}</label>
+							<md-select name="type" class="bold12 lineHgt34" ng-model="vehicleDetails.ncb" ng-model-options="{trackBy: '$value.id'}">
+								<md-option ng-value="ncb" ng-repeat="ncb in ncbList" ng-disabled="instantQuoteBikeForm"> {{ncb.display}} </md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+				</div>
+				<div layout="row" layout-xs="column" layout-sm="row" layout-md="row">
+					<div flex="50" flex-xs="100" flex-sm="50" flex-md="50" class="mar10PerRight resp_noMar">
+						<md-input-container class="width100">
+							<label class="md-no-float classForTooltip norm11">
+								<span ng-if="quoteParam.policyType == 'renew'">{{p365Labels.common.regDate}}</span>
+								<span ng-if="quoteParam.policyType != 'renew'">{{p365Labels.common.purchaseDate}}</span>
+							</label>
+							<input class="newDatepickerBorder wp_textBlack bold12" type="text" name="regYear" ng-model="vehicleInfo.dateOfRegistration" required
+							 md-no-asterisk ng-change="validateRegistrationDate()" readonly="readonly" p365-date-picker="dateOfRegistrationOptions"
+							/>
+						</md-input-container>
+					</div>
+					<div flex="50" flex-xs="100" flex-sm="50" flex-md="50" class="mar8PerRight resp_noMar">
+						<md-input-container class="width100">
+							<label class="md-no-float classForTooltip font11">{{p365Labels.common.expiryDate}}
+								<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+									data-toggle="tooltip"
+									data-original-title="{{tooltipContent.prevPolicyExpiryDate}}" tooltip></i> -->
+							</label>
+							<input class="newDatepickerBorder wp_textBlack bold12" type="text" ng-model="vehicleInfo.PreviousPolicyExpiryDate" ng-change="validatePrevPolicyStartDate()"
+							 readonly="readonly" p365-date-picker="previousPolicyExpiryDateOptions" />
+						</md-input-container>
+					</div>
+				</div>
+			</div>
+			<div flex="35" flex-xs="100" flex-sm="35" flex-md="35">
+				<!-- <div class="border1Bot equalHgt noEqualHt iPad_noBoder resp_noBoder">
+					
+					 <div class="pad3_17Per resp_pad7_2Per">
+						<p class="grey4dTxt" style="text-align: center;font-size: 15px;">{{p365Labels.common.selectIdv}}</p>
+						<div layout="row" class="addOnIDV">
+							<div flex="100" class="wrap">
+								<md-radio-group  ng-model="vehicleDetails.idvOption" style="max-width: unset; width: auto;" ng-change="updateUserIDV()">
+									<md-radio-button ng-repeat="option in idvOptions" class="noMargin leftMarginLeft" value="{{option.value}}">{{option.label}}</md-radio-button>
+								</md-radio-group>
+							</div>
+						</div>
+						<div ng-show="vehicleDetails.idvOption == 2">
+							<md-input-container class="md-block IDV_Input noMargin" style="background: #fff;margin: 5px 0;" >
+								<input ng-model="quoteParam.userIdv" ng-change="validateUserIDV()" style="margin: 0px 7px; width: 95%;">
+								<div class="clearfix"></div>
+								<p class="right font10" style="padding-right: 2%;">&#8377; {{(minIDVSuggested) | number:0 | regexINR}} to &#8377; {{(maxIDVSuggested) | number:0 | regexINR}}</p>
+								<div style="color: red" ng-show="userIDVError">{{p365Labels.validationMessages.userIDVInvalid}}</div>
+							</md-input-container>
+						</div>
+					</div> 
+				</div> -->
+			</div>
+		</div>
+		<ng-container class="section padRig15 width100 center">
+			<div class="pad20">
+				<p class="dialogButton">
+					<md-button class='width20_per capitalTxt resp_normFont13 inpCancelBtn iPad_btnAutoWid' ng-click="backToQuotes()">{{p365Labels.common.backToQuotes}}</md-button>
+					<md-button class='width20_per capitalTxt resp_normFont13 inpSaveBtn iPad_btnAutoWid' ng-click="confirmInput()" ng-disabled="bikeInputForm.$invalid || userIDVError">{{p365Labels.common.confirm}}</md-button>
+				</p>
+			</div>
+		</ng-container>
+	</div>
+</div>
+
+
+<modal-dialog show='modalVehicleRegistration' width='900px' class="ng-hide RTOSearchDiv fghjhh" style="overflow:auto;">
+
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">{{p365Labels.common.regPlaceModalLabel1}} </h2>
+		</div>
+		<div class='ng-modal-close wp_modalClose closePopup' ng-click='hideModal()' ng-if="$root.wordPressEnabled">
+			<i class="material-icons">close</i>
+		</div>
+		<div class='ng-modal-close closePopup' ng-click='hideModal()' style="color: #fff;" ng-if="!$root.wordPressEnabled">
+			<i class="material-icons">close</i>
+		</div>
+	</div>
+
+	<div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop">
+		<div class="pad30 wp_noPadTop wp_RtoMetro">
+			<div class="inner-addon right-addon posRel">
+				<i class="material-icons RTOSearchIcon">search</i>
+				<input type="text" class="form-control wp_borRadius30 wp_noBoxShadow" autocomplete="off" placeholder="Search for your RTO or City using search option below"
+				 ng-required="true" name="search" ng-model="$root.selectedRegData" typeahead-on-select="onSelect($item)" typeahead-wait-ms="10"
+				 typeahead-no-results="noResults" uib-typeahead="reg.display for reg in getRegPlaceList($viewValue)" typeahead-show-hint="true"
+				 typeahead-min-length="2" style="width: 100%;" />
+			</div>
+			<div class="dropdown-menu-NoResult" ng-if="noResults">No Results Found
+			</div>
+			<div class="RTOPopup">
+				<p class="RTOHeading blueTextColor popularHeadRto center">Popular Cities</p>
+			</div>
+			<div class="RTOMiddleTab">
+				<div class="gallery-items" style="padding-bottom: 5px;">
+					<div class="gallery-item clickMetro" ng-click="selectedMetroRTO(metros)" ng-repeat="metros in defaultMetroList">
+						<div class="gallery-contents">
+							<div class="thumbnail gallery-trigger wp_RTOThumbnail">{{metros.cityName}}</div>
+							<input type="hidden" ng-value="$index" class="rowCount" />
+						</div>
+						<div class="showMetro">
+							<div class="info-bg" ng-hide="hideStatus" style="display: block;">
+								<div class="section group divForMobile">
+									<div class="col span_1_of_3 borderBtmRTO" ng-repeat="rto in metros.RTODetails">
+										<a ng-click="onSelect(rto)" class="hiddencities">{{rto.display}}</a>
+									</div>
+									<div ng-if="dummyLength==1" class="hideforMobile">
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+									</div>
+									<div ng-if="dummyLength==2" class="hideforMobile">
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</modal-dialog>

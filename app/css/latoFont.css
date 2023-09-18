@@ -1,0 +1,38 @@
+/* latin-ext */
+ 
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Lato Regular'), local('Lato-Regular'), url(../fonts/Lato-Regular.ttf);
+}
+
+@font-face {
+    font-family: Lato Regular !important;
+    src: url(../fonts/Lato-Regular.ttf);
+}
+
+@font-face {
+    font-family: Lato-Bold !important;
+    src: url(../fonts/Lato-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'Lato Medium' !important;
+    src: local('Lato Medium'), local('Lato-Medium'), url(../fonts/Lato-Medium.ttf);
+}
+
+@font-face {
+    font-family: Lato-Thin !important;
+    src: url(../fonts/Lato-Thin.ttf)
+}
+
+@font-face {
+    font-family: Lato-Black !important;
+    src: url(../fonts/Lato-Black.ttf)
+}
+
+@font-face {
+    font-family: Lato-Hairline !important;
+    src: url(../fonts/Lato-Hairline.ttf)
+} 

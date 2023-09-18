@@ -1,0 +1,196 @@
+@media only screen and (min-device-width : 320px) and (max-device-width
+	: 568px) {
+	figure img {
+		height:255px;
+		width: 100%;
+	}
+	.carDiscountBtn {
+		margin-right: 0% !important;
+	}
+	.pad30 {
+		padding: 0px 0px 30px 0px;
+	}
+	.gallery-contents {
+		margin: 0px;
+	}
+	.reducePadding {
+		padding: 10px 0px 0px 0;
+	}
+	
+	
+	/*Reena.S ...........Purchasing Statement...........*/
+	.purchasingHeader p {
+		text-align: left;
+		font-size: 12px;
+	}
+	.outerPurchase {
+		width: 100%;
+		background-color:;
+	}
+	.innerPurchaseLeft {
+		width: 100%;
+		background-color:;
+		float: none;
+	}
+	.innerPurchaseRight {
+		width: 100%;
+		background-color:;
+		float: none;
+	}
+	.purchaseTitle {
+		width: 100%;
+		text-align: left;
+		color: #f7a100;
+		font-size: 18px;
+		padding-bottom: 10px;
+	}
+	.purchaseBody {
+		width: 100%;
+		background-color: #d7d9d3;
+		border: 1px solid #f7a100;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+	}
+	.purchaseBodyLeft {
+		width: 100%;
+		float: none;
+	}
+	.purchaseBodyRight {
+		width: 100%;
+		float: none;
+	}
+	.labelLeft {
+		padding: 10px 5px;
+		width: 60%;
+		float: left;
+		font-size: 12px;
+	}
+	.labelRight {
+		padding: 10px;
+		width: 40%;
+		float: left;
+		font-size: 12px;
+		font-weight: bold;
+	}
+	.extraPolicyHeight {
+		height: auto;
+	}
+	.extraVehicleHeight {
+		height: auto;
+	}
+	.rightBorder {
+		border-right: none;
+	}
+	.purchaseTable {
+		border-spacing: 1px;
+		width: 100%;
+		float: none;
+		font-size: 12px;
+	}
+	.purchaseTable th {
+		background-color: #f7a100;
+		text-align: left;
+		padding: 7px 5px;
+		border: none;
+		border-collapse: collapse;
+		color: #FFF;
+	}
+	.purchaseTable td {
+		background-color: #d7d9d3;
+		text-align: left;
+		padding: 7px 10px;
+		border: none;
+		border-collapse: collapse;
+		color: #424242;
+	}
+	.personalLabelLeft {
+		padding: 10px 5px;
+		width: 27%;
+		float: left;
+		font-size: 12px;
+	}
+	.personalLabelRight {
+		padding: 10px;
+		width: 70%;
+		float: left;
+		font-size: 12px;
+		font-weight: bold;
+	}
+	.purchaseFooter {
+		width: 100%;
+		border-top: 1px solid #2991ea;
+		text-align: center;
+		padding: 10px;
+		line-height: 20px;
+		font-size: 12px;
+	}
+	.purchaseFooterFeatures {
+		font-size: 15px;
+		font-weight: bold;
+		color: #565656;
+	}
+	.outerPurchase .pad10{padding:10px !important;}
+
+	/*Reena.S ...........Purchasing Statement...........*/
+	.responsiveTellus input[name="loginMobileNumber"] {
+		width: 88% !important;
+	}
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width
+	: 1024px) {
+	.carDiscountBtn {
+		margin-right: 0% !important;
+	}
+	.reducePadding {
+		padding: 10px 0px 0px 0;
+	}
+	.pad30 {
+		padding: 0px 0px 30px 0px;
+	}
+	.gallery-contents {
+		margin: 0px;
+	}
+	/*Reena.S ...........Purchasing Statement...........*/
+	.purchasingHeader p {
+		text-align: left;
+		font-size: 13px;
+	}
+	.innerPurchaseLeft {
+		width: 100%;
+		background-color:;
+		float: none;
+	}
+	.innerPurchaseRight {
+		width: 100%;
+		background-color:;
+		float: none;
+	}
+	.purchaseTitle {
+		width: 100%;
+		text-align: left;
+		color: #f7a100;
+		font-size: 18px;
+		padding-bottom: 10px;
+	}
+	.purchaseTable {
+		border-spacing: 1px;
+		width: 100%;
+		float: left;
+	}
+	.purchaseFooter {
+		width: 100%;
+		border-top: 1px solid #2991ea;
+		text-align: center;
+		padding: 15px;
+		line-height: 22px;
+		font-size: 12px;
+	}
+	.purchaseFooterFeatures {
+		font-size: 15px;
+		font-weight: bold;
+		color: #565656;
+	}
+	/*Reena.S ...........Purchasing Statement...........*/
+}

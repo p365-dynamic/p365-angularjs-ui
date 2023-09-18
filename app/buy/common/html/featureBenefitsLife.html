@@ -1,0 +1,50 @@
+<modal-dialog show='modelBeneFeatureLife' width='80%' height='auto' class="ng-hide">
+    <div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+        <div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+            <h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">Feature Benefits</h2>
+        </div>
+        <div class='ng-modal-close wp_modalClose closePopup' ng-click='closeBeneFeatureLife()'>
+            <i class="material-icons">highlight_off</i>
+        </div>
+    </div>
+    <div class="tab-pane">
+        <div class="pad10 pinPopup">
+            <md-input-container class="md-block" style="margin:0px !important;">
+                <div id="tabbed-nav">
+                    <!--Tab code-->
+                    <md-content>
+                        <md-content class="md-padding grey4bTxt pad10" style="max-height:60vh;overflow:auto;">
+                            <div class="healthViewBorder topBot20Padd">
+                                <div class="hideforMobile">
+                                    <div class="buydetails healthViewDetails">
+                                        <div class="section" style="width: 100%" ng-repeat="productFeatures in productFeaturesList" ng-if="productFeatures.cardView=='Y'">
+                                            <div class="col col-lg-4 healthViewPopupPadding">
+                                                <p>{{productFeatures.title}}</p>
+                                            </div>
+                                            <div class="col col-lg-8 healthViewPopupPadding">
+                                                <p>{{productFeatures.details}}</p>
+                                                <div ng-if="productFeatures.detailsList.length>0">
+                                                    <ul ng-repeat="item in productFeatures.detailsList" style="margin-bottom:0.4em;">
+                                                        <li style='/*font-family: "Helvetica Neue", sans-serif !important;font-weight: normal;font-size: initial;*/'>{{item.detail}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-content>
+                    </md-content>
+                </div>
+            </md-input-container>
+            <ng-container class="section padRig15 width100 center">
+                <div class="">
+                    <p class="dialogButton">
+                        <md-button class='width20_per capitalTxt resp_normFont13 inpSaveBtn' target="_frame" href={{brochureUrl}}>View Brochure</md-button>
+                    </p>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</modal-dialog>

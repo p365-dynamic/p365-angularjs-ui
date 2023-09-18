@@ -1,0 +1,194 @@
+<form name="travelInstantQuoteForm">
+	<div ng-controller="travelInstantQuoteController">
+		<div class="professionalBody bestQuote resp_padContainer">
+			<div class="personalInfo resp_topBot5Pad padBot5Per marTop4Per">
+				<h2 class="chooseProfTitle">{{$root.professionalText}}</h2>
+			</div>
+			<div layout='row' layout-xs="column" layout-sm="column" class='resp_noMar'>
+				<div flex="45" flex-xs="100" flex-sm="100" class="selfCenter">
+					<img class="width80" ng-src="{{$root.wp_path}}img/professionalJourney/{{$root.professionalImg}}.png">
+				</div>
+				<div flex="55" flex-xs="100" flex-sm="100" class="">
+					<div class="pad10 vertAlignCenter pbCarInput offWhiteBg side3_6Pad borRad7 marBot3Per createLeadHt">
+						<div layout="row" class="width100">
+							<div flex="50" class="left padRig5Per">
+								<md-input-container class="md-block"> <label class="pbCarInput">{{globalLabel.applicationLabels.travel.tripType}}</label>
+									<md-select name="tripType" ng-model="travelDetails.tripType" ng-change="toggleTripType();callSingleClickQuote()" ng-disabled=false>
+										<md-option ng-value="type.tripType" ng-repeat="type in tripTypeList">
+											{{type.displayField}}</md-option>
+									</md-select>
+									<div ng-if="travelInstantQuoteForm.startDate.$error.required" style="color: red;">{{globalLabel.applicationLabels.travel.required}}</div>
+								</md-input-container>
+							</div>
+							<div flex="50" class="left pbCarInput">
+								<md-input-container class="width100" ng-show="travelDetails.tripType == 'multi'">
+									<label class="pbCarInput" class="pbCarInput">{{globalLabel.applicationLabels.travel.tripDuration}}</label>
+									<md-select name="tripDuration" ng-model="travelDetails.tripDuration" ng-change="callSingleClickQuote()">
+										<md-option ng-value="tripDuration.duration" ng-repeat="tripDuration in tripDurationList">
+											{{tripDuration.displayField}}
+										</md-option>
+									</md-select>
+								</md-input-container>
+							</div>
+						</div>
+						<div layout="row" layout-xs="column" layout-sm="column" class="width100">
+							<div flex="100" flex-xs="100" flex-sm="100" class="left">
+								<md-input-container class="width100">
+									<label class="pbCarInput">{{globalLabel.applicationLabels.travel.destination_label}} </label>
+									<md-chips ng-model="travelDetails.destinations" md-require-match="true" class="wp_travel_md-chips_white" ng-change="" name="dest"
+									 ng-required="true" placeholder="Destinations" md-on-add="callSingleClickQuote()" md-on-remove="callSingleClickQuote()"
+									 secondary-placeholder="Destination">
+										<md-autocomplete style="width:40%;" md-selected-item="" md-search-text="searchText" md-items="continent in getContinentList(searchText)"
+										 md-item-text="continent.displayField" md-min-length="2" md-autoselect="true" md-input-name="destination">
+											<span md-highlight-text="searchText">{{continent.displayField}}</span>
+											<md-not-found> <span style="color:red;">No
+											Results Found</span> </md-not-found>
+										</md-autocomplete>
+										<md-chip-template>
+											<strong>{{travelDetails.destinations[$index].displayField}}</strong>
+										</md-chip-template>
+									</md-chips>
+									<span ng-show="travelDetails.destinations.length == 0" style="color:red;">
+												At least one destination is required
+												</span>
+								</md-input-container>
+							</div>
+						</div>
+						<div layout="row" layout-xs="column" layout-sm="column" class="width100">
+							<div flex="50" flex-xs="100" flex-sm="100" class="left padRig5Per">
+								<md-input-container class="width100">
+									<label class="pbCarInput">{{globalLabel.applicationLabels.travel.startDate}}</label>
+									<input class="" type="text" name='startDate' ng-model="travelDetails.startdate" readonly="readonly" ng-change="toggleDate()"
+									 p365-date-picker="travelStartDateOptions" required md-no-asterisk />
+									<div ng-if="travelInstantQuoteForm.startDate.$error.required" style="color: red;">{{globalLabel.applicationLabels.travel.required}}</div>
+									<div ng-messages="travelInstantQuoteForm.startDate.$error" ng-if="travelInstantQuoteForm.startDate.$touched"></div>
+								</md-input-container>
+
+							</div>
+							<div flex="50" flex-xs="100" flex-sm="100" class="left pbCarInput">
+								<md-input-container class="width100">
+									<label class="pbCarInput">{{globalLabel.applicationLabels.travel.endDate}}</label>
+									<input class="" type="text" name='endDate' ng-model="travelDetails.enddate" readonly="readonly" ng-change="callSingleClickQuote()"
+									 p365-date-picker="travelEndDateOptions" required md-no-asterisk />
+									<div ng-if="travelInstantQuoteForm.endDate.$error.required" style="color: red;">{{globalLabel.applicationLabels.travel.required}}</div>
+									<div ng-messages="travelInstantQuoteForm.endDate.$error" ng-if="travelInstantQuoteForm.endDate.$touched"></div>
+								</md-input-container>
+							</div>
+						</div>
+						<div layout="row" layout-xs="column" layout-sm="column" class="width100">
+							<div flex="50" flex-xs="100" flex-sm="100" class="left padRig5Per">
+								<md-input-container class="width100 border1Bot noMarTop">
+									<div class="pbCarInput">
+										{{globalLabel.applicationLabels.travel.insuranceFor}}
+										<a data-ng-class="{'disabled': instantQuoteTravelForm}" href="javascript:;" ng-click='toggleTraveller()' style="font-size: 13px !important;">[{{globalLabel.applicationLabels.travel.change}}]</a>
+									</div>
+									<div class="clearfix"></div>
+									<div ng-repeat="data in travellersList" ng-if="data.status">
+										<span class="" style="font-size: 15px !important;"> <b>
+														{{data.relation}}&nbsp; - {{data.gender}} - {{data.age}} years</b>
+												</span>
+									</div>
+								</md-input-container>
+
+							</div>
+							<div flex="50" flex-xs="100" flex-sm="100" class="left pbCarInput">
+								<md-input-container class="width100">
+									<label class="pbCarInput">{{globalLabel.applicationLabels.travel.sumInsured}}</label>
+									<md-select name="type" ng-model="travelDetails.sumInsured" ng-change="callSingleClickQuote()" required>
+										<md-option ng-value="suminsuredvalue.suminsured" name='suminsured1' ng-repeat="suminsuredvalue in sumInsuredList">&#36; {{suminsuredvalue.suminsured | regexINR}}</md-option>
+									</md-select>
+								</md-input-container>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<modal-dialog show="modalTraveller" width='600px' height='auto' class="ng-hide">
+			<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+				<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+					<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{globalLabel.applicationLabels.travel.addTravellers}}</h2>
+				</div>
+				<div class='ng-modal-close wp_modalClose closePopup' ng-click='closeTravellerModal()'>
+					<i class="material-icons">highlight_off</i>
+				</div>
+			</div>
+			<!-- <div class="section hideforMobile" ng-scrollable style="min-height:250px; max-height: auto;"> -->
+			<div class="pad10 mobileHealthFamily pad10Padding mobileSmFix">
+				<div class="leadCaptureBox familyPopup selectRiderPop">
+
+					<div class="popupTableHealth popupPadding" layout="row" style="padding: 5% 0% !important;">
+						<div class="font15 greyb7Txt" flex="30">
+							Travellers
+						</div>
+						<div class="font16 greyb7Txt" flex="20">
+							Gender
+						</div>
+						<div class="font16 greyb7Txt" flex="20">
+							Age
+						</div>
+						<div class="font16 greyb7Txt" flex="30">
+							Relationship
+						</div>
+					</div>
+
+					<div ng-repeat="data in travellersList">
+						<div layout="row" class="familyPopupPadding section">
+							<div flex="30">
+								<md-checkbox value="{{data}}" ng-model="data.status" ng-change="removeTraveller($index)" class="customCheckBoxPopup"></md-checkbox>
+								<span class="customCheckBoxLabel"> {{globalLabel.applicationLabels.travel.traveller}}&nbsp;{{data.traveller_id}}</span>
+							</div>
+							<div class="familySelect" flex="20">
+								<div ng-if="data.status">
+									<md-input-container class="md-block " style="margin: 0%; top:-7px;">
+										<md-select name="gender" ng-model="data.gender" class="wp_familyPopoup " style="width: 86% !important;">
+											<md-option ng-value="gen.value" ng-selected="{{gen.value == data.gender}}" ng-repeat="gen in genderType">{{gen.label}}</md-option>
+										</md-select>
+									</md-input-container>
+								</div>
+							</div>
+							<div class="familySelect " flex="20">
+								<input type="hidden" ng-value="data.age" class="hiddenAge">
+								<div ng-if="data.status">
+									<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+										<md-select name="age" ng-model="data.age" class="wp_familyPopoup " style="width: 80% !important;">
+											<md-option ng-value="value" ng-selected="{{value == data.age}}" ng-repeat="value in getAgeArray(data.minAge, data.maxAge)">
+												{{value}}</md-option>
+										</md-select>
+									</md-input-container>
+								</div>
+							</div>
+							<div class="familySelect" flex="30">
+								<div ng-if="data.status">
+									<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+										<md-select name="relation" ng-model="data.relation" class="wp_familyPopoup" ng-change="changeRelation(data.relation)">
+											<md-option ng-value="relation.member" ng-selected="{{relation.member == data.relation}}" ng-repeat="relation in relationType"
+											 ng-show="!relation.val">
+												{{relation.member}}
+											</md-option>
+										</md-select>
+									</md-input-container>
+								</div>
+							</div>
+						</div>
+						<div class="familyBtnAlign" style="text-align: center;">
+							<md-button ng-click="addTraveller($index);" class="familyBtn font12" ng-show="!disableAddButton && data.addNew"> &nbsp;
+								<i ng-if="basicExpanded" class="fa fa-minus" style="font-size: 10px;" aria-hidden="true"></i> <i ng-if="!basicExpanded"
+								 class="fa fa-plus" style="font-size: 10px;" aria-hidden="true"></i> Other Family Members&nbsp; </md-button>
+						</div>
+					</div>
+					<div class="center submitBtnAlign">
+						<div style="color: red" ng-repeat="error in familyErrors | limitTo:1" class="familySubmit">{{error}}</div>
+						<md-button type="submit" class="md-raised md-primary wp_button popupSubmitBtn capitalizeText font14" id="submitFamilyMemberInstant"
+						 ng-click="submitTravellers()" style="margin: 0px !important;">Submit</md-button>
+					</div>
+				</div>
+			</div>
+		</modal-dialog>
+	</div>
+</form>
+<!-- <div ng-scrollable style="height:400px;"> -->
+
+<!-- </div> -->

@@ -1,0 +1,25 @@
+<div ng-form='PBLifeRiderForm'>
+
+		<div layout="row" layout-xs="column" layout-sm="column" class="recomdAddonMotor">
+
+			<div flex="100" class="recomdAddonRgt">
+					<div layout="row" layout-xs="column" layout-sm="column" style="flex-wrap: wrap">
+						<div flex="50" flex-xs="100" flex-sm="100" style="padding-right: 10px;"  ng-repeat="addOnCover in addOnCovers"  ng-if="addOnCover.isEnable == 'Y'">
+								<div layout="row" layout-xs="column" layout-sm="row" layout-wrap flex>
+										<div class="classForTooltip" flex="100">
+												<div layout="row" layout-xs="column" layout-sm="row">
+									<md-checkbox class="blackAddon resize" checklist-model="personalDetails.selectedAddOnCovers" checklist-value="addOnCover"
+									 name='add' ng-change="updateRiders(addOnCover)">
+									 <span class="font15 marTopBot10" layout="row"> {{addOnCover.riderName}}</span>
+									</md-checkbox>
+									 <span class="pinkFont" style='margin-left: 10px;font-size: 10px;margin-top: 15px' ng-show="addOnCover.isRecommended == true && $root.showRecommendedRider">(P365 Recommended)</span>
+								
+						</div>
+						<p class="font11 marginCheckbox">{{addOnCover.description}}</p>
+					</div>
+				</div>
+			</div>
+		</div></div>
+		</div>
+		
+	</div>

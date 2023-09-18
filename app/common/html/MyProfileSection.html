@@ -1,0 +1,146 @@
+<div >
+    <div layout='row' layout-xs='column' layout-sm='row' class='confirmContent marBot15 resp_confirmBoxProp' layout-align='center top'>
+        <div flex='20' flex-xs='100' flex-sm='100' class='center'>
+            <div class='offWhiteBg pad5Per grey87Txt resp_pad1'>
+                <p>Name & Gender</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20'>
+                <p class='capitalizeText' ng-show="profileDetails.firstName">{{profileDetails.firstName}}{{(profileDetails.lastName)?'&nbsp;&nbsp;'+profileDetails.lastName:''}}</p>
+                <p class='capitalizeText' ng-show="profileDetails.gender">{{profileDetails.gender}}</p>
+                <p class='capitalizeText' ng-show="!profileDetails.firstName && !profileDetails.gender">Not Applicable </p>
+            </div>
+        </div>
+        <div flex='15' flex-xs='100' flex-sm='100' class='center'>
+            <div class='offWhiteBg pad5Per grey87Txt resp_pad1'>
+                <p>Work Profession</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20'>
+                <p class='capitalizeText' ng-show="profession.professionName">{{profession.professionName}}</p>
+                <p class='capitalizeText' ng-show="!profession.professionName">Not Applicable </p>
+            </div>
+        </div>
+        <div flex='15' flex-xs='100' flex-sm='100' class='center'>
+            <div class='offWhiteBg pad5Per grey87Txt resp_pad1'>
+                <p>Income Range</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20'>
+                <p ng-show="commonInfo.incomeRange.label">{{commonInfo.incomeRange.label}}</p>
+                <p></p>
+                <p ng-show="!commonInfo.incomeRange.label">Not Applicable </p>
+            </div>
+        </div>
+        <div flex='15' flex-xs='100' flex-sm='100' class='center'>
+            <div class='offWhiteBg pad5Per grey87Txt resp_pad1'>
+                <p>Family Info</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20'>
+                <p ng-repeat='member in familyComp' class='capitalizeText' ng-show="familyComp">{{member.display}}&nbsp;-&nbsp;{{member.birthYear}}</p>
+                <p ng-show="!familyComp">Not Applicable </p>
+            </div>
+        </div>
+        <div flex='15' flex-xs='100' flex-sm='100' class='center'>
+            <div class='offWhiteBg pad5Per grey87Txt resp_pad1'>
+                <p>Life Style</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20'>
+                <p ng-if='commonInfo.smoking == false'>Non Smoker</p>
+                <p ng-if='commonInfo.smoking == true'>Smoker</p>
+                <p ng-show="!commonInfo.smoking && !commonInfo.weight && !commonInfo.dailyActivity">Not Applicable </p>
+                <p ng-show="commonInfo.familyHistory.length > 0">
+                    <span ng-repeat='history in commonInfo.familyHistory' class='capitalizeText'>{{history.label}}
+                        <span ng-if='!$last'>,</span>
+                    </span>
+                </p>
+                <p class='capitalizeText' ng-show="commonInfo.weight">{{commonInfo.weight}} </p>
+                <p class='capitalizeText' ng-show="commonInfo.dailyActivity">{{commonInfo.dailyActivity}} </p>
+            </div>
+        </div>
+        <div flex='20' flex-xs='100' flex-sm='100' class='center'>
+            <div class='offWhiteBg pad5Per grey87Txt resp_pad1'>
+                <p>Address</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20'>
+                <p class="capitalizeText">{{commonInfo.homeStatus}}</p>
+                <span ng-show="addressDetails">
+                    <p>{{addressDetails.pincode}}</p>
+                    <p class='capitalizeText'>{{addressDetails.streetDetails}}</p>
+                    <p class='capitalizeText'>{{addressDetails.city}}
+                        <span ng-if='addressDetails.city'>,</span>{{addressDetails.state}}</p>
+                </span>
+                <p ng-show="!addressDetails.pincode">Not Applicable </p>
+            </div>
+        </div>
+    </div>
+    <div layout='row' layout-xs='column' layout-sm='row' class='confirmContent marBot15 resp_confirmBoxProp' layout-align='center top'>
+       <!-- check weather the car or bike details present or not //  -->
+        <div  flex='20' flex-xs='100' flex-sm='100' class='center'>
+            <div class='offWhiteBg pad5Per grey87Txt resp_pad1'>
+                <p>Car Details</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20' ng-show='vehicleDetails.carInfo'>
+                <p class='upperCaseText' ng-if='!$root.showCarRegAreaStatus && vehicleDetails.carInfo.registrationNumber'>{{vehicleDetails.carInfo.registrationNumber}}</p>
+                <p class='upperCaseText' ng-if='$root.showCarRegAreaStatus && vehicleDetails.carInfo.registrationPlace'>{{vehicleDetails.carInfo.registrationPlace}}</p>
+                <p class='capitalizeText'>{{vehicleDetails.carInfo.carrierVariantDisplayName}}</p>
+                <p>{{vehicleDetails.carInfo.registrationYear}}</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20' ng-show='!vehicleDetails.carInfo'>
+                <p>Not Applicable </p>
+            </div>
+        </div>
+        <div   flex='15' flex-xs='100' flex-sm='100' class='center'>
+            <div class='offWhiteBg pad5Per grey87Txt resp_pad1'>
+                <p>Bike Details</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20' ng-show='vehicleDetails.bikeInfo'>
+                <p class='upperCaseText' ng-if='!$root.s && vehicleDetails.bikeInfo.registrationNumber'>{{vehicleDetails.bikeInfo.registrationNumber}}</p>
+                <p class='upperCaseText' ng-if='$root.showBikeRegAreaStatus && vehicleDetails.bikeInfo.registrationPlace'>{{vehicleDetails.bikeInfo.registrationPlace}}</p>
+                <p class='capitalizeText'>{{vehicleDetails.bikeInfo.carrierVariantDisplayName}}</p>
+                <p>{{vehicleDetails.bikeInfo.registrationYear}}</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20' ng-show='!vehicleDetails.bikeInfo'>
+                <p>Not Applicable </p>
+            </div>
+        </div>
+        <div flex='15' flex-xs='100' flex-sm='100' class='center'>
+            <div class='offWhiteBg pad5Per grey87Txt resp_pad1'>
+                <p>Specialization</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20'>
+                <p class='capitalizeText' ng-show="commonInfo.specialization">{{commonInfo.specialization}}</p>
+                <p class='capitalizeText' ng-show="!commonInfo.specialization">Not Applicable </p>
+                <p></p>
+
+            </div>
+        </div>
+        <div flex='15' flex-xs='100' flex-sm='100' class='center'>
+            <div class='offWhiteBg pad5Per grey87Txt resp_pad1'>
+                <p>Work Type</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20'>
+                <p class='capitalizeText' ng-show="commonInfo.professionalLiability">{{commonInfo.professionalLiability}}</p>
+                <p class='capitalizeText' ng-show="commonInfo.clinicStatus">{{commonInfo.clinicStatus}}</p>
+                <p class='capitalizeText' ng-show="!commonInfo.professionalLiability && !commonInfo.clinicStatus">Not Applicable </p>
+            </div>
+        </div>
+        <div flex='15' flex-xs='100' flex-sm='100' class='center'>
+            <div class='offWhiteBg pad5Per grey87Txt resp_pad1'>
+                <p>Policies365 Donate</p>
+            </div>
+            <div class='bold12 confirmValue resp_pad20'>
+                <p class='capitalizeText' ng-show="commonInfo.ngo.displayName">{{commonInfo.ngo.displayName}}</p>
+                <p class='capitalizeText' ng-show="!commonInfo.ngo.displayName">Not Applicable </p>
+            </div>
+        </div>
+        <div flex='20' flex-xs='100' flex-sm='100' class='center'>
+            <div class='offWhiteBg pad5Per grey87Txt resp_pad1'>
+                <p> Communication Details</p>
+            </div>
+
+            <div class='bold12 confirmValue resp_pad20'>
+                <p class='capitalizeText' ng-show="profileDetails.mobile">M No-  {{profileDetails.mobile}}</p>
+                <p class='capitalizeText' ng-show="profileDetails.emailId">Email -{{profileDetails.emailId}}</p>                                    
+                <p class='capitalizeText' ng-if="!profileDetails.mobile && !profileDetails.emailId ">Not Applicable</p>
+            </div>
+        </div>
+    </div>
+</div>

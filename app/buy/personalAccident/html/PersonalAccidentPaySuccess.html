@@ -1,0 +1,269 @@
+<loading></loading>
+<ng-container ng-if="$root.wordPressEnabled">
+<div class="clearfix"></div>
+<div class="wp_InsideWrapperPaySuccess wp_paySectionBckgrnd wp_payBorder wp_pad20 wp_marginAutoSign wp_gradientBg">
+	<h3 class="wp_paySuH3">
+		<span><i class="fa fa-check-circle" aria-hidden="true"
+			style="color: #6ABC59; font-size: 25px;"></i></span> Payment Successful
+	</h3>
+	<p class="wp_paySuP">
+		We thank you for choosing Policies365 for your insurance needs and <br>
+		acknowledge the receipt INR
+		{{pAReponseToken.netPremium}} for your Personal Accident 
+		Insurance Policy.<br> the premium has been calculated on the
+		basis of information provided by you in the<br> proposal form and
+		is subject to the underwriting process. <br> policy copy
+		attached, in a short while.
+	</p>
+	<div
+		ng-if="createPolicyDoc.proposalStatus=='NSTP' || createPolicyDoc.proposalStatus=='nstp'">
+		<p class="wp_paySuP">
+			Application has been sent for underwriting.<br>
+			{{selectedProduct.insuranceCompany}} would be in touch with you
+			shortly.
+		</p>
+	</div>
+<div>
+	<p class="wp_paySuDetailsP">The policy details are as follows:</p>
+	<div layout="row" class="wp_paySuccessDetails">
+		<div flex="35">
+			<p class="wp_paySuP">Policy  number</p>
+		</div>
+		<div flex="10">
+			<p class="wp_paySuP">:</p>
+		</div>
+		<div flex="55">
+			<p class="wp_paySuP">
+					<!-- viewPolicy() -->
+				<a href="" ng-click="">
+					{{pAReponseToken.policyNo}} </a>
+			</p>
+		</div>
+	</div>
+	<div layout="row" class="wp_paySuccessDetails">
+		<div flex="35">
+			<p class="wp_paySuP">Policy Start Date</p>
+		</div>
+		<div flex="10">
+			<p class="wp_paySuP">:</p>
+		</div>
+		<div flex="55">
+			<p class="wp_paySuP">{{pAReponseToken.policyStartDate}}</p>
+		</div>
+	</div>
+
+	<div layout="row" class="wp_paySuccessDetails">
+		<div flex="35">
+			<p class="wp_paySuP">Policy End Date</p>
+		</div>
+		<div flex="10">
+			<p class="wp_paySuP">:</p>
+		</div>
+		<div flex="55">
+			<p class="wp_paySuP">{{pAReponseToken.policyEndDate}}</p>
+		</div>
+	</div>
+
+	
+	<div layout="row" class="wp_paySuccessDetails">
+		<div flex="35">
+			<p class="wp_paySuP">Premium Paid Amount</p>
+		</div>
+		<div flex="10">
+			<p class="wp_paySuP">:</p>
+		</div>
+		<div flex="55">
+			<p class="wp_paySuP">&#x20B9;
+				{{pAReponseToken.netPremium}}</p>
+		</div>
+	</div>
+</div>
+
+<div>
+	<p class="wp_paySuP">
+		In case of any queries or assistance, please call us on our<br> <span
+			class="wp_paySuDetailsP">Helpline 022-42114299</span> (Office hours
+		9:30 am to 6:00 pm)<br> or write to us at <span
+			class="wp_paySucLink"><a>contact@policies365.com</a></span>.
+	</p>
+</div>
+<div>
+	<p class="wp_paySuP">We look forward to a continuous association
+		with you.</p>
+</div>
+</div>
+</ng-container>
+<ng-container ng-if="!$root.wordPressEnabled">
+<div class="editback">
+	<div class="widthFull resultCommon">
+		<div class="InsideWrapper">
+			<div class="additionalfeatures">
+				<div>
+					<h2 style="color: #414141;">Congratulations!</h2>
+					<h4 style="color: #424242; text-align: center;">
+						<b
+							ng-if="createPolicyDoc.proposalStatus=='NSTP' || createPolicyDoc.proposalStatus=='nstp'">Your
+							Personal Accident Insurance Proposal have been successfully submitted</b> <b
+							ng-if="createPolicyDoc.proposalStatus=='STP' || createPolicyDoc.proposalStatus=='stp'">You
+							have got your Personal Accident Insurance Policy ready now</b>
+					</h4>
+				</div>
+				<div style="text-align: center;">
+					<img ng-src="{{$root.wp_path}}img\clogo\{{selectedProduct.carrierId}}.png"
+						style="display: inline-block !important">
+				</div>
+				<div>
+					<div class="section">
+						<div
+							ng-if="createPolicyDoc.proposalStatus=='NSTP' || createPolicyDoc.proposalStatus=='nstp'">
+							<p style="text-align: center">
+								Application has been sent for underwriting.<br>
+								{{selectedProduct.insuranceCompany}} would be in touch with you
+								shortly.
+							</p>
+						</div>
+					</div>
+					<br>
+					<div class="document_section1">
+						<div class="width60">
+							<label>Policy No./Proposal No.</label>
+							<div class="">
+								<b> {{pAReponseToken.policyNo}} </b>
+							</div>
+						</div>
+						<div class="width60">
+							<label>Sum Insured</label>
+							<div class="">
+								<b>{{selectedProduct.sumInsured}}</b>
+							</div>
+						</div>
+						<div class='insuredTable'>
+							<table class='insuredTableStyle'>
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Date of Birth</th>
+										<th>Relationship</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-ng-repeat='insured in proposalRequest.insuredMembers'>
+										<td>{{insured.firstName}}</td>
+										<td>{{insured.dateOfBirth}}</td>
+										<td>{{insured.relationship}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="document_section2">
+						<div class="width60">
+							<label>Name of the Product</label>
+							<div class="">
+								<b>{{selectedProduct.insuranceCompany}}</b>
+							</div>
+						</div>
+						<div class="width60">
+							<label>Premium Amount</label>
+							<div class="">
+								<b>{{pAReponseToken.netPremium}}</b>
+							</div>
+						</div>
+						<div class="width60"
+							ng-if="createPolicyDoc.proposalStatus=='STP' || createPolicyDoc.proposalStatus=='stp'">
+							<label>Validity</label>
+							<div class="">
+								<b>{{pAReponseToken.policyStartDate}}</b> to <b>{{pAReponseToken.policyEndDate}}</b>
+							</div>
+						</div>
+						<div class="width60">
+							<label>Transaction Number</label>
+							<div class="">
+								<b>{{pAReponseToken.proposalId}}</b>
+							</div>
+						</div>
+						<div class="width60">
+							<label>Mobile No.</label>
+							<div class="">
+								<b>{{proposalRequest.proposerInfo.contactInfo.mobile}}</b>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="float2" style="padding-right: 20%;">
+						<h5 style="color: #424242; text-align: center;"">
+							<b>(Please try downloading your policy after 30 minutes)</b>
+						</h5>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div style="text-align: center;">
+						<a class="bluebuybuttoncar" ng-click="purchaseStatement()"
+							style="margin: 10px 0px 0px 0px;">Purchase Statement</a> <span
+							ng-if="createPolicyDoc.proposalStatus=='STP' || createPolicyDoc.proposalStatus=='stp'"><a
+							class="bluebuybuttoncar" ng-click="viewPolicy()"
+							style="margin: 10px 0px 0px 0px;">View Policy</a></span>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+</ng-container>
+
+<modal-dialog show='modalOTP' width='450px' height='auto'
+		class="ng-hide">
+		<div class='ng-modal-close wp_modalClose' ng-click='closeAuthenticateForm()'
+	ng-if="$root.wordPressEnabled">
+	<i class="material-icons">close</i>
+</div>
+<form name="authenticateForm">
+	<div class="modalHeader  wp_noBluebackground wp_noBoxShadow">
+		<div class="blueBackground one-edge-shadow wp_noBoxShadow" style="" layout="row">
+			<div flex="85">
+				<h2 class="white popupHeading wp_popupHeading wp_OTPTitleFont">
+					{{globalLabel.applicationLabels.login.OTPTemplateHeader}}</span>
+				</h2>
+		</div>
+			<div class='ng-modal-close' ng-click='closeAuthenticateForm()'
+				style="color: #fff; margin-top: 5px !important;" flex="10">
+				<i class="material-icons">close</i>
+			</div>
+		</div>
+	</div>
+	<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+		<div class="fullShadow resultBg familyPopup wp_signinFamilyInnerPopup""
+			style="margin-bottom: 0px !important;">
+			<div class="popupTableHealth popupPadding" layout="row"
+				style="padding: 3% 0% 0% 0% !important;">
+				<div flex="100" style="text-align: center; padding: 1% 0%;">
+					<b>{{globalLabel.applicationLabels.login.enterOTPCaption}}</b>
+				</div>
+			</div>
+			<md-input-container class="md-block">
+			<div class="pad10">
+				<div flex="100">
+					<input name="enteredOTP" ng-model="authenticate.enteredOTP"
+						autocomplete="off" ng-pattern="/\d{6}/" maxlength="6"
+						minlength="6" class="signBoxShadow"
+						style="background: transparent !important; text-align: center;"
+						required />
+				</div>
+			</div>
+			</md-input-container>
+			<div style="color: red; text-align: center; margin-bottom: 1%;">{{invalidOTPError}}</div>
+		</div>
+	</div>
+	<div class="center">
+		<button type="submit" class="bluebutton"
+			ng-disabled="authenticateForm.$invalid" ng-click="authenticateUser()">Submit</button>
+	</div>
+	<div class="pad10 center">
+		<md-button ng-click="resendOTP()" ng-disabled="disableOTP"><span class="resendLink">Resend OTP</span></md-button>
+	</div>
+</form>
+</modal-dialog>
+

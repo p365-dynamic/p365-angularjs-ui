@@ -1,0 +1,218 @@
+<form name="coverageDetailsForm">
+
+		<div class="noMargin pad10 professionalProposalSection" ng-if="$root.professionalJourney">
+				<!-- <div class="right">
+					<p class="noMargin grey87Txt"><span><i class="material-icons pinkFont bold11">edit</i></span> {{p365Labels.common.edit}}</p>
+				</div> -->
+				<div layout="row" layout-xs="column" layout-sm="row" class="resp_center">
+					<div flex="35" flex-xs="100" flex-sm="35">
+						<img ng-src="{{$root.wp_path}}img\clogo\{{selectedProduct.carrierId}}.png">
+					</div>
+					<div flex="65" flex-xs="100" flex-sm="65">
+						<p class="font12 noMarBot marTop8Per resp_noMar">{{selectedProduct.insuranceCompany}} </p>
+						<p class="bold16 pinkFont marTop3Per"  style="margin-bottom: 0">{{p365Labels.common.premiumAmount}} &#8377;
+								<span ng-if="selectedProduct.premiumTypeMonthOrAnnual=='Monthly Premium'">{{selectedProduct.grossPremium | regexINR}}</span>
+								<span ng-if="selectedProduct.premiumTypeMonthOrAnnual=='Annual Premium'">{{selectedProduct.annualPremium | regexINR}}</span>	
+						</p>
+						<p class="compareMsg font10" style="margin-top: 0">(All prices are inclusive of GST)</p>
+					</div>
+				</div>
+				<div layout="row" layout-xs="column" layout-sm="row">
+					<div flex="35" flex-xs="100" flex-sm="35" class="propCoverageTxt">
+						<p class="noMargin resp_normFont13">{{p365Labels.common.coverageDetails}}</p>
+					</div>
+					<div flex="65" flex-xs="100" flex-sm="65" style="border-top: 1px solid #ddd;margin-top: 5px;"></div>
+				</div>
+				<div class="pad1020 iPad_wrap">
+					<md-input-container class="noMarBot noMarTop width100 iPad_width50">
+						<p class="pLabel">{{p365Labels.common.sumAssured}}</p>
+						<p class="bold12">{{selectedProduct.sumInsured | regexINR}}</p>
+					</md-input-container>
+					<md-input-container class="noMarBot noMarTop width100 iPad_width50">
+							<p class="pLabel">{{p365Labels.common.product}}</p>
+							<p class="bold12">{{selectedProduct.productName}}</p>
+					</md-input-container>
+					<md-input-container class="noMarBot noMarTop width100 iPad_width50">
+							<p class="pLabel">{{p365Labels.common.maturityAge}}</p>
+							<p class="bold12">{{selectedProductInputParam.personalDetails.maturityAge}}
+									{{p365Labels.common.years}}</p>
+					</md-input-container>
+					<md-input-container class="noMarBot noMarTop width100 iPad_width50">
+							<p class="pLabel">{{p365Labels.common.policyDuration}}</p>
+							<p class="bold12">{{(selectedProductInputParam.personalDetails.maturityAge - selectedProductInputParam.quoteParam.age)}} {{p365Labels.common.years}}</p>
+					</md-input-container>
+					<md-input-container class="noMarBot noMarTop width100 iPad_width50">
+							<p class="pLabel">{{p365Labels.common.premiumType}}</p>
+							<p class="bold12">{{selectedProduct.premiumTypeMonthOrAnnual}}</p>
+					</md-input-container>
+				</div>
+				
+				<div layout="row" layout-xs="column" layout-sm="row" ng-if="selectedProduct.ridersList.length > 0">
+					<div flex="35" flex-xs="100" flex-sm="35" class="propCoverageTxt">
+						<p class="noMargin resp_normFont13">{{p365Labels.common.addOnCover}}</p>
+					</div>
+					<div flex="65" flex-xs="100" flex-sm="65" style="border-top: 1px solid #ddd;margin-top: 5px;"></div>
+				</div>
+				<div class="pad1020">
+					<md-input-container class="noMarBot noMarTop width100" ng-repeat="rider in selectedProduct.ridersList">
+						<p class="pLabel">{{rider.riderName}} 
+						<span class="bold12" ng-if="rider.riderType != 'NA'">
+								<span ng-if="rider.riderPremiumAmount == 0 ">{{rider.riderType}}</span>
+								<span ng-if="rider.riderPremiumAmount != 0 ">&#8377;{{rider.riderPremiumAmount
+									| number:0}}</span>
+						</span>
+						<span class="bold12" ng-if="rider.riderType == 'NA'">{{rider.riderType}}
+						</span>
+						</p>
+					</md-input-container>
+				</div>
+		</div>
+	<div class="wp_sectionBckgrnd wp_proposalBorder wp_padding10 wp_proposalDiv wp_whiteBg" ng-if="!$root.professionalJourney">
+					<div class="buySide">
+						<div ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled" class="section" id='sticky'>
+							<div class="">
+								<div class="fullShadow resultBg" style="margin-bottom: 0px;">
+									<md-toolbar
+											class="md-theme-light resultHeader p365-light _md _md-toolbar-transitions toolbarFeatures">
+										<h2 class="md-toolbar-tools">
+											<span class="" style="line-height: 18px;">{{p365Labels.common.insuranceCompany}}
+												</span>
+										</h2>
+										</md-toolbar>
+
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="section" id='sticky' >
+							<div class="">
+								<div class="fullShadow resultBg wp_fullshadow"
+									style="margin-bottom: 0px;">
+									<md-toolbar
+										class="md-theme-light resultHeader p365-light _md _md-toolbar-transitions toolbarFeatures wp_fullshadow wp_resultHeader">
+									<h2 class="md-toolbar-tools" ng-if="selectedProduct.premiumTypeMonthOrAnnual=='Monthly Premium'">
+										<span class="wp_buyDiv" style="line-height: 18px;">{{p365Labels.common.premiumAmount}}
+											</span>
+										<div class="buyDiv wp_buyDiv wp_font20">&nbsp;&#8377;
+											{{selectedProduct.monthlyFinalPremium | regexINR}}</div>
+									</h2>
+									<h2 class="md-toolbar-tools" ng-if="selectedProduct.premiumTypeMonthOrAnnual=='Annual Premium'">
+										<span class="wp_buyDiv" style="line-height: 18px;">{{p365Labels.common.premiumAmount}}
+											</span>
+										<div class="buyDiv wp_buyDiv wp_font20">&nbsp;&#8377;
+											{{selectedProduct.annualPremium | regexINR}}</div>
+									</h2>
+									</md-toolbar>
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix"></div>
+						<div class="section" ng-if="!$root.wordPressEnabled">
+							<p class="compareMsg">{{p365Labels.common.GSTMsg}}</p>
+						</div>
+						<div class="clearfix"></div>
+						<div class="section">
+						<ng-container class="wp_col60 left wp_padRgt30 wp_borderRight dcp_width100">
+								<div class="">
+								<div class="fullShadow resultBg  wp_fullshadow wp_resultBg">
+									<div class="accGroup">
+										<md-toolbar class="md-theme-light resultHeader p365-light wp_fullshadow wp_resultHeader">
+										<h2 class="md-toolbar-tools">
+											<span class="wp_buyDetailsTitle">{{p365Labels.common.coverageDetails}}</span>
+										</h2>
+										</md-toolbar>
+
+										<md-list class="resultPad viewDiv wp_resultPad"> 
+										<ng-container class="wp_col50 left wp_padRgt30">
+										<md-list-item
+											class="md-1-line">
+										<div class="md-list-item-text">
+											<h3>{{p365Labels.common.sumAssured}}</h3>
+											<p>&#8377; {{selectedProduct.sumInsured | regexINR}}</p>
+										</div>
+										<md-divider ng-if="!$last"></md-divider> </md-list-item> <md-list-item
+											class="md-1-line">
+										<div class="md-list-item-text">
+											<h3>{{p365Labels.common.insurer}}</h3>
+											<p>{{selectedProduct.insuranceCompany}}</p>
+										</div>
+										<md-divider ng-if="!$last"></md-divider> </md-list-item> <md-list-item
+											class="md-1-line">
+										<div class="md-list-item-text">
+											<h3>{{p365Labels.common.product}}</h3>
+											<p>{{selectedProduct.productName}}</p>
+										</div>
+										<md-divider ng-if="!$last"></md-divider> </md-list-item> 
+										</ng-container> 
+										<ng-container class="wp_col50 left wp_padRgt30">
+								
+										<md-list-item
+											class="md-1-line">
+										<div class="md-list-item-text">
+											<h3>{{p365Labels.common.maturityAge}}</h3>
+											<p>{{selectedProductInputParam.personalDetails.maturityAge}}
+												{{p365Labels.common.years}}</p>
+										</div>
+										<md-divider ng-if="!$last"></md-divider> </md-list-item> <md-list-item
+											class="md-1-line">
+										<div class="md-list-item-text">
+											<h3>{{p365Labels.common.policyDuration}}</h3>
+											<p>{{selectedProductInputParam.personalDetails.maturityAge
+												- selectedProductInputParam.quoteParam.age}} {{p365Labels.common.years}}</p>
+										</div>
+										<md-divider ng-if="!$last"></md-divider> </md-list-item> <md-list-item
+											class="md-1-line">
+										<div class="md-list-item-text">
+											<h3>{{p365Labels.common.premiumType}}</h3>
+											<p>{{selectedProduct.premiumTypeMonthOrAnnual}}</p>
+										</div>
+										<md-divider ng-if="!$last"></md-divider> </md-list-item> 
+										</ng-container>
+										<div class="clearfix"></div>
+										</md-list>
+									</div>
+								</div>
+							</div>
+						</ng-container>
+						<ng-container class="wp_col30 left wp_padRgt30 wp_borderRight dcp_width100">
+								<div class="section"
+								ng-if="selectedProduct.riderList.length > 0 ">
+								<div class="">
+									<div class="fullShadow resultBg wp_fullshadow wp_resultBg" style="margin-bottom: 0px">
+										<div class="accGroup">
+											<md-toolbar class="md-theme-light resultHeader p365-light wp_fullshadow wp_resultHeader">
+											<h1 class="md-toolbar-tools">
+												<span> <b>{{p365Labels.common.addOnCover}}</b></span>
+											</h1>
+											</md-toolbar>
+											<md-list class="resultPad viewDiv wp_resultPad">
+											<div ng-repeat="rider in selectedProduct.riderList">
+												<!--  ng-if="rider.totalValue != 0" -->
+												<md-list-item class="md-1-line">
+												<div class="md-list-item-text">
+													<h3>{{rider.riderName}}</h3>
+													<p ng-if="rider.riderType != 'NA'">
+														<span ng-if="rider.riderPremiumAmount == 0 ">{{rider.riderType}}</span>
+														<span ng-if="rider.riderPremiumAmount != 0 ">&#8377;{{rider.riderPremiumAmount
+															| number:0}}</span>
+													</p>
+													<p ng-if="rider.riderType == 'NA'">{{rider.riderType}}</p>
+												</div>
+												<md-divider></md-divider> </md-list-item>
+												<md-divider></md-divider>
+											</div>
+											</md-list>
+										</div>
+									</div>
+								</div>
+							</div>
+						</ng-container>
+							
+
+							
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					</div>
+				</form>

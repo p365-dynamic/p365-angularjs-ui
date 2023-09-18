@@ -1,0 +1,157 @@
+<md-content style="background:transparent;"
+	ng-controller="lifeInstantQuoteController">
+<div class="aboutHead">Please share your details to calculate
+	premium</div>
+<div
+	style="box-shadow: 2px 2px 5px #4c4c4c; margin: 1.5% 0%; border-radius: 15px;">
+	<div layout="row"
+		style="background-color: #2991ea; border-radius: 7px;">
+		<div flex="50" flex-xs="50" flex-sm="50" class="LLAbout">
+			<div class="LLPremiLeft">Gender</div>
+		</div>
+		<div flex="50" class="LLAbout">
+			<div class="LLPremiRight">
+				<md-select name="type" ng-model="quoteParam.gender"
+					ng-change="singleClickLifeQuote()"> <md-option
+					ng-value="gender.value" ng-repeat="gender in genderType">{{gender.label}}</md-option>
+				</md-select>
+			</div>
+		</div>
+	</div>
+</div>
+<div
+	style="box-shadow: 2px 2px 5px #4c4c4c; margin: 1.5% 0%; border-radius: 15px;">
+	<div layout="row"
+		style="background-color: #2991ea; border-radius: 7px;">
+		<div flex="50" flex-xs="50" flex-sm="50" class="LLAbout">
+			<div class="LLPremiLeft">Age</div>
+		</div>
+		<div flex="50" class="LLAbout">
+			<div class="LLPremiRight">
+				<md-select name="type" ng-model="quoteParam.age"
+					ng-change="singleClickLifeQuote()"> <md-option
+					ng-value="age" ng-repeat="age in ageList">{{age}}</md-option> </md-select>
+			</div>
+		</div>
+	</div>
+</div>
+<div
+	style="box-shadow: 2px 2px 5px #4c4c4c; margin: 1.5% 0%; border-radius: 15px;">
+	<div layout="row"
+		style="background-color: #2991ea; border-radius: 7px;">
+		<div flex="50" flex-xs="50" flex-sm="50" class="LLAbout">
+			<div class="LLPremiLeft">{{globalLabel.applicationLabels.life.tobaccoAddiction}}</div>
+		</div>
+		<div flex="50" class="LLAbout">
+			<div class="LLPremiRight">
+				<md-select name="type" ng-model="quoteParam.tobacoAdicted"
+					ng-change="singleClickLifeQuote()"> <md-option
+					ng-value="tobacco.value"
+					ng-repeat="tobacco in tobaccoAddictionStatus">{{tobacco.label}}</md-option>
+				</md-select>
+			</div>
+		</div>
+	</div>
+</div>
+<div
+	style="box-shadow: 2px 2px 5px #4c4c4c; margin: 1.5% 0%; border-radius: 15px;">
+	<div layout="row"
+		style="background-color: #2991ea; border-radius: 7px;">
+		<div flex="50" flex-xs="50" flex-sm="50" class="LLAbout">
+			<div class="LLPremiLeft">{{globalLabel.applicationLabels.life.annualIncome}}</div>
+		</div>
+		<div flex="50" class="LLAbout">
+			<div class="LLPremiRight">
+				<md-select name="type" ng-model="personalDetails.annualIncomeObject"
+					ng-model-options="{trackBy: '$value.display'}"
+					ng-change="calculateSumAssured()"> <md-option
+					ng-value="income" ng-repeat="income in annualIncomesRange">{{income.display}}</md-option>
+				</md-select>
+			</div>
+		</div>
+	</div>
+</div>
+<div
+	style="box-shadow: 2px 2px 5px #4c4c4c; margin: 1.5% 0%; border-radius: 15px;">
+	<div layout="row"
+		style="background-color: #2991ea; border-radius: 7px;">
+		<div flex="50" flex-xs="50" flex-sm="50" class="LLAbout">
+			<div class="LLPremiLeft">{{globalLabel.applicationLabels.life.sumAssured}}</div>
+		</div>
+		<div flex="50" class="LLAbout">
+			<div class="LLPremiRight">
+				<md-select name="type" ng-model="personalDetails.sumInsuredObject"
+					ng-change="singleClickLifeQuote()"
+					ng-model-options="{trackBy: '$value.display'}"> <md-option
+					ng-repeat="sumInsured in personalDetails.sumInsuredList"
+					ng-value="sumInsured">{{sumInsured.display}}</md-option> </md-select>
+			</div>
+		</div>
+	</div>
+</div>
+</md-content>
+<modal-dialog show='Regpopup' width='500px' height='auto'
+	class="ng-hide">
+<div flex="100" class="LLHeadPatch headMarLeft resLLHeadPatch"
+	style="position: relative; margin: 0;">
+	<div class="detailHead" layout="row">
+		<div flex="90"></div>
+		<div flex="10" style="text-align: right;">
+			<a class="closePop" ng-click="closePop()"><i
+				class="material-icons">close</i></a>
+		</div>
+	</div>
+	<form name="quoteUserInfoForm">
+		<div layout="column">
+			<div flex="100" class="LLAbout" flex-xs="100" flex-sm="100"
+				style="color: #424242;">
+				<input type="text" name="name" value="" placeholder="Name"
+					class="exAdMar LLInput" capitalize-first
+					ng-model="quoteUserInfo.firstName" ng-pattern="/^[a-zA-Z\s]*$/"
+					required autocomplete="off">
+				<div ng-messages="quoteUserInfoForm.name.$error"
+					ng-if="quoteUserInfoForm.name.$touched" md-auto-hide="false"
+					class="errorMsg">
+					<div ng-message="required">Name is required</div>
+					<div ng-message="pattern">Enter valid Name</div>
+				</div>
+
+			</div>
+			<div flex="100" class="LLAbout" flex-xs="100" flex-sm="100"
+				style="color: #424242;">
+				<input type="text" ng-model="quoteUserInfo.emailId" name="emailId"
+					class="exAdMar LLInput" value="" autocomplete="off"
+					placeholder="Email Id" required
+					ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-z.]{2,5}$/">
+				<div ng-messages="quoteUserInfoForm.emailId.$error"
+					ng-if="quoteUserInfoForm.emailId.$touched" md-auto-hide="false"
+					class="errorMsg">
+					<div ng-message="required">Email Id is required</div>
+					<div ng-message="pattern">Enter valid Email Id</div>
+				</div>
+			</div>
+			<div flex="100" class="LLAbout" flex-xs="100" flex-sm="100"
+				style="color: #424242;">
+				<input type="text" name="mobileNumber"
+					ng-model="quoteUserInfo.mobileNumber" class="exAdMar HLInput"
+					autocomplete="off" value="" placeholder="Phone Number"
+					ng-pattern="/^[6789]\d{9}$/" maxlength="10" minlength="10" required>
+				<div ng-messages="quoteUserInfoForm.mobileNumber.$error"
+					ng-if="quoteUserInfoForm.mobileNumber.$touched"
+					md-auto-hide="false" class="errorMsg">
+					<div ng-message="required">Phone number is required</div>
+					<div ng-message="pattern">Enter valid Mobile No</div>
+				</div>
+			</div>
+			<div flex="100" flex-xs="100" flex-sm="100" class="LLAbout">
+				<button type="submit" ng-disabled="disabledRedirectToResult || quoteUserInfoForm.$invalid"
+					ng-click="$root.validateLandingUser('');" class="calcBtn"
+					id="lifeLeadSubmissionPop" style="position: unset; width: 100%;">
+					 <u>SUBMIT <span ng-show="disabledRedirectToResult"><i
+						class="fa fa-spinner fa-spin "></i></span></u>
+				</button>
+			</div>
+		</div>
+	</form>	
+</div>
+</modal-dialog>

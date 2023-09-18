@@ -1,0 +1,266 @@
+<div class="e8e8Container">
+    <div class="side10PerMar center resp_noMar resp_topBot5Pad padBot5Per">
+            <div class="clearfix"></div>
+        <h2 class="chooseProfTitle padTop4Per resp_font18">
+            <span data-bind-html-compile="p365Labels.professionalJourney.bestResultDetails" data-ng-bind-html="p365Labels.professionalJourney.bestResultDetails">
+            </span>
+        </h2>
+    </div>
+    <div>
+        <div layout="row" layout-xs="column" layout-sm="column" class="bestQuote pad10 recomdAddon resp_nosideMar">
+            <div flex="50" flex-xs="100" flex-sm="100" class="grey87Txt">
+                <div class="centerAlignTxt bold13 grey63Txt">{{p365Labels.common.previousQuote}}</div>
+                <div class="resFrameAlignment" ng-if="productInCart">
+                    <div class="whiteBg borRad10 posRel">
+                        <div class="bluredSec"></div>
+                        <div class="pad20 padBot10 resp_pad10">
+                            <div class="wrap">
+                                <div class="pj_width25 lobResult">
+                                    <span>
+                                        <i class="material-icons lobIcon">directions_bike</i>
+                                    </span>
+                                    <span class="lobTitle"> {{p365Labels.common.Bike}} </span>
+                                </div>
+                                <div class="pj_width37 centerAlignTxt resp_width45Per">
+                                    <img class="" ng-src="{{$root.wp_path}}img/clogo/{{productInCart.carrierId}}.png">
+                                    <!-- <p class="pinkFont noMarTopBot">&nbsp;</p> -->
+                                </div>
+                                <div class="pj_width37 centerAlignTxt resp_width30Per">
+                                    <div class="buyNowBtn posRel cursor">
+                                        <p class="pinkFont topBot5PerMar bold17">&#8377; {{productInCart.netPremium|number:0}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="row">
+                                <div flex="20" flex-xs="30" flex-sm="15">
+                                    <p>{{p365Labels.common.insuranceFor}}</p>
+                                </div>
+                                <div flex="80" flex-xs="70" flex-sm="85" class="mar18Bot resp_mar18Bot" style="border-bottom: 1px solid #ddd;"></div>
+
+                            </div>
+                            <p class="font12 left">
+                                <span class="grey41Txt boldFont">{{bikeDetailsCopy.displayVehicle}}</span>
+                                <span class="grey63Txt" ng-if="$root.showBikeRegAreaStatus && bikeVehicleInfoCopy.registrationPlace">{{p365Labels.common.registeredAt}}</span>
+                                <span class="grey41Txt boldFont upperCaseText" ng-if="$root.showBikeRegAreaStatus && bikeVehicleInfoCopy.registrationPlace">{{bikeVehicleInfoCopy.registrationPlace}},</span>
+                                <span class="grey63Txt" ng-if="!$root.showBikeRegAreaStatus && bikeDetailsCopy.registrationNumber">{{p365Labels.common.registrationNo}}</span>
+                                <span class="grey41Txt boldFont upperCaseText" ng-if="!$root.showBikeRegAreaStatus && bikeDetailsCopy.registrationNumber">{{bikeDetailsCopy.registrationNumber}},</span>
+                                <span class="grey63Txt"> {{p365Labels.common.registeredOn}}</span>
+                                <span class="grey41Txt boldFont">{{bikeInfoCopy.registrationYear}}</span>
+                                <!-- <span class="grey63Txt">and existing policy ncb of</span> -->
+                                <!-- <span class="grey41Txt boldFont">{{(productInCart.ncbPercentage>0)?productInCart.ncbPercentage+'%':productInCart.ncbPercentage}}</span> -->
+                                <!-- <span class="grey41Txt boldFont"> {{bikeDetailsCopy.ncb.display}}</span> -->
+                                <span class="grey41Txt boldFont" ng-if="productInCart.paidDriverCover > 0">{{p365Labels.common.with}}</span>
+                                <span class="grey41Txt boldFont" ng-if="!productInCart.paidDriverCover">{{p365Labels.common.without}}</span>
+                                <span class="grey63Txt">{{p365Labels.common.mandatoryPACover}}</span>
+                            </p>
+                        </div>
+                        <div class="innerResultFrame">
+                            <div class="resIdvSec pad20 padBot10 resp_pad10" layout="row">
+                                <div flex="75" flex-xs="60" flex-sm="80" layout="row" class="padRig15Per resp_noPad">
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{productInCart.netPremiumMean|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <span>{{p365Labels.common.Premium}}</span>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{productInCart.insurerIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <span>{{p365Labels.common.Service}}</span>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{productInCart.claimIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <span>{{p365Labels.common.Claim}}</span>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <!-- <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{productInCart.garageIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>Garage</a>
+                                        </p> -->
+                                    </div>
+                                </div>
+                                <div flex="25" flex-xs="40" flex-sm="20" class="">
+                                    <p class="bold17 noMargin centerAlignTxt grey41Txt">&#8377; {{productInCart.insuredDeclareValue|number:0}}</p>
+                                    <p class="noMargin greyc9Txt centerAlignTxt">{{p365Labels.common.IDV}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div flex="50" flex-xs="100" flex-sm="100" class="grey87Txt">
+                <div class="centerAlignTxt bold13 pinkFeTxt">{{p365Labels.common.updatedQuote}}</div>
+                <div class="resFrameAlignment resp_nosideMar" ng-if="isGotBikeQuotes">
+                    <div class="whiteBg borRad10">
+                        <div class="innerResultFrame pad20 padBot10 resp_pad10">
+                            <div class="wrap">
+                                <div class="pj_width25 lobResult">
+                                    <span>
+                                        <i class="material-icons lobIcon">directions_bike</i>
+                                    </span>
+                                    <span class="lobTitle">
+                                        {{p365Labels.common.Bike}}
+                                    </span>
+                                </div>
+                                <div class="pj_width37 centerAlignTxt resp_width45Per">
+                                    <img class="" ng-src="{{$root.wp_path}}img/clogo/{{$root.bikeQuote.carrierId}}.png">
+                                    <!-- <p class="pinkFont noMarTopBot">&nbsp;</p> -->
+                                </div>
+                                <div class="pj_width37 centerAlignTxt resp_width30Per">
+                                    <div class="buyNowBtn posRel cursor">
+                                        <p class="pinkFont topBot5PerMar bold17">&#8377; {{$root.bikeQuote.netPremium|number:0}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="row">
+                                <div flex="20" flex-xs="30" flex-sm="15">
+                                    <p>{{p365Labels.common.insuranceFor}}</p>
+                                </div>
+                                <div flex="80" flex-xs="70" flex-sm="85" class="mar18Bot resp_mar8Bot" style="border-bottom: 1px solid #ddd;"></div>
+                            </div>
+                            <div>
+                                <p class="font12" style="margin: 1% 0;">
+                                    <span class="grey41Txt boldFont">{{vehicleDetails.displayVehicle}}</span>
+                                    <span class="grey63Txt" ng-if="$root.showBikeRegAreaStatus && vehicleInfo.registrationPlace">{{p365Labels.common.registeredAt}}</span>
+                                    <span class="grey41Txt boldFont upperCaseText" ng-if="$root.showBikeRegAreaStatus && vehicleInfo.registrationPlace">{{vehicleInfo.registrationPlace}},</span>
+                                    <span class="grey63Txt" ng-if="!$root.showBikeRegAreaStatus && vehicleDetails.registrationNumber">{{p365Labels.common.registrationNo}}</span>
+                                    <span class="grey41Txt boldFont upperCaseText" ng-if="!$root.showBikeRegAreaStatus && vehicleDetails.registrationNumber">{{vehicleDetails.registrationNumber}},</span>
+                                    <span class="grey63Txt">{{p365Labels.common.registeredOn}}</span>
+                                    <span class="grey41Txt boldFont">{{vehicleInfo.regYear}}</span>
+                                    <!-- <span class="grey63Txt">and existing policy ncb of</span> -->
+                                    <!-- <span class="grey41Txt boldFont">{{($root.bikeQuote.ncbPercentage>0)?$root.bikeQuote.ncbPercentage+'%':$root.bikeQuote.ncbPercentage}}</span> -->
+                                    <!-- <span class="grey41Txt boldFont"> {{vehicleDetails.ncb.display}}</span> -->
+                                    <span class="grey41Txt boldFont" ng-if="$root.bikeQuote.paidDriverCover > 0">{{p365Labels.common.with}}</span>
+                                    <span class="grey41Txt boldFont" ng-if="!$root.bikeQuote.paidDriverCover">{{p365Labels.common.without}}</span>
+                                    <span class="grey63Txt"> {{p365Labels.common.mandatoryPACover}}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="innerResultFrame">
+                            <div class="resIdvSec pad20 padBot10 resp_pad10" layout="row">
+                                <div flex="75" flex-xs="60" flex-sm="80" layout="row" class="padRig15Per resp_noPad">
+                                    <div flex="25" class="center cursor" ng-click="openBikePopup(0,$root.bikeQuote)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{$root.bikeQuote.netPremiumMean|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 pinkFont">
+                                            <span>{{p365Labels.common.Premium}}</span>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openBikePopup(1,$root.bikeQuote)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{$root.bikeQuote.insurerIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 pinkFont">
+                                            <span>{{p365Labels.common.Service}}</span>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openBikePopup(2,$root.bikeQuote)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{$root.bikeQuote.claimIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 pinkFont">
+                                            <span>{{p365Labels.common.Claim}}</span>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <!-- <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{$root.bikeQuote.garageIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>Garage</a>
+                                        </p> -->
+                                    </div>
+                                </div>
+                                <div flex="25" flex-xs="40" flex-sm="20" class="">
+                                    <p class="bold17 noMargin centerAlignTxt grey41Txt">&#8377; {{$root.bikeQuote.insuredDeclareValue|number:0}}</p>
+                                    <p class="noMargin greyc9Txt centerAlignTxt">{{p365Labels.common.IDV}}</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="innerResultFrame pad5_20 rightAlignTxt font10">
+                            <p class="noMargin greyb7Txt">
+                                <span ng-show="$root.bikeQuote.ridersList.length > 0">
+                                    Your Selected ( {{($root.bikeQuote.ridersList.length
+                                    < 10)? '0'+$root.bikeQuote.ridersList.length:$root.bikeQuote.ridersList.length}} ) Riders 
+                                    <a ng-click="showSelectedRiders()" class="cursor pinkFont"> {{p365Labels.common.View}} </a>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="resFrameAlignment resp_nosideMar" ng-if="!isGotBikeQuotes">
+                    <div class="whiteBg borRad10 center" style="min-height:270px;display: flex;" layout-align="center center">
+                        <img ng-src="{{$root.wp_path}}img/svg/eclipse.svg" alt="" ng-if="bikeRequestStatus == 0">
+                        <div ng-if="bikeRequestStatus == 2 || quoteCalcSummaryError">
+                            <span ng-bind-html="quoteCalculationError.message" bind-html-compile="quoteCalculationError.message"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-container class="section padRig15 width100 center">
+            <div class="">
+                <p class="dialogButton">
+                    <md-button class='width20_per capitalTxt resp_normFont13 inpCancelBtn' ng-click="backToRiderSection()">{{p365Labels.common.back}}</md-button>
+                    <md-button class='width20_per capitalTxt resp_normFont13 inpSaveBtn' ng-disabled="$root.bikeQuoteResult.length==0" ng-click="confirmBuyProduct($root.bikeQuote)">{{p365Labels.common.confirm}}</md-button>
+                </p>
+            </div>
+        </ng-container>
+    </div>
+</div>
+<!--     Premium Breakup Popup       -->
+<ng-container ng-include="bikePremiumTemplate"></ng-container>
+<!--     Premium Breakup Popup       -->
+<modal-dialog show="displaySelecteRidersModal" width='400px' height='auto' cls="ng-hide RTOSearchDiv">
+    <div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+        <div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+            <h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">{{p365Labels.common.selectedRider}}</h2>
+        </div>
+        <div class='ng-modal-close closePopup' ng-click='hideSelectedRiders()'>
+            <i class="material-icons greyb7Txt">highlight_off</i>
+        </div>
+    </div>
+    <div class="pad10 borderf2Top">
+        <div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+            <div class="">
+                <div class="PACoverTxt grey63Txt" ng-repeat="addOnCover in $root.bikeQuote.ridersList" layout="row">
+                    <div flex="80" flex-xs="100" flex-sm="100">
+                            <p class="font12 grey63Txt boldFont">
+                            <span class="pinkFont fa fa-check"></span> {{addOnCover.riderName}}
+                        </p>
+                        </div>
+                        <div flex="20" flex-xs="100" flex-sm="100">
+                            <p class="font12 grey63Txt boldFont" ng-show="addOnCover.riderValue > 0"> &#8377; {{addOnCover.riderValue}}</p>
+                            <p class="font12 grey63Txt boldFont" ng-show="!addOnCover.riderValue"> {{p365Labels.common.NA}}</p>
+                        </div>
+                   
+                </div>
+            </div>
+            <div class="center submitBtnAlign ">
+                <md-button class="md-raised md-primary popupSubmitBtn capitalizeText bold12" ng-click="hideSelectedRiders()" id="carSubmitPACoverForm">{{p365Labels.common.OK}}</md-button>
+            </div>
+        </div>
+    </div>
+</modal-dialog>

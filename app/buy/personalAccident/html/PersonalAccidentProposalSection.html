@@ -1,0 +1,152 @@
+<form name="coverageDetailsForm">
+	<div class="wp_sectionBckgrnd wp_proposalBorder wp_padding10 wp_proposalDiv wp_whiteBg">
+					<div class="buySide">
+						<div ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled" class="section" id='sticky'>
+							<div class="">
+								<div class="fullShadow resultBg" style="margin-bottom: 0px;">
+									<md-toolbar
+											class="md-theme-light resultHeader p365-light _md _md-toolbar-transitions toolbarFeatures">
+										<h2 class="md-toolbar-tools">
+											<span class="" style="line-height: 18px;">Insurance
+												Company</span>
+										</h2>
+										</md-toolbar>
+
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="section" id='sticky' >
+							<div class="">
+								<div class="fullShadow resultBg wp_fullshadow"
+									style="margin-bottom: 0px;">
+									<md-toolbar
+										class="md-theme-light resultHeader p365-light _md _md-toolbar-transitions toolbarFeatures wp_fullshadow wp_resultHeader">
+									<h2 class="md-toolbar-tools" ng-if="selectedProduct.premiumTypeMonthOrAnnual=='Monthly Premium'">
+										<span class="wp_buyDiv" style="line-height: 18px;">Premium
+											Amount</span>
+										<div class="buyDiv wp_buyDiv wp_font20">&nbsp;&#8377;
+											{{selectedProduct.monthlyFinalPremium | regexINR}}</div>
+									</h2>
+									<h2 class="md-toolbar-tools" ng-if="selectedProduct.premiumTypeMonthOrAnnual=='Annual Premium'">
+										<span class="wp_buyDiv" style="line-height: 18px;">Premium
+											Amount</span>
+										<div class="buyDiv wp_buyDiv wp_font20">&nbsp;&#8377;
+											{{selectedProduct.annualPremium | regexINR}}</div>
+									</h2>
+									</md-toolbar>
+								</div>
+							</div>
+						</div>
+						
+						<div class="clearfix"></div>
+						<div class="section" ng-if="!$root.wordPressEnabled">
+							<p class="compareMsg">All prices are inclusive of GST</p>
+						</div>
+						<div class="clearfix"></div>
+						<div class="section">
+						<ng-container class="wp_col60 left wp_padRgt30 wp_borderRight dcp_width100">
+								<div class="">
+								<div class="fullShadow resultBg  wp_fullshadow wp_resultBg">
+									<div class="accGroup">
+										<md-toolbar class="md-theme-light resultHeader p365-light wp_fullshadow wp_resultHeader">
+										<h2 class="md-toolbar-tools">
+											<span class="wp_buyDetailsTitle">Coverage Details</span>
+										</h2>
+										</md-toolbar>
+
+										<md-list class="resultPad viewDiv wp_resultPad"> 
+										<ng-container class="wp_col50 left wp_padRgt30">
+										<md-list-item
+											class="md-1-line">
+										<div class="md-list-item-text">
+											<h3>Sum Assured</h3>
+											<p>&#8377; {{selectedProduct.sumInsured | regexINR}}</p>
+										</div>
+										<md-divider ng-if="!$last"></md-divider> </md-list-item> <md-list-item
+											class="md-1-line">
+										<div class="md-list-item-text">
+											<h3>Insurer</h3>
+											<p>{{selectedProduct.insuranceCompany}}</p>
+										</div>
+										<md-divider ng-if="!$last"></md-divider> </md-list-item> <md-list-item
+											class="md-1-line">
+										<div class="md-list-item-text">
+											<h3>Product</h3>
+											<p>{{selectedProduct.productName}}</p>
+										</div>
+										<md-divider ng-if="!$last"></md-divider> </md-list-item> 
+										</ng-container> 
+										<ng-container class="wp_col50 left wp_padRgt30">
+								
+										<md-list-item
+											class="md-1-line">
+										<div class="md-list-item-text">
+											<h3>Premimum Value</h3>
+											<p>{{selectedProduct.netPremium}}
+												</p>
+										</div>
+										<md-divider ng-if="!$last"></md-divider> </md-list-item> <md-list-item
+											class="md-1-line">
+										<div class="md-list-item-text">
+											<h3>policy Term </h3>
+											<p>1 years</p>
+										</div>
+
+										<!-- <md-divider ng-if="!$last"></md-divider> </md-list-item> <md-list-item
+											class="md-1-line">
+										<div class="md-list-item-text">
+											<h3>Policy End Date </h3>
+											<p>1 years</p>
+										</div> -->
+
+										
+										<md-divider ng-if="!$last"></md-divider> </md-list-item> 
+										</ng-container>
+										<div class="clearfix"></div>
+										</md-list>
+									</div>
+								</div>
+							</div>
+						</ng-container>
+						<ng-container class="wp_col30 left wp_padRgt30 wp_borderRight dcp_width100">
+								<div class="section"
+								ng-if="selectedProduct.riderList.length > 0 ">
+								<div class="">
+									<div class="fullShadow resultBg wp_fullshadow wp_resultBg" style="margin-bottom: 0px">
+										<div class="accGroup">
+											<md-toolbar class="md-theme-light resultHeader p365-light wp_fullshadow wp_resultHeader">
+											<h1 class="md-toolbar-tools">
+												<span> <b>Add-on Cover </b></span>
+											</h1>
+											</md-toolbar>
+											<md-list class="resultPad viewDiv wp_resultPad">
+											<div ng-repeat="rider in selectedProduct.riderList">
+												<!--  ng-if="rider.totalValue != 0" -->
+												<md-list-item class="md-1-line">
+												<div class="md-list-item-text">
+													<h3>{{rider.riderName}}</h3>
+													<p ng-if="rider.riderType != 'NA'">
+														<span ng-if="rider.riderPremiumAmount == 0 ">{{rider.riderType}}</span>
+														<span ng-if="rider.riderPremiumAmount != 0 ">&#8377;{{rider.riderPremiumAmount
+															| number:0}}</span>
+													</p>
+													<p ng-if="rider.riderType == 'NA'">{{rider.riderType}}</p>
+												</div>
+												<md-divider></md-divider> </md-list-item>
+												<md-divider></md-divider>
+											</div>
+											</md-list>
+										</div>
+									</div>
+								</div>
+							</div>
+						</ng-container>
+							
+
+							
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					</div>
+				</form>

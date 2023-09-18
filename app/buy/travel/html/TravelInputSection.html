@@ -1,0 +1,208 @@
+<div class="showForMobile" style="display:{{$root.hideonEdit}}">
+	<div>
+		<div class="clearfix"></div>
+		<md-card class="pad2TopBot">
+			<div layout="row" class="resp_pad7_10 border1Bot">
+				<div flex="10">
+					<span><i class="material-icons resp_font18">favorite</i></span>
+				</div>
+				<div flex="80" class="font12">Life Details </div>
+				<div flex="10" class="font12 pinkFont cursor" ng-click="$root.editForMobile()">Edit</div>
+			</div>
+			<div class="resp_pad7_10 bold12">
+				{{quoteParam.gender == 'M' ? "Male": "Female"}}, aged {{quoteParam.age}} with
+				{{personalDetails.annualIncomeObject.annualIncome}}
+				Annual Income
+			</div>
+
+			<div layout="row" class="resp_pad7_10">
+				<div flex="60" class="resp_titleProp">
+					Insured upto
+				</div>
+				<div flex="40" class="resp_valueProp">
+					{{quoteParam.age}}
+				</div>
+			</div>
+			<div layout="row" class="resp_pad7_10">
+				<div flex="60" class="resp_titleProp">
+					Sum Assured
+				</div>
+				<div flex="40" class="resp_valueProp">
+					{{personalDetails.sumInsuredObject.display}}
+				</div>
+			</div>
+		</md-card>
+	</div>
+</div>
+
+<!-- <div class="fullShadow resultBg wp_resultBorder wp_InputContainer"> -->
+<div ng-form="travelInputForm" class="hideForMobile" style="display:{{$root.showonEdit}}">
+	<div class="wrap width100 side3Pad quoteInpSec modifyDiv">
+		<ng-container class="width20_per padRig15 resp_width100">
+			<md-input-container class="md-block">
+				<label
+					class="md-no-float classForTooltip font12">{{globalLabel.applicationLabels.travel.tripType}}</label>
+				<md-select class="bold12 lineHgt34" name="tripType" ng-model="travelDetails.tripType"
+					ng-change="toggleTripType();" ng-disabled=false>
+					<md-option ng-value="type.tripType" ng-repeat="type in tripTypeList">{{type.displayField}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+		</ng-container>
+		<ng-container class="width20_per padRig15 resp_width100">
+			<md-input-container class="md-block">
+				<label
+					class="md-no-float classForTooltip font12">{{globalLabel.applicationLabels.travel.sumInsured}}</label>
+				<md-select name="type" ng-model="travelDetails.sumInsured" class="bold12 lineHgt34">
+					<md-option ng-value="sumInsuredValue.suminsured" name='SumInsured'
+						ng-repeat="sumInsuredValue in sumInsuredList">&#36; {{sumInsuredValue.suminsured | regexINR}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+		</ng-container>
+		<ng-container class="width20_per padRig15 resp_width100">
+			<md-input-container class="md-block">
+				<label
+					class="md-no-float classForTooltip font12">{{globalLabel.applicationLabels.travel.startDate}}</label>
+				<input class="bold12" type="text" name='startDate' readonly ng-model="travelDetails.startdate"
+					ng-change="toggleDate()" p365-date-picker="travelStartDateOptions" />
+			</md-input-container>
+		</ng-container>
+		<ng-container class="width20_per padRig15 resp_width100">
+			<md-input-container class="md-block">
+				<label
+					class="md-no-float classForTooltip font12">{{globalLabel.applicationLabels.travel.endDate}}</label>
+				<input class="bold12" type="text" name='endDate' ng-model="travelDetails.enddate" readonly
+					p365-date-picker="travelEndDateOptions" />
+			</md-input-container>
+		</ng-container>
+		<ng-container class="width20_per padRig15 resp_width100">
+			<md-input-container class="md-block">
+				<label class="md-no-float classForTooltip font12">{{globalLabel.applicationLabels.travel.pedStatus}}<a
+						ng-if="quoteParam.pedStatus=='Y' || isDiseased==true" ng-click='toggleHealth()'>
+						[{{globalLabel.applicationLabels.travel.change}}] </a> </label>
+				<md-select name="type" ng-model="quoteParam.pedStatus" class="bold2 lineHgt34"
+					ng-change="diseaseClick()">
+					<md-option ng-value="preDisease.value" ng-repeat="preDisease in pedStatus">{{preDisease.label}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+			<!-- <md-list-item class="md-1-line checkBox" ng-if="isDiseased==true">
+				<div layout="row" layout-wrap flex>
+					<div class="md-list-item-text" flex="100">
+						<label ng-repeat="outerdata in selectedDisease.diseaseList">
+							<p class="btn active" ng-repeat="data in diseaseList"
+							ng-if="data.diseaseId == outerdata"> <md-checkbox
+								checklist-model="selectedDisease.diseaseList"
+								checklist-value="data.diseaseId"
+								ng-click="removePreDisease(data)"><span class="span_font">
+								&nbsp;{{data.disease}} - <span
+								ng-repeat="member in data.travellersList"
+								ng-if="data.travellersList.length > 0">
+									{{globalLabel.applicationLabels.travel.traveller}} &nbsp;{{member.traveller_id}} <span
+									ng-if="!$last">,&nbsp;</span>
+										</span>
+									</span>
+								</md-checkbox>
+							</p>
+						</label>
+					</div>
+				</div>
+			</md-list-item> -->
+		</ng-container>
+
+		<ng-container class="width20_per padRig15 resp_width100" ng-show="travelDetails.tripType == 'multi'">
+			<md-input-container class="md-block">
+				<label
+					class="md-no-float classForTooltip font12">{{globalLabel.applicationLabels.travel.tripDuration}}</label>
+				<md-select name="tripDuration" ng-model="travelDetails.tripDuration" class="bold12 lineHgt34"
+					ng-change="callSingleClickQuote()">
+					<md-option ng-value="tripDuration.duration" ng-repeat="tripDuration in tripDurationList">
+						{{tripDuration.displayField}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+		</ng-container>
+		<ng-container class="width20_per padRig15 resp_width100">
+			<md-input-container class="md-block">
+				<label
+					class="md-no-float classForTooltip font12">{{globalLabel.applicationLabels.travel.travellingFromIndia}}</label>
+				<md-select name="question_1" class="bold12 lineHgt34" ng-model="quoteParam.travellingFromIndia"
+					ng-change="toggleQuestion1()">
+					<md-option ng-value="status.value" ng-repeat="status in questionStatus">
+						{{status.label}}</md-option>
+				</md-select>
+				<div ng-messages="travelInputForm.question_1.$error" ng-if="show_error_msg_1 == true">
+					{{globalLabel.applicationLabels.travel.errorMessage}}</div>
+			</md-input-container>
+		</ng-container>
+		<ng-container class="width20_per padRig15 resp_width100">
+			<md-input-container class="md-block">
+				<label
+					class="md-no-float classForTooltip font12">{{globalLabel.applicationLabels.travel.isIndian}}</label>
+				<md-select name="question_2" ng-model="quoteParam.isIndian" class="bold12 lineHgt34"
+					ng-change="toggleQuestion2()">
+					<md-option ng-value="status.value" ng-repeat="status in questionStatus">
+						{{status.label}}</md-option>
+				</md-select>
+			</md-input-container>
+		</ng-container>
+		<ng-container class="width20_per padRig15 resp_width100" ng-show="show_error_msg_2 == true">
+			<md-input-container class="md-block">
+				<label
+					class="md-no-float classForTooltip font12">{{globalLabel.applicationLabels.travel.isOciPio}}</label>
+				<md-select name="question_3" ng-model="quoteParam.isOciPioStatus" ng-change="toggleQuestion3()">
+					<md-option ng-value="status.value" ng-repeat="status in questionStatus">
+						{{status.label}}</md-option>
+				</md-select>
+				<div ng-messages="travelInputForm.question_3.$error" ng-if="show_error_msg_3 == true">
+					{{globalLabel.applicationLabels.travel.errorMessage}}</div>
+			</md-input-container>
+		</ng-container>
+		<ng-container class="width20_per padRig15 resp_width100">
+			<md-input-container class="md-block border1Bot">
+				<label class="md-no-float classForTooltip font12">Travellers Insured <a href="javascript:;"
+						ng-click='toggleTraveller()'>[Change]</a></label>
+				<p class="" ng-repeat="data in travellersList" ng-if="data.status" name="travellers"
+					style="margin: 10px 3px;">
+					{{data.relation}}&nbsp; - {{data.gender}} - {{data.age}} years</p>
+			</md-input-container>
+		</ng-container>
+		<ng-container class="width20_per padRig15 resp_width100">
+			<md-input-container class="md-block">
+				<label
+					class="md-no-float classForTooltip font12">{{globalLabel.applicationLabels.travel.destination_label}}</label>
+				<md-chips ng-model="travelDetails.destinations" md-require-match="true" ng-change="" name="dest"
+					ng-required="true" md-on-add="callSingleClickQuote()" md-on-remove="callSingleClickQuote()"
+					class="wp_travel_md-chips">
+					<md-autocomplete md-selected-item="" md-search-text="searchText"
+						md-items="continent in getContinentList(searchText)" md-item-text="continent.displayField"
+						md-min-length="2" md-autoselect="false" md-input-name="destination">
+						<span md-highlight-text="searchText">{{continent.displayField}}</span>
+						<md-not-found> <span style="color:red">No
+								Results Found</span> </md-not-found>
+					</md-autocomplete>
+					<md-chip-template> <strong>{{travelDetails.destinations[$index].displayField}}</strong>
+					</md-chip-template>
+				</md-chips>
+				<div class="md-chips-messages" ng-show="travelInputForm.dest.$dirty || travelInputForm.$submitted"
+					ng-messages="travelInputForm.dest.$error">
+					<div ng-message="required">At least one destination is required</div>
+				</div>
+				<input type="hidden" name="{{UNIQUE_QUOTE_ID_ENCRYPTED}}" id="{{UNIQUE_QUOTE_ID_ENCRYPTED}}"
+					value="{{UNIQUE_QUOTE_ID_ENCRYPTED}}" ng-model="UNIQUE_QUOTE_ID_ENCRYPTED">
+			</md-input-container>
+		</ng-container>
+
+		<ng-container class="section padRig15 width100 center" ng-if="travelInputForm.$dirty">
+			<div class="">
+				<p class="dialogButton">
+					<md-button ng-click="resetOnCancel()" class="inpCancelBtn" id="carBuyProductBtn">Cancel</md-button>
+					<md-button ng-click="singleClickTravelQuote()" class="inpSaveBtn" id="carBuyProductBtn">Submit
+					</md-button>
+				</p>
+			</div>
+		</ng-container>
+	</div>
+	<!-- <div ng-form=""> -->
+</div>

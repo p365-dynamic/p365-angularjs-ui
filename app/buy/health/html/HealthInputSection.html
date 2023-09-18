@@ -1,0 +1,134 @@
+<div class="showForMobile"  style="display:{{$root.hideonEdit}}">
+		<div>
+			<div class="clearfix"></div>
+			<md-card class="pad2TopBot">
+				<div layout="row" class="resp_pad7_10 border1Bot">
+					<div flex="10">
+						<span><i class="material-icons resp_font18">hotel</i></span>
+					</div>
+					<div flex="80" class="font12"> Health Details </div>
+					<div flex="10" class="font12 pinkFont cursor" ng-click="$root.editForMobile()">Edit</div>
+				</div>
+				<div layout="row" class="resp_pad7_10">
+						<div flex="100">
+							<span class="resp_titleProp">Gender</span> <span class="resp_valueProp">{{quoteParam.selfGender == 'M' ? "Male": "Female"}}</span>
+						</div>
+					
+				</div>
+				<div layout="row" class="resp_pad7_10">
+					<div flex="100">
+						<span class="resp_titleProp">Hospital Limit</span> <span class="resp_valueProp"> {{hospitalisationLimit.displayValue}}</span>
+					</div>
+				</div>
+				<div layout="row" class="resp_pad7_10">
+						<div flex="100">
+							<span class="resp_titleProp">Members Insured</span> <span class="resp_valueProp"><span ng-repeat="data in familyList" ng-if="data.val==true">{{data.member}} - {{data.age}} <span ng-hide="$last">,&nbsp; </span></span>
+						</div>
+					</div>
+			</md-card>
+		</div>
+	</div>
+<div class="fullShadow resultBg wp_resultBorder wp_InputContainer resp_pad10 hideForMobile" style="display:{{$root.showonEdit}}" >
+	<div ng-form="healthInputForm">
+		<div class="wrap width100 side3Pad quoteInpSec modifyDiv">
+			<ng-container class="pj_width15 iPad_width25 wp_autoComplete padRig3Per resp_width100">
+				<div class="innerHeadDropText">
+					<md-input-container class="md-block">
+						<label class="md-no-float classForTooltip font12">{{p365Labels.common.gender}}</label>
+						<md-select name="type" ng-model="quoteParam.selfGender" class="bold12 lineHgt37" required md-no-asterisk ng-change="calculateQuoteOnSubmit()">
+							<md-option ng-value="gender.value" ng-repeat="gender in genderType">{{gender.label}}</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+			</ng-container>
+			<ng-container class="pj_width15 iPad_width25 padRig3Per resp_width100">
+				<md-input-container class="md-block">
+					<label class="md-no-float classForTooltip font12">{{p365Labels.common.hospitalLimit}}
+							<!-- <i
+							class="fa fa-question-circle fa-sm bluecolor"
+							data-toggle="tooltip" data-html="true"
+							title="{{tooltipContent.hospitalizationCover}}" tooltip></i> -->
+					</label>
+					<md-select name="type" ng-model="hospitalisationLimit" class="bold12 lineHgt37" ng-model-options="{trackBy: '$value.displayValue'}"
+					 required md-no-asterisk ng-change="changeHospitalLimit(hospitalisationLimit)">
+						<md-option ng-value="limit" ng-repeat="limit in hospitalizationLimitArray">{{limit.displayValue}}</md-option>
+					</md-select>
+				</md-input-container>
+
+			</ng-container>
+			<ng-container class="pj_width25 iPad_width50 wp_left wp_resultCol30 wp_padRgt30 padRig3Per resp_width100 iPad_zeroPadRight">
+				<md-input-container class="md-block border1Bot marBot5">
+					<label class="md-no-float classForTooltip font12"> {{p365Labels.common.membersInsured}} 
+							<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+							data-toggle="tooltip" title="{{tooltipContent.memberInsured}}"
+							tooltip></i> -->
+						<a href="javascript:;" ng-click='toggleFamily()'>[{{p365Labels.common.change}}]</a>	
+					</label>
+					<p class="bold12"><span ng-repeat="data in familyList" ng-if="data.val==true">{{data.member}} - {{data.age}} <span ng-hide="$last">,&nbsp; </span></span></p>
+				</md-input-container>
+			</ng-container>
+			<ng-container class="pj_width30 iPad_width50 padRig3Per resp_width100">
+
+				<md-input-container class="md-block border1Bot">
+					<label class="md-no-float classForTooltip font12">{{p365Labels.common.pinCode}} 
+							<!-- <i	class="fa fa-question-circle fa-sm bluecolor"
+							data-toggle="tooltip" data-html="true"
+							title="{{tooltipContent.pincode}}" tooltip></i> -->
+						<a href="javascript:;" ng-click='togglePin()'> [Change]</a>
+								</label>
+					<p class="bold12">{{personalInfo.pincode}} - {{personalInfo.displayArea}}</p>
+				</md-input-container>
+			</ng-container>
+			<ng-container class="pj_width15 iPad_width50 wp_left wp_resultCol30 wp_padRgt30  resp_width100">
+				<md-input-container class="md-block"> <label class="md-no-float classForTooltip font12">
+					{{p365Labels.common.preExistingDiseases}} 
+					<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" data-html="true"
+									title="{{tooltipContent.preExistingDiseases}}" tooltip></i> -->
+					<a ng-if="isDiseased==true" ng-click='toggleHealth()'> [{{p365Labels.common.change}}] </a>
+							</label>
+					<md-select name="type" ng-model="personalInfo.preDiseaseStatus" class="bold12 lineHgt37" ng-change="diseaseClick()" required
+					 md-no-asterisk>
+						<md-option ng-value="preDisease.value" ng-repeat="preDisease in preDiseaseStatus">
+							{{preDisease.label}} </md-option>
+					</md-select>
+				</md-input-container>
+				<!-- <div class="clearfix"></div>
+					<md-list-item class="md-1-line checkBox"
+					ng-if="isDiseased==true">
+				<div layout="row" layout-wrap flex>
+					<div class="md-list-item-text" flex="100">
+						<p ng-repeat="outerdata in selectedDisease.diseaseList">
+							<label class="btn active" ng-repeat="data in diseaseList"
+								ng-if="data.diseaseId == outerdata"
+								style="box-shadow: none !important; -webkit-box-shadow: none !important; padding: 0px !important;">
+								<md-checkbox checklist-model="selectedDisease.diseaseList"
+									ng-click="removePreDisease(data)"
+									checklist-value="data.diseaseId"> <span class="">&nbsp;{{data.disease}}
+									- <span ng-repeat="member in data.familyList"
+									style="text-align: left;"> {{member.label}} <span
+										ng-if="$index != (data.familyList.length - 1)">,&nbsp;</span>
+								</span>
+								</span></md-checkbox>
+							</label>
+							<md-divider ng-if="!$last"></md-divider>
+						</p>
+					</div>
+				</div>
+			</md-list-item> -->
+			</ng-container>
+
+			<ng-container class="section padRig3Per width100 center" ng-if="healthInputForm.$dirty">
+				<div class="">
+					<p class="dialogButton">
+						<md-button ng-click="resetOnCancel()" class="inpCancelBtn" id="carBuyProductBtn">Cancel</md-button>
+						<md-button ng-click="singleClickHealthQuote()" class="inpSaveBtn" id="editHealthInputSectionBtn">Submit</md-button>
+					</p>
+				</div>
+			</ng-container>
+		</div>
+	</div>
+</div>
+<input type="hidden" name="{{UNIQUE_QUOTE_ID_ENCRYPTED}}" id="{{UNIQUE_QUOTE_ID_ENCRYPTED}}"
+				value="{{UNIQUE_QUOTE_ID_ENCRYPTED}}" ng-model="UNIQUE_QUOTE_ID_ENCRYPTED">
+				
+

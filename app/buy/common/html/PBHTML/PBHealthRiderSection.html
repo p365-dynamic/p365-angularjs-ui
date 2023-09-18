@@ -1,0 +1,75 @@
+
+	<div class="side10PerMar center resp_noMar resp_topBot5Pad padBot3Per marTop4Per">
+		<h2 class="chooseProfTitle resp_font18">
+			<span data-bind-html-compile="globalLabel.applicationLabels.professionalJourney.health.addOnDetails" data-ng-bind-html="globalLabel.applicationLabels.professionalJourney.health.addOnDetails">
+		  		</span>
+		</h2>
+	</div>
+	<div ng-form='PBHealthRiderForm'>
+		<!-- <div class="side10PerMar">
+			<p class="greyc9Txt font10 topBot5pxMar">Policies365 Recommended Add-Ons</p>
+		</div> -->
+		<div layout="row" layout-xs="column" layout-sm="column" class="addOnSec pad10 recomdAddonMotor">
+			<div flex="100" class="recomdAddonRgt">
+				<div layout="row" layout-xs="column" style="flex-wrap: wrap">
+					<div flex="50" flex-xs="100" style="padding-right: 10px;" class="md-1-line checkBox" ng-repeat="features in planBenefits">
+						<div layout="row" layout-xs="column" layout-sm="column">
+								<md-checkbox class="blackAddon resize" checklist-model="$root.selectedFeatures" checklist-value="features" ng-change="isRiderFormDirty=true" name='add'>
+										<span class="font15 marTopBot10" layout="row">{{features.name}}<span ng-if="features.isRecommended">(P365 Recommended)</span></span>
+								</md-checkbox>
+							</div>
+							<p class="font11 marginCheckbox">
+									{{features.description}}
+								</p>
+						</div>
+					<div flex="50" flex-xs="100" flex-sm="100" style="padding-right: 10px;">
+							<!-- <div ng-repeat="v in [0]"> -->
+						<div layout="row" layout-xs="column" layout-sm="column">
+							<md-checkbox class="resize blackAddon" ng-true-value="true" ng-false-value="false" ng-model="parent.roomRentFeature" name="add"
+							ng-change="addRoomRentAsFeature(parent.roomRentFeature);isRiderFormDirty=true;">
+							<span class="font15 marTopBot10" layout="row">Room Rent</span>
+							</md-checkbox>
+							<span class="marLeft20" ng-if="parent.roomRentFeature">
+								<md-select  class="noMargin" ng-model="parent.roomType" ng-change="addRoomRentAsFeature(parent.roomRentFeature);isRiderFormDirty=true;" required md-no-asterisk>
+										<md-option ng-value="room" ng-repeat="room in roomTypesArray">&nbsp;{{room.name}}</md-option>
+								</md-select>
+								<span class="font15 marTopBot10" layout="row" ng-if="room.isRecommended">(P365 Recommended)</span>
+							</span>
+						</div>
+						<p class="font11 marginCheckbox">It is the Cap applied by the Insurance companies in the form of room charges or room category for the hospital room that
+								you can opt for.</p>
+						<!-- </div> -->
+					</div>
+
+					<div flex="50" flex-xs="100" flex-sm="100" style="padding-right: 10px;">
+							<!-- <div ng-repeat="v in [0]"> -->
+						<div layout="row" layout-xs="column" layout-sm="column">
+								<md-checkbox class="resize blackAddon" ng-true-value="true" ng-false-value="false" ng-model="parent.preExistingCoverageFeature"
+								name="add" ng-change="addPreExistingCoverageAsFeature(parent.coverageAfter);isRiderFormDirty=true">
+								<span class="font15 marTopBot10" layout="row">Pre-Existing Coverage</span>
+							   </md-checkbox>
+							<span class="marLeft20" ng-if="parent.preExistingCoverageFeature">
+								<md-select  class="noMargin" ng-model="parent.coverageAfter" ng-change="addPreExistingCoverageAsFeature(parent.coverageAfter);isRiderFormDirty=true" required md-no-asterisk>
+										<md-option ng-value="coverage" ng-repeat="coverage in preExistingCoverages">&nbsp;{{coverage.display}}</md-option>
+								</md-select>
+							</span>
+						</div>
+						<p class="font11 marginCheckbox">Pre-existing medical conditions or ailments for which you are already in medication are not covered in the plan for a specific
+								time duration and would vary between plans. Lower the waiting period it is better.</p>
+						<!-- </div> -->
+					</div>
+					
+					
+					<!-- end -->
+				</div>
+			</div>
+		</div>
+		<ng-container class="section padRig15 width100 center">
+			<div class="">
+				<p class="dialogButton">
+					<md-button class='width20_per capitalTxt resp_normFont13 inpCancelBtn' ng-click="showEditInputSection()">BACK</md-button>
+					<md-button class='width20_per capitalTxt resp_normFont13 inpSaveBtn' ng-click="getProfessionalBestQuotes()">CONFIRM</md-button>
+				</p>
+			</div>
+		</ng-container>
+	</div>

@@ -1,0 +1,162 @@
+<form name="coverageDetailsForm">
+
+		<div class="noMargin pad10 professionalProposalSection">
+				<!-- <div class="right">
+					<p class="noMargin grey87Txt"><span><i class="material-icons pinkFont bold11">edit</i></span> {{p365Labels.common.edit}}</p>
+				</div> -->
+				<div layout="row" layout-xs="column" layout-sm="row" class="resp_center">
+
+					<div flex="35" flex-xs="100" flex-sm="35">
+						<img ng-src="{{$root.wp_path}}img\clogo\{{selectedProduct.carrierId}}.png">
+					</div>
+					<div flex="65" flex-xs="100" flex-sm="65">
+						<p class="font12 noMarBot marTop8Per resp_noMar" ng-if="$root.wordPressEnabled">{{selectedProduct.insuranceCompany}} </p>
+						<p class="font12 noMarBot marTop8Per resp_noMar" ng-if="!$root.wordPressEnabled">
+								<md-input-container class="md-block resultPad"> 
+										<md-select name="reltn" ng-model-options="{trackBy: '$value.id'}" ng-model="premiumDetails.selectedProductDetails"
+										ng-change="changeInsuranceCompany()" class="mdInputContainer_input" md-no-asterisk>
+										<md-option ng-value="carquoteresp" ng-repeat="carquoteresp in quoteCalcResponse">
+								{{carquoteresp.insuranceCompany + " - (IDV : " +
+								carquoteresp.insuredDeclareValue + " & Premium : " +
+								carquoteresp.grossPremium + ")"}}</md-option>
+									</md-select>
+									 </md-input-container>
+						</p>
+						<p class="bold16 pinkFont marTop3Per"  style="margin-bottom: 0">{{p365Labels.common.premiumAmount}} &#8377;
+								{{selectedProduct.grossPremium |number:0|regexINR}}</p>
+						<p class="compareMsg font10" style="margin-top: 0">(All prices are inclusive of GST)</p>
+					</div>
+				</div>
+				<div layout="row" layout-xs="column" layout-sm="row">
+					<div flex="35" flex-xs="100" flex-sm="35" class="propCoverageTxt">
+						<p class="noMargin resp_normFont13">{{p365Labels.common.coverageDetails}}</p>
+					</div>
+					<div flex="65" flex-xs="100" flex-sm="65" style="border-top: 1px solid #ddd;margin-top: 5px;"></div>
+				</div>
+				<div class="pad1020 iPad_wrap">
+					<md-input-container class="noMarBot noMarTop width100 iPad_width50">
+						<p class="pLabel">{{p365Labels.common.insuredDeclaredValue}}</p>
+						<p class="bold12">{{selectedProduct.insuredDeclareValue |number:0|regexINR}}</p>
+					</md-input-container>
+					<md-input-container class="noMarBot noMarTop width100 iPad_width50">
+							<p class="pLabel">{{p365Labels.common.product}}</p>
+							<p class="bold12">{{selectedProduct.productType}}</p>
+						
+					</md-input-container>
+					<md-input-container class="noMarBot noMarTop width100" ng-if="ODPolicyStartDate && ODPolicyEndDate && insuranceDetails.insuranceType == 'new'">
+							<p class="bold12 noMargin">{{p365Labels.common.ownDamagaePolicyPeriod}}</p>
+					</md-input-container>
+					<div layout="row" layout-xs="column" layout-sm="row" class="iPad_width100" ng-if="ODPolicyStartDate && ODPolicyEndDate && insuranceDetails.insuranceType == 'new'">
+						<div flex="33" flex-xs="100" flex-sm="33">
+							<md-input-container class="noMarBot noMarTop width100">
+								<p class="pLabel">{{p365Labels.common.policyStartDate}}</p>
+								<p class="bold12">{{ODPolicyStartDate}}</p>
+							</md-input-container>
+						</div>
+						<div flex="33" flex-xs="100" flex-sm="33">
+							<md-input-container class="noMarBot noMarTop width100">
+								<p class="pLabel">{{p365Labels.common.policyEndDate}}</p>
+								<p class="bold12">{{ODPolicyEndDate}}</p>								
+							</md-input-container>
+						</div>
+						<div flex="33" flex-xs="100" flex-sm="33">
+							<md-input-container class="noMarBot noMarTop width100">
+								<p class="pLabel">{{p365Labels.common.ncb}}</p>
+								<p class="bold12">0</p>
+							</md-input-container>
+						</div>
+					</div>
+					<md-input-container class="noMarBot width100" ng-if="ODPolicyStartDate && ODPolicyEndDate && insuranceDetails.insuranceType == 'new'">
+							<p class="bold12 noMargin">{{p365Labels.common.liabilityPeriod}}</p>
+					</md-input-container>
+					<div layout="row" layout-xs="column" layout-sm="row" class="iPad_width100" ng-if="ODPolicyStartDate && ODPolicyEndDate && insuranceDetails.insuranceType == 'new'">
+							<div flex="33" flex-xs="100" flex-sm="33">
+								<md-input-container class="noMarBot noMarTop width100">
+									<p class="pLabel">{{p365Labels.common.policyStartDate}}</p>
+									<p class="bold12">{{policyStartDate}}</p>
+								</md-input-container>
+							</div>
+							<div flex="33" flex-xs="100" flex-sm="33">
+								<md-input-container class="noMarBot noMarTop width100">
+									<p class="pLabel">{{p365Labels.common.policyEndDate}}</p>
+									<p class="bold12">{{policyEndDate}}</p>								
+								</md-input-container>
+							</div>
+							<div flex="33" flex-xs="100" flex-sm="33">
+								<md-input-container class="noMarBot noMarTop width100">
+									<p class="pLabel">{{p365Labels.common.ncb}}</p>
+									<p class="bold12">0</p>
+								</md-input-container>
+							</div>
+						</div>
+						<div layout="row" layout-xs="column" layout-sm="row" class="iPad_width100">
+								<div flex="33" flex-xs="100" flex-sm="33" ng-if="!previousPolicyStatus">
+									<p></p>
+									<md-input-container class="noMarBot noMarTop width100">
+										<label>{{p365Labels.common.policyStartDate}}</label>
+										<input class="newDatepickerBorder" type="text"
+										ng-model="prevPolDetails.policyStartDate"
+										p365-date-picker="polStartDateOptions"
+										ng-change="validatePolicyStartDate()" readonly="readonly"
+										style="background: transparent; border: none; color: #424242; border-bottom: 1px solid #d1d1d1;"
+										required md-no-asterisk />
+									</md-input-container>
+								</div>
+								<div flex="33" flex-xs="100" flex-sm="33" ng-if="previousPolicyStatus">
+									<md-input-container class="noMarBot noMarTop  width100">
+										<p class="pLabel">{{p365Labels.common.policyStartDate}}</p>
+										<p class="bold12">{{policyStartDate}}</p>
+									</md-input-container>
+								</div>
+								<div flex="33" flex-xs="100" flex-sm="33" ng-if="previousPolicyStatus">
+									<md-input-container class="noMarBot noMarTop width100">
+										<p class="pLabel">{{p365Labels.common.policyEndDate}}</p>
+										<p class="bold12">{{policyEndDate}}</p>								
+									</md-input-container>
+								</div>
+								<div flex="33" flex-xs="100" flex-sm="33" ng-if="previousPolicyStatus">
+									<md-input-container class="noMarBot noMarTop width100">
+										<p class="pLabel">{{p365Labels.common.newNcb}}</p>
+										<p class="bold12" ng-if="selectedProduct.ncbPercentage != null">{{selectedProduct.ncbPercentage}}%</p>
+										<p class="bold12" ng-if="selectedProduct.ncbPercentage == null">NA</p>
+									</md-input-container>
+								</div>
+							</div>
+				</div>
+				<div layout="row" layout-xs="column" layout-sm="row" class="iPad_width100">
+					<div flex="35" flex-xs="100" flex-sm="35" class="propCoverageTxt">
+						<p class="noMargin resp_normFont13">{{p365Labels.common.vehicleDetails}}</p>
+					</div>
+					<div flex="65" flex-xs="100" flex-sm="65" style="border-top: 1px solid #ddd;margin-top: 5px;"></div>
+				</div>
+				<div class="pad1020">
+					<md-input-container class="noMarBot noMarTop width100">
+						<p class="pLabel">{{p365Labels.common.makeAndModel}}</p>
+						<p class="bold12">{{selectedProduct.carrierVariantDisplayName}}</p>
+					</md-input-container>
+				</div>
+
+				<div layout="row" layout-xs="column" layout-sm="row" ng-if="selectedProduct.ridersList.length > 0">
+						<div flex="35" flex-xs="100" flex-sm="35" class="propCoverageTxt">
+							<p class="noMargin resp_normFont13">{{p365Labels.common.addOnCover}}</p>
+						</div>
+						<div flex="65" flex-xs="100" flex-sm="65" style="border-top: 1px solid #ddd;margin-top: 5px;"></div>
+					</div>
+					<div class="pad1020">
+						<md-input-container class="noMarBot noMarTop width100" ng-repeat="rider in selectedProduct.ridersList">
+							<p class="pLabel">{{rider.riderName}} 
+								<span ng-if="rider.riderType != 'NA' && rider.riderType != 'included' && (rider.riderValue >= 1)">&#8377; {{rider.riderValue | number:0 | regexINR}}</span>
+				                <span ng-if="rider.riderType == 'NA' || rider.riderType == 'included'">{{rider.riderType}}</span>
+				                <span ng-if="rider.riderType != 'NA' && rider.riderType != 'included' && (!rider.riderValue || rider.riderValue == 0 || rider.riderValue < 1)">NA</span>
+							</p>
+						</md-input-container>
+						<md-input-container class="noMarBot noMarTop width100" ng-repeat="dependants in rider.dependant">
+								<p class="pLabel">{{dependants.riderName}} 
+								<span class="bold12">{{dependants.riderType}}</span>
+								</p>
+							</md-input-container>
+					</div>
+				</div>
+
+
+</form>

@@ -1,0 +1,62 @@
+<div style="height:400px; overflow:auto;">
+<div class="clear"></div>
+    <div class="border robo marginbot10">
+    <div class="section group">
+					<div class="col span_1_of_3"><img src="{{selectPremiumFromResult.carrierLogo}}" width="120" height="50"></div>
+                    <div class="col span_1_of_3"><div class="heading">Premium Details</div> </div>
+                    <div class="col span_1_of_3"></div>
+                    </div>
+    <div class="plandetail"> </div>
+    </div>
+   <div class="border robo marginbot10">
+   <div class="section group viewDiv">
+            <div class="col span_1_of_3">
+                <b>{{quoteParam.policyType}}</b>
+            </div>
+            <div class="col span_1_of_3">
+                <b>{{quoteParam.preExistingDisease}}</b>
+            </div>
+            <div class="col span_1_of_3">
+                <b>{{personalInfo.hospitalisationLimit}}</b>
+            </div>
+        </div>
+        <div class="section group viewDiv">
+            <div class="col span_1_of_3">
+                <b>family of {{quoteParam.totalCount}}</b>
+            </div>
+            <div class="col span_1_of_3"></div>
+            <div class="col span_1_of_3">
+                <b>{{personalInfo.pincode}}</b>
+            </div>
+        </div>
+    </div>
+    
+  
+	<div class="marginbot10">
+		<table class="popupquotetable robo">
+			<tr>
+				<th>Category</th>
+				<th>Value</th>
+			</tr>
+			<tr>
+				<td>Basic Premium</td>
+				<td>{{selectPremiumFromResult.basicPremium}}</td>
+			</tr>
+			<tr>
+				<td>Service Tax</td>
+				<td>{{selectPremiumFromResult.serviceTax}}</td>
+			</tr>
+			<tr>
+				<td>Adjusted Premium</td>
+				<td>{{selectPremiumFromResult.adjustedPremium}}</td>
+			</tr>
+			<tr>
+				<td>Annual Premium</td>
+				<td>{{selectPremiumFromResult.annualPremium}}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+	<div class="pad10 center">
+    <a class="orangebutton" ng-click="toggleMoreDetails()">Return To View Quote Options</a>
+    </div>

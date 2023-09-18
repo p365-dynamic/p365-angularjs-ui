@@ -1,0 +1,159 @@
+ <div class="fullShadow resultBg wp_resultBorder wp_InputContainer">
+	<div ng-form="homeInputForm">
+		<md-toolbar class="md-theme-light resultHeader p365-light"
+			ng-if="!$root.wordPressEnabled">
+		<h2 class="md-toolbar-tools" ng-click="showPersonalDetails()">
+			<span>Home Details</span>
+			<md-button class="md-icon-button" id="assuranceResultSaveIcon"
+				aria-label="save" ng-click="toggleChange('submit')" data-html="true"
+				data-toggle="tooltip" data-placement="right" title="Save" tooltip>
+			<i class="material-icons">save</i> </md-button>
+			<md-button class="md-icon-button" id="assuranceResultResetIcon"
+				aria-label="undo" ng-click="toggleChange('cancel')" data-html="true"
+				data-toggle="tooltip" data-placement="right" title="Reset" tooltip>
+			<i class="material-icons">undo</i> </md-button>
+			<span flex></span>
+			<md-button
+				ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled && homeInputSection"
+				class="md-icon-button"
+				id="homeInputExpandIcon"> <i class="material-icons">arrow_drop_down</i>
+			</md-button>
+			<md-button
+				ng-if="$root.baseEnvEnabled  && !$root.wordPressEnabled && !homeInputSection"
+				class="md-icon-button"
+				id="homeInputCollaseIcon"> <i class="material-icons">arrow_drop_up</i>
+			</md-button>
+		</h2>
+		</md-toolbar>
+		<md-list ng-hide="$root.baseEnvEnabled && homeInputSection"
+			class="resultPad modifyDiv classForTooltip">
+		<div ng-if="!$root.wordPressEnabled && homeInputForm.$dirty">
+			<p class="errorSmallText">
+				Changes made, please click on <i class="material-icons"
+					style="position: relative; top: 8px;">save</i> to see the updated
+				results.
+			</p>
+		</div>
+		<div ng-if="$root.wordPressEnabled && homeInputForm.$dirty">
+			<p class="errorSmallText">
+				Changes made, please click on <b>SUBMIT</b> to see the updated
+				results.
+			</p>
+		</div>
+
+		<div class="section">
+		<ng-container class="wp_left wp_resultCol30 wp_padRgt30">
+		 <md-input-container style="width: 100%;"> <label class="md-no-float classForTooltip">{{globalLabel.applicationLabels.home.typeOfHome}}</label>
+		<md-select name="type" ng-model="quoteParam.homeType"> <md-option
+			ng-value="homeType.value" ng-repeat="homeType in typeOfHome">{{homeType.label}}</md-option>
+		</md-select> </md-input-container>
+		<div class="clearfix"></div>
+		
+		<md-input-container class="md-block"  ng-if="quoteParam.homeType=='Owned'"> <label
+			class="md-no-float classForTooltip">{{globalLabel.applicationLabels.home.valueOfStructure}}
+			<i class="fa fa-question-circle fa-sm bluecolor"
+			data-toggle="tooltip" data-html="true"
+			title="{{tooltipContent.structureSumInsured}}" tooltip></i>			
+			<span style="color: red"  >{{message}}</span>
+		</label> 
+		<input  style="width:70% !important;" ng-pattern='/^[1-9][0-9]*$/' ng-change="checkSum(quoteParam.structureSumInsured);"  name="type"
+		 ng-model="quoteParam.structureSumInsured"
+		required md-no-asterisk autocomplete='off' 	maxlength='8' minlength='1' >
+		<span style="width: 30% !important; font-weight:bold "> {{showAmount(quoteParam.structureSumInsured)}} Lakhs</span>
+			
+		</md-input-container>
+		<div class="clearfix"></div>
+		
+
+		<md-input-container style="width: 100%;"> <label class="md-no-float classForTooltip">{{globalLabel.applicationLabels.home.policyTerm}}</label>
+			<md-select name="type" ng-model="quoteParam.policyTerm"> <md-option
+				ng-value="policyTerm" ng-repeat="policyTerm in policyTermArray">{{policyTerm}}</md-option>
+			</md-select> </md-input-container>
+			<div class="clearfix"></div>
+		 </ng-container>
+
+
+
+		<ng-container class="wp_left wp_resultCol30 wp_padRgt30">
+		
+		<md-input-container class="md-block"  > <label
+			class="md-no-float classForTooltip">{{globalLabel.applicationLabels.home.valueOfContent}}
+			<i class="fa fa-question-circle fa-sm bluecolor"
+			data-toggle="tooltip" data-html="true"
+			title="{{tooltipContent.contentSumInsured}}" tooltip></i>			
+			<span style="color: red"  >{{message}}</span>
+		</label> 
+		<input  style="width:70% !important;" ng-pattern='/^[1-9][0-9]*$/' ng-change="checkSum(quoteParam.contentSumInsured);"  name="type"
+		 ng-model="quoteParam.contentSumInsured"
+		required md-no-asterisk autocomplete='off' 	maxlength='8' minlength='1' >
+		<span style="width: 30% !important; font-weight:bold "> {{showAmount(quoteParam.contentSumInsured)}} Lakhs</span>
+			
+		</md-input-container>
+		<div class="clearfix"></div>
+		<md-input-container class="md-block"
+			ng-if="quoteParam.homeType=='Owned'"> <label
+			class="md-no-float classForTooltip">{{globalLabel.applicationLabels.home.ageOfProperty}}
+			<i class="fa fa-question-circle fa-sm bluecolor"
+			data-toggle="tooltip" data-html="true"
+			title="{{tooltipContent.propertyAge}}" tooltip></i> <span
+			style="color: red">{{message}}</span>
+		</label> <input style="width: 70% !important;" ng-pattern='/^[1-9][0-9]*$/'
+			ng-change="checkPropertyAge(quoteParam.propertyAge);" name="type"
+			ng-model="quoteParam.propertyAge" required md-no-asterisk
+			autocomplete='off' maxlength='4' minlength='1'> <span
+			style="width: 30% !important; font-weight: bold">
+			{{showPropertyAge(quoteParam.propertyAge)}} Years</span> </md-input-container>
+
+		<div class="clearfix"></div>	
+		</ng-container>
+
+		 <ng-container class="wp_left wp_resultCol30 wp_padRgt30"> 
+				<!--<div class="col col-sm-12"> -->
+		 <md-list-item class="md-1-line">
+		<div class="md-list-item-text">
+			<h3 class="md-no-float classForTooltip">
+				{{globalLabel.applicationLabels.home.pinCode}} <i
+					class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip"
+					data-html="true" title="{{tooltipContent.pincode}}" tooltip></i><a
+					href="javascript:;" ng-click='togglePin()'> [Change]</a>
+			</h3>
+			
+			<p>{{personalDetails.pincode}} - {{personalDetails.displayArea}}</p>
+		</div>
+		<md-divider ng-if="!$last"></md-divider></md-list-item>
+		<div ng-if="$root.wordPressEnabled" ><p style="padding:10px 0"></p></div>
+		<div class="clearfix"></div>
+		<!--</div> -->
+	
+	
+  		<md-input-container style="width: 100%;"> <label class="md-no-float classForTooltip">{{globalLabel.applicationLabels.home.typeOfProperty}}</label>
+		<md-select name="type" ng-model="quoteParam.propertyType"
+			ng-change="calculateHomePremium()"> <md-option
+			ng-value="propertyType.value"
+			ng-repeat="propertyType in typeOfProperty">{{propertyType.label}}</md-option>
+		</md-select> </md-input-container>
+			
+		
+		 </ng-container>
+		 <div class="clearfix"></div>
+		</div>
+		
+
+		<div class="section" ng-if="$root.wordPressEnabled && homeInputForm.$dirty">
+			<div class="col col-sm-4 fullWidth"></div>
+			<div class="col col-sm-4 fullWidth">
+				<p class="dialogButton">
+					<button ng-click="toggleChange()"
+						class="bluebuybuttoncar wp_resultInpBtn" id="carBuyProductBtn"
+						style="background-color: #c4c4c4 !important;">Cancel</button>
+					<button ng-disabled="disableSubmit" ng-click="singleClickHomeQuote()"
+						class="bluebuybuttoncar wp_resultInpBtn" id="carBuyProductBtn">
+						Submit</button>
+				</p>
+			</div>
+			<div class="col col-sm-4 fullWidth"></div>
+			<div class="clearfix"></div>
+		</div>
+		</md-list>
+	</div>
+</div>

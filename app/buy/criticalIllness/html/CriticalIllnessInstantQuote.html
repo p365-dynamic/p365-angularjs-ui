@@ -1,0 +1,45 @@
+<md-content ng-controller="criticalIllnessInstantQuoteController" 
+	class="wp_md-content wp_inputBorderRadius"><!-- style="background:#fff;" --> 
+	<ng-container ng-if="$root.displayInstantScreen"> <md-input-container style="width: 100%;">
+<label>{{globalLabel.applicationLabels.criticalIllness.genderType}}</label> <md-select
+	name="type" ng-model="quoteParam.gender"
+	ng-change="calculateCriticalIllnessPremium()"> <md-option
+	ng-value="gender.value" ng-repeat="gender in genderType"
+	ng-disabled="instantQuoteCriticalIllnessForm">{{gender.label}}</md-option> </md-select> </md-input-container>
+	<div class="clearfix"></div>
+	 <md-input-container
+	class="md-block"> <label>{{globalLabel.applicationLabels.criticalIllness.age}}</label>
+<md-select name="type" ng-model="quoteParam.age"
+	ng-change="calculateCriticalIllnessPremium()"> <md-option
+	ng-value="age" ng-repeat="age in ageList"
+	ng-disabled="instantQuoteCriticalIllnessForm">{{age}}</md-option> </md-select> </md-input-container> 
+	<div class="clearfix"></div>
+	<md-input-container
+	class="md-block"> <label>{{globalLabel.applicationLabels.criticalIllness.tobaccoAddiction}}</label>
+<md-select name="type" ng-model="quoteParam.tobacoAdicted"
+	ng-change="calculateCriticalIllnessPremium()"> <md-option
+	ng-value="tobacco.value" ng-repeat="tobacco in tobaccoAddictionStatus"
+	ng-disabled="instantQuoteCriticalIllnessForm">{{tobacco.label}}</md-option> </md-select> </md-input-container> 
+	<div class="clearfix"></div>
+ 
+	<div class="clearfix"></div>	
+		
+	 <md-input-container
+ class="md-block"> <label>{{globalLabel.applicationLabels.criticalIllness.sumAssured}}&nbsp;&nbsp;</label>
+ <div class="">
+ <input  style="color: #fff" ng-pattern='/^[1-9][0-9]*$/' class="" name='sumAssured' ng-change="checkSum(quoteParam.sumInsured);calculateCriticalIllnessPremium()" 
+ ng-model='quoteParam.sumInsured' autocomplete='off'
+		maxlength='8' minlength='1'
+	   required md-no-asterisk style="position: relative;" />
+ <div class="ammount-lable" style="background-color: #fbfbfbcc;position: absolute;right: 0px;width: 33%;height: 100%;border-radius: 0 24px 24px 0px;top: 0px;">
+	 <label class="ammount-lable1" style="color:#f56909 !important;font-weight:bold;font-size: 100% !important;top:30%;left:12%;">
+	 &#x20B9;&nbsp;{{showAmount(quoteParam.sumInsured)}} Lakhs
+	 </label>
+ </div>
+ </div> 
+</md-input-container>
+
+<span  ng-show="$root.disableNextScreen">{{message}}</span>
+
+
+ </ng-container> </md-content>

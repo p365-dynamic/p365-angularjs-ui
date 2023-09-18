@@ -1,0 +1,303 @@
+<div class="editback2">
+<div class="InsideWrapper">
+   <div class="section group viewDiv">
+   	<form name="coverageDetailsForm">
+      <div class="col span_1_of_3">
+	  <div id="accordion" simple-accordion toggle-speed="fast" toggle-easing="linear" slide-up-speed="fast" slide-up-easing="linear" >
+			<div class="accGroup">
+			<h6 class="accordion-toggle accForMobile">
+				<b>{{p365Labels.common.coverageDetails}}</b>
+			</h6>
+			<div class="accordion-content default pad5">
+				<div class="accForWeb">
+					<div class="orangecolorHeader" style="padding-bottom: 5px;">
+						<b>{{p365Labels.common.coverageDetails}} </b>
+					</div>
+				</div>
+               <div class="width60">
+               		<div>{{p365Labels.common.insuranceCompany}}</div>
+            		<label>
+            			<b>{{selectedProduct.insuranceCompany}}</b>
+            		</label>
+         		</div>
+
+				<div class="width60">
+					<div>{{p365Labels.common.vehicle}}</div>
+					<label><b>{{p365Labels.common.dynamiContent}}</b></label>
+				 </div>
+				 <div class="width60">
+					<div>{{p365Labels.common.insuredDeclaredValue}}</div>
+					<label><b>&#8377; {{selectedProduct.insuredDeclareValue}}</b></label>
+				 </div>
+				 <div class="width60">
+					<div>{{p365Labels.common.policyStartDate}}</div>
+						<label>
+						<b>{{insuranceDetails.policyStartDate}}</b>
+						</label>
+				 </div>
+				 <div class="width60">
+					<div>{{p365Labels.common.policyEndDate}}</div>
+						<label>
+						<b>{{insuranceDetails.policyEndDate}}</b>
+						</label>
+				 </div>
+
+				 <div class="width60">
+					<div>{{p365Labels.common.newNcb}}</div>
+					<label><b>{{selectedProduct.ncbPercentage}}%</b></label>
+				 </div>
+			<div class="orangecolorHeader" style="padding-bottom: 5px;">
+					<b> {{p365Labels.common.additionalCover}}</b>
+				</div>
+			 <div class="width60">
+         	<div class="btnGroupDisplay">
+				<div data-toggle="buttons" class="btn-group btn-group-vertical"
+				ng-repeat="rider in selectedProduct.riderList">
+				<input type="checkbox"
+				ng-checked="true" disabled="disabled"><span>
+				{{rider["com.sutrr.quote.carquotecalc.AddOnCover"].riderName}}</span></label>
+				</div>
+			</div>
+			<!--  
+			<div data-toggle="buttons" class="btn-group btn-group-vertical">
+				<label class="btn">
+					<input type="checkbox" ng-true-value="true" ng-false-value="false"
+					ng-model="checkforPsgCover" name='add' ng-change="">
+					<i class="fa fa-square-o fa-lg"></i>
+					<i class="fa fa-check-square-o fa-lg"></i>
+					<span>{{globalLabel.applicationLabels.car.passengerCover}}</span>
+				</label>
+			</div>
+			-->
+			<div ng-show="checkforPsgCover">
+				<div class="select-style" style="margin-left: 20px;">
+					<select ng-model="vehicleDetails.passengerCover"
+						ng-options="psgCover.riderAmount for psgCover in passengerCoverList track by psgCover.riderAmount"
+						ng-change="">
+					</select>
+				</div>
+			</div>
+			<!--  
+			<div data-toggle="buttons" class="btn-group btn-group-vertical">
+				<label class="btn">
+					<input type="checkbox" ng-true-value="true" ng-false-value="false"
+						ng-model="checkforAccessoriesCover" name="add" ng-change="">
+						<i class="fa fa-square-o fa-lg"></i>
+						<i class="fa fa-check-square-o fa-lg"></i>
+						<span>{{globalLabel.applicationLabels.car.accessories}}</span>
+				</label>
+			</div>
+			-->
+			<br />
+			<div ng-show="checkforAccessoriesCover">
+								<div style="margin-left: 20px;">
+									<div data-toggle="buttons" class="btn-group btn-group-vertical">
+										<label class="btn"><input type="checkbox" checked=""
+											ng-true-value="true" ng-false-value="false"
+											ng-model="checkforElectrical" name="add"
+											ng-change=""><i
+											class="fa fa-square-o fa-sm bluecolor"></i><i
+											class="fa fa-check-square-o fa-sm bluecolor"></i><span
+											style="font-size: 11px;">{{p365Labels.common.accessoriesElectrical}}</span></label>
+									</div>
+									<div ng-show="checkforElectrical">
+										<input type="text"
+											ng-model="vehicleDetails.electricalAccessories"
+											style="width: 80%; margin-left: 20px;"
+											ng-blur="">
+									</div>
+									<br />
+									<div data-toggle="buttons" class="btn-group btn-group-vertical">
+										<label class="btn"><input type="checkbox" checked=""
+											ng-true-value="true" ng-false-value="false"
+											ng-model="checkforNonElectrical" name="add"
+											ng-change=""><i
+											class="fa fa-square-o fa-sm bluecolor"></i><i
+											class="fa fa-check-square-o fa-sm bluecolor"></i><span
+											style="font-size: 11px;">{{p365Labels.common.accessoriesNoElectrical}}</span></label>
+									</div>
+									<div ng-show="checkforNonElectrical">
+										<input type="text"
+											ng-model="vehicleDetails.nonElectricalAccessories"
+											style="width: 80%; margin-left: 20px;"
+											ng-blur="">
+									</div>
+								</div>
+							</div>
+         </div>
+			<div class="clearfix"></div>
+			
+			
+		
+			<div class="orangecolorHeader" style="padding-bottom: 5px;">
+				<b>{{p365Labels.common.discountInfo}}</b>
+			</div>
+         <div class="width60">
+            <div>{{p365Labels.common.voluntaryDeductibleAmount}}</div>
+            <label><b>&#8377; {{selectedProductInputParam.quoteParam.deductible}}</b></label>
+         </div>
+         <div class="width60">
+            <div>{{p365Labels.common.antiTheftDevice}}</div>
+            <label ng-if="selectedProductInputParam.quoteParam.isAntiTheftDevice=='Y'"><b>{{p365Labels.common.yes}}</b></label>
+            <label ng-if="selectedProductInputParam.quoteParam.isAntiTheftDevice=='N'"><b>{{p365Labels.common.no}}</b></label>
+         </div>
+         <div class="width60">
+            <div>{{p365Labels.common.automobileMember}}</div>
+            <label ng-if="selectedProductInputParam.vehicleInfo.isAutoAssociation=='Y'"><b>{{p365Labels.common.yes}}</b></label>
+            <label ng-if="selectedProductInputParam.vehicleInfo.isAutoAssociation=='N'"><b>{{p365Labels.common.no}}</b></label>
+         </div>
+		 <div class="clearfix"></div>
+			</div>	
+			</div>
+			<div class="clearfix"></div>
+		
+		</div>
+        
+         <h4 style="padding-bottom: 5px; color:#2991ea;"><b>{{p365Labels.common.premiumAmount}}</b></h4>
+         <div class="border bold">
+            &#8377; {{selectedProduct.grossPremium}}
+         </div>
+      </div>
+      </form>
+      <div class="col span_2_of_3">
+	  <div class="">
+            <div class="row bs-wizard" style="border-bottom:0;">
+                
+                <div class="col-xs-4 bs-wizard-step active proposerInfo">
+                  <div class="text-center bs-wizard-stepnum">{{p365Labels.common.scheduleInspectionOnline}}</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <div class="bs-wizard-dot"></div>
+                </div>                
+                <div class="col-xs-4 bs-wizard-step disabled prevPolicyInfo"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">{{p365Labels.common.inspectionAndDocVerification}}</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <div class="bs-wizard-dot"></div>
+                </div>
+				<div class="col-xs-4 bs-wizard-step disabled"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">{{p365Labels.common.makePaymentToInsurer}}</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <div class="bs-wizard-dot"></div>
+                </div>               
+            </div>
+			</div>
+         <div class="additionalfeatures buyInput">
+         <form name='personalDetailsForm' ng-show='screenOneStatus'>
+            <div class="orangetitle magintop10">{{p365Labels.common.inspectionAddress}} </div>
+			<div class="section group">    
+				<div class="col span_1_of_2">        
+					<input type='text' placeholder='Door No/Block No/Block Name' name='Address Line 1' ng-model='proposerDetails.addressLine1' autocomplete='off' maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z0-9\,\-\. ]*$/' required>
+				</div>    
+				<div class="col span_1_of_2">  
+					<input type='text' placeholder='Society Name/ Street Name'	name='Address Line 2' ng-model='proposerDetails.addressLine2' autocomplete='off' maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z0-9\,\-\. ]*$/'>
+				</div>
+			</div>
+			<div class="section group">    
+				<div class="col span_1_of_2">        
+					<input type="text" placeholder='Enter Pincode' style='width: 50% !important' name='Pincode' ng-model="proposerDetails.pincode"  ng-pattern='/[0-9]{6}/' autocomplete='off' maxlength='6' minlength='6' ng-disabled="true" readonly required>
+					<a ng-click='togglePin()' style="color: #f7a100;">{{p365Labels.common.change}}</a>
+				</div>    
+				<div class="col span_1_of_2">  
+					<input type='text' placeholder='Enter Area' name='area' ng-model='proposerDetails.area' autocomplete='off'autocomplete='off' maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z\.\- ]*$/' readonly required>
+				</div>
+			</div>
+			<div class="section group">    
+				<div class="col span_1_of_2">        
+					<input type='text' placeholder='Enter City' name='City/Town/Village' ng-model='proposerDetails.city' autocomplete='off' maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z\. ]*$/' readonly required>
+				</div>    
+				<div class="col span_1_of_2">  
+					<input type='text' placeholder='Enter State' name='State' ng-model='proposerDetails.state' autocomplete='off' maxlength='35' minlength='1' ng-pattern='/^[a-zA-Z\.\- ]*$/' readonly required>   
+				</div>
+			</div>
+            
+			
+            <div class="orangetitle magintop10">{{p365Labels.common.choseInspectionDateAndTime}}</div>
+			
+			<div class="section group">    
+				<div class="col span_1_of_2">        
+					<div class='select-style' style='width: 100%'>	
+							<select ng-model='nominationRelation' placeholder='Nothing selected.' ng-change='changeRelation()'	ng-options='relation.name for relation in relationList' required>
+							<option value=''>{{p365Labels.common.inspectionDate}}</option>
+							</select>			
+						</div> 
+				</div>    
+				<div class="col span_1_of_2">  
+					<div class='select-style' style='width: 100%'>	
+							<select ng-model='nominationRelation' placeholder='Nothing selected.' ng-change='changeRelation()'	ng-options='relation.name for relation in relationList' required>
+							<option value=''>{{p365Labels.common.inspectionTime}}</option>
+							</select>			
+						</div> 
+				</div>
+			</div>
+            
+			<div class='center'>
+				<input class='bluebutton' type='button' value='Schedule Inspection >>'
+				ng-click='submitPersonalAndNominationInfo()' ng-disabled='personalDetailsForm.$invalid'>
+			</div>
+            </form>
+            <div ng-show="screenTwoStatus">
+			<form name="previousPolicyDetailsForm">
+            <div ng-show="showPreviousPolicyForm">
+            <div class="orangetitle magintop10">{{p365Labels.common.previousPolicyDetails}} </div>
+            
+           	<div class='center'>
+				<input class="greybutton" value="<< Previous Page" ng-click="editPesonalInfo()" type="button">
+           		<!--<span  ng-show='showPaymentButton'>
+					<input class='bluebutton' type='button' value='Proceed to make payment'
+					ng-click='proceedForPayment()' ng-disabled='previousPolicyDetailsForm.$invalid'>
+				</span>
+				<span ng-show="showInspectionButton">
+					<input class='bluebutton' type='button' value='Schedule Vehicle Inspection'
+					ng-click='submitPreviousPolicyAndVehicleInfo()' ng-disabled='previousPolicyDetailsForm.$invalid'>
+				</span>
+				<input class="bluebutton" value="Schedule Inspection" ng-click="scheduleInspection()" type="button">-->
+			</div>
+			
+            </form>
+            </div>
+            </div>
+      </div>
+   </div>
+</div>
+</div>
+
+	<modal-dialog show='modalPIN' width='500px' height='300px'
+		class="ng-hide">
+	<div class="modalHeader">
+		<h2 class="bluecolor">
+			Enter Area or City or Pincode
+			<div class='ng-modal-close' ng-click='hideModal()'>X</div>
+		</h2>
+	</div>
+	<div class="tab-pane">
+
+		<div class="">
+			<div class="pad10">
+
+				<form name="pincodeform">
+					<input type="text" name="pin" placeholder="Enter City/Area/Pincode" autocomplete="off"
+						ng-required="true" typeahead-on-select="onSelectPinOrArea($item)"
+						ng-model="proposerDetails.pincode"
+						uib-typeahead="pin.display for pin in getPinCodeAreaList($viewValue)"
+						typeahead-show-hint="true" typeahead-min-length="3"
+						typeahead-wait-ms="10" />
+					<div ng-messages="pincodeform.pin.$error"
+						ng-if="pincodeform.pin.$touched">
+						<div style="color: red" ng-message="required">{{p365Labels.common.pincodeRequired}}</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</modal-dialog>
+
+
+<script>
+$(document).ready(function(){
+  $("#demo").on("hide.bs.collapse", function(){
+    $(".btn").html('<span class="glyphicon glyphicon-collapse-down"></span>');
+  });
+  $("#demo").on("show.bs.collapse", function(){
+    $(".btn").html('<span class="glyphicon glyphicon-collapse-up"></span>');
+  });
+});
+</script>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="sample" basedir="." default="dev-deploy">
+	<taskdef resource="net/sf/antcontrib/antlib.xml"/>
+	<tstamp>
+		<format property="RELEASE_TIME" pattern="dd_MMM_yyyy_HH_mm_ss"/>
+	</tstamp>
+	<property name="exec.dir" value="." />
+	<property name="properties_filepath" value="." />
+	<property name="workspace" value="${exec.dir}" />
+	<property name="properties.filepath" value="${workspace}/app/ApplicationLabels.json" />
+	<property name="template.filepath" value="${workspace}/tempFile.html" />
+	<property name="app.dir" value="${workspace}/app" />
+	<property name="deploy.dir" value="${workspace}/deploy" />
+	<property name="dist.dir" value="${workspace}/dist" />
+	<property name="gruntexe" value="/usr/bin/grunt" />
+	<property name="carrierlogo.imagepath" value="/opt/release/carrierlogo" />
+	<property name="dev.final.release" value="${workspace}/deployable/dev" />
+	<property name="dev.release.dir" value="/opt/release/deployable/development/${RELEASE_TIME}" />
+	<property name="dev.webservice.link" value="http://192.168.0.50:8981/cxf" />
+	<property name="dev.webapp.url" value="http://192.168.0.50:9091/policies365/index.html#/" />
+	<property name="dev.field.status" value="false" />
+	<property name="wordPressEnabled" value="false" />
+	<property name="styleCSSVal" value="style.css" />
+	<property name="responsive" value="responsive.css" />
+	<property name="wordPressDynamicURL" value="''" />
+	<property name="agencyPortalDynamicURL" value="'http://192.168.0.10/policies365/#/proposalresdata?proposalId='" />
+	<target name="dev-deploy" depends="grunt">
+		<echo message="Creating development deployable." />
+		<copy todir="${dev.release.dir}" >  
+    		<fileset dir="${dist.dir}" includes="**"/>  
+	 	</copy>
+		<replace dir="${dev.release.dir}" value="policies365-version-${RELEASE_TIME}">
+			<include name="**/*.js"/>
+			<replacetoken>WEB_APPLICATION_VERSION</replacetoken>
+		</replace>
+		<echo message="WEB_APPLICATION_VERSION = policies365-version-${RELEASE_TIME}" />
+		<replace dir="${dev.release.dir}" value="${dev.webservice.link}">
+			<include name="**/*.js"/>
+			<replacetoken>WEBSERVICE_URL</replacetoken>
+		</replace>
+		<replace dir="${dev.release.dir}" value="${dev.field.status}">
+			<include name="**/*.js"/>
+			<replacetoken>FIELD_ENABLE_STATUS</replacetoken>
+		</replace>
+		<replace dir="${dev.release.dir}" value="${dev.webapp.url}">
+			<include name="**/*.js"/>
+			<replacetoken>WEB_APP_URL</replacetoken>
+		</replace>
+		<replace dir="${dev.release.dir}" value="${baseVariableValue}">
+			<include name="**/*.js"/>
+			<replacetoken>BASE_VARIABLE_DEFINATION</replacetoken>
+		</replace>
+		<replace dir="${dev.release.dir}" value="${customVariableValue}">
+			<include name="**/*.js"/>
+			<replacetoken>CUSTOM_VARIABLE_DEFINATION</replacetoken>
+		</replace>
+		<replace dir="${dev.release.dir}" value="${agencyPortalEnabled}">
+					<include name="**/*.js"/>
+					<replacetoken>AGENCY_PORTAL_ENABLED_FLAG</replacetoken>
+				</replace>
+		<replace dir="${dev.release.dir}" value="${iquoteEnabled}">
+					<include name="**/*.js"/>
+					<replacetoken>IQUOTE_ENABLED_FLAG</replacetoken>
+				</replace>
+		<replace dir="${dev.release.dir}" value="${wordPressDynamicURL}">
+			<include name="**/*.js"/>
+			<replacetoken>WORD_PRESS_DYNAMIC_URL</replacetoken>
+		</replace>
+		<replace dir="${dev.release.dir}" value="${agencyPortalDynamicURL}">
+					<include name="**/*.js"/>
+					<replacetoken>AGENCY_PORTAL_DYNAMIC_URL</replacetoken>
+				</replace>
+		<replace dir="${dev.release.dir}" value="${wordPressEnabled}">
+			<include name="**/*.js"/>
+			<replacetoken>WORD_PRESS_ENABLED_FLAG</replacetoken>
+		</replace>
+		<echo message="Development deployable created." />
+		<echo message="Development deployable copy started." />
+		<copy todir="${dev.final.release}">
+			<fileset dir="${dev.release.dir}" includes="**"/>  
+		</copy>
+		<echo message="Development deployable copy completed." />
+	</target>
+	<target name="grunt" depends="deploy">
+	<if>
+    <equals arg1="${isGruntAllowed}" arg2="Yes"/>
+	<then>
+		<echo message="Performing grunt operation." />
+		<exec executable="${gruntexe}" dir="${basedir}" outputproperty="log"></exec>
+		<echo message="Grunt Log : ${log}" />
+		<condition property="onSuccess">
+			<matches pattern="Done, without errors." string="${log}" />
+		</condition>
+		<fail message="Grunt failed!" unless="onSuccess" />
+	</then>
+	<else>
+        <echo message="Grunt option is not opted!"/>
+		<copy todir="${dist.dir}" >  
+			<fileset dir="${deploy.dir}" includes="**"/>  
+		</copy>
+    </else>
+	</if>
+	</target>
+	<target name="deploy" depends="clean">
+		<java dir="${exec.dir}" jar="${exec.dir}/lib/DeployGen.jar" fork="true"
+			failonerror="true" maxmemory="128m">
+			<arg value="${properties.filepath}" />
+			<arg value="${template.filepath}" />
+			<arg value="${app.dir}" />
+			<arg value="${deploy.dir}" />
+			<arg value="-h" />
+		</java>
+		<replace dir="${deploy.dir}" value="${styleCSSVal}">
+			<include name="**/*.html"/>
+			<replacetoken>STYLE_CSS_VAL</replacetoken>
+		</replace>
+		<replace dir="${deploy.dir}" value="${responsive}">
+			<include name="**/*.html"/>
+			<replacetoken>RESPONSIVE_MOBILE</replacetoken>
+		</replace>
+	</target>
+	<target name="clean" depends="init">
+		<delete includeEmptyDirs="true">
+			<fileset dir="${dist.dir}" includes="**/*" defaultexcludes="no" />
+		</delete>
+		<delete includeEmptyDirs="true">
+			<fileset dir="${deploy.dir}" includes="**/*" defaultexcludes="no" />
+		</delete>
+		<delete includeEmptyDirs="true">
+			<fileset dir="${workspace}/deployable" includes="**/*" defaultexcludes="no" />
+		</delete>
+	</target>
+	<target name="init">
+		    <if>
+			   <equals arg1="${applicationType}" arg2="IQuote"/>
+			   <then>
+			   	  <echo message="Inside iQuote"/>
+			      <property name="customVariableValue" value="false" />
+			      <property name="baseVariableValue" value="true" />
+			    <property name="agencyPortalEnabled" value="false" />
+				<property name="iquoteEnabled" value="false" />
+			  </then>
+		    <elseif>
+		    	<equals arg1="${applicationType}" arg2="AgencyPortal"/>
+		    				   <then>
+		    				   	  <echo message="Inside Agency Portal"/>
+		    				      <property name="customVariableValue" value="false" />
+		    				      <property name="baseVariableValue" value="true" />
+		    				   	  <property name="agencyPortalEnabled" value="true" />
+								  <property name="iquoteEnabled" value="false" />
+		    				  </then>
+		    	</elseif>
+			  <else>
+			  	 <echo message="Inside Custom"/>
+				<property name="customVariableValue" value="true" />
+				<property name="baseVariableValue" value="false" />
+			  	<property name="agencyPortalEnabled" value="false" />
+				<property name="iquoteEnabled" value="false" />
+			  </else>
+			</if>
+		</target>
+</project>

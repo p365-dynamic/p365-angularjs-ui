@@ -1,0 +1,318 @@
+<!-- <div class="professionalBody padContainer resp_padContainer"  ng-show="showProfessionList == true">
+	<div class="personalInfo resp_topBot5Pad padBot3Per">
+		<h2 class="chooseProfTitle">
+			What is your profession?
+		</h2>
+	</div>
+	<div class="quesSec">
+		<form name="templateForm">
+		<md-input-container flex="50" class="md-block">
+			<label class="wp_textBlack">Select Profession</label>
+			<md-select name="profession" class="mdInputContainer_input" ng-model="obj" ng-change="professionSelects(obj)">
+				<md-option ng-value="profession" ng-repeat="profession in professionList">
+					{{profession.professionName}}</md-option>
+			</md-select>
+		</md-input-container>
+		</form>
+	</div>
+</div> -->
+
+
+
+<div class="marBot4Per side5MarPer">
+	<md-progress-linear md-mode='determinate' value="{{progress}}" class="topPos0"></md-progress-linear>
+	<span>0%</span>
+	<span style="float: right;">100%</span>
+</div>
+<div class="professionalBody padContainer resp_padContainer">
+	<div ng-repeat="slide in slideConfig.slides" ng-if="slide.isActive == 'Y'">
+		<div ng-if="slideStatus.current == $index" class="slide" ng-class="slideClass">
+			<div class="personalInfo resp_topBot5Pad padBot3Per">
+				<h2 class="chooseProfTitle">
+				
+					<span data-ng-bind-html="slide.question" data-bind-html-compile="slide.question" class="ng-binding"><div class="side20Mar resp_noMar iPad_nosideMar ng-scope">What is your specialization <span ng-bind-html="commonInfo.salutation" data-bind-html-compile="commonInfo.salutation" class="ng-binding"><span class="ng-scope">Miss</span></span>. <span ng-bind-html="commonInfo.firstName" data-bind-html-compile="commonInfo.firstName" class="ng-binding"><span class="ng-scope">Cdc</span></span> to help me assess liability relating to your profession?</div></span>
+				</h2>
+			</div>
+			<div class="quesSec">
+				<form name="templateForm">
+						
+					<span data-ng-bind-html="slide.template" data-bind-html-compile="slide.template"></span>
+					<div ng-show="!$root.editProfile">
+						<div class='incomePg topBot3_1Mar resp_topBot5Pad'>
+							<md-button   class='width18_per upperCaseText resp_normFont13'  ng-if="(slide.slideKey != 'familyIncome' && slide.slideKey != 'familyDetails' && slide.slideKey != 'lifeStyle' && slide.slideKey != 'confirmation') &&!$last" ng-click='submitFormDetails($index,false);updateProgress($index)'
+							 ng-disabled='templateForm.$invalid'>{{slide.ButtonLabel}}</md-button>
+							 <md-button  id="confirmProfessionalDetailsBtn" class='width18_per upperCaseText resp_normFont13'   ng-if="(slide.slideKey != 'familyIncome' && slide.slideKey != 'familyDetails' && slide.slideKey != 'lifeStyle' && slide.slideKey == 'confirmation') &&!$last" ng-click='submitFormDetails($index,false);updateProgress($index)'
+							 ng-disabled='templateForm.$invalid'>{{slide.ButtonLabel}}</md-button>
+							 <md-button  class='width18_per upperCaseText resp_normFont13'  ng-if="(slide.slideKey == 'familyDetails') &&!$last" ng-click='submitFamilyDetails($index,false);updateProgress($index)'
+							 ng-disabled='templateForm.$invalid || !isAgeApplicable'>{{slide.ButtonLabel}}</md-button>
+							 <md-button  class='width18_per upperCaseText resp_normFont13'  ng-if="(slide.slideKey == 'lifeStyle') &&!$last" ng-click='submitLifeStyleDetails($index,false);updateProgress($index)'
+							 ng-disabled='templateForm.$invalid'>{{slide.ButtonLabel}}</md-button>
+							 <md-button  class='width18_per upperCaseText resp_normFont13'  ng-if="(slide.slideKey == 'familyIncome') &&!$last" ng-click='submitFamilyIncome($index,false);updateProgress($index);checkSpecz();checkLiab()'
+							 ng-disabled='templateForm.$invalid'>{{slide.ButtonLabel}}</md-button>
+							<md-button id="professionalGetQuotBtn"class='width18_per upperCaseText resp_normFont13' ng-if="$last" ng-click='createLead()' ng-disabled='templateForm.$invalid'>{{p365Labels.common.getQuotes}}</md-button>
+							
+							<!-- <md-button id="professionalGetQuotBtn"class='width18_per upperCaseText resp_normFont13' ng-if="$last && showOtpButton"  ng-click='sendOTP()' ng-disabled='templateForm.$invalid'>{{p365Labels.common.sendOTP}}</md-button> -->
+							<!-- // the button is for submitting otp this button does not have its own queastion   -->
+							<!-- <md-button id="professionalGetQuotBtn"class='width18_per upperCaseText resp_normFont13' style="width: auto;" ng-if="$last && !showOtpButton"   ng-click='submitOTP()' ng-disabled='templateForm.$invalid'>Submit OTP and View Risk Profile</md-button>
+							<div class="incomePg topBot3_1Mar resp_topBot5Pad" ng-if="$last && !showOtpButton">
+								<a ng-click="resendOTP()"   id="profRiskResendOTP">{{p365Labels.common.resendOTP}} </a>|
+								<a ng-click="changeNumber()"  id="profRiskResendOTP">{{p365Labels.common.changeNo}}</a> </div>
+							</div>
+							<div style="color: red" >{{invalidOTPError}}</div> -->
+						
+					
+						</div>
+						<!-- <div class='incomePg topBot3Pad resp_topBot5Pad' ng-if="slide.slideKey == 'familyDetails'">
+							<md-button class='width18_per upperCaseText resp_normFont13' ng-if="!$last" ng-click='submitFamilyDetails($index,false);updateProgress($index)'
+							 ng-disabled='templateForm.$invalid || !isAgeApplicable'>{{slide.ButtonLabel}}</md-button>
+							<md-button class='width18_per upperCaseText resp_normFont13' ng-if="$last" ng-click='createLead()' ng-disabled='templateForm.$invalid'>{{p365Labels.common.getQuotes}}</md-button>
+						</div>
+						<div class='incomePg topBot3Pad resp_topBot5Pad' ng-if="slide.slideKey == 'lifeStyle'">
+							<md-button class='width20_per upperCaseText resp_normFont13' ng-if="!$last" ng-click='submitLifeStyleDetails($index,false);updateProgress($index)'
+							 ng-disabled='templateForm.$invalid'>{{slide.ButtonLabel}}</md-button>
+							<md-button class='width20_per upperCaseText resp_normFont13' ng-if="$last" ng-click='createLead()' ng-disabled='templateForm.$invalid'>{{p365Labels.common.getQuotes}}</md-button>
+						</div>
+						<div class='incomePg topBot3Pad resp_topBot5Pad' ng-if="slide.slideKey == 'familyIncome'">
+							<md-button class='width20_per upperCaseText resp_normFont13' ng-if="!$last" ng-click='submitFamilyIncome($index,false);updateProgress($index);checkSpecz();checkLiab()'
+							 ng-disabled='templateForm.$invalid'>{{slide.ButtonLabel}}</md-button>
+							<md-button id="getQuotes" class='width20_per upperCaseText resp_normFont13' ng-if="$last" ng-click='createLead()' ng-disabled='templateForm.$invalid'>{{p365Labels.common.getQuotes}}</md-button>
+						</div> -->
+						<div layout='row' layout-align='center center' class='side32Mar resp_noMar'>
+							<span class='pinkFont cursor' ng-if="slide.slideKey == 'carRTO'" ng-click='skipCarDetails($index)'>{{p365Labels.common.noCar}} &gt;</span>
+							<span class='pinkFont cursor' ng-if="slide.slideKey == 'bikeRTO'" ng-click='skipBikeDetails($index)'>{{p365Labels.common.noBike}} &gt;</span>
+						</div>
+					</div>
+					<div ng-show="$root.editProfile">
+					<div class='incomePg topBot3_1Mar resp_topBot5Pad' ng-if="slide.slideKey != 'familyIncome' && slide.slideKey != 'familyDetails' && slide.slideKey != 'lifeStyle' && slide.slideKey != 'confirmation' && !$last">
+							<md-button  ng-if="slide.slideKey !='carRTO' && slide.slideKey !='bikeRTO'" class='width18_per upperCaseText resp_normFont13' ng-click='submitFormDetails($index,true)' ng-disabled='templateForm.$invalid'>{{p365Labels.common.update}}</md-button>
+							<md-button ng-if="slide.slideKey=='carRTO'" id="updateCarRTOBtn" class='width18_per upperCaseText resp_normFont13' ng-click='submitFormDetails($index,true)' ng-disabled='templateForm.$invalid'>{{p365Labels.common.update}}</md-button>
+							<md-button ng-if="slide.slideKey=='bikeRTO'" id="updateBikeRTOBtn" class='width18_per upperCaseText resp_normFont13' ng-click='submitFormDetails($index,true)' ng-disabled='templateForm.$invalid'>{{p365Labels.common.update}}</md-button>	
+						</div>
+						<div class='incomePg topBot3Pad resp_topBot5Pad' ng-if="slide.slideKey == 'familyIncome' && !$last">
+							<md-button id="updateFamilyIncomeBtn" class='width18_per upperCaseText resp_normFont13' ng-click='submitFamilyIncome($index,true)' ng-disabled='templateForm.$invalid'>{{p365Labels.common.update}}</md-button>
+						</div> 
+						<div class='incomePg topBot3Pad resp_topBot5Pad' ng-if="slide.slideKey == 'familyDetails' && !$last">
+							<md-button id="updateFamilyDetailsBtn" class='width18_per upperCaseText resp_normFont13' ng-click='submitFamilyDetails($index,true)' ng-disabled='templateForm.$invalid || !isAgeApplicable'>{{p365Labels.common.update}}</md-button>
+						</div>
+						<div class='incomePg topBot3Pad resp_topBot5Pad' ng-if="slide.slideKey == 'lifeStyle' && !$last">
+							<md-button id="updateLifeStyleDetailsBtn" class='width20_per upperCaseText resp_normFont13' ng-click='submitLifeStyleDetails($index,true)' ng-disabled='templateForm.$invalid'>{{p365Labels.common.update}}</md-button>
+						</div>
+						<div class='incomePg topBot3Pad resp_topBot5Pad' ng-if="slide.slideKey == 'confirmation' && !$last">
+							<md-button id="confirmProfessionalDetailsBtn" class='width20_per upperCaseText resp_normFont13' ng-if="!$last" ng-click='submitFormDetails($index,false)' ng-disabled='templateForm.$invalid'>{{slide.ButtonLabel}}</md-button>
+						</div>
+						<div class='incomePg topBot3Pad resp_topBot5Pad' ng-if="$last">
+							<md-button id="professionalGetQuotBtn"class='width18_per upperCaseText resp_normFont13' ng-if="$last"  ng-click='createLead()' ng-disabled='templateForm.$invalid'>View Risk Profile</md-button>
+							<!-- <md-button id="professionalGetQuotBtn"class='width18_per upperCaseText resp_normFont13' ng-if="$last && showOtpButton && $root.authenticated"  ng-click='createLead()' ng-disabled='templateForm.$invalid'>View Risk Profile</md-button> -->
+							
+							<!-- <md-button id="professionalGetQuotBtn"class='width18_per upperCaseText resp_normFont13' ng-if="$last && showOtpButton && !$root.authenticated"  ng-click='sendOTP()' ng-disabled='templateForm.$invalid'>{{p365Labels.common.sendOTP}}</md-button>
+							<!-- // the button is for submitting otp this button does not have its own queastion   -->
+							<!-- <md-button  id="professionalGetQuotBtn"class='width18_per upperCaseText resp_normFont13'  style="width: auto;" ng-if="$last && !showOtpButton"   ng-click='submitOTP()' ng-disabled='templateForm.$invalid'>Submit OTP and View Risk Profile</md-button> -->
+							<!-- <div class="incomePg topBot3_1Mar resp_topBot5Pad" ng-if="$last && !showOtpButton">
+								<a ng-click="resendOTP()"   id="profRiskResendOTP">{{p365Labels.common.resendOTP}} </a>|
+								<a ng-click="changeNumber()"  id="profRiskResendOTP">{{p365Labels.common.changeNo}}</a> </div>					
+							<div style="color: red" >{{invalidOTPError}}</div>								 -->
+						</div>
+					</div>
+				</form>
+				<div ng-if="slideStatus.isFirst" ng-controller="quoteController">
+					<p class="grey888Txt">{{p365Labels.common.proverbShowRecommendation}}
+						<p>
+							<span ng-repeat="tab in tabs | filter:{flagToShow:false}" class="pinkFont font12 cursor">
+								<span ng-click="onClickProfessionalTab(tab)">{{tab.title}}</span>
+								<span ng-if="!$last">&nbsp;&nbsp;
+									<span style="font-weight: 600;color:#f2f2f2;">|</span> &nbsp;&nbsp;</span>
+							</span>
+				</div>
+			</div>
+			<span ng-if="!slideStatus.isFirst && !$root.editProfile && slide.slideKey != 'confirmation'" class="cursor backBtn">
+				<span ng-click='prev()'>
+					<i class="material-icons">keyboard_arrow_left</i>
+				</span>
+			</span>
+		</div>
+	</div>
+</div>
+<!-- resize draggable -->
+<div ng-if="miaAnswer" ng-hide="miaTimeout">
+	<div class="Mia-div">
+		<div class="Mia-text">
+			<span data-bind-html-compile="miaAnswer" data-ng-bind-html="miaAnswer"></span>
+		</div>
+	</div>
+</div>
+</div>
+
+<modal-dialog show='modalCarRegistration' width='900px' height='auto' class="ng-hide RTOSearchDiv" style="overflow:auto;">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.regPlaceModalLabel1}} </h2>
+		</div>
+		<div class='ng-modal-close wp_modalClose closePopup' ng-click='hideCarModal()' ng-if="$root.wordPressEnabled">
+			<i class="material-icons">highlight_off</i>
+		</div>
+		<div class='ng-modal-close closePopup' ng-click='hideCarModal()' style="color: #fff;" ng-if="!$root.wordPressEnabled">
+			<i class="material-icons">highlight_off</i>
+		</div>
+	</div>
+
+	<div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop">
+		<div class="pad30 wp_noPadTop wp_RtoMetro">
+			<div class="inner-addon right-addon posRel">
+				<i class="material-icons RTOSearchIcon">search</i>
+				<input type="text" autocomplete="off" class="form-control wp_borRadius30 wp_noBoxShadow" placeholder="Search for your RTO or City using search option below"
+				 ng-required="true" name="search" ng-model="$root.selectedRegData" typeahead-on-select="onSelectCar($item)" typeahead-wait-ms="10"
+				 typeahead-no-results="noResults" uib-typeahead="reg.display for reg in getRegPlaceList($viewValue)" typeahead-show-hint="true"
+				 typeahead-min-length="2" style="width: 100%;" />
+			</div>
+			<div class="dropdown-menu-NoResult" ng-if="noResults">{{p365Labels.common.noResults}}
+			</div>
+			<div class="RTOPopup">
+				<p class="RTOHeading blueTextColor popularHeadRto center">{{p365Labels.common.popularCities}}</p>
+			</div>
+			<div class="RTOMiddleTab">
+				<div class="gallery-items" style="padding-bottom: 5px;">
+					<div class="gallery-item clickMetro" ng-click="selectedMetroRTO(metros)" ng-repeat="metros in defaultMetroList" style="height: 55px">
+						<div class="gallery-contents">
+							<div class="thumbnail gallery-trigger wp_RTOThumbnail">{{metros.cityName}}</div>
+							<input type="hidden" ng-value="$index" class="rowCount" />
+							<!-- <div style="width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-left:10px solid red;position:absolute;top:10px;left:10px;"></div> -->
+						</div>
+						<div class="showMetro">
+							<div class="info-bg" ng-hide="hideStatus" style="display: block;">
+
+								<div class="section group divForMobile">
+									<div class="col span_1_of_3 borderBtmRTO" ng-repeat="rto in metros.RTODetails">
+										<a ng-click="onSelectCar(rto)" class="hiddencities">{{rto.display}}</a>
+									</div>
+									<div ng-if="dummyLength==1" class="hideforMobile">
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+									</div>
+									<div ng-if="dummyLength==2" class="hideforMobile">
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</modal-dialog>
+
+<modal-dialog show='modalBikeRegistration' width='900px' height='auto' class="ng-hide RTOSearchDiv" style="overflow:auto;">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.regPlaceModalLabel1}}</h2>
+		</div>
+		<div class='ng-modal-close closePopup' ng-click='hideBikeModal()' ng-if="$root.wordPressEnabled">
+			<i class="material-icons">highlight_off</i>
+		</div>
+		<div class='ng-modal-close closePopup' ng-click='hideBikeModal()' style="color: #fff;" ng-if="!$root.wordPressEnabled">
+			<i class="material-icons">highlight_off</i>
+		</div>
+	</div>
+
+	<div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop">
+		<div class="pad30 wp_noPadTop wp_RtoMetro">
+			<div class="inner-addon right-addon posRel">
+				<i class="material-icons RTOSearchIcon">search</i>
+				<input type="text" autocomplete="off" class="form-control wp_borRadius30 wp_noBoxShadow" placeholder="Search for your RTO or City using search option below"
+				 placeholder="Search" ng-required="true" name="search" ng-model="$root.selectedRegData" typeahead-on-select="onSelectBike($item)"
+				 typeahead-wait-ms="10" typeahead-no-results="noResults" uib-typeahead="reg.display for reg in getRegPlaceList($viewValue)"
+				 typeahead-show-hint="true" typeahead-min-length="2" style="width: 100%;" />
+			</div>
+			<div class="dropdown-menu-NoResult" ng-if="noResults">{{p365Labels.common.noResults}}
+			</div>
+			<div class="RTOPopup">
+				<p class="RTOHeading blueTextColor popularHeadRto centerAlignTxt">{{p365Labels.common.popularCities}}</p>
+			</div>
+			<div class="RTOMiddleTab">
+				<div class="gallery-items" style="padding-bottom: 5px;">
+					<div class="gallery-item clickMetro" ng-click="selectedMetroRTO(metros)" ng-repeat="metros in defaultMetroList" style="height: 55px">
+						<div class="gallery-contents">
+							<div class="thumbnail gallery-trigger wp_RTOThumbnail">{{metros.cityName}}</div>
+							<input type="hidden" ng-value="$index" class="rowCount" />
+							<!-- <div style="width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-left:10px solid red;position:absolute;top:10px;left:10px;"></div> -->
+						</div>
+						<div class="showMetro">
+							<div class="info-bg" ng-hide="hideStatus" style="display: block;">
+								<div class="section group divForMobile">
+									<div class="col span_1_of_3 borderBtmRTO" ng-repeat="rto in metros.RTODetails">
+										<a ng-click="onSelectBike(rto)" class="hiddencities">{{rto.display}}</a>
+									</div>
+									<div ng-if="dummyLength==1" class="hideforMobile">
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+									</div>
+									<div ng-if="dummyLength==2" class="hideforMobile">
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</modal-dialog>
+
+<modal-dialog show='riskAssessmentDemoModal' width='900px' height='auto' class="ng-hide RTOSearchDiv" style="overflow:auto;">
+    <div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+        <div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+            <h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">
+                <span data-ng-bind-html="commonInfo.salutation" data-bind-html-compile="commonInfo.salutation"  ng-if="commonInfo.firstName"></span><span ng-if="commonInfo.firstName">.&nbsp;</span>
+				<span data-ng-bind-html="commonInfo.firstName" data-bind-html-compile="commonInfo.firstName"></span><span ng-if="commonInfo.firstName">,&nbsp;</span>
+				<span data-ng-bind-html="p365Labels.common.demoRiskProfileHeading" data-bind-html-compile="p365Labels.common.demoRiskProfileHeading"></span>
+            </h2>
+        </div>
+        <div class='ng-modal-close wp_modalClose closePopup' ng-click='hideRiskAssessmentDemo()'>
+            <i class="material-icons greyb7Txt">highlight_off</i>
+        </div>
+    </div>
+
+    <div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop resp_riskpopupHgt" >
+        <div layout="row" layout-xs="column">
+        <img ng-src="{{$root.wp_path}}img/professionalJourney/Risk_Profile_img_trans.png" width="100%" height="100%"/>    
+           
+        </div>
+    </div>
+    
+    <div class="clear"></div>
+</modal-dialog>
+
+
+<modal-dialog show='insuranceProfileDemoModal' width='900px' height='auto' class="ng-hide RTOSearchDiv" style="overflow:auto;">
+    <div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+        <div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+            <h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">
+                <span data-ng-bind-html="commonInfo.salutation" data-bind-html-compile="commonInfo.salutation" ng-if="commonInfo.firstName"></span><span ng-if="commonInfo.firstName">.&nbsp;</span>
+				<span data-ng-bind-html="commonInfo.firstName" data-bind-html-compile="commonInfo.firstName"></span><span ng-if="commonInfo.firstName">,&nbsp;</span>
+				<span data-ng-bind-html="p365Labels.common.demoInsuranceAssessmentHeading" data-bind-html-compile="p365Labels.common.demoInsuranceAssessmentHeading"></span>
+            </h2>
+        </div>
+        <div class='ng-modal-close wp_modalClose closePopup' ng-click='hideInsuranceProfileDemo()'>
+            <i class="material-icons greyb7Txt">highlight_off</i>
+        </div>
+    </div>
+
+    <div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop resp_riskpopupHgt" >
+        <div layout="row" layout-xs="column">
+        <img ng-src="{{$root.wp_path}}img/professionalJourney/Insurance_Profile_img.png" width="100%" height="100%"/>    
+           
+        </div>
+    </div>
+    
+    <div class="clear"></div>
+</modal-dialog>
+
+
+

@@ -1,0 +1,2181 @@
+<loading></loading>
+<div after-render="missionCompled"></div>
+<div class="section carBg wp_padHeaderNavi wp_innerCar"
+	ng-if="$root.wordPressEnabled">
+	<ng-container ng-include="$root.headerNavigation"
+		ng-controller='headerNavigationController'></ng-container>
+	<div class="clearfix"></div>
+</div>
+<div class="section termBg wp_padHeaderNavi wp_innerCar"
+	ng-if="!$root.wordPressEnabled && $root.baseEnvEnabled">
+	<ng-container ng-include="$root.headerNavigation"
+		ng-controller='headerNavigationController'></ng-container>
+	<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+<div
+	class="middleTab one-edge-shadow widthFull resultCommon mobileResult wp_padHeaderNavi wp_resultBorder wp_noBoxShadow">
+	<div class="backButtonPlacer wp_backBtnPlacer">
+		<a ng-click="backToResultScreen()" id="assuranceBackToHomeScreen">
+			<div class="md-raised backButtonColor backButton" data-html="true"
+				data-toggle="tooltip" data-placement="right" title="Back" tooltip>
+				<i class="fa fa-chevron-left"></i>
+			</div>
+		</a>
+	</div>
+
+	<form name="quotePersonalAccidentInputForm">
+		<div class="section" ng-if="$root.wordPressEnabled">
+			<ng-container ng-include="personalAccidentInputSectionHTML"></ng-container>
+		</div>
+		
+		<div class="col col-sm-4 fullWidth wp_padNo" style="float: right;">
+			<p class="compareMsg" ng-if="$root.wordPressEnabled">{{globalLabel.applicationLabels.common.GSTmsg}}</p>
+		</div>
+		<div class="section">
+			<div class="col col-sm-3 fullWidth">
+				<ng-container ng-if="!$root.wordPressEnabled"
+					ng-include="personalAccidentInputSectionHTML"></ng-container>
+				<!-- <ng-container ng-if="!$root.wordPressEnabled"
+					ng-include="personalAccidentPayoutSectionHTML"></ng-container> -->
+			</div>
+			<div
+				class="col col-sm-9 mobileMidTop fixForMobile fullWidth wp_Width100 wp_fullpadNo">
+				<div class="divForMobile" style="width: 100%;">
+					<div class="section wp_cardCompareViewBg">
+						<div class="col col-sm-4 ">
+							<div class="col col-sm-12  col-sm-12PadRem">
+								<div class="col col-sm-12  col-sm-12PadRem">
+									<div class="padButtonResult marBtmMobile wp_marBorder">
+										<md-button ng-if="$root.wordPressEnabled"
+											class="md-raised whiteBgColor wp_transparentResultBG wp_center wp_RolloverBtn"
+											ng-class="{tabActive : activeMenu === 'Email'}"
+											md-ink-ripple="{{rippleColor}}" id="assuranceShareBtn"
+											ng-click="showShareEmailModal()" data-toggle="tooltip"
+											tooltip> <i class="material-icons wp_btnIcons">share</i>
+										Share</md-button>
+										<md-menu ng-if="!$root.wordPressEnabled" md-offset="0 40"
+											class="md-prevent-menu-close"> <md-button
+											class="md-raised whiteBgColor wp_transparentResultBG wp_center wp_RolloverBtn"
+											ng-class="{tabActive : activeMenu === 'Email'}"
+											md-ink-ripple="{{rippleColor}}" id="assuranceShareBtn"
+											ng-click="openMenu($mdOpenMenu, $event);clickForActive('Email')"
+											data-toggle="tooltip" tooltip> <i
+											class="material-icons wp_btnIcons">share</i> Share</md-button> <md-menu-content
+											width="5"
+											class="menuForCheckbox emailContent md-menu-disable-close"
+											id="alerts-menu-content"> <ng-container
+											ng-include="personalAccidentShareEmailSectionHTML"></ng-container>
+										</md-menu-content> </md-menu>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col col-sm-4 hideforMobile">
+							<div class="col  col-sm-12  col-sm-12PadRem">
+								<div class="padButtonResult wp_marBorder" layout="row">
+									<!-- <div flex="50">
+										<md-button
+											class="md-raised whiteBgColor wp_transparentResultBG wp_RolloverBtn viewTabActive"
+											style="background:#fff;text-align: center;border-radius: 3px 0px 0px 3px;"
+											ng-if="showCompareBtn==true" id="assuranceCompareBtn"
+											ng-class="{viewTabActive : activeViewMenu === 'Compare'}"
+											md-ink-ripple="{{rippleColor}}"
+											ng-click="compareViewClick();clickForViewActive('Compare')">
+										Card View </md-button>
+									</div> -->
+									<!-- <div flex="50">
+										<md-button
+											class="md-raised whiteBgColor wp_transparentResultBG wp_RolloverBtn"
+											style="text-align: center;border-radius: 0px 3px 3px 0px;"
+											ng-if="showCardBtn==true" id="assuranceCompareCardBtn"
+											ng-class="{viewTabActive : activeViewMenu === 'Card'}"
+											md-ink-ripple="{{rippleColor}}"
+											ng-click="cardViewClick();clickForViewActive('Card')"
+											data-toggle="tooltip" title="{{tooltipContent.compareview}}"
+											tooltip> Compare View </md-button>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						<div class="col col-sm-4 showforDcp">
+							<div class="padButtonResult whiteBgColor wp_marNoBorder"
+								layout="row">
+								<div flex="85" style="width:;">
+									<md-menu md-offset="0 40" class="md-prevent-menu-close">
+									<md-button
+										class="md-raised whiteBgColor wp_transparentResultBG wp_RolloverBtn"
+										style="background:#fff;" id="assuranceSortClickActive"
+										ng-class="{tabActive : activeMenu === 'Sort'}"
+										md-ink-ripple="{{rippleColor}}" data-toggle="tooltip"
+										title="{{tooltipContent.sort}}" tooltip
+										ng-click="openMenu($mdOpenMenu, $event);clickForActive('Sort')"
+										ng-disabled="disableSort"
+										style="border-radius: 2px 0px 0px 2px !important;">
+									<i class="material-icons left wp_btnIcons">sort</i> <span
+										class="left">Sort</span> <span class="right"
+										style="font-size: 11px;">{{selectedSortOption.display}}</span></md-button>
+									<md-menu-content width="4" class="menuForCheckbox">
+									<div class="menuHeaderText">Sort By</div>
+									<md-list class="resultPad"> <a
+										ng-repeat="type in sortTypes"> <md-list-item
+											class="md-1-line checkBox">
+										<div layout="row" layout-wrap flex>
+											<div class="md-list-item-text" flex="100">
+												<p ng-click="updateSort(type)"
+													ng-class="{tabSortActive : activeSort === type.key}">{{type.display}}</p>
+												<md-divider ng-if="!$last"></md-divider>
+											</div>
+										</div>
+										</md-list-item>
+									</a> </md-list> </md-menu-content> </md-menu>
+								</div>
+								<div flex="15" style="width:;">
+									<md-button id="assuranceSortByIcon" ng-disabled="disableSort"
+										class="md-raised md-sortbutton sortIconBtnAlign wp_RolloverBtn"
+										md-ink-ripple="{{rippleColor}}"
+										ng-click="updateSortOrder(selectedSortOption)"> <a
+										ng-click=""><i class="material-icons wp_btnIcons">swap_vert</i></a>
+									</md-button>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="section wp_fullpadNo">
+
+
+						<div class="col col-sm-8" class="row" style="">
+							<div class="section">
+								<br>
+
+							</div>
+						</div>
+
+						<div class="col col-sm-4" class="row" style="">
+							<!-- <div flex="30"> -->
+							<p class="compareMsg" ng-if="!$root.wordPressEnabled">{{globalLabel.applicationLabels.common.GSTmsg}}</p>
+							<!-- </div> -->
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div ng-if="cardView==true">
+						<!--result-->
+						<div class="section hideforMobile">
+							<div class="col col-sm-12 wp_fullpadNo" style="width: 100%;">
+								<div class="section resultDisplayHeader">
+									<div class="col col-sm-3" style="">INSURER & PLAN</div>
+									<div class="col col-sm-3" style="float: center;">BENEFITS</div>
+									<div class="col col-sm-3" style="float: center;">Premium/Duration</div>
+									<div class="col col-sm-3" style="float: center;"></div>
+									<!-- <div class="col col-sm-3"> </div>
+									<div class="col col-sm-3"> </div> -->
+
+								</div>
+							</div>
+						</div>
+						<div class="section">
+					
+							<div class="col col-sm-12 wp_fullpadNo" style="width: 100%;">
+								<div
+									class="fullShadow resultBg wp_resultBorder wp_resultGradient"
+									ng-repeat="data in $root.paQuoteResult | orderBy :sortKey:sortReverse| unique:'carrierId'"
+									ng-if="validatePremium(data)"	ng-init="morePlans = groupPlans(data)">
+
+									<!-- for SBI ng-if="checkForSbi(data)"-->
+									<div>
+										<div id="triangletopright" class="hideforMobile"
+											ng-show="isMaxIndex(data.insurerIndex,data.sumInsured,data.grossPremium,data.carrierId)">
+											<span>Best Value</span>
+										</div>
+
+										<div ng-if="selCarrierId==selMinCarrierId">
+											<div id="triangletopright2" class="hideforMobile"
+												ng-show="isMinPremium(data.grossPremium,data.carrierId)">
+												<span>Lowest Price</span>
+											</div>
+										</div>
+										<div ng-if="selCarrierId!=selMinCarrierId">
+											<div id="triangletopright1" class="hideforMobile"
+												ng-show="isMinPremium(data.grossPremium,data.carrierId)">
+												<span>Lowest Price</span>
+											</div>
+										</div>
+
+
+
+										<!-- mobile  -->
+										<div class="section showforMobile">
+											<div class="col col-sm-6"
+												style="width: 50%; border-right: 1px solid #ccc;">
+												<img data-toggle="tooltip" title="{{data.insuranceCompany}}"
+													ng-src="{{$root.wp_path}}img\clogo\{{data.carrierId}}.png"
+													data-html="true" tooltip>
+												<p>
+													<b>{{data.productName}}</b>
+												</p>
+
+												<div style="text-align: center; font-size: 12px;">
+													<a style="text-align: center; font-size: 12px;"
+														ng-init="data.hasMorePlans = isMoreQuoteToShow(morePlans,data.carrierId);data.isMorePlans = false;">
+														<span
+														ng-click='data.showPanel = data.carrierId;data.isMorePlans=true'
+														ng-show="!data.isMorePlans && data.hasMorePlans">+ More Plans</span> <span
+														ng-click='data.showPanel = data.carrierId;data.isMorePlans=false'
+														ng-show="data.isMorePlans">- Hide Plans</span>
+													</a>
+												</div>
+
+
+												<a style="text-align: center; font-size: 12px;"
+													href="{{data.brochureLink}}" target="_blank"> View
+													Brochure &nbsp;<i style="color: #FC3C3F;"
+													class="fa fa-file" aria-hidden="true"></i>
+												</a>
+
+												<p style="margin: 20px auto auto !important;"
+													data-toggle="tooltip"
+													title="{{tooltipContent.serviceRating}}" tooltip>
+													<ng-rate-it ng-model="data.insurerIndex" resetable="false"
+														rated="ratedCallback" min="0" max="5" step="1"
+														read-only="true"></ng-rate-it>
+													&nbsp; {{data.insurerIndex | number:1}}
+												</p>
+
+												<button
+													ng-click="buyProduct(data)"
+													class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer"
+													id="assuranceBuyProductBtn" style="width: auto">{{globalLabel.applicationLabels.common.buyNow}}</button>
+											</div>
+											<div class="col col-sm-6" style="width: 50%">
+												<md-list class="resultListPad"> <md-list-item
+													class="md-1-line">
+												<div class="md-list-item-text">
+													<h3>
+														{{globalLabel.applicationLabels.life.sumAssured}} <i
+															class="fa fa-question-circle fa-sm bluecolor"
+															data-toggle="tooltip"
+															title="{{tooltipContent.sumAssured}}" tooltip></i> <span
+															ng-if="true" md-ink-ripple="false"> <span
+															ng-if="(data.paSumInsured != undefined)"> <md-menu
+																	md-position-mode="target-right target"> <a
+																	ng-click="openMenu($mdOpenMenu, $event);getPopup(data);"
+																	title="{{tooltipContent.viewDetails}}" data-html="true"
+																	tooltip> [+] </a> <!-- Popup for addational details -->
+																<md-menu-content width="6"
+																	class="menuForCheckbox menuForPremium carBenefitPopup">
+																<div class="menuHeaderText">SUM INSURED</div>
+																<div style="padding: 0px 10px 10px 10px;">
+																	<md-list class="resultPad"
+																		ng-if="true ||(selectPremiumFromResult.odpremium + selectPremiumFromResult.llDriverCover + selectPremiumFromResult.paidDriverCover + selectPremiumFromResult.tppremium) > 0">
+
+																	</b> <md-list-item
+																		ng-if="(data.sumInsured != 'undefined' )"
+																		class="md-1-line checkBox">
+																	<div layout="row" layout-wrap flex>
+																		<div class="md-list-item-text" flex="100">
+																			<div class="section">
+																				<div class="col col-lg-9">
+																					<p>
+																						<b> Base Sum Insured</b>
+																					</p>
+																				</div>
+																				<div class="col col-lg-3">
+																					<p class="right">
+																						<b>&#8377; {{data.sumInsured}}</b>
+																					</p>
+																				</div>
+																			</div>
+																			<md-divider></md-divider>
+																		</div>
+																	</div>
+																	</md-list-item> <md-list-item ng-if="(data.paSumInsured) != undefined"
+																		class="md-1-line checkBox">
+																	<div layout="row" layout-wrap flex>
+																		<div class="md-list-item-text" flex="100">
+																			<div class="section">
+																				<div class="col col-lg-9">
+																					<p>
+																						<b> Personal Accident Sum Insured</b>
+																					</p>
+																				</div>
+																				<div class="col col-lg-3">
+																					<p class="right">
+																						<b>&#8377; {{data.paSumInsured}}</b>
+																					</p>
+																				</div>
+																			</div>
+																			<md-divider></md-divider>
+																		</div>
+																	</div>
+																	</md-list-item> <md-list-item ng-if="data.termSumInsured != undefined"
+																		class="md-1-line checkBox">
+																	<div layout="row" layout-wrap flex>
+																		<div class="md-list-item-text" flex="100">
+																			<div class="section">
+																				<div class="col col-lg-9">
+																					<p>
+																						<b> Term Sum Insured</b>
+																					</p>
+																				</div>
+																				<div class="col col-lg-3">
+																					<p class="right">
+																						<b>&#8377; {{data.termSumInsured}}</b>
+																					</p>
+																				</div>
+																			</div>
+																			<md-divider></md-divider>
+																		</div>
+																	</div>
+																	</md-list-item> <span> <a ng-click="toggleMoreDetails"
+																		class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer"
+																		style="width: auto; margin: 21px 60px auto">{{globalLabel.applicationLabels.common.popupButton}}</a>
+																	</span> </md-list>
+																</div>
+																</md-menu-content> </md-menu>
+														</span>
+														</span>
+													</h3>
+
+													<p style="font-size: 20px !important; padding-bottom: 2px;">&#8377;
+														{{(data.sumInsured) | number:0 | regexINR}}</p>
+												</div>
+												</md-list-item> <md-list-item class="md-1-line">
+												<div class="md-list-item-text">
+													
+													<p>Permanent Total Disablement</p>
+												</div>
+												</md-list-item>
+												<!-- <md-list-item class="md-1-line">
+												<div class="md-list-item-text">
+													
+													<p>Permanent Partial Disablement</p>
+												</div>
+												</md-list-item> -->
+												 <md-list-item class="md-1-line">
+												<div class="md-list-item-text">
+													<h3>
+														{{premiumFrequencyTypeName(data.premiumFrequency)}}
+														<!-- <span ng-bind="premiumFrequencyTypeName(data.premiumFrequency)"></span> -->
+														<i class="fa fa-question-circle fa-sm bluecolor"
+															data-toggle="tooltip"
+															title="{{tooltipContent.totalPremium}}" tooltip></i> <span
+															ng-if="true" md-ink-ripple="false"> <span>
+																<md-menu md-position-mode="target-right target">
+																<a
+																	ng-click="openMenu($mdOpenMenu, $event);getPopup(data);"
+																	title="{{tooltipContent.totalPremium}}"
+																	data-html="true" tooltip> [+] </a> <!-- Popup for addational details -->
+																<md-menu-content width="6"
+																	class="menuForCheckbox menuForPremium carBenefitPopup">
+																<div class="menuHeaderText">Premium Details</div>
+																<div style="padding: 0px 10px 10px 10px;">
+																	<md-list class="resultPad"> </b> <md-list-item
+																		class="md-1-line checkBox">
+																	<div layout="row" layout-wrap flex>
+																		<div class="md-list-item-text" flex="100">
+																			<div class="section">
+																				<div class="col col-lg-9">
+																					<p>
+																						<b>{{globalLabel.applicationLabels.car.basicCoverage}}</b>
+																					</p>
+																				</div>
+																				<div class="col col-lg-3">
+																					<p class="right">
+																						<b>&#8377; {{data.grossPremium}}</b>
+																					</p>
+																				</div>
+																			</div>
+																			<md-divider></md-divider>
+																		</div>
+																	</div>
+																
+																	</md-list-item> <md-list-item class="md-1-line checkBox">
+																	<div layout="row" layout-wrap flex>
+																		<div class="md-list-item-text" flex="100">
+																			<div class="section">
+																				<div class="col col-lg-9">
+																					<p>
+																						<b>{{globalLabel.applicationLabels.common.serviceTax}}</b>
+																					</p>
+																				</div>
+																				<div class="col col-lg-3">
+																					<p class="right">
+																						<b>+&#8377; {{data.serviceTax | number:0 |
+																							regexINR}}</b>
+																					</p>
+																				</div>
+																			</div>
+																			<md-divider></md-divider>
+																		</div>
+																	</div>
+																	</md-list-item> <!-- remove if not needed --> <br />
+
+
+																	<md-list-item class="md-1-line checkBox">
+																	<div layout="row" layout-wrap flex>
+																		<div class="md-list-item-text" flex="100">
+																			<div class="section">
+																				<div class="col col-lg-9">
+																					<p>
+																						<b>{{globalLabel.applicationLabels.car.finalPrice}}</b>
+																					</p>
+																				</div>
+																				<div class="col col-lg-3">
+																					<p class="right">
+																						<b>&#8377; {{data.netPremium | number:0 |
+																							regexINR}} </b>
+																				</div>
+																			</div>
+																			<md-divider></md-divider>
+																		</div>
+																	</div>
+																	</md-list-item> <span> <a ng-click="toggleMoreDetails"
+																		class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer"
+																		style="width: auto; margin: 21px 60px auto">{{globalLabel.applicationLabels.common.popupButton}}</a>
+																	</span> </md-list>
+																</div>
+																</md-menu-content> </md-menu>
+														</span>
+														</span>
+													</h3>
+
+													<p style="font-size: 20px !important; padding-bottom: 2px;">&#8377;
+
+														{{(data.grossPremium) | number:0 | regexINR}}</p>
+												</div>
+												</md-list-item> </md-list>
+											</div>
+										</div>
+
+										<!--./mobile  -->
+
+										<!-- mobile  more -->
+										`
+										<div
+											ng-show="data.showPanel == data.carrierId && data.isMorePlans"
+											class="section showforMobile" ng-repeat=" mdata in morePlans">
+											<div class="col col-sm-6"
+												style="width: 50%; border-right: 1px solid #ccc;">
+												<img data-toggle="tooltip"
+													title="{{mdata.insuranceCompany}}"
+													ng-src="{{$root.wp_path}}img\clogo\{{mdata.carrierId}}.png"
+													data-html="true" tooltip>
+												<p>
+													<b>{{mdata.productName}}</b>
+												</p>
+
+
+
+
+												<a style="text-align: center; font-size: 12px;"
+													href="{{mdata.brochureLink}}" target="_blank"> View
+													Brochure &nbsp;<i style="color: #FC3C3F;"
+													class="fa fa-file" aria-hidden="true"></i>
+												</a>
+
+												<p style="margin: 20px auto auto !important;"
+													data-toggle="tooltip"
+													title="{{tooltipContent.serviceRating}}" tooltip>
+													<ng-rate-it ng-model="mdata.insurerIndex" resetable="false"
+														rated="ratedCallback" min="0" max="5" step="1"
+														read-only="true"></ng-rate-it>
+													&nbsp; {{mdata.insurerIndex | number:1}}
+												</p>
+
+												<button
+													ng-click="buyProduct(mdata)"
+													class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer"
+													id="assuranceBuyProductBtn" style="width: auto">{{globalLabel.applicationLabels.common.buyNow}}</button>
+											</div>
+											<div class="col col-sm-6" style="width: 50%">
+												<md-list class="resultListPad"> <md-list-item
+													class="md-1-line">
+
+												<div class="md-list-item-text">
+
+													<h3>
+														{{globalLabel.applicationLabels.life.sumAssured}} <i
+															class="fa fa-question-circle fa-sm bluecolor"
+															data-toggle="tooltip"
+															title="{{tooltipContent.sumAssured}}" tooltip></i> <span
+															ng-if="true" md-ink-ripple="false"> <span
+															ng-if="(mdata.paSumInsured != undefined)"> <md-menu
+																	md-position-mode="target-right target"> <a
+																	ng-click="openMenu($mdOpenMenu, $event);getPopup(mdata);"
+																	title="{{tooltipContent.viewDetails}}" data-html="true"
+																	tooltip> [+] </a> <!-- Popup for addational details -->
+																<md-menu-content width="6"
+																	class="menuForCheckbox menuForPremium carBenefitPopup">
+																<div class="menuHeaderText">SUM INSURED</div>
+																<div style="padding: 0px 10px 10px 10px;">
+																	<md-list class="resultPad"
+																		ng-if="true ||(selectPremiumFromResult.odpremium + selectPremiumFromResult.llDriverCover + selectPremiumFromResult.paidDriverCover + selectPremiumFromResult.tppremium) > 0">
+
+																	</b> <md-list-item
+																		ng-if="(mdata.sumInsured != 'undefined' )"
+																		class="md-1-line checkBox">
+																	<div layout="row" layout-wrap flex>
+																		<div class="md-list-item-text" flex="100">
+																			<div class="section">
+																				<div class="col col-lg-9">
+																					<p>
+																						<b> Base Sum Insured</b>
+																					</p>
+																				</div>
+																				<div class="col col-lg-3">
+																					<p class="right">
+																						<b>&#8377; {{mdata.sumInsured}}</b>
+																					</p>
+																				</div>
+																			</div>
+																			<md-divider></md-divider>
+																		</div>
+																	</div>
+																	</md-list-item> <md-list-item
+																		ng-if="(mdata.paSumInsured) != undefined"
+																		class="md-1-line checkBox">
+																	<div layout="row" layout-wrap flex>
+																		<div class="md-list-item-text" flex="100">
+																			<div class="section">
+																				<div class="col col-lg-9">
+																					<p>
+																						<b>Personal Accident Sum Insured</b>
+																					</p>
+																				</div>
+																				<div class="col col-lg-3">
+																					<p class="right">
+																						<b>&#8377; {{mdata.paSumInsured}}</b>
+																					</p>
+																				</div>
+																			</div>
+																			<md-divider></md-divider>
+																		</div>
+																	</div>
+																	</md-list-item> <md-list-item
+																		ng-if="mdata.termSumInsured != undefined"
+																		class="md-1-line checkBox">
+																	<div layout="row" layout-wrap flex>
+																		<div class="md-list-item-text" flex="100">
+																			<div class="section">
+																				<div class="col col-lg-9">
+																					<p>
+																						<b> Term Sum Insured</b>
+																					</p>
+																				</div>
+																				<div class="col col-lg-3">
+																					<p class="right">
+																						<b>&#8377; {{mdata.termSumInsured}}</b>
+																					</p>
+																				</div>
+																			</div>
+																			<md-divider></md-divider>
+																		</div>
+																	</div>
+																	</md-list-item> <span> <a ng-click="toggleMoreDetails"
+																		class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer"
+																		style="width: auto; margin: 21px 60px auto">{{globalLabel.applicationLabels.common.popupButton}}</a>
+																	</span> </md-list>
+																</div>
+																</md-menu-content> </md-menu>
+														</span>
+														</span>
+													</h3>
+
+													<p style="font-size: 20px !important; padding-bottom: 2px;">&#8377;
+														{{(mdata.sumInsured) | number:0 | regexINR}}</p>
+												</div>
+												</md-list-item> <md-list-item class="md-1-line">
+												<div class="md-list-item-text">
+													
+													<p>Permanent Total Disablement</p>
+												</div>
+												</md-list-item>
+												<!-- <md-list-item class="md-1-line">
+												<div class="md-list-item-text">
+													
+													<p>Permanent Partial Disablement</p>
+												</div>
+												</md-list-item> -->
+												 <md-list-item class="md-1-line">
+
+												<div class="md-list-item-text">
+
+													<h3>
+														{{premiumFrequencyTypeName(mdata.premiumFrequency)}}
+														<!-- <span ng-bind="premiumFrequencyTypeName(mdata.premiumFrequency)"></span> -->
+														<i class="fa fa-question-circle fa-sm bluecolor"
+															data-toggle="tooltip"
+															title="{{tooltipContent.totalPremium}}" tooltip></i> <span
+															ng-if="true" md-ink-ripple="false"> <span>
+																<md-menu md-position-mode="target-right target">
+																<a
+																	ng-click="openMenu($mdOpenMenu, $event);getPopup(mdata);"
+																	title="{{tooltipContent.totalPremium}}"
+																	data-html="true" tooltip> [+] </a> <!-- Popup for addational details -->
+																<md-menu-content width="6"
+																	class="menuForCheckbox menuForPremium carBenefitPopup">
+																<div class="menuHeaderText">Premium Details</div>
+																<div style="padding: 0px 10px 10px 10px;">
+																	<md-list class="resultPad"> </b> <md-list-item
+																		class="md-1-line checkBox">
+																	<div layout="row" layout-wrap flex>
+																		<div class="md-list-item-text" flex="100">
+																			<div class="section">
+																				<div class="col col-lg-9">
+																					<p>
+																						<b>{{globalLabel.applicationLabels.car.basicCoverage}}</b>
+																					</p>
+																				</div>
+																				<div class="col col-lg-3">
+																					<p class="right">
+																						<b>&#8377; {{mdata.grossPremium}}</b>
+																					</p>
+																				</div>
+																			</div>
+																			<md-divider></md-divider>
+																		</div>
+																	</div>
+																	
+																	</md-list-item> <md-list-item class="md-1-line checkBox">
+																	<div layout="row" layout-wrap flex>
+																		<div class="md-list-item-text" flex="100">
+																			<div class="section">
+																				<div class="col col-lg-9">
+																					<p>
+																						<b>{{globalLabel.applicationLabels.common.serviceTax}}</b>
+																					</p>
+																				</div>
+																				<div class="col col-lg-3">
+																					<p class="right">
+																						<b>+&#8377; {{mdata.serviceTax | number:0 |
+																							regexINR}}</b>
+																					</p>
+																				</div>
+																			</div>
+																			<md-divider></md-divider>
+																		</div>
+																	</div>
+																	</md-list-item> <!-- remove if not needed --> <br />
+
+
+																	<md-list-item class="md-1-line checkBox">
+																	<div layout="row" layout-wrap flex>
+																		<div class="md-list-item-text" flex="100">
+																			<div class="section">
+																				<div class="col col-lg-9">
+																					<p>
+																						<b>{{globalLabel.applicationLabels.car.finalPrice}}</b>
+																					</p>
+																				</div>
+																				<div class="col col-lg-3">
+																					<p class="right">
+																						<b>&#8377; {{mdata.netPremium | number:0 |
+																							regexINR}} </b>
+																				</div>
+																			</div>
+																			<md-divider></md-divider>
+																		</div>
+																	</div>
+																	</md-list-item> <span> <a ng-click="toggleMoreDetails"
+																		class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer"
+																		style="width: auto; margin: 21px 60px auto">{{globalLabel.applicationLabels.common.popupButton}}</a>
+																	</span> </md-list>
+																</div>
+																</md-menu-content> </md-menu>
+														</span>
+														</span>
+													</h3>
+
+													<p style="font-size: 20px !important; padding-bottom: 2px;">&#8377;
+
+														{{(mdata.grossPremium) | number:0 | regexINR}}</p>
+												</div>
+												</md-list-item> </md-list>
+											</div>
+										</div>
+										<!-- ./mobile  more -->
+
+										<!-- WEB -->
+										<div class="hideforMobile">
+											<div class="styleForLife">
+												<div class="section resultFlexHeader">
+													<div class="col col-sm-2" style="text-align: center">
+														<div class="md-list-item-text">
+															<img data-toggle="tooltip"
+																title="{{data.insuranceCompany}}"
+																ng-src="{{$root.wp_path}}img\clogo\{{data.carrierId}}.png"
+																style="display: inline-block !important"
+																data-html="true" tooltip>
+															<p>
+																<b>{{data.productName}}</b>
+															</p>
+															<div>
+																<a style="text-align: center; font-size: 12px;"
+																	ng-init="data.hasMorePlans = isMoreQuoteToShow(morePlans,data.carrierId);data.isMorePlans = false;">
+																	<span
+																	ng-click='data.showPanel = data.carrierId;data.isMorePlans=true'
+																	ng-show="!data.isMorePlans && data.hasMorePlans">+
+																		More Plans</span> <span
+																	ng-click='data.showPanel = data.carrierId;data.isMorePlans=false'
+																	ng-show="data.isMorePlans">- Hide Plans</span>
+																</a>
+															</div>
+
+
+															<a style="text-align: center; font-size: 12px;"
+																href="{{data.brochureLink}}" target="_blank"> View
+																Brochure &nbsp;<i style="color: #FC3C3F;"
+																class="fa fa-file" aria-hidden="true"></i>
+															</a>
+														</div>
+													</div>
+													<div class="col col-sm-10">
+														<div class="section">
+															<div class="col col-sm-4">
+																<md-list class=" resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text">
+																	<h3>
+																		{{globalLabel.applicationLabels.life.sumAssured}} <i
+																			class="fa fa-question-circle fa-sm bluecolor"
+																			data-toggle="tooltip"
+																			title="{{tooltipContent.sumAssured}}" tooltip></i> <span
+																			ng-if="true" md-ink-ripple="false"> <span
+																			ng-if="(data.paSumInsured != undefined)"> <md-menu
+																					md-position-mode="target-right target"> <a
+																					ng-click="openMenu($mdOpenMenu, $event);getPopup(data);"
+																					title="{{tooltipContent.viewDetails}}"
+																					data-html="true" tooltip>
+																					({{globalLabel.applicationLabels.common.quoteResultViewDetails}})</a>
+
+
+																				<!-- Popup for addational details --> <md-menu-content
+																					width="6"
+																					class="menuForCheckbox menuForPremium carBenefitPopup">
+																				<div class="menuHeaderText">SUM INSURED</div>
+																				<div style="padding: 0px 10px 10px 10px;">
+																					<md-list class="resultPad"
+																						ng-if="true ||(selectPremiumFromResult.odpremium + selectPremiumFromResult.llDriverCover + selectPremiumFromResult.paidDriverCover + selectPremiumFromResult.tppremium) > 0">
+																					<md-list-item
+																						ng-if="(data.sumInsured != 'undefined' )"
+																						class="md-1-line checkBox">
+																					<div layout="row" layout-wrap flex>
+																						<div class="md-list-item-text" flex="100">
+																							<div class="section">
+																								<div class="col col-lg-9">
+																									<p>
+																										<b> Base Sum Insured</b>
+																									</p>
+																								</div>
+																								<div class="col col-lg-3">
+																									<p class="right">
+																										<b>&#8377; {{data.sumInsured}}</b>
+																									</p>
+																								</div>
+																							</div>
+																							<md-divider></md-divider>
+																						</div>
+																					</div>
+																					</md-list-item> <md-list-item
+																						ng-if="(data.paSumInsured) != undefined"
+																						class="md-1-line checkBox">
+																					<div layout="row" layout-wrap flex>
+																						<div class="md-list-item-text" flex="100">
+																							<div class="section">
+																								<div class="col col-lg-9">
+																									<p>
+																										<b> Personal Accident Sum Insured</b>
+																									</p>
+																								</div>
+																								<div class="col col-lg-3">
+																									<p class="right">
+																										<b>&#8377; {{data.paSumInsured}}</b>
+																									</p>
+																								</div>
+																							</div>
+																							<md-divider></md-divider>
+																						</div>
+																					</div>
+																					</md-list-item> <md-list-item
+																						ng-if="data.termSumInsured != undefined"
+																						class="md-1-line checkBox">
+																					<div layout="row" layout-wrap flex>
+																						<div class="md-list-item-text" flex="100">
+																							<div class="section">
+																								<div class="col col-lg-9">
+																									<p>
+																										<b> Term Sum Insured</b>
+																									</p>
+																								</div>
+																								<div class="col col-lg-3">
+																									<p class="right">
+																										<b>&#8377; {{data.termSumInsured}}</b>
+																									</p>
+																								</div>
+																							</div>
+																							<md-divider></md-divider>
+																						</div>
+																					</div>
+																					</md-list-item> <span> <a ng-click="toggleMoreDetails"
+																						class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer"
+																						style="width: auto; margin: 21px 60px auto">{{globalLabel.applicationLabels.common.popupButton}}</a>
+																					</span> </md-list>
+																				</div>
+																				</md-menu-content> </md-menu>
+																		</span>
+																		</span>
+																	</h3>
+
+																	<p
+																		style="font-size: 20px !important; padding-bottom: 2px;">&#8377;
+																		{{(data.sumInsured) | number:0 | regexINR}}</p>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+															<div class="col col-sm-4">
+
+																<md-list class="resultListPad">
+
+																<div class="md-list-item-text">
+
+																	<md-list-item class="md-1-line">
+																	<div class="md-list-item-text">
+																		
+																		<p>
+																			Permanent Total Disablement
+																		</p>
+																	</div>
+																	</md-list-item>
+
+																</div>
+																</md-list>
+															</div>
+															<!-- <div class="col col-sm-4">
+
+																<md-list class="resultListPad">
+
+																<div class="md-list-item-text">
+
+																	<md-list-item class="md-1-line">
+																	<div class="md-list-item-text">
+																		
+																		<p>
+																			Permanent Partial Disablement
+																		</p>
+																	</div>
+																	</md-list-item>
+
+																</div>
+																</md-list>
+															</div> -->
+															<div class="col col-sm-4">
+																<md-list class=" resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text">
+
+																	<h3>
+																		<span
+																			ng-bind="premiumFrequencyTypeName(data.premiumFrequency)"></span>
+																		<i class="fa fa-question-circle fa-sm bluecolor"
+																			data-toggle="tooltip"
+																			title="{{tooltipContent.totalPremium}}" tooltip></i><span
+																			md-ink-ripple="false"> <span
+																			ng-repeat="v in [0]"> <md-menu
+																					md-position-mode="target-right target"> <a
+																					ng-click="openMenu($mdOpenMenu, $event);getPopup(data);"
+																					title="{{tooltipContent.viewDetails}}"
+																					data-html="true" tooltip>
+																					({{globalLabel.applicationLabels.common.quoteResultViewDetails}})
+																				</a> <md-menu-content width="6"
+																					class="menuForCheckbox menuForPremium carBenefitPopup">
+																				<div class="menuHeaderText">PREMIUM DETAILS</div>
+																				<div style="padding: 0px 10px 10px 10px;">
+																					<md-list class="resultPad"
+																						ng-if="true ||(selectPremiumFromResult.odpremium + selectPremiumFromResult.llDriverCover + selectPremiumFromResult.paidDriverCover + selectPremiumFromResult.tppremium) > 0">
+
+																					<md-list-item class="md-1-line checkBox">
+																					<div layout="row" layout-wrap flex>
+																						<div class="md-list-item-text" flex="100">
+																							<div class="section">
+																								<div class="col col-lg-9">
+																									<p>
+																										<b>{{globalLabel.applicationLabels.car.basicCoverage}}</b>
+																									</p>
+																								</div>
+																								<div class="col col-lg-3">
+																									<p class="right">
+																										<b>&#8377; {{data.grossPremium}}</b>
+																									</p>
+																								</div>
+																							</div>
+																							<md-divider></md-divider>
+																						</div>
+																					</div>
+																					
+																					</md-list-item> <md-list-item class="md-1-line checkBox">
+																					<div layout="row" layout-wrap flex>
+																						<div class="md-list-item-text" flex="100">
+																							<div class="section">
+																								<div class="col col-lg-9">
+																									<p>
+																										<b>{{globalLabel.applicationLabels.common.serviceTax}}</b>
+																									</p>
+																								</div>
+																								<div class="col col-lg-3">
+																									<p class="right">
+																										<b>+&#8377; {{data.serviceTax | number:0 |
+																											regexINR}}</b>
+																									</p>
+																								</div>
+																							</div>
+																							<md-divider></md-divider>
+																						</div>
+																					</div>
+																					</md-list-item> <md-list-item class="md-1-line checkBox">
+																					<div layout="row" layout-wrap flex>
+																						<div class="md-list-item-text" flex="100">
+																							<div class="section">
+																								<div class="col col-lg-9">
+																									<p>
+																										<b>{{globalLabel.applicationLabels.car.finalPrice}}</b>
+																									</p>
+																								</div>
+																								<div class="col col-lg-3">
+																									<p class="right">
+																										<b>&#8377; {{data.netPremium | number:0
+																											| regexINR}} </b>
+																								</div>
+																							</div>
+																							<md-divider></md-divider>
+																						</div>
+																					</div>
+																					</md-list-item> <a ng-click="toggleMoreDetails"
+																						class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer"
+																						style="width: auto; margin: 21px 60px auto">{{globalLabel.applicationLabels.common.popupButton}}</a>
+																					</md-list>
+																				</div>
+																				</md-menu-content> </md-menu>
+																		</span>
+																		</span>
+																	</h3>
+																	<p
+																		style="font-size: 20px !important; padding-bottom: 2px;">&#8377;
+																		{{(data.grossPremium) | number:0 | regexINR}}</p>
+																</div>
+																</md-list-item> </md-list>
+															</div>
+														</div>
+														<div class="section div-border-top-left setFel">
+															<div class="col col-sm-4">
+																<md-list class="resultListPad"> <md-list-item
+																	class="md-1-line">
+																<div class="md-list-item-text">
+																	<h3>
+																		{{globalLabel.applicationLabels.life.claimsNServicing}}
+																		<i class="fa fa-question-circle fa-sm bluecolor"
+																			data-toggle="tooltip" data-html="true"
+																			title="{{tooltipContent.serviceRating}}" tooltip></i>
+																	</h3>
+																	<p>
+																		<ng-rate-it ng-model="data.insurerIndex"
+																			resetable="false" min="0" max="5" step="1"
+																			read-only="true"></ng-rate-it>
+																		&nbsp; {{data.insurerIndex | number:1}}
+																	</p>
+																</div>
+
+																</md-list-item> </md-list>
+															</div>
+															<!-- <div class="col col-sm-4">
+
+																<md-list-item class="md-1-line">
+																<h3>
+																	Permanent Total Disablement
+																	Accidental Total & Permanent Disability*/
+																	&nbsp; <span class="inlineImg floatRight"
+																		ng-if="data.riders[1].riderType == 'selected' && isAnnualPremium==true"
+																		class="strong">&#8377;
+																		{{data.riders[1].riderPremiumAmount | number:0 |
+																		regexINR}}</span>  <i
+																		class="fa fa-info-circle fa-sm bluecolor"
+																		ng-if="data.riders[1].riderType == 'selected'"
+																		data-toggle="tooltip" data-html="true"
+																		title="Accidental Disability SumAssured <b>{{data.riders[1].riderSumAssured| number:0 | regexINR}}</b>"
+																		tooltip></i> <span class="inlineImg"
+																		ng-if="data.riders[1].riderType != 'selected'"
+																		class="strong"><img
+																		ng-src="{{$root.wp_path}}img/icons/{{data.riders[1].riderImgPath}}.png"
+																		data-html="true" data-toggle="tooltip"
+																		data-placement="right"
+																		title="{{data.riders[1].riderTooltipName}}" tooltip></span>
+																</h3>
+																</md-list-item>
+															</div> -->
+														 	<div class="col col-sm-4">
+																		<md-list class="resultListPad">
+
+																		<div class="md-list-item-text">
+
+																			<md-list-item class="md-1-line">
+																			<div class="md-list-item-text">
+																				
+																				<p>
+																					Permanent Partial Disablement
+																				</p>
+																			</div>
+																			</md-list-item>
+																		</div>
+																		</md-list>
+															</div>
+												
+															<div class="col col-sm-4" style="align-self: center;">
+															<button
+															ng-click="buyProduct(data)"
+															class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer"
+															id="assuranceBuyProductBtn" data-placement="top"
+															data-toggle="tooltip" title="{{tooltipContent.buyNow}}"
+															tooltip data-html="true" style="width: auto">{{globalLabel.applicationLabels.common.buyNow}}</button>
+													</div>
+														</div>
+													</div>
+												</div>
+
+
+
+
+											</div>
+											<!-- ./WEB -->
+											<div class="clearfix"></div>
+
+											<!--more-->
+											<!-- more PLANS -->
+											<div
+												ng-show="data.showPanel == data.carrierId && data.isMorePlans">
+												<div class="hideforMobile"
+													ng-repeat=" mdata in morePlans | orderBy :sortKey:sortReverse">
+													<div class="styleForLife">
+
+														<div class="section resultFlexHeader">
+															<div class="col col-sm-2" style="text-align: center">
+																<div class="md-list-item-text">
+																	<img data-toggle="tooltip"
+																		title="{{mdata.insuranceCompany}}"
+																		ng-src="{{$root.wp_path}}img\clogo\{{mdata.carrierId}}.png"
+																		style="display: inline-block !important"
+																		data-html="true" tooltip>
+																	<p>
+																		<b>{{mdata.productName}}</b>
+																	</p>
+																	<a style="text-align: center; font-size: 12px;"
+																		href="{{mdata.brochureLink}}" target="_blank">
+																		View Brochure &nbsp;<i style="color: #FC3C3F;"
+																		class="fa fa-file" aria-hidden="true"></i>
+																	</a>
+																</div>
+															</div>
+															<div class="col col-sm-10">
+																<div class="section">
+																	<div class="col col-sm-4">
+																		<md-list class="resultListPad"> <md-list-item
+																			class="md-1-line">
+																		<div class="md-list-item-text">
+																			<h3>
+																				{{globalLabel.applicationLabels.life.sumAssured}} <i
+																					class="fa fa-question-circle fa-sm bluecolor"
+																					data-toggle="tooltip"
+																					title="{{tooltipContent.sumAssured}}" tooltip></i>
+																				<span ng-if="true" md-ink-ripple="false"> <span
+																					ng-if="(mdata.paSumInsured != undefined)"> <md-menu
+																							md-position-mode="target-right target">
+																						<a
+																							ng-click="openMenu($mdOpenMenu, $event);getPopup(mdata);"
+																							title="{{tooltipContent.viewDetails}}"
+																							data-html="true" tooltip>
+																							({{globalLabel.applicationLabels.common.quoteResultViewDetails}})
+																						</a> <!-- Popup for addational details --> <md-menu-content
+																							width="6"
+																							class="menuForCheckbox menuForPremium carBenefitPopup">
+																						<div class="menuHeaderText">SUM INSURED</div>
+																						<div style="padding: 0px 10px 10px 10px;">
+																							<md-list class="resultPad"
+																								ng-if="true ||(selectPremiumFromResult.odpremium + selectPremiumFromResult.llDriverCover + selectPremiumFromResult.paidDriverCover + selectPremiumFromResult.tppremium) > 0">
+																							<md-list-item
+																								ng-if="(mdata.sumInsured != 'undefined' )"
+																								class="md-1-line checkBox">
+																							<div layout="row" layout-wrap flex>
+																								<div class="md-list-item-text" flex="100">
+																									<div class="section">
+																										<div class="col col-lg-9">
+																											<p>
+																												<b> Base Sum Insured</b>
+																											</p>
+																										</div>
+																										<div class="col col-lg-3">
+																											<p class="right">
+																												<b>&#8377; {{mdata.sumInsured}}</b>
+																											</p>
+																										</div>
+																									</div>
+																									<md-divider></md-divider>
+																								</div>
+																							</div>
+																							</md-list-item> <md-list-item
+																								ng-if="(mdata.paSumInsured) != undefined"
+																								class="md-1-line checkBox">
+																							<div layout="row" layout-wrap flex>
+																								<div class="md-list-item-text" flex="100">
+																									<div class="section">
+																										<div class="col col-lg-9">
+																											<p>
+																												<b> Personal Accident Sum Insured</b>
+																											</p>
+																										</div>
+																										<div class="col col-lg-3">
+																											<p class="right">
+																												<b>&#8377; {{mdata.paSumInsured}}</b>
+																											</p>
+																										</div>
+																									</div>
+																									<md-divider></md-divider>
+																								</div>
+																							</div>
+																							</md-list-item> <md-list-item
+																								ng-if="mdata.termSumInsured != undefined"
+																								class="md-1-line checkBox">
+																							<div layout="row" layout-wrap flex>
+																								<div class="md-list-item-text" flex="100">
+																									<div class="section">
+																										<div class="col col-lg-9">
+																											<p>
+																												<b> Term Sum Insured</b>
+																											</p>
+																										</div>
+																										<div class="col col-lg-3">
+																											<p class="right">
+																												<b>&#8377; {{mdata.termSumInsured}}</b>
+																											</p>
+																										</div>
+																									</div>
+																									<md-divider></md-divider>
+																								</div>
+																							</div>
+																							</md-list-item> <span> <a ng-click="toggleMoreDetails"
+																								class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer"
+																								style="width: auto; margin: 21px 60px auto">{{globalLabel.applicationLabels.common.popupButton}}</a>
+																							</span> </md-list>
+																						</div>
+																						</md-menu-content> </md-menu>
+																				</span>
+																				</span>
+																			</h3>
+
+																			<p
+																				style="font-size: 20px !important; padding-bottom: 2px;">&#8377;
+																				{{(mdata.sumInsured) | number:0 | regexINR}}</p>
+																		</div>
+																		</md-list-item> </md-list>
+																	</div>
+																	<div class="col col-sm-4">
+																		<md-list class="resultListPad">
+
+																		<div class="md-list-item-text">
+
+																			<md-list-item class="md-1-line">
+																			<div class="md-list-item-text">
+																				
+																				<p>
+																					Permanent Total Disablement
+																				</p>
+																			</div>
+																			</md-list-item>
+																		</div>
+																		</md-list>
+																	</div>
+																	
+																	
+															
+																	 <!-- <div class="col col-sm-4">
+																		<md-list class="resultListPad">
+
+																		<div class="md-list-item-text">
+
+																			<md-list-item class="md-1-line">
+																			<div class="md-list-item-text">
+																				
+																				<p>
+																					Permanent Partial Disablement
+																				</p>
+																			</div>
+																			</md-list-item>
+																		</div>
+																		</md-list>
+																	</div>  -->
+																	<div class="col col-sm-4">
+																		<md-list class=" resultListPad"> <md-list-item
+																			class="md-1-line">
+																		<div class="md-list-item-text">
+
+																			<h3>
+																				<span
+																					ng-bind="premiumFrequencyTypeName(mdata.premiumFrequency)"></span>
+																				<i class="fa fa-question-circle fa-sm bluecolor"
+																					data-toggle="tooltip"
+																					title="{{tooltipContent.totalPremium}}" tooltip></i><span
+																					md-ink-ripple="false"> <span
+																					ng-repeat="v in [0]"> <md-menu
+																							md-position-mode="target-right target">
+																						<a
+																							ng-click="openMenu($mdOpenMenu, $event);getPopup(mdata);"
+																							title="{{tooltipContent.viewDetails}}"
+																							data-html="true" tooltip>
+																							({{globalLabel.applicationLabels.common.quoteResultViewDetails}})
+																						</a> <md-menu-content width="6"
+																							class="menuForCheckbox menuForPremium carBenefitPopup">
+																						<div class="menuHeaderText">PREMIUM DETAILS</div>
+																						<div style="padding: 0px 10px 10px 10px;">
+																							<md-list class="resultPad"
+																								ng-if="true ||(selectPremiumFromResult.odpremium + selectPremiumFromResult.llDriverCover + selectPremiumFromResult.paidDriverCover + selectPremiumFromResult.tppremium) > 0">
+
+																							<md-list-item class="md-1-line checkBox">
+																							<div layout="row" layout-wrap flex>
+																								<div class="md-list-item-text" flex="100">
+																									<div class="section">
+																										<div class="col col-lg-9">
+																											<p>
+																												<b>{{globalLabel.applicationLabels.car.basicCoverage}}</b>
+																											</p>
+																										</div>
+																										<div class="col col-lg-3">
+																											<p class="right">
+																												<b>&#8377; {{mdata.grossPremium}}</b>
+																											</p>
+																										</div>
+																									</div>
+																									<md-divider></md-divider>
+																								</div>
+																							</div>
+																						
+																							</md-list-item> <md-list-item class="md-1-line checkBox">
+																							<div layout="row" layout-wrap flex>
+																								<div class="md-list-item-text" flex="100">
+																									<div class="section">
+																										<div class="col col-lg-9">
+																											<p>
+																												<b>{{globalLabel.applicationLabels.common.serviceTax}}</b>
+																											</p>
+																										</div>
+																										<div class="col col-lg-3">
+																											<p class="right">
+																												<b>+&#8377; {{mdata.serviceTax |
+																													number:0 | regexINR}}</b>
+																											</p>
+																										</div>
+																									</div>
+																									<md-divider></md-divider>
+																								</div>
+																							</div>
+																							</md-list-item> <md-list-item class="md-1-line checkBox">
+																							<div layout="row" layout-wrap flex>
+																								<div class="md-list-item-text" flex="100">
+																									<div class="section">
+																										<div class="col col-lg-9">
+																											<p>
+																												<b>{{globalLabel.applicationLabels.car.finalPrice}}</b>
+																											</p>
+																										</div>
+																										<div class="col col-lg-3">
+																											<p class="right">
+																												<b>&#8377; {{mdata.netPremium |
+																													number:0 | regexINR}} </b>
+																										</div>
+																									</div>
+																									<md-divider></md-divider>
+																								</div>
+																							</div>
+																							</md-list-item> <a ng-click="toggleMoreDetails"
+																								class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer"
+																								style="width: auto; margin: 21px 60px auto">{{globalLabel.applicationLabels.common.popupButton}}</a>
+																							</md-list>
+																						</div>
+																						</md-menu-content> </md-menu>
+																				</span>
+																				</span>
+																			</h3>
+																			<p
+																				style="font-size: 20px !important; padding-bottom: 2px;">&#8377;
+																				{{(mdata.grossPremium) | number:0 | regexINR}}</p>
+																		</div>
+																		</md-list-item> </md-list>
+																	</div>
+																</div>
+																<div class="section  div-border-top-left setFel">
+																	<div class="col col-sm-4">
+																		<md-list class="resultListPad"> <md-list-item
+																			class="md-1-line">
+																		<div class="md-list-item-text">
+																			<h3>
+																				{{globalLabel.applicationLabels.life.claimsNServicing}}
+																				<i class="fa fa-question-circle fa-sm bluecolor"
+																					data-toggle="tooltip" data-html="true"
+																					title="{{tooltipContent.serviceRating}}" tooltip></i>
+																			</h3>
+																			<p>
+																				<ng-rate-it ng-model="mdata.insurerIndex"
+																					resetable="false" min="0" max="5" step="1"
+																					read-only="true"></ng-rate-it>
+																				&nbsp; {{mdata.insurerIndex | number:1}}
+																			</p>
+																		</div>
+
+																		</md-list-item> </md-list>
+																	</div>
+																	<div class="col col-sm-4">
+																		<md-list class="resultListPad">
+
+																		<div class="md-list-item-text">
+
+																			<md-list-item class="md-1-line">
+																			<div class="md-list-item-text">
+																				
+																				<p>
+																					Permanent Partial Disablement
+																				</p>
+																			</div>
+																			</md-list-item>
+																		</div>
+																		</md-list>
+																	</div>
+																	<div class="col col-sm-4" style="align-self: center;">
+																		<button
+																			ng-click="buyProduct(mdata)"
+																			class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer"
+																			id="assuranceBuyProductBtn" data-placement="top"
+																			data-toggle="tooltip" title="{{tooltipContent.buyNow}}"
+																			tooltip data-html="true" style="width: auto">{{globalLabel.applicationLabels.common.buyNow}}</button>
+																	</div>
+																</div>
+															</div>
+															
+														</div>
+														<div class="clearfix"></div>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+											</div>
+											<!-- ./more Palns  -->
+											<!-- more end-->
+										</div>
+
+									</div>
+
+								</div>
+
+
+
+								<div class="fullShadow resultBg"
+									ng-repeat="quoteRequest in $root.paQuoteRequest"
+									ng-if="!$root.baseEnvEnabled || $root.wordPressEnabled">
+									<div
+										class="resultBGpad divForMobile wp_resultBorder  wp_resultGradient wp_borderRadius12"
+										ng-if="quoteRequest.status != 1 && compareView==false">
+
+
+										<div class="section showforMobile">
+											<div class="section">
+												<div class="col col-sm-2" style="margin-top: 2.5%">
+													<img data-toggle="tooltip" title=""
+														ng-src="{{$root.wp_path}}img\clogo\{{quoteRequest.carrierId}}.png"
+														style="" tooltip>
+												</div>
+												<div class="col col-sm-10">
+													<div ng-if="quoteRequest.status == 0">
+														<md-progress-circular class="md-accent md-hue-1"
+															md-diameter="60"></md-progress-circular>
+													</div>
+													<div ng-if="quoteRequest.status == 2" class="setErrorPlace">
+														<div ng-bind-html="quoteRequest.message"
+															bind-html-compile="quoteRequest.message"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+										<div class="section hideforMobile">
+											<div class="col col-sm-2" style="margin-top: 2.5%">
+												<img data-toggle="tooltip" title=""
+													ng-src="{{$root.wp_path}}img\clogo\{{quoteRequest.carrierId}}.png"
+													style="" tooltip>
+											</div>
+											<div class="col col-sm-10">
+												<div ng-if="quoteRequest.status == 0">
+													<md-progress-circular class="md-accent md-hue-1"
+														md-diameter="60"></md-progress-circular>
+												</div>
+												<div ng-if="quoteRequest.status == 2" class="setErrorPlace">
+													<div ng-bind-html="quoteRequest.message"
+														bind-html-compile="quoteRequest.message"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="fullShadow resultBg setErrorPlace"
+									ng-if="!errorRespCounter">
+									<div ng-bind-html="errorRespMsg"
+										bind-html-compile="errorRespMsg"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Compare View Div started here -->
+					<div ng-if="compareView==true">
+						<div class="section">
+							<div class="col col-sm-12 wp_fullpadNo" style="width: 100%;">
+								<div class="fullShadow resultBg noPadForCompare wp_compareDiv">
+									<div class="section">
+										<div class="col col-sm-4">
+											<div class="col-container">
+												<div class="row header compareHeaderProp rowDisplay">
+													<div class="col compareColProp colDisplay">Policy
+														Details</div>
+												</div>
+												<div class="row compareRowProp rowDisplay">
+													<div class="col compareColProp colDisplay">
+														<b>Benefits</b>
+													</div>
+												</div>
+												<div class="row compareRowProp rowDisplay"
+													ng-repeat="data in compareLifePoliciesDisplayList">
+													<div class="col compareColProp colDisplay">{{data.label}}</div>
+												</div>
+												<div class="row compareRowProp rowDisplay"
+													ng-repeat="benefits in $root.consolidatedBenefitsList">
+													<div class="col compareColProp colDisplay">{{benefits}}</div>
+												</div>
+												<div ng-show="consolatedRiderList != 0"
+													class="row compareRowProp rowDisplay">
+													<div class="col compareColProp colDisplay">
+														<b>Riders</b>
+													</div>
+												</div>
+												<div class="row compareRowProp rowDisplay"
+													ng-repeat="rider in consolatedRiderList">
+													<div class="col compareColProp colDisplay">{{rider.riderName}}</div>
+												</div>
+												<div class="row compareRowProp rowDisplay">
+													<div class="col compareColProp colDisplay">
+														<b>Savings</b>
+													</div>
+												</div>
+												<div class="row compareRowProp rowDisplay"
+													ng-repeat="savings in $root.consolidatedSavingsList">
+													<div class="col compareColProp colDisplay">{{savings}}</div>
+												</div>
+												<div class="row compareRowProp rowDisplay">
+													<div class="col compareColProp colDisplay">
+														<b>Flexibility</b>
+													</div>
+												</div>
+												<div class="row compareRowProp rowDisplay"
+													ng-repeat="flexibility in $root.consolidatedFlexibilityList">
+													<div class="col compareColProp colDisplay">{{flexibility}}</div>
+												</div>
+											</div>
+										</div>
+										<div class="col col-sm-8 wp_resultSlick"
+											ng-if="true ||slickLoaded" id="slickWrapper">
+											<slick dots="true" infinite="false" speed=300
+												slides-to-show=3 touch-move="false" slides-to-scroll=1
+												class="slider one-time"
+												="true ||dataLoaded"
+									 init-onload="true"
+												data="$root.paQuoteResult">
+											<div class="zebraCompare"
+												ng-repeat="data in $root.paQuoteResult">
+												<div class="col-container">
+													<div class="row header compareHeaderProp rowDisplay">
+														<div class="col compareColProp colDisplay">
+															<img data-toggle="tooltip"
+																title="{{data.insuranceCompany}}"
+																ng-src="{{$root.wp_path}}img\clogo\{{data.carrierId}}.png"
+																style="" tooltip data-placement="bottom">
+														</div>
+													</div>
+													<div class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay">&nbsp;</div>
+													</div>
+													<div class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay">{{payoutName}}</div>
+													</div>
+													<div class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay">{{data.lumsumPayout}}</div>
+													</div>
+													<div class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay">{{(data.lumsumPayout/data.sumInsured)
+															* 100}}</div>
+													</div>
+													<div class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay">
+															{{data.monthlyPayout}}</div>
+													</div>
+													<div class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay">{{(personalDetails.maturityAge
+															- quoteParam.age)*12}}</div>
+													</div>
+													<
+												</div>
+												<div ng-repeat="benefits in $root.consolidatedBenefitsList"
+													class="col-container">
+													<div class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay"
+															ng-if="true || data.features[benefits] == undefined"
+															data-placement="top" data-toggle="tooltip"
+															title="{{tooltipContent.NATooltip}}" tooltip>NA</div>
+														<div class="col compareColProp colDisplay"
+															ng-if=" true || data.features[benefits] != undefined">{{data.features[benefits]}}</div>
+													</div>
+												</div>
+												<div class="col-container">
+													<div ng-show="consolatedRiderList != 0"
+														class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay">&nbsp;</div>
+													</div>
+												</div>
+												<div class="col-container">
+													<div class="row compareRowProp rowDisplay"
+														ng-repeat="rider in consolatedRiderList">
+														<div class="col compareColProp colDisplay">{{findRider(rider.riderId,data.riders)}}</div>
+													</div>
+												</div>
+												<div class="col-container">
+													<div class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay">&nbsp;</div>
+													</div>
+												</div>
+												<div ng-repeat="savings in $root.consolidatedSavingsList"
+													class="col-container">
+													<div class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay"
+															ng-if="true ||data.features[savings] == undefined">NA</div>
+														<div class="col compareColProp colDisplay"
+															ng-if="true || data.features[savings] != undefined">{{data.features[savings]}}</div>
+													</div>
+												</div>
+												<div class="col-container">
+													<div class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay">&nbsp;</div>
+													</div>
+												</div>
+												<div
+													ng-repeat="flexibility in $root.consolidatedFlexibilityList"
+													class="col-container">
+													<div class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay">
+															<div ng-switch on="flexibility">
+																<div ng-switch-when="Maximum Sum Assured">{{(data.sumInsured
+																	* quoteParam.age)}}</div>
+																<div ng-switch-default
+																	ng-if="data.features[flexibility] == undefined">NA</div>
+																<div ng-switch-default
+																	ng-if="data.features[flexibility] != undefined && data.features[flexibility] =='Annual'">
+																	<span ng-if="isAnnualPremium">{{data.features[flexibility]}}</span>
+																	<span ng-if="isMonthlyPremium">Monthly</span>
+																</div>
+																<div ng-switch-default
+																	ng-if="data.features[flexibility] != undefined && data.features[flexibility] !='Annual'">{{data.features[flexibility]}}</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-container">
+													<div class="row compareRowProp rowDisplay">
+														<div class="col compareColProp colDisplay"
+															style="text-align: center; border-bottom: 0px;">
+															<button
+																ng-click="buyProduct(data)" id="assuranceBuyProductBtn"
+																class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer ng-binding"
+																style="width: auto;">Buy now</button>
+														</div>
+													</div>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+
+
+											</slick>
+										</div>
+										<div class="clearfix"></div>
+
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<form style="display: hidden;" ng-form-commit action='' method='post'
+	target="_blank" name="paymentForm" novalidate>
+	<div ng-repeat="formParams in postMethodFormContent">
+		<input type="hidden" name="{{formParams.name}}"
+			value="{{formParams.value}}">
+	</div>
+</form>
+
+<modal-dialog show='modelBeneFeature' width='900px' height='auto'
+	class="ng-hide">
+<div class='ng-modal-close wp_modalClose'
+	ng-click='closeBeneFeatureModel()' ng-if="$root.wordPressEnabled">
+	<i class="material-icons">close</i>
+</div>
+<div
+	class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow"
+	style="">
+	<div class="" style="">
+		<div class="section">
+			<div class="col col-sm-3 lifeViewDetailsTitle wp_popupHeading">{{globalLabel.applicationLabels.life.productListColumn1}}</div>
+			<div class="col col-sm-7 lifeViewDetailsTitle wp_popupHeading">{{globalLabel.applicationLabels.life.productListColumn2}}</div>
+			<div class="col col-sm-2" style="padding-top: 10px !important;">
+				<div class='ng-modal-close' ng-click='closeBeneFeatureModel()'
+					ng-if="true || !$root.wordPressEnabled" style="color: #fff;">
+					<i class="material-icons">close</i>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<div class="pad10 responsiveTellus newPopupInnerShadow"
+	style="background-color: #fff;">
+	<div class="lifeViewDetails" style="overflow: auto; height: 450px">
+		<div class="section"
+			ng-repeat="productFeatures in productFeaturesList">
+			<div ng-if="true ||productFeatures.cardView=='Y'">
+				<div class="col col-sm-3">
+					<div class="lifeViewPadding">{{productFeatures.title}}</div>
+				</div>
+				<div class="col col-sm-9" style="padding-left: 4px !important;">
+					<div class="lifeViewPadding">{{productFeatures.details}}</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<md-divider></md-divider>
+		</div>
+	</div>
+	<div class="" style="text-align: center;">
+		<a target="_frame" href={{brochureUrl}}> <md-button
+				id="assuranceViewBrochure" class="md-raised md-primary" ng-click=""
+				style="padding: 5px 15px;margin-bottom: 1.5% !important; margin-top: 2% !important;">
+			<i class="normalFont">View Brochure</i> </md-button>
+		</a>
+	</div>
+</div>
+</modal-dialog>
+<modal-dialog show='modalCompare' width='930px' height='auto'
+	class="ng-hide modalDialog">
+<div ng-click="hideModal()" class="material-icons close" style="">close</div>
+<div style="overflow: auto; height: 400px">
+	<div class="col-container">
+		<div class="mainCol" style="width: 10%;">
+			<div class="col-container">
+				<div class="row header compareHeaderProp rowDisplay">
+					<div class="col compareColProp colDisplay">S No</div>
+				</div>
+				<div class="row compareRowProp rowDisplay">
+					<div class="col subHeader compareColProp colDisplay">&nbsp;</div>
+				</div>
+				<div class="row compareRowProp rowDisplay"
+					ng-repeat="data in comparePoliciesDisplayList">
+					<div class="col compareColProp colDisplay">{{($index+1)}}</div>
+				</div>
+				<div ng-show="consolatedDiscountList != 0"
+					class="row compareRowProp rowDisplay">
+					<div class="col subHeader compareColProp colDisplay">&nbsp;</div>
+				</div>
+				<div class="row compareRowProp rowDisplay"
+					ng-repeat="data in consolatedDiscountList">
+					<div class="col subHeader compareColProp colDisplay">
+						{{(comparePoliciesDisplayList.length)+($index+1)}}</div>
+				</div>
+				<div ng-show="consolatedRiderList != 0"
+					class="row compareRowProp rowDisplay">
+					<div class="col compareColProp colDisplay">&nbsp;</div>
+				</div>
+				<div class="row compareRowProp rowDisplay"
+					ng-repeat="rider in consolatedRiderList">
+					<div class="col subHeader compareColProp colDisplay">{{(comparePoliciesDisplayList.length)
+						+ (consolatedDiscountList.length) + ($index+1)}}</div>
+				</div>
+				<div class="row compareRowProp rowDisplay">
+					<!-- ng-show="vehicleDetails.checkforDriverAccCover && !vehicleDetails.checkforPsgCover" -->
+					<div class="col compareColProp colDisplay">{{(comparePoliciesDisplayList.length)
+						+ (consolatedDiscountList.length) + (consolatedRiderList.length) +
+						($index+1)}}</div>
+				</div>
+				<div class="row compareRowProp rowDisplay">
+					<!-- 	ng-show="vehicleDetails.checkforPsgCover && !vehicleDetails.checkforDriverAccCover"> -->
+					<div class="col compareColProp colDisplay">{{(comparePoliciesDisplayList.length)
+						+ (consolatedDiscountList.length) + (consolatedRiderList.length) +
+						($index+1)}}</div>
+				</div>
+				<div class="row compareRowProp rowDisplay">
+					<!-- ng-show="vehicleDetails.checkforPsgCover && vehicleDetails.checkforDriverAccCover"> -->
+					<div class="col compareColProp colDisplay">{{(comparePoliciesDisplayList.length)
+						+ (consolatedDiscountList.length) + (consolatedRiderList.length) +
+						($index+1)}}</div>
+				</div>
+				<div class="row compareRowProp rowDisplay">
+					<!-- ng-show="vehicleDetails.checkforPsgCover && vehicleDetails.checkforDriverAccCover"> -->
+					<div class="col compareColProp colDisplay">{{(comparePoliciesDisplayList.length)
+						+ (consolatedDiscountList.length) + (consolatedRiderList.length) +
+						($index+1) + ($index+1)}}</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="mainCol" style="width: 30%;">
+			<div class="col-container">
+				<div class="row header compareHeaderProp rowDisplay">
+					<div class="col compareColProp colDisplay">Policy Details</div>
+				</div>
+				<div class="row compareRowProp rowDisplay">
+					<div class="col compareColProp colDisplay">
+						<b>Basic Coverage</b>
+					</div>
+				</div>
+				<div class="row compareRowProp rowDisplay"
+					ng-repeat="data in comparePoliciesDisplayList">
+					<div class="col compareColProp colDisplay">{{data.label}}</div>
+				</div>
+				<div ng-show="consolatedDiscountList != 0"
+					class="row compareRowProp rowDisplay">
+					<div class="col compareColProp colDisplay">
+						<b>Discounts</b>
+					</div>
+				</div>
+				<div class="row compareRowProp rowDisplay"
+					ng-repeat="discount in consolatedDiscountList">
+					<div class="col compareColProp colDisplay">{{discount.type}}</div>
+				</div>
+				<div ng-show="consolatedRiderList != 0"
+					class="row compareRowProp rowDisplay">
+					<div class="col compareColProp colDisplay">
+						<b>Add-on Coverage</b>
+					</div>
+				</div>
+				<div class="row compareRowProp rowDisplay"
+					ng-repeat="rider in consolatedRiderList">
+					<div class="col compareColProp colDisplay">{{rider.riderName}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="mainCol" ng-repeat="data in selectedCarrier">
+			<div class="col-container">
+				<div class="row header compareHeaderProp rowDisplay">
+					<div class="col compareColProp colDisplay">{{data.insuranceCompany}}</div>
+				</div>
+				<div class="row compareRowProp rowDisplay">
+					<div class="col compareColProp colDisplay">&nbsp;</div>
+				</div>
+				<div class="row compareRowProp rowDisplay">
+					<div class="col compareColProp colDisplay">{{data.sumInsured}}</div>
+				</div>
+				<div class="row compareRowProp rowDisplay">
+					<div class="col compareColProp colDisplay">{{data.grossPremium}}</div>
+				</div>
+				<div class="row compareRowProp rowDisplay"
+					ng-repeat="discount in consolatedDiscountList">
+					<div class="col compareColProp colDisplay">{{findDiscount(discount.discountId,data.discountList)}}</div>
+				</div>
+				<div ng-show="consolatedRiderList != 0"
+					class="row compareRowProp rowDisplay">
+					<div class="col compareColProp colDisplay">&nbsp;</div>
+				</div>
+
+				<div class="row compareRowProp rowDisplay"
+					ng-repeat="rider in consolatedRiderList">
+					<div class="col compareColProp colDisplay">{{findRider(rider.riderId,data.ridersList)}}</div>
+				</div>
+				<div class="row compareRowProp rowDisplay"
+					ng-show="vehicleDetails.checkforDriverAccCover">
+					<div class="col compareColProp colDisplay">{{vehicleDetails.driverAccidentCover}}</div>
+				</div>
+				<div class="row compareRowProp rowDisplay"
+					ng-show="vehicleDetails.checkforPsgCover">
+					<div class="col compareColProp colDisplay">{{vehicleDetails.passengerCover}}</div>
+				</div>
+				<div class="row compareRowProp rowDisplay">
+					<div class="col compareColProp colDisplay">
+						<button 
+							ng-click="buyProduct(data)"
+							class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer ng-binding"
+							id="assuranceBuyProductBtn" style="width: auto">Buy now</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</modal-dialog>
+
+
+<modal-dialog show="shareEmailModal" width='500px' height='auto'
+	class="ng-hide RTOSearchDiv">
+<div class='ng-modal-close wp_modalClose' ng-click='hideEmailModal()'
+	ng-if="$root.wordPressEnabled">
+	<i class="material-icons">close</i>
+</div>
+<div
+	class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow"
+	style="" layout="row">
+	<div flex="85" flex-sm="85" class="wp_respWidth100 wp_Width100"
+		flex-xs="85" style="padding: 4% 0%; text-align: center;">
+		<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">Share
+			Email</h2>
+	</div>
+	<div class='ng-modal-close' ng-click='hideEmailModal()'
+		style="color: #fff;" flex="15" ng-if="!$root.wordPressEnabled">
+		<i class="material-icons">close</i>
+	</div>
+</div>
+<div class="pad10">
+	<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+		<ng-container ng-include="personalAccidentShareEmailSectionHTML"></ng-container>
+	</div>
+</div>
+</modal-dialog>
+
+
+<modal-dialog show='modalEmailView' width='550px' height='auto'
+	class="ng-hide">
+<div class='ng-modal-close wp_modalClose' ng-click='hideEmailModal()'
+	ng-if="$root.wordPressEnabled">
+	<i class="material-icons">close</i>
+</div>
+<div class="blueBackground one-edge-shadow wp_noBoxShadow" style=""
+	layout="row">
+	<div class="" style="padding-top: 5px; text-align: center;" flex="90"
+		flex-sm="85" flex-xs="85">
+		<h2 class="white popupHeading wp_popupHeading">{{globalLabel.applicationLabels.common.shareEmailModalLabel1}}</h2>
+	</div>
+	<div class='ng-modal-close' ng-click='hideEmailModal()'
+		style="color: #fff; margin-top: 5px !important; text-align: center;"
+		flex="10" flex-sm="15" flex-xs="15">
+		<i class="material-icons">X</i>
+	</div>
+</div>
+<div class="pad10 responsiveTellus newPopupInnerShadow" style="">
+	<div class="popupTableHealth popupPadding" layout="row"
+		style="padding: 3% 0% 3% 0% !important;">
+		<div flex="100" style="text-align: center; padding: 1% 0%;">
+			<b>{{globalLabel.applicationLabels.common.shareEmailModalLabel2}}</b>
+			<div data-ng-repeat="choice in EmailChoices" ng-if="choice.username"
+				flex="100" style="text-align: center; padding: 1% 0%;">
+				{{$index+1}}.<b>{{choice.username}}</b>
+			</div>
+		</div>
+	</div>
+	<div class="center">
+		<md-button class='md-raised md-primary popupSubmit'
+			ng-click="hideEmailModal()" style="margin-bottom: 8px !important;">OK</md-button>
+	</div>
+</div>
+</modal-dialog>
+ 
+ <modal-dialog show='modalFamilyInfo' width='500px' height='auto'
+	class="ng-hide">
+<div class='ng-modal-close wp_modalClose'
+	ng-click='closeFamilyMemberModal()' ng-if="$root.wordPressEnabled">
+	<i class="material-icons">close</i>
+</div>
+<div
+	class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow"
+	style="" layout="row">
+	<div flex="85" flex-sm="85"
+		flex-xs="85" class="wp_respWidth100 wp_Width100" style="padding: 4% 0%; text-align: center;">
+		<h2 class="white popupHeading wp_popupHeading">
+			{{globalLabel.applicationLabels.personalAccident.addFamilyMembers}}
+		</h2>
+	</div>
+	<div class='ng-modal-close' ng-click='closeFamilyMemberModal()'
+		ng-if="!$root.wordPressEnabled" style="color: #fff;" flex="15">
+		<i class="material-icons">close</i>
+	</div>
+</div>
+
+<div class="pad10 mobileHealthFamily pad10Padding mobileSmFix">
+	<div class="leadCaptureBox familyPopup">
+		<div class="popupTableHealth popupPadding" layout="row"
+			style="padding: 5% 0% !important;">
+			<div class="col col-lg-5">
+				<b>Relationship</b>
+			</div>
+			<div class="col col-lg-2">
+				<b>Age</b>
+			</div>
+			<div class="col col-lg-5">
+				<b>DOB</b>
+			</div>
+		</div>
+		<md-divider></md-divider>
+		<div ng-repeat="data in familyList" ng-if="data.other==false">
+			<div layout="row" class="familyPopupPadding section">
+				<div class="col col-lg-5">
+					<md-checkbox value="{{data}}" ng-model="data.val"> </md-checkbox>
+					<span class="alignLabelCheckBox">{{data.member}}</span> <!-- <span
+						ng-if="data.member=='Son' && data.iconFlag==true "> <md-button
+							class="familyBtnChild" ng-disabled="data.val==false"
+							ng-click="addNewSon($index)" id="addNewSonInstant">+
+						Son</md-button>
+					</span> <span ng-if="data.member=='Daughter' && data.iconFlag==true">
+
+						<md-button class="familyBtnChild" ng-disabled="data.val==false"
+							ng-click="addNewDaughter($index)" id="addNewSonInstant">+
+						Daughter</md-button>
+					</span> -->
+				</div>
+				<div class="familySelect col col-lg-2">
+					<input type="hidden" ng-value="data.age" class="hiddenAge">
+						<div ng-if="data.val">
+						<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+							<input  ng-value="data.age" ng-model="data.age"  style="width: 100%; border: 0" readonly>
+						</md-input-container>
+						</div>
+					</div>
+				<div class="familySelect col col-lg-5">
+					<div ng-if="data.val">
+						<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+						<input class="newDatepickerBorder"
+								ng-model='data.dob'
+								ng-change="validateAge(data,data.dob)"
+								name='dateofbirth'
+								p365-date-picker="DOBOptions{{$index}}" required
+								md-no-asterisk style="border: 0" readonly/>
+						</md-input-container>
+					</div>
+					
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div layout-sm="column">
+				<md-divider></md-divider>
+			</div>
+
+		</div>
+		<div ng-if="basicExpanded">
+			<div ng-repeat="data in familyList" ng-if="data.other==true">
+				<div layout="row" class="familyPopupPadding section">
+					<div class="col col-lg-8">
+						<md-checkbox value="{{data}}" ng-model="data.val"> </md-checkbox>
+						<span class="alignLabelCheckBox">{{data.member}}</span>
+					</div>
+					<div class="familySelect col col-lg-4">
+						<span> <input type="hidden" ng-value="data.age"
+							class="hiddenAge">
+							<div ng-if="data.val">
+								<md-input-container class="md-block"
+									style="margin: 0%; top:-7px;"> <md-select
+									ng-if="data.val" name="type" ng-model="data.age"> <md-option
+									ng-value="value" ng-selected="{{value == data.age}}"
+									ng-repeat="value in getAgeArray(data.minAge, data.maxAge)">
+								{{value}} </md-option> </md-select> </md-input-container>
+							</div></span>
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+				<div layout-sm="column">
+					<md-divider></md-divider>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="familyBtnAlign" style="text-align: center;">
+			<md-button ng-click="toggleBasicExpanded()" class="familyBtn"
+				id="addNewFamilyMemberInstant"> &nbsp;<i
+				ng-if="basicExpanded" class="fa fa-minus" style="font-size: 10px;"
+				aria-hidden="true"></i> <i ng-if="!basicExpanded" class="fa fa-plus"
+
+				style="font-size: 10px;" aria-hidden="true"></i> Other Family
+			Members&nbsp; </md-button>
+		</div> -->
+	</div>
+
+	<div class="center submitBtnAlign center">
+		<div style="color: red" ng-repeat="error in familyErrors"
+			class="familySubmit">{{error}}</div>
+		<md-button type="submit" class="md-raised md-primary wp_button"
+			id="submitFamilyMemberInstant" ng-click="submitFamily()"
+			style="margin: 0px !important;">Submit</md-button>
+	</div>
+</div>
+</modal-dialog>
+ <modal-dialog show='modalPIN' width='500px' height='auto !important'
+	class="ng-hide">
+<div class='ng-modal-close wp_modalClose' ng-click='hideModal()'
+	ng-if="$root.wordPressEnabled">
+	<i class="material-icons">close</i>
+</div>
+<div
+	class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow"
+	style="" layout="row">
+	<div class="wp_respWidth100 wp_Width100" style="padding: 4% 0%; text-align: center;" flex="85" flex-sm="85" flex-xs="85">
+		<h2 class="white popupHeading wp_popupHeading">
+			Enter Area or City or Pincode</span>
+		</h2>
+	</div>
+	<div class='ng-modal-close' ng-click='hideModal()' style="color: #fff;"
+
+		ng-if="!$root.wordPressEnabled" flex="15">
+		<i class="material-icons">close</i>
+	</div>
+</div>
+<div class="tab-pane">
+	<div class="">
+		<div class="pad10 pinPopup">
+			<md-input-container class="md-block">
+			<div layout="row">
+				<i class="material-icons" flex="2">room</i>
+				<div flex="95">
+					<input name="pin" ng-required="true" class="wp_healthModalPin"
+						typeahead-on-select="onSelectPinOrArea($item)" autocomplete="off"
+						typeahead-wait-ms="10" typeahead-no-results="noResults"
+						ng-model="personalDetails.pincode"
+						uib-typeahead="pin.display for pin in getPinCodeAreaList($viewValue)"
+						typeahead-show-hint="false" typeahead-min-length="3"
+						typeahead-wait-ms="10" style="background: transparent !important;" />
+				</div>
+				
+
+			</div>
+			<div class="dropdown-menu-NoResult dropdown-menu-NoResultPosition"
+					ng-if="noResults">No Results Found</div>
+			</md-input-container>
+		</div>
+	</div>
+</div>
+</modal-dialog> 
+
+
+<form name="quoteUserInfoForm">
+	<modal-dialog show='modalView' width='550px' height='auto'
+		class="ng-hide">
+	<div class="blueBackground one-edge-shadow" style="" layout="row">
+		<div class="" style="padding-top: 5px;" flex="90">
+			<h2 class="white popupHeading">
+				{{globalLabel.applicationLabels.common.userInfoModalLabel4}}</h2>
+		</div>
+	</div>
+	<div class="pad10 responsiveTellus newPopupInnerShadow" style="">
+		<div class="leadCaptureBox leadScrollMobile">
+			<div class="pad10 leftnoborder paddingWebNew leadCapturePadding">
+
+				<div class="section group">
+					<div layout="row">
+						<md-input-container flex="50" style="width: 100%;">
+						<div class="">
+							<input type="text" class="capitializeName"
+								placeholder="First name" name="firstName"
+								ng-model="quoteUserInfo.firstName" autocomplete="off"
+								maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/"
+								required capitalize-first />
+							<div ng-messages="quoteUserInfoForm.firstName.$error"
+								ng-if="quoteUserInfoForm.firstName.$touched">
+								<div style="color: red" ng-message="required">{{globalLabel.validationMessages.firstNameRequired}}</div>
+								<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+								<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+								<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+							</div>
+						</div>
+						</md-input-container>
+						<md-input-container flex="50" style="width: 100%;">
+						<div class="">
+							<input type="text" class="capitializeName"
+								placeholder="Last name" name="lastName"
+								ng-model="quoteUserInfo.lastName" autocomplete="off"
+								maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/"
+								style="box-shadow: 0px;" capitalize-first />
+
+							<div ng-messages="quoteUserInfoForm.lastName.$error"
+								ng-if="quoteUserInfoForm.lastName.$touched">
+								<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+								<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+								<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+							</div>
+						</div>
+						</md-input-container>
+
+					</div>
+				</div>
+				<md-input-container style="width: 100%;">
+				<div class="section group">
+					<div class="col span_3_of_3">
+						<input type="text"
+							ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-z.]{2,5}$/"
+							placeholder="Email-ID" autocomplete="off" maxlength="50"
+							name="emailId" ng-model="quoteUserInfo.emailId" required />
+						<div ng-messages="quoteUserInfoForm.emailId.$error"
+							ng-if="quoteUserInfoForm.emailId.$touched">
+							<div style="color: red" ng-message="required">{{globalLabel.validationMessages.emailIdRequired}}</div>
+							<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.emailIdInvalid}}</div>
+							<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.emailIdInvalid}}</div>
+						</div>
+					</div>
+				</div>
+				</md-input-container>
+				<br />
+				<md-input-container style="width: 100%;">
+				<div class="section group">
+					<div class="col span_3_of_3">
+						<input type="text" placeholder="Mobile Number" name="mobileNumber"
+							ng-model="quoteUserInfo.mobileNumber" autocomplete="off"
+							ng-pattern="/^[6789]\d{9}$/" maxlength="10" minlength="10"
+							required />
+						<div ng-messages="quoteUserInfoForm.mobileNumber.$error"
+							ng-if="quoteUserInfoForm.mobileNumber.$touched">
+							<div style="color: red" ng-message="required">{{globalLabel.validationMessages.mobileNumberRequired}}</div>
+							<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+							<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+							<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+						</div>
+					</div>
+				</div>
+				</md-input-container>
+				<br />
+				<md-button type="submit" ng-click="redirectToAPResult()"
+					id="aboutLeadBtn" ng-disabled="disabledRedirectToResult"
+					class="md-raised md-primary leadBtnPadding"
+					style="display: block; background-color: #2991ea; width:100% !important;">
+				<b>{{globalLabel.applicationLabels.common.viewBuyQuote}}</b> <span
+					ng-show="disabledRedirectToResult"><i
+					class="fa fa-spinner fa-spin "></i></span> </md-button>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	</modal-dialog>
+</form>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		setTimeout(function () {
+			$('[data-toggle="tooltip"]').tooltip();
+		}, 100)
+	});
+
+	var scrollv // register two global vars for two scrollable instances
+
+	jQuery(function (e) { // on DOM load
+
+		scrollv = new scrollable({
+			wrapperid: "scrollable-v",
+			moveby: 1
+		})
+	})
+</script>

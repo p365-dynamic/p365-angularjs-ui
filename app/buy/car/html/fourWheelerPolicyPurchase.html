@@ -1,0 +1,181 @@
+<div class="editback wp_noBGPad">
+	<div class="widthFull resultCommon wp_noBoxShadow wp_noBGPad">
+		<div class="InsideWrapper wp_purchasePopup wp_marginAutoSign wp_gradientBg">
+			<div class="purchaseStatement">
+				<!-- <div class="backButton">
+					<md-button class="md-fab md-mini md-primary backButtonColor"
+						aria-label="back" style="margin: 17px 10px 0px 17px !important;">
+					<md-icon style="" md-svg-src="img/arrow-left-bold.svg"></md-icon> </md-button>
+				</div> -->
+				<div class="pad10 purchasingHeader">
+					<h3>Insurance Sales Statement</h3>
+					<p>Thanks for Purchasing this policy through Policies365. The transaction details of your {{lineOfBusiness}} Policy purchased
+						from {{policyDocument.insuredDetails.insurerCompanyName}} through Policies365 are furnished below. Policy document
+						will be issued by the {{policyDocument.insuredDetails.insurerCompanyName}} with these details .</p>
+				</div>
+				<!--................Personal Details Start................  -->
+				<div class="outerPurchase" layout="row" layout-xs="column">
+					<div class="innerPurchaseLeft pad10" flex="50" flex-xs="100">
+						<div class="purchaseTitle pad10TopBtm">
+							<label class="font18 blueTxt">Personal Details</label>
+						</div>
+						<div class="purchaseBody pad10">
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Name :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.insuredDetails.insurerName}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Address :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.insuredDetails.insurerAddress}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Email :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.insuredDetails.insurerEmailId}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Mobile No. :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.insuredDetails.insurerMobileNumber}}</b></div>
+							</div>
+						</div>
+					</div>
+
+					<!--................Personal Details End................  -->
+
+					<!--................Vehicle Details Start................  -->
+					<div class="innerPurchaseLeft pad10" flex="50" flex-xs="100">
+						<div class="purchaseTitle pad10TopBtm">
+							<label class="font18 blueTxt">Vehicle Details</label>
+						</div>
+						<div class="purchaseBody pad10">
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Vehicle :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.vehicleDetails.manufacturer + " " + policyDocument.vehicleDetails.model + " " + policyDocument.vehicleDetails.variant}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Registration No :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.vehicleDetails.registrationNumber}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Registration Date :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.vehicleDetails.registrationDate}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Engine No. :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.vehicleDetails.engineNo}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Chassis No. :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.vehicleDetails.chassisNumber}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Financed by :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.policyDetails.financeInstitution}}</b></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--................Vehicle Details End................  -->
+
+				<!--................Policy Details Start................  -->
+				<div class="outerPurchase" layout="row" layout-xs="column">
+					<div class="innerPurchaseLeft pad10" flex="50" flex-xs="100">
+						<div class="purchaseTitle pad10TopBtm">
+							<label class="font18 blueTxt">Policy Details</label>
+						</div>
+						<div class="purchaseBody pad10">
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Policy No. :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.policyDetails.policyNumber}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Product Name :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.policyDetails.policyProductName}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Policy Issue Date :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.policyDetails.policyIssueDate}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Policy Start Date :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.policyDetails.periodOfInsuranceFrom}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Policy Expiry Date :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.policyDetails.periodOfInsuranceTo}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Total Premium :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.premiumDetails.totalPremium}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Payment Date :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.policyDetails.policyIssueDate}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Policy Type :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.policyDetails.policyProductType}}</b></div>
+							</div>
+						</div>
+					</div>
+
+					<!--................Policy Details End................  -->
+
+					<!--................Coverage Details Start................  -->
+					<div class="innerPurchaseLeft pad10" flex="50" flex-xs="100">
+						<div class="purchaseTitle pad10TopBtm">
+							<label class="font18 blueTxt">Coverage Details</label>
+						</div>
+
+						<div class="purchaseBody pad10">
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Insured Declared Value :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.vehicleDetails.idv}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">No Claim Bonus :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.premiumDetails.ncbPercentage}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad" ng-repeat="odRider in policyDocument.premiumDetails.ridersList.odRiders">
+								<div class="personalLabelLeft font13" flex="30">{{odRider.display}} :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{odRider.riderValue | number:2}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Voluntary Deductible :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.premiumDetails.voluntaryDeductibleSI}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Electrical Accessories :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.premiumDetails.eleAccessoriesSI}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Non-Electrical Accessories :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.premiumDetails.nonEleAccessoriesSI}}</b></div>
+							</div>
+							<div layout="row" class="topBot1Pad">
+								<div class="personalLabelLeft font13" flex="30">Value of LPG/CNG Kit :</div>
+								<div class="personalLabelRight font13" flex="50"><b>{{policyDocument.premiumDetails.cngLpgKitSI}}</b></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--................Coverage Details End................  -->
+
+				<div class="purchasingHeader">
+					<div class="pad10">
+						<p>This is a transaction confirmation statement and Policy will be issued by the Insurer. This cannot be used for filing
+							claims in your policy. If you have any questions, complaints or suggestion, please write to us at contact@policies365.com</p>
+					</div>
+				</div>
+				<!-- <div class="pad10">
+					<div class="purchaseFooter">
+						<span class="purchaseFooterFeatures">Policies365 Insurance
+							Web Aggregator Private Limited</span><br> Plot No. 1, 2nd Floor, Software Technology Park of India, MIDC-Phase
+						I, Hinjewadi, Pune - 411057
+						<br> IRDAI Web Aggregator License No. 17 Code No. IRDAI/WBA33/2016 Valid till: 24/08/2019
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+</div>

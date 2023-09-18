@@ -1,0 +1,25 @@
+<div class="fullShadow resultBg">
+					<md-toolbar ng-if="!$root.wordPressEnabled" class="md-theme-light resultHeader p365-light">
+					<h2 class="md-toolbar-tools" ng-click="showInsuranceDetails()" >
+						<span>Insurance Type</span>
+						<span flex></span>
+						<md-button
+							ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled && bikeInsuranceInputSection"
+							class="md-icon-button"
+							id="bikeInsuranceInputExpandIcon"> <i
+							class="material-icons">arrow_drop_down</i> </md-button>
+						<md-button
+							ng-if="$root.baseEnvEnabled &&!$root.wordPressEnabled && !bikeInsuranceInputSection"
+							class="md-icon-button"
+							id="bikeInsuranceInputCollapseIcon"> <i
+							class="material-icons">arrow_drop_up</i> </md-button>
+					</h2>
+					</md-toolbar>
+					<md-list ng-hide="$root.baseEnvEnabled && bikeInsuranceInputSection"
+						class="resultPad viewReportDiv"> <md-input-container
+						class="md-block"> <md-radio-group
+						ng-model="quoteParam.insuranceType" ng-change="onClickResultTab()">
+					<md-radio-button value="1" class="md-primary">Comprehensive
+					Insurance</md-radio-button> <md-radio-button value="2" ng-disabled="true">3rd
+					Party Liability Insurance</md-radio-button> </md-radio-group> </md-input-container> </md-list>
+				</div>

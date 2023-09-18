@@ -1,0 +1,38 @@
+<div class="fullShadow resultBg classForTooltip">
+	<md-toolbar ng-if="!$root.wordPressEnabled"
+		class="md-theme-light resultHeader p365-light">
+	<h2 class="md-toolbar-tools" ng-click="showPayoutDetails()" >
+		<span>Payout Options <i
+			class="fa fa-question-circle fa-sm whiteColor" data-toggle="tooltip"
+			data-html="true" title="{{tooltipContent.payoutOptions}}" tooltip></i></span>
+		<span flex></span>
+		<md-button
+			ng-if="$root.baseEnvEnabled &&!$root.wordPressEnabled && payoutInputSection"
+			class="md-icon-button"
+			id="riderInputExpandIcon"> <i class="material-icons">arrow_drop_down</i>
+		</md-button>
+		<md-button
+			ng-if="$root.baseEnvEnabled &&!$root.wordPressEnabled && !payoutInputSection"
+			class="md-icon-button"
+			id="riderInputCollaseIcon"> <i class="material-icons">arrow_drop_up</i>
+		</md-button>
+	</h2>
+	</md-toolbar>
+	<md-list ng-hide="$root.baseEnvEnabled && payoutInputSection" class="resultPad modifyIDVDiv">
+	<md-radio-group ng-model="payoutDetails.payoutOption">
+	<md-list-item class="md-1-line" ng-repeat="option in payoutOptions">
+	<md-radio-button ng-value="option" ng-checked="true" md-prevent-menu-close
+		ng-click="togglePayoutChange(option)">{{option.name}}
+	<i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip"
+		title="{{option.description}}" tooltip></i> </md-radio-button> <md-divider
+		ng-if="!$last"></md-divider> </md-list-item> </md-radio-group> </md-list>
+	<!-- <ng-container class="wp_left wp_width100 wp_resultSticky">
+	<p ng-if="$root.wordPressEnabled" class="dialogButton" layout="row">
+		<button flex="50" ng-click="resetPayoutDetails()"
+			class="bluebuybuttoncar wp_riderPopup" id="carBuyProductBtn"
+			style="background-color: #c4c4c4 !important;">Cancel</button>
+		<button flex="50" ng-click="singleClickLifeQuote()"
+			class="bluebuybuttoncar wp_riderPopup" id="carBuyProductBtn">Submit</button>
+	</p>
+	</ng-container> -->
+</div>

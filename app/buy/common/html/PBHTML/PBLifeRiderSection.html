@@ -1,0 +1,48 @@
+<div>
+	<div class="side10PerMar center resp_noMar resp_topBot5Pad padBot3Per marTop4Per">
+		<h2 class="chooseProfTitle resp_font18">
+			<span data-bind-html-compile="p365Labels.professionalJourney.addOnDetails" data-ng-bind-html="p365Labels.professionalJourney.addOnDetails">
+			</span>
+		</h2>
+	</div>
+	<div ng-form='PBLifeRiderForm'>
+		<!-- <div class="side10PerMar">
+			<p class="greyc9Txt font10 topBot5pxMar">Policies365 Recommended Add-Ons</p>
+		</div> -->
+		<div layout="row" layout-xs="column" layout-sm="column" class="addOnSec pad10 recomdAddonMotor">
+
+			<div flex="100" class="recomdAddonRgt">
+				<div layout="row" layout-xs="column" layout-sm="column" style="flex-wrap: wrap">
+					<div flex="50" flex-xs="100" flex-sm="100" style="padding-right: 10px;" ng-repeat="addOnCover in addOnCovers" ng-if="addOnCover.isEnable == 'Y'">
+						<div layout="row" layout-xs="column" layout-sm="row" layout-wrap flex>
+							<div class="classForTooltip" flex="100">
+								<div layout="row" layout-xs="column" layout-sm="row">
+									<md-checkbox class="blackAddon resize" checklist-model="personalDetails.selectedAddOnCovers" checklist-value="addOnCover"
+									 name='add' ng-change="updateRiders(addOnCover)">
+										<span class="font15 marTopBot10" layout="row"> {{addOnCover.riderName}}</span>
+									</md-checkbox>
+									<span class="pinkFont" style='margin-left: 10px;font-size: 10px;margin-top: 15px' ng-show="addOnCover.isRecommended == true">(P365 Recommended)</span>
+
+
+									<!--  <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" data-html="true"
+									 title="{{addOnCover.description}}" tooltip></i> -->
+
+								</div>
+								<p class="font11 marginCheckbox">{{addOnCover.description}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<ng-container class="section padRig15 width100 center">
+			<div class="">
+				<p class="dialogButton">
+					<md-button class='width20_per capitalTxt resp_normFont13 inpCancelBtn' ng-click="showEditInputSection()">{{p365Labels.common.back}}</md-button>
+					<md-button class='width20_per capitalTxt resp_normFont13 inpSaveBtn' ng-click="getProfessionalBestQuotes()">{{p365Labels.common.confirm}}</md-button>
+				</p>
+			</div>
+		</ng-container>
+	</div>
+</div>

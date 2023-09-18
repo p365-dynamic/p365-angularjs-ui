@@ -1,0 +1,127 @@
+<div class="fullShadow resultBg">
+	<div ng-if="$root.wordPressEnabled">
+		<div layout="row" class="">
+			<md-input-container flex="100" style="font-size:13px !important" class="md-block buyNowBtnPopup_bottom">
+				<md-radio-group ng-model="$root.selectedInsuranceType">
+					<md-radio-button ng-value="insuranceTypeList[0].value" style="padding: 5px;">{{insuranceTypeList[0].display}}</md-radio-button>
+					<div class="divForMobile">
+						<div class="hideforMobile">
+							<div ng-show="$root.selectedInsuranceType == 'comprehensive'" class="side8PerPad">
+								{{globalLabel.applicationLabels.car.ownDamage}}
+								<md-list class="resultPad">
+									<md-list-item class="md-1-line checkBox">
+										<p layout="row">
+											<span ng-repeat="data in ownDamageYears" flex="50">
+													<md-checkbox class="resize blackAddon" ng-true-value="true"	 ng-false-value="false" checklist-model="$root.ownDamageValidity" checklist-value="data.year" name="_1OD_3TP">&nbsp;{{data.value}}
+													 </md-checkbox>
+													</span>
+										</p>
+									</md-list-item>
+								</md-list>
+								<!-- {{globalLabel.applicationLabels.car.personalAccident}}
+								<md-list class="resultPad">
+									<md-list-item class="md-1-line checkBox">
+										<p layout="row">
+											<span ng-repeat="data in personalAccidentYears" flex="50">
+														<md-checkbox class="resize blackAddon" ng-true-value="true" ng-disabled="!PACoverDetails.isPACoverApplicable"
+																	 ng-false-value="false" checklist-model="$root.personalAccidentValidity"
+																  checklist-value="data.year" name="_1OD_3TP">&nbsp;{{data.value}}
+														 </md-checkbox></span>
+										</p>
+									</md-list-item>
+								</md-list> -->
+								{{globalLabel.applicationLabels.car.thirdPartyLiablity}}
+								<md-list class="resultPad">
+									<md-list-item class="md-1-line checkBox">
+										<p layout="row">
+											<span ng-repeat="data in thirdPartyDamageCoveredYears" flex="50">
+														<md-checkbox class="resize blackAddon" ng-true-value="true" ng-disabled="true"
+																	 ng-false-value="false" checklist-model="$root.thirdPartyDamageValidity"
+																  checklist-value="data.year" name="_1OD_3TP">&nbsp;{{data.value}}
+														 </md-checkbox>
+														</span>
+										</p>
+									</md-list-item>
+								</md-list>
+
+							</div>
+						</div>
+						<div class="showforMobile">
+							<div ng-show="$root.selectedInsuranceType == 'comprehensive'" class="side8PerPad">
+								<md-list class="resultPad">
+
+									{{globalLabel.applicationLabels.car.ownDamage}}
+									<md-list class="resultPad">
+										<md-list-item class="md-1-line checkBox">
+											<p layout="row">
+												<span ng-repeat="data in ownDamageYears" flex="50">
+													<md-checkbox class="resize blackAddon" ng-true-value="true"
+																 ng-false-value="false" checklist-model="$root.ownDamageValidity"
+															  checklist-value="data.year" name="_1OD_3TP">&nbsp;{{data.value}}
+													 </md-checkbox>
+													</span>
+											</p>
+										</md-list-item>
+									</md-list>
+									<!-- {{globalLabel.applicationLabels.car.personalAccident}}
+									<md-list class="resultPad">
+										<md-list-item class="md-1-line checkBox">
+											<p layout="row">
+												<span ng-repeat="data in personalAccidentYears" flex="50">
+														<md-checkbox class="resize blackAddon" ng-true-value="true" ng-disabled="!PACoverDetails.isPACoverApplicable"
+																	 ng-false-value="false" checklist-model="$root.personalAccidentValidity"
+																  checklist-value="data.year" name="_1OD_3TP">&nbsp;{{data.value}}
+														 </md-checkbox></span>
+											</p>
+										</md-list-item>
+									</md-list> -->
+									{{globalLabel.applicationLabels.car.thirdPartyLiablity}}
+									<md-list class="resultPad">
+										<md-list-item class="md-1-line checkBox">
+											<p layout="row">
+												<span ng-repeat="data in thirdPartyDamageCoveredYears" flex="50">
+														<md-checkbox class="resize blackAddon" ng-true-value="true" ng-disabled="true"
+																	 ng-false-value="false" checklist-model="$root.thirdPartyDamageValidity"
+																  checklist-value="data.year" name="_1OD_3TP">&nbsp;{{data.value}}
+														 </md-checkbox>
+														</span>
+											</p>
+										</md-list-item>
+									</md-list>
+							</div>
+						</div>
+					</div>
+					<md-radio-button ng-value="insuranceTypeList[1].value" style="padding: 5px;">{{insuranceTypeList[1].display}}</md-radio-button>
+				</md-radio-group>
+			</md-input-container>
+		</div>
+		<span ng-show="planTypeError" style="color:red;">Please Select at least one plan type</span>
+		<div class='buyOwnerBtn center'>
+			<md-input-container class="md-block" style="margin:0px !important;">
+				<md-button id="bikeSubmitInsuranceTypeForm" class='inpSaveBtn' style="float: unset" ng-click="submitInsuranceType($root.selectedInsuranceType)">Submit</md-button>
+			</md-input-container>
+		</div>
+	</div>
+	<div ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled">
+		<md-toolbar ng-if="!$root.wordPressEnabled" class="md-theme-light resultHeader p365-light">
+			<h2 class="md-toolbar-tools" ng-click="showInsuranceDetails()">
+				<span>Insurance Type</span>
+				<span flex></span>
+				<md-button ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled && bikeInsuranceInputSection" class="md-icon-button" id="bikeInsuranceInputExpandIcon">
+				<i class="material-icons">arrow_drop_down</i> </md-button>
+				<md-button ng-if="$root.baseEnvEnabled &&!$root.wordPressEnabled && !bikeInsuranceInputSection" class="md-icon-button" id="bikeInsuranceInputCollapseIcon">
+				<i class="material-icons">arrow_drop_up</i> </md-button>
+			</h2>
+		</md-toolbar>
+		<md-list ng-hide="$root.baseEnvEnabled && bikeInsuranceInputSection" class="resultPad viewReportDiv">
+			<md-input-container class="md-block">
+				<md-radio-group ng-model="$root.selectedInsuranceType" ng-change="filterResult($root.selectedInsuranceType)">
+					<md-radio-button ng-repeat="insuranceType in insuranceTypeList" ng-value="insuranceType.value" style="padding: 5px;">
+						{{insuranceType.display}}
+					</md-radio-button>
+				</md-radio-group>
+			</md-input-container>
+		</md-list>
+	</div>
+
+</div>

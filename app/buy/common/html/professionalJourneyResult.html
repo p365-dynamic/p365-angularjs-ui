@@ -1,0 +1,1218 @@
+<loading></loading>
+<div class="section carBg wp_padHeaderNavi wp_innerCar" ng-if="!$root.wordPressEnabled && $root.baseEnvEnabled">
+    <ng-container ng-include="$root.headerNavigation" ng-controller='headerNavigationController'></ng-container>
+    <div class="clearfix"></div>
+</div>
+<div>
+    <div class="wrap white_e7_Bg">
+        <md-whiteframe class="md-whiteframe-4dp pad10 pj_width25 white_f7_Bg resp_width100 iPad_width40">
+            <md-content class="center borRad7 margin7" id="editProfile">
+              <p class="font11 capitalizeText pinkFont cursor margin7" ng-click="editJourneyDetailsWithSlideKey('confirmation')">{{p365Labels.common.editProfile}}
+                    <span>
+                        <i class="material-icons bold11">edit</i>
+                    </span>
+                </p>
+                <div>
+                    <p class="topBot2Mar font13" style="color: #676767;">
+                        <span>
+                            <i class="material-icons vertAlignBot font16">person</i>
+                        </span>
+                        <b>{{commonInfo.firstName+' '+commonInfo.lastName}}</b>
+                    </p>
+                </div>
+            </md-content>
+            <div style="border-bottom: 1px solid #ddd;margin:4% 0%"></div>
+            <div class="center" id="riskProfile">
+                <p class="font16 topBot2Mar" style="color: #676767;">{{p365Labels.common.riskProfile}}
+                    <!-- <span>
+                        <i class="material-icons font12">error_outline</i>
+                    </span> -->
+                </p>
+                <p class="pinkFont font11 topBot2Mar cursor" ng-click="showRiskChartModal();$root.alreadyShared = false;">{{p365Labels.common.zoomAndShare}}
+                    <span>
+                        <i class="material-icons font9">crop_free</i>
+                    </span>
+                </p>
+                <p365-pie-chart items="dataItems" chart-title="chartTitle" ng-if="isChartReady == true" display-legends="false" display-width="250"
+                    display-height="175" pie-size="100"></p365-pie-chart>
+                <p class="side6Pad font12 textItalic">"We used 42+ data points to find how keys risks range from very low to very high for you"</p>
+                <md-menu>
+                    <p ng-click="openMenu($mdMenu, $event)" class="side5Mar font13 greyb7Txt rightAlignTxt cursor">
+                        <u>Disclaimer</u>
+                    </p>
+                    <md-menu-content>
+                        <p class="pad5_20 centerAlignTxt">The Risk and Insurance profile is based on inputs <br> provided by you, many other data points and
+                            AI.
+                            <br> Policies365 cannot be held responsible for<br> the accuracy of it.</p>
+                    </md-menu-content>
+                </md-menu>
+            </div>
+            <div style="border-bottom: 1px solid #ddd;margin:4% 0%"></div>
+            <div class="center" id="insuranceAssesment">
+                <p class="font16 topBot2Mar" style="color: #676767;">{{p365Labels.common.insuranceAssessmant}}
+                    <!-- <span>
+                        <i class="material-icons font12">error_outline</i>
+                    </span> -->
+                </p>
+                <p class="pinkFont font11 topBot2Mar cursor" ng-click="showInsuranceAssessChartModal();$root.alreadyShared = false;">{{p365Labels.common.zoomAndShare}}
+                    <span>
+                        <i class="material-icons font9">crop_free</i>
+                    </span>
+                </p>
+                <!-- <p365-chart items="items" chart-type="chartType" chart-title="chartTitle" xaxis="xaxis" y-axis-title="yAxisTitle" ng-if="isChartReady == true"
+                    display-width="300" display-height="300"></p365-chart> -->
+                <ng-container ng-include="insuranceAssessmentHTML"></ng-container>
+                <p class="side6Pad font12 textItalic">"We used your risk profile and other data to assess what insurances you need"</p>
+                <md-menu>
+                    <p ng-click="openMenu($mdMenu, $event)" class="side5Mar font13 greyb7Txt rightAlignTxt cursor">
+                        <u>Disclaimer</u>
+                    </p>
+                    <md-menu-content>
+                        <p class="pad5_20 centerAlignTxt">The Risk and Insurance profile is based on inputs <br> provided by you, many other data points and
+                            AI.
+                            <br> Policies365 cannot be held responsible for<br> the accuracy of it.</p>
+                    </md-menu-content>
+                </md-menu>
+            </div>
+        </md-whiteframe>
+        <div class="pj_width75 pad1020 resp_width100 resp_pad10 iPad_width60">
+            <p class="font8 padRig3Per rightAlignTxt noMargin greyb7Txt">{{p365Labels.common.exclusiveGSTPrices}}
+                <span>
+                    <i class="material-icons font9">error_outline</i>
+                </span>
+            </p>
+            <div style="display: flex;flex-wrap: wrap">
+                <!-- Health Card -->
+                <div flex="45" flex-xs="100" flex-sm="100" class="resFrameAlignment resp_nosideMar resp_topBot5MarPer" ng-if="!isGotHealthQuotes">
+                    <div class="whiteBg borRad10 center" style="min-height:250px;display: flex;" layout-align="center center">
+                        <img ng-src="{{$root.wp_path}}img/svg/eclipse.svg" alt="" ng-if="healthRequestStatus == 0">
+                        <div ng-if="healthRequestStatus == 2">
+                            <span>
+                                <i class="material-icons lobIcon">hotel</i>
+                            </span>
+                            <span ng-bind-html="$root.healthErrorMessage" bind-html-compile="$root.healthErrorMessage"></span>
+                            <span ng-click="editJourneyDetailsWithSlideKey('familyDetails')" class="pinkFont cursor">{{p365Labels.common.clickHere}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div flex="45" flex-xs="100" flex-sm="100" class="resFrameAlignment resp_nosideMar resp_topBot5MarPer" ng-if="healthProductToBeAddedInCart && isGotHealthQuotes  && validatePremium(healthProductToBeAddedInCart)">
+                    <div class="whiteBg borRad10" id="viewMore">
+                        <div class="innerResultFrame pad20 padBot10 resp_pad10 minHeight171">
+                            <div class="wrap">
+                                <div class="pj_width25 lobResult resp_width30Per">
+                                    <span>
+                                        <i class="material-icons lobIcon">hotel</i>
+                                    </span>
+                                    <span class="lobTitle">
+                                        {{p365Labels.common.Health}}
+                                    </span>
+                                </div>
+                                <div class="pj_width37 center resp_width30Per">
+                                    <img ng-src="{{$root.wp_path}}img/clogo/{{healthProductToBeAddedInCart.carrierId}}.png" class="resp_width80">
+                                </div>
+                                <div class="pj_width37 resp_width40">
+                                    <div id="bestValue" style="padding-top:10px;">
+                                        <div class="buyNowBtn posRel cursor" id="viewHealthQuotes" ng-click="editInputs('HEALTH')">
+                                            <p class="pinkFont topBot1Mar addToCartBtn font10">{{p365Labels.common.viewQuotes}} ( {{($root.healthQuoteResult.length
+                                                < 10)? '0'+$root.healthQuoteResult.length:$root.healthQuoteResult.length}} )</p>
+                                                    <!-- <p class="noMarBot top7Mar font8 greyb7Txt">{{p365Labels.common.recommendedBenefits}}</p> -->
+                                                    <p class="pinkFont topBot7Mar bold17">&#8377; {{healthProductToBeAddedInCart.basicPremium | number:0 | regexINR}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="row">
+                                <p class="noMarTopBot font11">
+                                    <a class="pinkFont textItalic" ng-click="viewBeneFeature(healthProductToBeAddedInCart)">{{healthProductToBeAddedInCart.planName}}</a>
+                                </p>
+                            </div>
+                            <div layout="row">
+                                <div flex="20" flex-xs="25" flex-sm="25" class="font11">
+                                    <p>{{p365Labels.common.insuranceFor}}</p>
+                                </div>
+                                <div flex="80" flex-xs="75" flex-sm="75" style="border-bottom: 1px solid #ddd;margin-bottom: 17px;margin-top:7px;"></div>
+                                <!-- <div flex="40" flex-xs="55" flex-sm="55" class="center" layout="row" ng-click="editInputs('HEALTH')">
+                                    <div flex="30">
+                                        <p class="font10 capitalizeText pinkFont resEditDetail cursor" style="border-radius: 10px 0px 0px 10px;border-right:1px solid #ddd;">{{p365Labels.common.edit}}
+                                            <span>
+                                                <i class="material-icons bold9">edit</i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div flex="70">
+                                        <p class="font10 capitalizeText pinkFont resEditDetail cursor" style="border-radius: 0px 10px 10px 0px;">{{p365Labels.common.viewMoreQuotes}}</p>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div>
+                                <p class="font12" style="margin: 0;">
+                                    <span ng-repeat="member in healthInfo.selectedFamilyMembers | orderBy:'id'">
+                                        <span class="grey4bTxt boldFont"></span>
+                                    <span class="grey41Txt boldFont ">
+                                            <span class="capitalizeText">{{member.gender}}</span>&nbsp;({{member.age+"Years"}}),
+                                    <!-- <span ng-if="healthInfo.selectedFamilyMembers.length > 1  && $index != healthInfo.selectedFamilyMembers.length-1">,
+                                    </span> -->
+                                    <!-- <span ng-if="healthInfo.selectedFamilyMembers.length > 1" class="grey63Txt">with </span> -->
+                                    <!-- <span class="grey63Txt">, </span> -->
+                                    <!-- <span class="grey41Txt boldFont" ng-if="$index > 0">
+                                            <span class="capitalizeText">{{member.gender}}</span>&nbsp;({{member.age+"Years"}}), -->
+                                    <!-- <span ng-if="$index == healthInfo.selectedFamilyMembers.length-1">&</span> -->
+                                    </span>
+                                    </span>
+                                    <span class="grey63Txt">&nbsp; {{p365Labels.common.residingAt}} </span>
+                                    <span class="grey41Txt boldFont">{{(addressDetails.streetDetails)?addressDetails.streetDetails:addressDetails.pincode}}</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="innerResultFrame">
+                            <div class="resIdvSec pad5_20 resp_pad5" layout="row">
+                                <div flex="65" flex-xs="60" flex-sm="60" layout="row">
+                                    <div flex="25" class="center cursor" ng-click="openHealthPopup(0)">
+                                        <!-- <p style="margin: 0;" class="bold13"></p> -->
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText">{{healthProductToBeAddedInCart.netPremiumMean|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.premium}}</a>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openHealthPopup(1)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText">{{healthProductToBeAddedInCart.insurerIndex | number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.service}}</a>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openHealthPopup(2)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText">{{healthProductToBeAddedInCart.benefitIndex | number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.Benefits}}</a>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openHealthPopup(3)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText">{{healthProductToBeAddedInCart.hospitalIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.cashless}}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div flex="35" flex-xs="40" flex-sm="40" class="center selfCenter">
+                                    <p class="grey4bTxt bold17 noMargin">&#8377; {{healthProductToBeAddedInCart.sumInsured | regexINR}}</p>
+                                    <p class="noMargin grey888Txt">{{p365Labels.common.sumInsured}}</p>
+                                </div>
+                            </div>
+                            <!-- <div id="star-five"></div> -->
+                        </div>
+                        <!-- <div class="innerResultFrame pad5_20 rightAlignTxt font10">
+                            <p class="noMargin greyb7Txt">{{p365Labels.common.totalQuotes}} ( {{($root.healthQuoteResult.length
+                                < 10)? '0'+$root.healthQuoteResult.length:$root.healthQuoteResult.length}} )</p>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- ./Health Card -->
+
+                <!-- Life Card -->
+                <div flex="45" flex-xs="100" flex-sm="100" class="resFrameAlignment resp_nosideMar resp_topBot5MarPer" ng-if="!isGotLifeQuotes">
+                    <div class="whiteBg borRad10 center" style="min-height:250px;display: flex;" layout-align="center center">
+                        <img ng-src="{{$root.wp_path}}img/svg/eclipse.svg" alt="" ng-if="lifeRequestStatus == 0">
+                        <div ng-if="lifeRequestStatus == 2">
+                            <!-- <span ng-bind-html="$root.lifeQuoteRequest[0].message" bind-html-compile="$root.lifeQuoteRequest[0].message"></span> -->
+                            <span>
+                                <i class="material-icons lobIcon">favorite</i>
+                            </span>
+                            <span ng-bind-html="$root.lifeErrorMessage" bind-html-compile="$root.lifeErrorMessage"></span>
+                            <span ng-click="editJourneyDetailsWithSlideKey('familyIncome')" class="pinkFont cursor">{{p365Labels.common.clickHere}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div flex="45" flex-xs="100" flex-sm="100" class="resFrameAlignment resp_nosideMar resp_topBot5MarPer" ng-if="lifeProductToBeAddedInCart  && isGotLifeQuotes  && validatePremium(lifeProductToBeAddedInCart)">
+                    <div class="whiteBg borRad10" id="viewMore">
+                        <div class="innerResultFrame pad20 padBot10 resp_pad10 minHeight171">
+                            <div class="wrap">
+                                <div class="pj_width25 lobResult resp_width30Per">
+                                    <span>
+                                        <i class="material-icons lobIcon">favorite</i>
+                                    </span>
+                                    <span class="lobTitle">
+                                        {{p365Labels.common.Life}}
+                                    </span>
+                                </div>
+                                <div class="pj_width37 center resp_width30Per">
+                                    <img ng-src="{{$root.wp_path}}img/clogo/{{lifeProductToBeAddedInCart.carrierId}}.png" class="resp_width80">
+                                </div>
+                                <div class="pj_width37 resp_width40">
+                                    <!-- <div class="buyNowBtn posRel cursor" ng-click='addProductToCart(lifeProductToBeAddedInCart,"LIFE")' id="bestValue"> -->
+                                    <div id="bestValue" style="padding-top:10px;">
+                                        <div class="buyNowBtn posRel cursor" ng-click="editInputs('LIFE')" id="viewLifeQuotes">
+                                            <p class="pinkFont topBot1Mar addToCartBtn font10">{{p365Labels.common.viewQuotes}} ( {{($root.lifeQuoteResult.length
+                                                < 10)? '0'+$root.lifeQuoteResult.length:$root.lifeQuoteResult.length}} )</p>
+                                                    <!-- <p class="noMarBot top7Mar font8 greyb7Txt">{{p365Labels.common.recommendedRiders}}</p> -->
+                                                    <!-- <p class="pinkFont topBot2Mar bold17" ng-if="!$root.isAnnualPremium">&#8377; {{lifeProductToBeAddedInCart.monthlyBasePremium|number}}
+                                            <span class="font8 normFont">
+                                                (Monthly)</span>
+                                        </p> -->
+                                                    <!-- <p class="pinkFont topBot2Mar bold17" ng-if="$root.isAnnualPremium">&#8377; {{lifeProductToBeAddedInCart.basicPremiumWithRider| number:0 | regexINR}}
+                                            <span class="font8 normFont">
+                                                (Annual)</span>
+                                        </p> -->
+                                                    <!-- added for temporary purpose remove once monthly premium enabled-->
+                                                    <p class="pinkFont topBot7Mar bold17">&#8377; {{lifeProductToBeAddedInCart.basicPremiumWithRider | number:0
+                                                        | regexINR}}
+                                                        <span class="font8 normFont">
+                                                            {{p365Labels.common.annual}}</span>
+                                                    </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="row">
+                                <p class="noMarTopBot font11">
+                                    <a class="pinkFont textItalic" ng-click="getProductFeatures(lifeProductToBeAddedInCart,true)"> {{lifeProductToBeAddedInCart.productName}}</a>
+                                </p>
+                            </div>
+                            <div layout="row">
+                                <div flex="20" flex-xs="25" flex-sm="25" class="font11">
+                                    <p>{{p365Labels.common.insuranceFor}}</p>
+                                </div>
+                                <div flex="80" flex-xs="75" flex-sm="75" style="border-bottom: 1px solid #ddd;margin-bottom: 17px;margin-top:7px;"></div>
+                                <!-- <div flex="40" flex-xs="55" flex-sm="55" class="center" layout="row" ng-click="editInputs('LIFE')">
+                                    <div flex="30">
+                                        <p class="font10 capitalizeText pinkFont resEditDetail cursor" style="border-radius: 10px 0px 0px 10px;border-right:1px solid #ddd;">{{p365Labels.common.edit}}
+                                            <span>
+                                                <i class="material-icons bold9">edit</i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div flex="70">
+                                        <p class="font10 capitalizeText pinkFont resEditDetail cursor" style="border-radius: 0px 10px 10px 0px;">{{p365Labels.common.viewMoreQuotes}}</p>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div>
+                                <p class="font12" style="margin: 0;">
+                                    <span class="grey41Txt boldFont">{{commonInfo.gender}}&nbsp;({{commonInfo.age}}&nbsp;Years),</span>
+                                    <span class="grey41Txt boldFont" ng-if="!commonInfo.smoking">{{p365Labels.common.nonSmoker}}</span>
+                                    <span class="grey41Txt boldFont" ng-if="commonInfo.smoking">{{p365Labels.common.smoker}}</span>
+                                    <span class="grey63Txt">{{p365Labels.common.annualIncome}}</span>
+                                    <span class="grey41Txt boldFont upperCaseText">{{commonInfo.incomeRange.label}},</span>
+                                    <span class="grey63Txt">{{p365Labels.common.coveredAge}}</span>
+                                    <span class="grey41Txt boldFont">{{$root.insuredUptoAge}} {{p365Labels.common.years}}</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="innerResultFrame">
+                            <div class="resIdvSec pad5_20 resp_pad5" layout="row">
+                                <div flex="65" flex-xs="60" flex-sm="60" layout="row">
+                                    <div flex="25" class="center cursor" ng-click="openLifePopup(0)">
+                                        <!-- <p style="margin: 0;" class="bold13"></p> -->
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText">{{lifeProductToBeAddedInCart.netPremiumMean|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.premium}}</a>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openLifePopup(1)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText">{{lifeProductToBeAddedInCart.insurerIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.service}}</a>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openLifePopup(2)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText">{{lifeProductToBeAddedInCart.benefitIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.Benefits}}</a>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openLifePopup(3)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText">{{lifeProductToBeAddedInCart.claimIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.claim}}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div flex="35" flex-xs="40" flex-sm="40" class="center selfCenter">
+                                    <p class="grey4bTxt bold17 noMargin">&#8377; {{lifeProductToBeAddedInCart.sumInsured | number:0 | regexINR}}</p>
+                                    <p class="noMargin grey888Txt">{{p365Labels.common.sumInsured}}</p>
+                                </div>
+                            </div>
+                            <!-- <div id="star-five"></div> -->
+                        </div>
+                        <!-- <div class="innerResultFrame pad5_20 rightAlignTxt font10">
+                            <p class="noMargin greyb7Txt">Total available quotes ({{($root.lifeQuoteResult.length
+                                < 10)? '0'+$root.lifeQuoteResult.length:$root.lifeQuoteResult.length}} )</p>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- ./Life Card -->
+
+                <!-- Car card-->
+                <div flex="45" flex-xs="100" flex-sm="100" class="resFrameAlignment resp_nosideMar resp_topBot5MarPer" ng-if="carProductToBeAddedInCart && !isGotCarQuotes">
+                    <div class="whiteBg borRad10 center" style="min-height:250px;display: flex;" layout-align="center center">
+                        <img ng-src="{{$root.wp_path}}img/svg/eclipse.svg" alt="" ng-if="carRequestStatus == 0">
+                        <div ng-if="carRequestStatus == 2">
+                            <!-- <span ng-bind-html="$root.carQuoteRequest[0].message" bind-html-compile="$root.carQuoteRequest[0].message"></span> -->
+                            <span>
+                                <i class="material-icons lobIcon grey4aTxt">directions_car</i>
+                            </span>
+                            <span ng-bind-html="$root.carErrorMessage" bind-html-compile="$root.carErrorMessage"></span>
+                            <span ng-click="editJourneyDetailsWithSlideKey('carRTO')" class="pinkFont cursor">{{p365Labels.common.clickHere}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div flex="45" flex-xs="100" flex-sm="100" class="resFrameAlignment resp_nosideMar resp_topBot5MarPer" ng-if="carProductToBeAddedInCart && isGotCarQuotes">
+                    <div class="whiteBg borRad10" id="viewMore">
+                        <div class="innerResultFrame pad20 padBot10 resp_pad10 minHeight171">
+                            <div class="wrap">
+                                <div class="pj_width25 lobResult resp_width30Per iPad_width20">
+                                    <span>
+                                        <i class="material-icons lobIcon grey4aTxt">directions_car</i>
+                                    </span>
+                                    <span class="lobTitle grey4aTxt">{{p365Labels.common.car}}</span>
+                                </div>
+                                <div class="pj_width37 resp_width45 center resp_width30Per">
+                                    <img ng-src="{{$root.wp_path}}img/clogo/{{carProductToBeAddedInCart.carrierId}}.png" class="resp_width80">
+                                    <p class="pinkFont noMarTopBot font11">
+                                        <u></u>
+                                        <!--{{carProductToBeAddedInCart.insuranceCompany}} -->
+                                    </p>
+                                </div>
+                                <div class="pj_width37 resp_width40 iPad_width40">
+                                    <!-- <div class="buyNowBtn posRel cursor" ng-click='addProductToCart(carProductToBeAddedInCart,"CAR")' id="bestValue"> -->
+                                    <div id="bestValue" style="padding-top:10px;">
+                                        <div class="buyNowBtn posRel cursor" id="viewCarQuotes" ng-click="editInputs('CAR')">
+                                            <p class="pinkFeTxt topBot1Mar addToCartBtn font10">{{p365Labels.common.viewQuotes}} ( {{($root.carQuoteResult.length
+                                                < 10)? '0'+$root.carQuoteResult.length:$root.carQuoteResult.length}} )</p>
+                                                    <!-- <p class="noMarBot top7Mar font8 greyb7Txt">{{p365Labels.common.seeRecommendedAddOn}}</p> -->
+                                                    <p class="pinkFeTxt bold17 topBot7Mar">&#8377; {{carProductToBeAddedInCart.netPremium | number:0 | regexINR}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="row">
+                                <p class="pinkFont noMarTopBot font11">
+                                    &nbsp;
+                                </p>
+                            </div>
+                            <div layout="row">
+                                <div flex="20" flex-xs="25" flex-sm="30" class="font11">
+                                    <p class="grey63Txt">{{p365Labels.common.insuranceFor}}</p>
+                                </div>
+                                <div flex="80" flex-xs="75" flex-sm="75" style="border-bottom: 1px solid #ddd; margin-bottom: 17px;margin-top:8px;"></div>
+                                <!-- <div flex="40" flex-xs="55" flex-sm="50" class="center" layout="row" ng-click="editInputs('CAR')">
+                                    <div flex="30">
+                                        <p class="font10 capitalizeText pinkFont resEditDetail cursor" style="border-radius: 10px 0px 0px 10px;border-right:1px solid #ddd;">{{p365Labels.common.edit}}
+                                            <span>
+                                                <i class="material-icons bold9">edit</i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div flex="70">
+                                        <p class="font10 capitalizeText pinkFont resEditDetail cursor" style="border-radius: 0px 10px 10px 0px;">{{p365Labels.common.viewMoreQuotes}}</p>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div>
+                                <p class="font12" style="margin: 0;">
+                                    <span class="grey41Txt boldFont">{{carDetails.displayVehicle}}</span>
+                                    <span class="grey63Txt" ng-if="$root.showCarRegAreaStatus && carVehicleInfo.registrationPlace">{{p365Labels.common.registeredAt}}</span>
+                                    <span class="grey41Txt boldFont upperCaseText" ng-if="$root.showCarRegAreaStatus && carVehicleInfo.registrationPlace">{{carVehicleInfo.registrationPlace}},</span>
+                                    <span class="grey63Txt" ng-if="!$root.showCarRegAreaStatus && carDetails.registrationNumber">{{p365Labels.common.registrationNo}}</span>
+                                    <span class="grey41Txt boldFont upperCaseText" ng-if="!$root.showCarRegAreaStatus && carDetails.registrationNumber">{{carDetails.registrationNumber}},</span>
+                                    <span class="grey63Txt">{{p365Labels.common.On}}</span>
+                                    <span class="grey41Txt boldFont">{{carInfo.registrationYear}}</span>
+                                    <!-- <span class="grey63Txt">and existing policy ncb of</span>-->
+                                    <!-- <span class="grey41Txt boldFont">{{(carProductToBeAddedInCart.ncbPercentage>0)?carProductToBeAddedInCart.ncbPercentage+'%':carProductToBeAddedInCart.ncbPercentage}} </span>-->
+                                    <!-- <span class="grey41Txt boldFont"> {{carDetails.ncb.display}}</span> -->
+                                    <span class="grey41Txt boldFont" ng-if="carProductToBeAddedInCart.paidDriverCover > 0">{{p365Labels.common.with}}</span>
+                                    <span class="grey41Txt boldFont" ng-if="!carProductToBeAddedInCart.paidDriverCover">{{p365Labels.common.without}}</span>
+                                    <span class="grey63Txt">{{p365Labels.common.mandatoryPACover}}</span>
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="innerResultFrame">
+                            <div class="resIdvSec pad5_20 resp_pad5" layout="row">
+                                <div flex="65" flex-xs="60" flex-sm="60" layout="row">
+                                    <div flex="25" class="center cursor" ng-click="openCarPopup(0)">
+                                        <div style="position:relative">
+                                            <!-- <i class="customStar"></i> -->
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{carProductToBeAddedInCart.netPremiumMean|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.premium}}</a>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openCarPopup(1)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{carProductToBeAddedInCart.insurerIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.service}}</a>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openCarPopup(2)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{carProductToBeAddedInCart.claimIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.claim}}</a>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openCarPopup(3)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText iPad_bold10">{{carProductToBeAddedInCart.garageIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.garage}}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div flex="35" flex-xs="40" flex-sm="40" class="center selfCenter">
+                                    <p class="grey4bTxt bold17 noMargin centerAlignTxt">&#8377; {{carProductToBeAddedInCart.insuredDeclareValue | number:0 | regexINR}}</p>
+                                    <p class="noMargin grey888Txt centerAlignTxt">{{p365Labels.common.idv}}</p>
+                                </div>
+                            </div>
+                            <!-- <div id="star-five"></div> -->
+                        </div>
+                        <!-- <div class="innerResultFrame pad5_20 rightAlignTxt font10">
+                            <p class="noMargin greyb7Txt">{{p365Labels.common.totalQuotes}} ( {{($root.carQuoteResult.length
+                                < 10)? '0'+$root.carQuoteResult.length:$root.carQuoteResult.length}} )</p>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- ./Car card -->
+
+                <!-- Bike Card -->
+                <div flex="45" flex-xs="100" flex-sm="100" class="resFrameAlignment resp_nosideMar resp_topBot5MarPer" ng-if="!isGotBikeQuotes">
+                    <div class="whiteBg borRad10 center" style="min-height:250px;display: flex;" layout-align="center center">
+                        <img ng-src="{{$root.wp_path}}img/svg/eclipse.svg" alt="" ng-if="bikeRequestStatus == 0">
+                        <div ng-if="bikeRequestStatus == 2">
+                            <!-- <span ng-bind-html="$root.bikeQuoteRequest[0].message" bind-html-compile="$root.bikeQuoteRequest[0].message"></span> -->
+                            <span>
+                                <i class="material-icons lobIcon">directions_bike</i>
+                            </span>
+                            <span ng-bind-html="$root.bikeErrorMessage" bind-html-compile="$root.bikeErrorMessage"></span>
+                            <span ng-click="editJourneyDetailsWithSlideKey('bikeRTO')" class="pinkFont cursor">{{p365Labels.common.clickHere}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div flex="45" flex-xs="100" flex-sm="100" class="resFrameAlignment resp_nosideMar resp_topBot5MarPer" ng-if="bikeProductToBeAddedInCart && isGotBikeQuotes">
+                    <div class="whiteBg borRad10" id="viewMore">
+                        <div class="innerResultFrame pad20 padBot10 resp_pad10 minHeight171">
+                            <div class="wrap">
+                                <div class="pj_width25 lobResult resp_width30Per">
+                                    <span>
+                                        <i class="material-icons lobIcon">directions_bike</i>
+                                    </span>
+                                    <span class="lobTitle">
+                                        {{p365Labels.common.bike}}
+                                    </span>
+                                </div>
+                                <div class="pj_width37 center resp_width30Per">
+                                    <img ng-src="{{$root.wp_path}}img/clogo/{{bikeProductToBeAddedInCart.carrierId}}.png" class="resp_width80">
+                                    <p class="pinkFont noMarTopBot font11">
+                                        <u></u>
+                                        <!--{{bikeProductToBeAddedInCart.insuranceCompany}} -->
+                                    </p>
+                                </div>
+                                <div class="pj_width37 resp_width40">
+                                    <!-- <div class="buyNowBtn posRel cursor" ng-click='addProductToCart(bikeProductToBeAddedInCart,"BIKE")' id="bestValue"> -->
+                                    <div id="bestValue" style="padding-top:10px;">
+                                        <div class="buyNowBtn posRel cursor" ng-click="editInputs('BIKE')" id="viewBikeQuotes">
+                                            <p class="pinkFont topBot1Mar addToCartBtn font10">{{p365Labels.common.viewQuotes}} ( {{($root.bikeQuoteResult.length
+                                                < 10)? '0'+$root.bikeQuoteResult.length:$root.bikeQuoteResult.length}} )</p>
+                                                    <!-- {{p365Labels.common.seeRecommendedAddOn}} -->
+                                                    <p class="pinkFont topBot7Mar bold17">&#8377; {{bikeProductToBeAddedInCart.netPremium | number:0 | regexINR}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="row">
+                                <p class="pinkFont noMarTopBot font11">
+                                    &nbsp;
+                                </p>
+                            </div>
+                            <div layout="row">
+                                <div flex="20" flex-xs="25" flex-sm="25" class="font11">
+                                    <p>{{p365Labels.common.insuranceFor}}</p>
+                                </div>
+                                <div flex="80" flex-xs="75" flex-sm="75" style="border-bottom: 1px solid #ddd;margin-bottom: 17px;margin-top:7px;"></div>
+                                <!-- <div flex="40" flex-xs="55" flex-sm="55" class="center" layout="row" ng-click="editInputs('BIKE')">
+                                    <div flex="30">
+                                        <p class="font10 capitalizeText pinkFont resEditDetail cursor" style="border-radius: 10px 0px 0px 10px;border-right:1px solid #ddd;">{{p365Labels.common.edit}}
+                                            <span>
+                                                <i class="material-icons bold9">edit</i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div flex="70">
+                                        <p class="font10 capitalizeText pinkFont resEditDetail cursor" style="border-radius: 0px 10px 10px 0px;">{{p365Labels.common.viewMoreQuotes}}</p>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div>
+                                <p class="font12" style="margin: 0;">
+                                    <span class="grey41Txt boldFont">{{bikeDetails.displayVehicle}}</span>
+                                    <span class="grey63Txt" ng-if="$root.showBikeRegAreaStatus && bikeVehicleInfo.registrationPlace">{{p365Labels.common.registeredAt}}</span>
+                                    <span class="grey41Txt boldFont upperCaseText" ng-if="$root.showBikeRegAreaStatus && bikeVehicleInfo.registrationPlace">{{bikeVehicleInfo.registrationPlace}},</span>
+                                    <span class="grey63Txt" ng-if="!$root.showBikeRegAreaStatus && bikeDetails.registrationNumber">{{p365Labels.common.registrationNo}}</span>
+                                    <span class="grey41Txt boldFont upperCaseText" ng-if="!$root.showBikeRegAreaStatus && bikeDetails.registrationNumber">{{bikeDetails.registrationNumber}},</span>
+                                    <span class="grey63Txt">{{p365Labels.common.On}}</span>
+                                    <span class="grey41Txt boldFont">{{bikeInfo.registrationYear}}</span>
+                                    <!-- <span class="grey63Txt">and existing policy ncb of</span> -->
+                                    <!-- <span class="grey41Txt boldFont">{{(bikeProductToBeAddedInCart.ncbPercentage>0)?bikeProductToBeAddedInCart.ncbPercentage+'%':bikeProductToBeAddedInCart.ncbPercentage}}</span> -->
+                                    <!-- <span class="grey41Txt boldFont"> {{bikeDetails.ncb.display}}</span> -->
+                                    <span class="grey41Txt boldFont" ng-if="bikeProductToBeAddedInCart.paidDriverCover > 0">{{p365Labels.common.with}}</span>
+                                    <span class="grey41Txt boldFont" ng-if="!bikeProductToBeAddedInCart.paidDriverCover">{{p365Labels.common.without}}</span>
+                                    <span class="grey63Txt">{{p365Labels.common.mandatoryPACover}} </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="innerResultFrame">
+                            <div class="resIdvSec pad5_20 resp_pad5" layout="row">
+                                <div flex="65" flex-xs="60" flex-sm="60" layout="row">
+                                    <div flex="25" class="center cursor" ng-click="openBikePopup(0)">
+                                        <!-- <p style="margin: 0;" class="bold13"></p> -->
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText">{{bikeProductToBeAddedInCart.netPremiumMean|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.premium}}</a>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openBikePopup(1)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText">{{bikeProductToBeAddedInCart.insurerIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.service}}</a>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center cursor" ng-click="openBikePopup(2)">
+                                        <div style="position:relative">
+                                            <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                            <span class="bold12 customStarText">{{bikeProductToBeAddedInCart.claimIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>{{p365Labels.common.claim}}</a>
+                                        </p>
+                                    </div>
+                                    <div flex="25" class="center">
+                                        <!-- <div style="position:relative">
+                                            <i class="customStar"></i>
+                                            <span class="bold12 customStarText">{{bikeProductToBeAddedInCart.garageIndex|number:1}}</span>
+                                        </div>
+                                        <p class="noMargin font9 greyc9Txt">
+                                            <a>Garage</a>
+                                        </p> -->
+                                    </div>
+                                </div>
+                                <div flex="35" flex-xs="40" flex-sm="40" class="center selfCenter">
+                                    <p class="grey4bTxt bold17 noMargin">&#8377; {{bikeProductToBeAddedInCart.insuredDeclareValue|number}}</p>
+                                    <p class="noMargin grey888Txt">{{p365Labels.common.idv}}</p>
+                                </div>
+                            </div>
+                            <!-- <div id="star-five"></div> -->
+                        </div>
+                        <!-- <div class="innerResultFrame pad5_20 rightAlignTxt font10">
+                            <p class="noMargin greyb7Txt">{{p365Labels.common.totalQuotes}}({{($root.bikeQuoteResult.length
+                                < 10)? '0'+$root.bikeQuoteResult.length:$root.bikeQuoteResult.length}} )</p>
+                        </div> -->
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<modal-dialog show='riskChartModal' width='900px' height='85vh' class="ng-hide RTOSearchDiv" style="overflow:auto;">
+    <div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+        <div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+            <h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">
+                <span data-ng-bind-html="commonInfo.salutation" data-bind-html-compile="commonInfo.salutation"></span>.&nbsp;
+                <span data-ng-bind-html="commonInfo.firstName" data-bind-html-compile="commonInfo.firstName"></span>
+                <span ng-if="!$root.alreadyShared">{{p365Labels.common.confirmInfo}}</span>
+                <span ng-if="$root.alreadyShared">{{p365Labels.common.shareProfileConfirmInfo}}</span>
+
+            </h2>
+        </div>
+        <div class='ng-modal-close wp_modalClose closePopup' ng-click='hideRiskChartModal()'>
+            <i class="material-icons greyb7Txt">highlight_off</i>
+        </div>
+    </div>
+
+    <div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop resp_riskpopupHgt scrollHgt450">
+        <div layout="row" layout-xs="column">
+            <div flex="65" flex-xs="100" class="divForMobile" style="position: relative;" ng-if="$root.alreadyShared != true">
+                <div ng-if="!$root.authenticated" class="blurDiv"></div>
+                <p365-pie-chart items="dataItems" chart-title="chartTitle" display-legends="false" display-lables="true" display-width="auto"
+                    display-height="450" ng-if="isChartReady == true" class="hideForMobile" pie-size="60"></p365-pie-chart>
+                <p365-pie-chart items="dataItems" chart-title="chartTitle" display-legends="true" display-lables="false" display-width="300"
+                    display-height="300" ng-if="isChartReady == true" class="showForMobile"></p365-pie-chart>
+            </div>
+            <div flex="100" flex-xs="100" class="divForMobile" style="position: relative;" ng-if="$root.alreadyShared == true">
+                <div ng-if="!$root.authenticated" class="blurDiv"></div>
+                <p365-pie-chart items="dataItems" chart-title="chartTitle" display-legends="false" display-lables="true" display-width="auto"
+                    display-height="450" ng-if="isChartReady == true" class="hideForMobile" pie-size="60"></p365-pie-chart>
+                <p365-pie-chart items="dataItems" chart-title="chartTitle" display-legends="true" display-lables="false" display-width="300"
+                    display-height="300" ng-if="isChartReady == true" class="showForMobile"></p365-pie-chart>
+            </div>
+
+            <div flex="35" flex-xs="100" class="selfCenter" ng-if="$root.alreadyShared != true">
+                <div layout='row' class='side4Mar resp_noMar iPad_side10PerMar'>
+                    <div class='side10Mar centerAlignTxt' flex='100'>
+                        {{p365Labels.common.confirmOTPMessage}}
+                        <div class='form-group' ng-if="$root.authenticated">
+                            <form name="shareProfileForm">
+                                <md-input-container class='md-block wp_whiteColor noMargin noPadtop mar14Bot' md-no-float>
+                                    <input type="text" class='infoPage posRel' placeholder="Email ID" ng-model='quoteUserInfo.emailId' name="userEmail" autocomplete="off"
+                                        maxlength="35" minlength="1" ng-pattern='/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z.]{2,5}$/'
+                                        required>
+                                </md-input-container>
+                                <!-- <md-input-container class='md-block wp_whiteColor noMargin noPadtop mar14Bot' md-no-float>
+                                    <input type="text" class='infoPage posRel' type="text" placeholder="Mobile Number" name="mobileNumber" ng-model="quoteUserInfo.mobileNumber"
+                                        autocomplete="off" required ng-pattern='/^[6789]\d{9}$/' numbers-only maxlength="10"
+                                        minlength="10" required>
+                                </md-input-container> -->
+                                <div style="color: red; text-align: center; margin-bottom: 1%;">{{shareProfileError}}</div>
+                                <div class="incomePg topBot3_1Mar resp_topBot5Pad">
+                                    <md-button class="width50 upperCaseText resp_normFont13" type="button" ng-disabled="shareProfileForm.$invalid" ng-click="shareProfile('riskProfile','SHARERISKPROFILE')">
+                                        <span>{{p365Labels.common.Share}}</span>
+                                    </md-button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class='form-group' ng-if="!$root.authenticated">
+                            <form name="authenticateForm">
+                                <div class="modalHeader wp_noBluebackground wp_noBoxShadow">
+                                    <div class="blueBackground one-edge-shadow wp_noBoxShadow" style="" layout="row">
+                                        <div flex="85">
+                                            <h2 class="white popupHeading wp_popupHeading wp_OTPTitleFont side6Pad">
+                                                <span>{{p365Labels.login.OTPTemplateHeader}}</span>
+                                            </h2>
+                                        </div>
+                                        <div class='ng-modal-close ' ng-click='hideModal() ' style="color: #fff;" flex="15">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+                                    <div class="fullShadow resultBg familyPopup wp_signinFamilyInnerPopup" style="margin-bottom: 0px !important;">
+                                        <div class="popupTableHealth popupPadding" layout="row" style="padding: 3% 0% 0% 0% !important;">
+                                            <div flex="100" style="text-align: center; padding: 1% 0%;">
+                                                <b>{{p365Labels.login.enterOTPCaption}}</b>
+
+                                            </div>
+                                        </div>
+                                        <md-input-container class='md-block wp_whiteColor noMargin noPadtop mar14Bot' md-no-float>
+                                            <input type="text" class='infoPage posRel' placeholder="Mobile Number" name="mobileNumber" ng-model="quoteUserInfo.mobileNumber"
+                                                autocomplete="off" required ng-pattern='/^[6789]\d{9}$/' numbers-only maxlength="10"
+                                                minlength="10" required>
+                                        </md-input-container>
+                                        <md-input-container class='md-block wp_whiteColor noMargin noPadtop mar14Bot' md-no-float ng-if="modalOTPError == false">
+                                            <input type="text" class='infoPage posRel' placeholder="Enter OTP" name="mobileOTP" ng-model="authenticate.enteredOTP" autocomplete="off"
+                                                required ng-pattern="/\d{6}/" numbers-only maxlength="6" minlength="6" />
+                                        </md-input-container>
+                                        <div ng-if="modalOTPError == true">{{createOTPError}}</div>
+                                        <div style="color: red; text-align: center; margin-bottom: 1%;">{{invalidOTPError}}</div>
+                                        <div style="color: green; text-align: center; margin-bottom: 1%;">{{p365Labels.validationMessages.otpValidPeriod}}</div>
+                                    </div>
+
+                                </div>
+                                <div class="incomePg topBot3_1Mar resp_topBot5Pad" ng-hide="modalOTPError == false">
+                                    <md-button type="button" class="width50 upperCaseText resp_normFont13" id="profRiskSendOTP" ng-disabled="authenticateForm.$invalid"
+                                        ng-click="sendOTP()">
+                                        <span>{{p365Labels.common.sendOTP}}</span>
+                                    </md-button>
+                                </div>
+                                <div class="incomePg topBot3_1Mar resp_topBot5Pad">
+                                    <a ng-click="resendOTP()" id="profRiskResendOTP">{{p365Labels.common.resendOTP}}</a>
+                                </div>
+                                <div class="incomePg topBot3_1Mar resp_topBot5Pad" ng-show="modalOTPError == false">
+                                    <md-button type="button" class="width50 upperCaseText resp_normFont13" id="profRiskSubmitOTP" ng-disabled="authenticateForm.$invalid"
+                                        ng-click="submitOTP()">
+                                        <span>{{p365Labels.common.submitOTP}}</span>
+                                    </md-button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <ng-container ng-show="$root.authenticated" ng-include="riskDescSection"></ng-container>
+    </div>
+
+
+    </div>
+    <div class="clear"></div>
+
+
+</modal-dialog>
+
+<modal-dialog show='insuranceAssessChartModal' width='900px' height='auto' class="ng-hide RTOSearchDiv" style="overflow:auto;">
+    <div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+        <div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+            <h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">
+                <span data-ng-bind-html="commonInfo.salutation" data-bind-html-compile="commonInfo.salutation"></span>.&nbsp;
+                <span data-ng-bind-html="commonInfo.firstName" data-bind-html-compile="commonInfo.firstName"></span>
+                <span ng-if="!$root.alreadyShared">{{p365Labels.common.insuranceProfileConfirmInfo}}</span>
+                <span ng-if="$root.alreadyShared">{{p365Labels.common.shareInsuranceProfileConfirmInfo}}</span>
+
+            </h2>
+        </div>
+        <div class='ng-modal-close wp_modalClose closePopup' ng-click='hideInsuranceAssessChartModal()'>
+            <i class="material-icons greyb7Txt">highlight_off</i>
+        </div>
+    </div>
+
+    <div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop resp_riskpopupHgt scrollHgt450">
+        <div layout="row" layout-xs="column">
+            <div flex="70" flex-xs="100" class="divForMobile" style="position: relative;" ng-if="$root.alreadyShared != true">
+                <div ng-if="!$root.authenticated" class="blurDiv"></div>
+                <!-- <p365-chart items="items" chart-type="chartType" chart-title="chartTitle" xaxis="xaxis" y-axis-title="yAxisTitle" ng-if="isChartReady == true"
+                    display-width="auto" display-height="400" inner-size="50%" class="hideForMobile"></p365-chart>
+                <p365-chart items="items" chart-type="chartType" chart-title="chartTitle" xaxis="xaxis" y-axis-title="yAxisTitle" ng-if="isChartReady == true"
+                    display-width="250" display-height="250" inner-size="50%" class="showForMobile"></p365-chart> -->
+                <ng-container ng-include="insuranceAssessmentHTML"></ng-container>
+            </div>
+            <div flex="100" flex-xs="100" class="divForMobile" style="position: relative;" ng-if="$root.alreadyShared == true">
+                <div ng-if="!$root.authenticated" class="blurDiv"></div>
+                <!-- <p365-chart items="items" chart-type="chartType" chart-title="chartTitle" xaxis="xaxis" y-axis-title="yAxisTitle" ng-if="isChartReady == true"
+                    display-width="auto" display-height="400" inner-size="50%" class="hideForMobile"></p365-chart>
+                <p365-chart items="items" chart-type="chartType" chart-title="chartTitle" xaxis="xaxis" y-axis-title="yAxisTitle" ng-if="isChartReady == true"
+                    display-width="250" display-height="250" inner-size="50%" class="showForMobile"></p365-chart> -->
+                <ng-container ng-include="insuranceAssessmentHTML"></ng-container>
+            </div>
+            <div flex="30" flex-xs="100" class="selfCenter" ng-if="$root.alreadyShared != true">
+                <div layout='row' class='side4Mar resp_noMar iPad_side10PerMar'>
+                    <div class='side10Mar centerAlignTxt' flex='100'>
+                        {{p365Labels.common.confirmOTPMessage}}
+                        <div class='form-group' ng-if="$root.authenticated">
+
+                            <form name="shareProfileForm">
+                                <md-input-container class='md-block wp_whiteColor noMargin noPadtop mar14Bot' md-no-float>
+                                    <input type="text" class='infoPage posRel' placeholder="Email ID" ng-model='quoteUserInfo.emailId' name="userEmail" autocomplete="off"
+                                        maxlength="35" minlength="1" ng-pattern='/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z.]{2,5}$/'
+                                        required>
+                                </md-input-container>
+                                <!-- <md-input-container class='md-block wp_whiteColor noMargin noPadtop mar14Bot' md-no-float>
+                                    <input type="text" class='infoPage posRel' type="text" placeholder="Mobile Number" name="mobileNumber" ng-model="quoteUserInfo.mobileNumber"
+                                        autocomplete="off" required ng-pattern='/^[6789]\d{9}$/' numbers-only maxlength="10"
+                                        minlength="10" required>
+                                </md-input-container> -->
+                                <div style="color: red; text-align: center; margin-bottom: 1%;">{{shareProfileError}}</div>
+                                <div class="incomePg topBot3_1Mar resp_topBot5Pad">
+                                    <md-button class="width50 upperCaseText resp_normFont13" type="button" ng-disabled="shareProfileForm.$invalid" ng-click="shareProfile('insuranceAssessment','SHAREINSURANCEPROFILE')">
+                                        <span>{{p365Labels.common.Share}}</span>
+                                    </md-button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class='form-group' ng-if="!$root.authenticated">
+                            <form name="authenticateForm">
+                                <div class="modalHeader wp_noBluebackground wp_noBoxShadow">
+                                    <div class="blueBackground one-edge-shadow wp_noBoxShadow" style="" layout="row">
+                                        <div flex="85">
+                                            <h2 class="white popupHeading wp_popupHeading wp_OTPTitleFont side6Pad">
+                                                <span>{{p365Labels.login.OTPTemplateHeader}}</span>
+                                            </h2>
+                                        </div>
+                                        <div class='ng-modal-close ' ng-click='hideModal() ' style="color: #fff;" flex="15">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+                                    <div class="fullShadow resultBg familyPopup wp_signinFamilyInnerPopup" style="margin-bottom: 0px !important;">
+                                        <div class="popupTableHealth popupPadding" layout="row" style="padding: 3% 0% 0% 0% !important;">
+                                            <div flex="100" style="text-align: center; padding: 1% 0%;">
+                                                <b>{{p365Labels.login.enterOTPCaption}}</b>
+
+                                            </div>
+                                        </div>
+                                        <md-input-container class='md-block wp_whiteColor noMargin noPadtop mar14Bot' md-no-float>
+                                            <input type="text" class='infoPage posRel' placeholder="Mobile Number" name="mobileNumber" ng-model="quoteUserInfo.mobileNumber"
+                                                autocomplete="off" required ng-pattern='/^[6789]\d{9}$/' numbers-only maxlength="10"
+                                                minlength="10" required>
+                                        </md-input-container>
+                                        <md-input-container class='md-block wp_whiteColor noMargin noPadtop mar14Bot' md-no-float ng-if="modalOTPError == false">
+                                            <input type="text" class='infoPage posRel' placeholder="Enter OTP" name="mobileOTP" ng-model="authenticate.enteredOTP" autocomplete="off"
+                                                required ng-pattern="/\d{6}/" numbers-only maxlength="6" minlength="6" />
+                                        </md-input-container>
+                                        <div ng-if="modalOTPError == true">{{createOTPError}}</div>
+                                        <div style="color: red; text-align: center; margin-bottom: 1%;">{{invalidOTPError}}</div>
+                                        <div style="color: green; text-align: center; margin-bottom: 1%;">{{p365Labels.validationMessages.otpValidPeriod}}</div>
+                                    </div>
+
+                                </div>
+                                <div class="incomePg topBot3_1Mar resp_topBot5Pad" ng-hide="modalOTPError == false">
+                                    <md-button type="button" class="width50 upperCaseText resp_normFont13" id="profSendOTP" ng-disabled="authenticateForm.$invalid"
+                                        ng-click="sendOTP()">
+                                        <span>{{p365Labels.common.sendOTP}}</span>
+                                    </md-button>
+                                </div>
+                                <div class="incomePg topBot3_1Mar resp_topBot5Pad">
+                                    <a ng-click="resendOTP()" id="profResendOTP">{{p365Labels.common.resendOTP}}</a>
+                                </div>
+                                <div class="incomePg topBot3_1Mar resp_topBot5Pad" ng-show="modalOTPError == false">
+                                    <md-button type="button" class="width50 upperCaseText resp_normFont13" id="profSubmitOTP" ng-disabled="authenticateForm.$invalid"
+                                        ng-click="submitOTP()">
+                                        <span>{{p365Labels.common.submitOTP}}</span>
+                                    </md-button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="clear"></div>
+</modal-dialog>
+
+<modal-dialog show="emailSuccessPopup" width='400px' height='auto' cls="ng-hide RTOSearchDiv">
+    <div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+        <div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+            <h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.shareRiskProfile}}</h2>
+        </div>
+        <div class='ng-modal-close closePopup' ng-click='hideEmailModal()'>
+            <i class="material-icons greyb7Txt">highlight_off</i>
+        </div>
+    </div>
+    <div class="pad10 borderf2Top">
+        <div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+            <div class="">
+                <div class="PACoverTxt grey63Txt">
+                    <p class="font12 grey63Txt boldFont" style="text-align: center;font-size:  initial !important;">
+                        <span class="pinkFont fa fa-check"></span> {{quoteUserInfo.emailId}}
+                    </p>
+                </div>
+            </div>
+            <div class="center submitBtnAlign ">
+                <md-button class="md-raised md-primary popupSubmitBtn capitalizeText bold12" ng-click="hideEmailModal()" id="emailsuccess">{{p365Labels.common.OK}}</md-button>
+            </div>
+        </div>
+    </div>
+</modal-dialog>
+
+
+
+<modal-dialog show='insuranceAssessChartModal' width='900px' height='auto' class="ng-hide RTOSearchDiv" style="overflow:auto;">
+    <div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+        <div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+            <h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">
+                <span data-ng-bind-html="commonInfo.salutation" data-bind-html-compile="commonInfo.salutation"></span>.&nbsp;
+                <span data-ng-bind-html="commonInfo.firstName" data-bind-html-compile="commonInfo.firstName"></span>
+                <span ng-if="!$root.alreadyShared">{{p365Labels.common.insuranceProfileConfirmInfo}}</span>
+                <span ng-if="$root.alreadyShared">{{p365Labels.common.shareInsuranceProfileConfirmInfo}}</span>
+
+            </h2>
+        </div>
+        <div class='ng-modal-close wp_modalClose closePopup' ng-click='hideInsuranceAssessChartModal()'>
+            <i class="material-icons greyb7Txt">highlight_off</i>
+        </div>
+    </div>
+
+    <div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop resp_riskpopupHgt scrollHgt450">
+        <div layout="row" layout-xs="column">
+            <div flex="70" flex-xs="100" class="divForMobile" style="position: relative;" ng-if="$root.alreadyShared != true">
+                <div ng-if="!$root.authenticated" class="blurDiv"></div>
+                <!-- <p365-chart items="items" chart-type="chartType" chart-title="chartTitle" xaxis="xaxis" y-axis-title="yAxisTitle" ng-if="isChartReady == true"
+                    display-width="auto" display-height="400" inner-size="50%" class="hideForMobile"></p365-chart>
+                <p365-chart items="items" chart-type="chartType" chart-title="chartTitle" xaxis="xaxis" y-axis-title="yAxisTitle" ng-if="isChartReady == true"
+                    display-width="250" display-height="250" inner-size="50%" class="showForMobile"></p365-chart> -->
+                <ng-container ng-include="insuranceAssessmentHTML"></ng-container>
+            </div>
+            <div flex="100" flex-xs="100" class="divForMobile" style="position: relative;" ng-if="$root.alreadyShared == true">
+                <div ng-if="!$root.authenticated" class="blurDiv"></div>
+                <!-- <p365-chart items="items" chart-type="chartType" chart-title="chartTitle" xaxis="xaxis" y-axis-title="yAxisTitle" ng-if="isChartReady == true"
+                    display-width="auto" display-height="400" inner-size="50%" class="hideForMobile"></p365-chart>
+                <p365-chart items="items" chart-type="chartType" chart-title="chartTitle" xaxis="xaxis" y-axis-title="yAxisTitle" ng-if="isChartReady == true"
+                    display-width="250" display-height="250" inner-size="50%" class="showForMobile"></p365-chart> -->
+                <ng-container ng-include="insuranceAssessmentHTML"></ng-container>
+            </div>
+            <div flex="30" flex-xs="100" class="selfCenter" ng-if="$root.alreadyShared != true">
+                <div layout='row' class='side4Mar resp_noMar iPad_side10PerMar'>
+                    <div class='side10Mar centerAlignTxt' flex='100'>
+                        {{p365Labels.common.confirmOTPMessage}}
+                        <div class='form-group' ng-if="$root.authenticated">
+
+                            <form name="shareProfileForm">
+                                <md-input-container class='md-block wp_whiteColor noMargin noPadtop mar14Bot' md-no-float>
+                                    <input type="text" class='infoPage posRel' placeholder="Email ID" ng-model='quoteUserInfo.emailId' name="userEmail" autocomplete="off"
+                                        maxlength="35" minlength="1" ng-pattern='/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z.]{2,5}$/'
+                                        required>
+                                </md-input-container>
+                                <md-input-container class='md-block wp_whiteColor noMargin noPadtop mar14Bot' md-no-float>
+                                    <!-- <input type="text" class='infoPage posRel' type="text" placeholder="Mobile Number" name="mobileNumber" ng-model="quoteUserInfo.mobileNumber"
+                                        autocomplete="off" required ng-pattern='/^[6789]\d{9}$/' numbers-only maxlength="10"
+                                        minlength="10" required> -->
+                                </md-input-container>
+                                <div style="color: red; text-align: center; margin-bottom: 1%;">{{shareProfileError}}</div>
+                                <div class="incomePg topBot3_1Mar resp_topBot5Pad">
+                                    <md-button class="width50 upperCaseText resp_normFont13" type="button" ng-disabled="shareProfileForm.$invalid" ng-click="shareProfile('insuranceAssessment','SHAREINSURANCEPROFILE')">
+                                        <span>{{p365Labels.common.Share}}</span>
+                                    </md-button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class='form-group' ng-if="!$root.authenticated">
+                            <form name="authenticateForm">
+                                <div class="modalHeader wp_noBluebackground wp_noBoxShadow">
+                                    <div class="blueBackground one-edge-shadow wp_noBoxShadow" style="" layout="row">
+                                        <div flex="85">
+                                            <h2 class="white popupHeading wp_popupHeading wp_OTPTitleFont side6Pad">
+                                                <span>{{p365Labels.login.OTPTemplateHeader}}</span>
+                                            </h2>
+                                        </div>
+                                        <div class='ng-modal-close ' ng-click='hideModal() ' style="color: #fff;" flex="15">
+                                            <i class="material-icons">close</i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+                                    <div class="fullShadow resultBg familyPopup wp_signinFamilyInnerPopup" style="margin-bottom: 0px !important;">
+                                        <div class="popupTableHealth popupPadding" layout="row" style="padding: 3% 0% 0% 0% !important;">
+                                            <div flex="100" style="text-align: center; padding: 1% 0%;">
+                                                <b>{{p365Labels.login.enterOTPCaption}}</b>
+
+                                            </div>
+                                        </div>
+                                        <md-input-container class='md-block wp_whiteColor noMargin noPadtop mar14Bot' md-no-float>
+                                            <input type="text" class='infoPage posRel' placeholder="Mobile Number" name="mobileNumber" ng-model="quoteUserInfo.mobileNumber"
+                                                autocomplete="off" required ng-pattern='/^[6789]\d{9}$/' numbers-only maxlength="10"
+                                                minlength="10" required>
+                                        </md-input-container>
+                                        <md-input-container class='md-block wp_whiteColor noMargin noPadtop mar14Bot' md-no-float ng-if="modalOTPError == false">
+                                            <input type="text" class='infoPage posRel' placeholder="Enter OTP" name="mobileOTP" ng-model="authenticate.enteredOTP" autocomplete="off"
+                                                required ng-pattern="/\d{6}/" numbers-only maxlength="6" minlength="6" />
+                                        </md-input-container>
+                                        <div ng-if="modalOTPError == true">{{createOTPError}}</div>
+                                        <div style="color: red; text-align: center; margin-bottom: 1%;">{{invalidOTPError}}</div>
+                                        <div style="color: green; text-align: center; margin-bottom: 1%;">{{p365Labels.validationMessages.otpValidPeriod}}</div>
+                                    </div>
+
+                                </div>
+                                <div class="incomePg topBot3_1Mar resp_topBot5Pad" ng-hide="modalOTPError == false">
+                                    <md-button type="button" class="width50 upperCaseText resp_normFont13" id="profSendOTP" ng-disabled="authenticateForm.$invalid"
+                                        ng-click="sendOTP()">
+                                        <span>{{p365Labels.common.sendOTP}}</span>
+                                    </md-button>
+                                </div>
+                                <div class="incomePg topBot3_1Mar resp_topBot5Pad">
+                                    <a ng-click="resendOTP()" id="profResendOTP">{{p365Labels.common.resendOTP}}</a>
+                                </div>
+                                <div class="incomePg topBot3_1Mar resp_topBot5Pad" ng-show="modalOTPError == false">
+                                    <md-button type="button" class="width50 upperCaseText resp_normFont13" id="profSubmitOTP" ng-disabled="authenticateForm.$invalid"
+                                        ng-click="submitOTP()">
+                                        <span>{{p365Labels.common.submitOTP}}</span>
+                                    </md-button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</modal-dialog>
+
+
+
+
+
+<modal-dialog show='riskAndInsuranceProfilePopup' width='90%' height='auto' class="ng-hide RTOSearchDiv" style="overflow:auto;">
+        <div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+                <div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+                    <h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">
+                        <span data-ng-bind-html="commonInfo.salutation" data-bind-html-compile="commonInfo.salutation"></span>.&nbsp;
+                        <span data-ng-bind-html="commonInfo.firstName" data-bind-html-compile="commonInfo.firstName"></span>
+                        <span ng-if="!$root.alreadyShared">{{p365Labels.common.confirmInfo}}</span>
+                        <span ng-if="$root.alreadyShared">{{p365Labels.common.shareProfileConfirmInfo}}</span>
+        
+                    </h2>
+                </div>
+                <div class='ng-modal-close wp_modalClose closePopup' ng-click='hideRiskAndInsuranceProfilePopup()'>
+                    <i class="material-icons greyb7Txt">highlight_off</i>
+                </div>
+        </div>
+		<div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop resp_riskpopupHgt scrollHgt450">
+        <div layout="row" layout-xs="column">
+                <div flex="50" flex-xs="100" class="" style="position: relative;">
+                 <p365-pie-chart items="dataItems" chart-title="chartTitle" display-legends="false" display-lables="true" display-width="auto"
+                    display-height="450" ng-if="isChartReady == true" class="hideForMobile" pie-size="60"></p365-pie-chart>
+                <p365-pie-chart items="dataItems" chart-title="chartTitle" display-legends="true" display-lables="false" display-width="300"
+                    display-height="300" ng-if="isChartReady == true" class="showForMobile"></p365-pie-chart>
+                </div>
+                <div flex="50" flex-xs="100" class="" style="position: relative;">                    
+             
+    
+                <div flex='100'>
+                        <div layout="row" layout-xs="row" flex='100' style="flex-wrap:wrap;">
+                            <div flex="50" class="flip-card" ng-repeat="dataElement in insuranceAssessmentRes|orderBy:'displayOrder'" ng-show="!(dataElement.insuranceLabel == 'Critical Illness')" >
+                                <div class="flip-card-inner">
+                                    <div class="white_chips flip-card-front">
+                                        <div layout="row" class="hgt30px">
+                                            <div flex="80" class="marTop3Per leftAlignTxt">
+                                                <!-- Bike and car should be by default must have -->
+                                                <img ng-show="dataElement.insuranceLabel == 'Bike' || dataElement.insuranceLabel == 'Car'" ng-src="{{$root.wp_path}}img/icons/MustHave.png"
+                                                    class="marLeftNeg">
+                                            <!-- <img ng-show="(dataElement.range == '40-100') && (dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')"
+                                                    ng-src="{{$root.wp_path}}img/icons/MustHave.png" class="marLeftNeg">
+                                                <img ng-show="(dataElement.range == '25-40') && (dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')"
+                                                    ng-src="{{$root.wp_path}}img/icons/NiceToHave.png" class="marLeftNeg"> -->
+                                                <img ng-show="(dataElement.insCatAsPerRisk == 'high' || dataElement.insCatAsPerRisk == 'veryHigh') && (dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')"
+                                                    ng-src="{{$root.wp_path}}img/icons/MustHave.png" class="marLeftNeg">
+                                                <img ng-show="(dataElement.insCatAsPerRisk == 'medium') && (dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')" ng-src="{{$root.wp_path}}img/icons/NiceToHave.png" class="marLeftNeg">
+                                                <!-- <img ng-show="dataElement.insuranceCat == 'Minimum'" ng-src="{{$root.wp_path}}img/icons/NeedToHave.png"> -->
+                                                <div ng-show="(dataElement.range == '0-25') && (dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')"
+                                                    class="marLeftNeg"></div>
+                                                    <span class="greyb7Txt font9 marRightTop3" >{{dataElement.insuranceLabel}}</span>
+                                            </div>
+                                            <div flex="20" class="marTop3Per">
+                                                <i ng-show="dataElement.insuranceLabel == 'Bike'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip" title="Bike"
+                                                    tooltip>directions_bike</i>
+                                                <i ng-show="dataElement.insuranceLabel == 'Car'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip" title="Car"
+                                                    tooltip>directions_car</i>
+                                                <i ng-show="dataElement.insuranceLabel == 'Health'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip"
+                                                    title="Health" tooltip>hotel</i>
+                                                <i ng-show="dataElement.insuranceLabel == 'Life'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip" title="Life"
+                                                    tooltip>favorite</i>
+                                                <i ng-show="dataElement.insuranceLabel == 'Retirement'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip"
+                                                    title="Retirement" tooltip>airline_seat_recline_extra</i>
+                                                <i ng-show="dataElement.insuranceLabel == 'Critical Illness'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip"
+                                                    title="Critical Illness" tooltip>add_box</i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="ins_Text" ng-show="dataElement.sumInsured">
+                                                <p class="font12 noMargin pad1 minimumColor" ng-show="minimumFlag">&#8377; {{dataElement.sumInsured.MinimumSumInsured | number:0 | regexINR}}</p>
+                                                <p class="font12 noMargin pad1 recommendColor" ng-show="recommendedFlag">&#8377; {{dataElement.sumInsured.RecommendedSumInsured | number:0 | regexINR}}</p>
+                                                <p class="font12 noMargin pad1 comprehensiveColor" ng-show="comprehensiveFlag">&#8377; {{dataElement.sumInsured.ComprehensiveSumInsured | number:0 | regexINR}}</p>
+                                                <p class="font10 greyb7Txt mar5top" ng-show="dataElement.insuranceLabel == 'Bike' || dataElement.insuranceLabel == 'Car'">Insured declared value</p>
+                                                <p class="font10 greyb7Txt mar5top" ng-show="dataElement.insuranceLabel == 'Health' || dataElement.insuranceLabel == 'Life'">Sum Insured</p>
+                                                <p class="font10 greyb7Txt mar5top" ng-show="dataElement.insuranceLabel == 'Retirement'">Investment amount</p>
+                                                <p class="font10 greyb7Txt mar5top" ng-show="dataElement.insuranceLabel == 'Critical Illness'">Sum Insured</p>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="white_chips flip-card-back">
+                                        <div layout="row">
+                                            <div flex="80" class="marTop3Per rightAlignTxt">
+                                                <p class="topBot2Mar greyb7Txt font9">{{dataElement.insuranceLabel}}</p>
+                                            </div>
+                                            <div flex="20" class="marTop3Per">
+                                                <i ng-show="dataElement.insuranceLabel == 'Bike'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip" title="Bike"
+                                                    tooltip>directions_bike</i>
+                                                <i ng-show="dataElement.insuranceLabel == 'Car'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip" title="Car"
+                                                    tooltip>directions_car</i>
+                                                <i ng-show="dataElement.insuranceLabel == 'Health'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip"
+                                                    title="Health" tooltip>hotel</i>
+                                                <i ng-show="dataElement.insuranceLabel == 'Life'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip" title="Life"
+                                                    tooltip>favorite</i>
+                                                <i ng-show="dataElement.insuranceLabel == 'Retirement'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip"
+                                                    title="Retirement" tooltip>airline_seat_recline_extra</i>
+                                                <i ng-show="dataElement.insuranceLabel == 'Critical Illness'" class="material-icons lobIcon greyb7Txt font17" data-toggle="tooltip"
+                                                    title="Critical Illness" tooltip>add_box</i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="pad20">
+                                                <p class="font12 noMargin pad1 recommendColor">
+                                                    <span ng-show="dataElement.insuranceLabel == 'Bike' || dataElement.insuranceLabel == 'Car'">Mandatary by law</span>
+                                                    <span ng-show="(dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')">Your {{dataElement.insuranceLabel}} risk is {{dataElement.insCatAsPerRiskDisplayLabel}}</span>
+                                                    <!-- <span ng-show="(dataElement.range == '25-40') && (dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')">Your {{dataElement.insuranceLabel}} risk is {{dataElement.insCatAsPerRisk}}</span>
+                                                    <span ng-show="(dataElement.range == '0-25') && (dataElement.insuranceLabel != 'Bike' && dataElement.insuranceLabel != 'Car')">Your {{dataElement.insuranceLabel}} risk is {{dataElement.insCatAsPerRisk}}</span> -->
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div layout="row" flex="100" class="center" ng-show="insuranceAssessmentRes">
+                            <!-- ng-click="toggleMinimum()" ng-click="toggleRecommended()" ng-click="toggleComprehensive()"-->
+                            <p flex="33" flex-sm="100" flex-xs="100" class="font12 cursor">
+                                <i class="material-icons font12 minimumColor">fiber_manual_record</i> Minimum
+                            </p>
+                            <p flex="33" flex-sm="100" flex-xs="100" class="font12 cursor">
+                                <i class="material-icons font12 recommendColor">fiber_manual_record</i> Recommended
+                            </p>
+                            <p flex="33" flex-sm="100" flex-xs="100" class="font12 cursor">
+                                <i class="material-icons font12 comprehensiveColor">fiber_manual_record</i> Comprehensive
+                            </p>
+                        </div>
+                    
+                    </div>
+
+                </div>
+    </div>
+	</div>
+ </modal-dialog>
+
+ 
+<!--     health Features Popup       -->
+<ng-container ng-include="lifeFeaturesTemplate"></ng-container>
+<!--     Premium Breakup Popup       -->
+
+<!--     health Features Popup       -->
+<ng-container ng-include="healthFeaturesTemplate"></ng-container>
+<!--     Premium Breakup Popup       -->
+
+<!--     Premium Breakup Popup       -->
+<ng-container ng-include="carPremiumTemplate"></ng-container>
+<!--     Premium Breakup Popup       -->
+
+<!--     Premium Breakup Popup       -->
+<ng-container ng-include="bikePremiumTemplate"></ng-container>
+<!--     Premium Breakup Popup       -->
+
+<!--     Premium Breakup Popup       -->
+<ng-container ng-include="healthPremiumTemplate"></ng-container>
+<!--     Premium Breakup Popup       -->
+
+<!--     Premium Breakup Popup       -->
+<ng-container ng-include="lifePremiumTemplate"></ng-container>
+<!--     Premium Breakup Popup       -->

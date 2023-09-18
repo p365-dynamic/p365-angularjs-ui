@@ -1,0 +1,364 @@
+<!-- <div ng-scrollable style="height:400px;"> -->
+<form name="travelInstantQuoteForm">
+	<ng-container ng-if="$root.displayInstantScreen" ng-controller="travelInstantQuoteController">
+		<md-content class="wp_md-content wp_inputBorderRadius">
+			<!-- Row_1 -->
+			<div class='section group' layout="row" layout-xs="column" layout-sm="column">
+				<!-- TripType -->
+				<div flex="100" flex-xs="100" flex-sm="100" style="width: 100%;" class="">
+					<md-input-container class="md-block"> 
+						<label>{{globalLabel.applicationLabels.travel.tripType}}</label>
+						<md-select name="tripType" ng-model="travelDetails.tripType" ng-change="toggleTripType();callSingleClickQuote()"
+						 ng-disabled=false>
+							<md-option ng-value="type.tripType" ng-repeat="type in tripTypeList">
+								{{type.displayField}}</md-option>
+						</md-select>
+						<div ng-if="travelInstantQuoteForm.startDate.$error.required" style="color: red;">{{globalLabel.applicationLabels.travel.required}}</div>
+					</md-input-container>
+				</div>
+				<!-- ./TripType -->
+			</div>
+			<div class='section group' layout="row" layout-xs="column" layout-sm="column">
+				<!-- Travelling to -->
+				<!-- <ng-container ng-if ="$root.wordPressEnabled" class="wp_autoCompleteWhite"> -->
+				<div flex="100" flex-xs="100" flex-sm="100" style="width:100%;" class="">
+					<md-input-container class="md-block">
+						<label>{{globalLabel.applicationLabels.travel.destination_label}}</label>
+						<div ng-scrollable style="height:90px;">
+							<md-chips ng-model="travelDetails.destinations" md-require-match="true" class="wp_travel_md-chips_white" ng-change="" name="dest"
+							 ng-required="true" placeholder="Destinations" md-on-add="callSingleClickQuote()" md-on-remove="callSingleClickQuote()"
+							 secondary-placeholder="Destination">
+								<md-autocomplete style="width:40%;" md-selected-item="" md-search-text="searchText" md-items="continent in getContinentList(searchText)"
+								 md-item-text="continent.displayField" md-min-length="2" md-autoselect="true" md-input-name="destination">
+									<span md-highlight-text="searchText">{{continent.displayField}}</span>
+									<md-not-found> <span style="color:red;">No Results Found</span> </md-not-found>
+								</md-autocomplete>
+								<md-chip-template>
+									<strong>{{travelDetails.destinations[$index].displayField}}</strong>
+								</md-chip-template>
+							</md-chips>
+						</div>
+						<span ng-show="travelDetails.destinations.length == 0" style="color:red;">
+			  				At least one destination is required
+      					</span>
+					</md-input-container>
+				</div>
+				<!-- </ng-container> -->
+				<!--./ Travelling to -->
+			</div>
+			<!-- ./Row_1 -->
+			<!-- Row_2 -->
+			<p class="emptySpacer"></p>
+			<div class='section group' layout="row" layout-xs="column" layout-sm="column">
+				<!-- Start date -->
+				<div flex="50" flex-xs="100" flex-sm="100" style="width: 100%;" class="wp_travelCalender alignColumn">
+					<md-input-container class="md-block wp_whiteColor">
+						<label>{{globalLabel.applicationLabels.travel.startDate}}</label> <input class="newDatepickerBorder" type="text" name='startDate'
+						 ng-model="travelDetails.startdate" readonly="readonly" ng-change="toggleDate()" p365-date-picker="travelStartDateOptions"
+						 required md-no-asterisk />
+						<div ng-if="travelInstantQuoteForm.startDate.$error.required" style="color: red;">{{globalLabel.applicationLabels.travel.required}}</div>
+						<div ng-messages="travelInstantQuoteForm.startDate.$error" ng-if="travelInstantQuoteForm.startDate.$touched"></div>
+					</md-input-container>
+				</div>
+
+				<!-- ./Start date -->
+				<!-- End date -->
+				<div flex="50" flex-xs="100" flex-sm="100" style="width: 100%;" class="wp_travelCalender ">
+					<md-input-container class="md-block wp_whiteColor">
+						<label>{{globalLabel.applicationLabels.travel.endDate}}</label> <input class="newDatepickerBorder" type="text" name='endDate'
+						 ng-model="travelDetails.enddate" readonly="readonly" ng-change="callSingleClickQuote()" p365-date-picker="travelEndDateOptions"
+						 required md-no-asterisk />
+						<div ng-if="travelInstantQuoteForm.endDate.$error.required" style="color: red;">{{globalLabel.applicationLabels.travel.required}}</div>
+						<div ng-messages="travelInstantQuoteForm.endDate.$error" ng-if="travelInstantQuoteForm.endDate.$touched"></div>
+					</md-input-container>
+				</div>
+
+				<!--./ End date -->
+			</div>
+			<!-- ./Row_2 -->
+			<!-- Row_3 -->
+			<div class='section group' layout="row" layout-xs="column" layout-sm="column">
+				<!-- Traveler's count -->
+				<div flex="100" flex-xs="100" flex-sm="100" style="width: 100%;" class="">
+					<md-input-container class="md-block">
+						<label style="font-size: 13px !important;">{{globalLabel.applicationLabels.travel.insuranceFor}}
+							<a data-ng-class="{'disabled': instantQuoteTravelForm}" ng-if ="$root.wordPressEnabled" class="white"
+							href="javascript:;" ng-click='toggleTraveller()'
+							style="font-size: 13px !important;">[{{globalLabel.applicationLabels.travel.change}}]</a>
+							
+							<a data-ng-class="{'disabled': instantQuoteTravelForm}" ng-if ="!$root.wordPressEnabled"
+							href="javascript:;" ng-click='toggleTraveller()'
+							style="font-size: 13px !important;">[{{globalLabel.applicationLabels.travel.change}}]</a>
+						</label>
+						<div class="btn-group btn-group-vertical" data-toggle="buttons">
+							<div ng-repeat="data in travellersList" ng-if="data.status">
+								<span class="" style="font-size: 15px !important;"> <b>
+									{{data.relation}}&nbsp; - {{data.gender}} - {{data.age}} years</b>
+								</span>
+							</div>
+						</div>
+					</md-input-container>
+					<div class="clearfix"></div>
+				</div>
+				<!-- ./Traveler's count -->
+			</div>
+			<!-- ./Row_3 -->
+			<!-- trip_duration -->
+			<div class='section group' layout="row" layout-xs="column" layout-sm="column" ng-show="travelDetails.tripType == 'multi'">
+				<!-- Question_1 -->
+				<div flex="100" flex-xs="100" flex-sm="100" style="width: 100%;" class="">
+					<md-input-container class="md-block"> <label>{{globalLabel.applicationLabels.travel.tripDuration}}</label>
+						<md-select name="tripDuration" ng-model="travelDetails.tripDuration" ng-change="callSingleClickQuote()">
+							<md-option ng-value="tripDuration.duration" ng-repeat="tripDuration in tripDurationList">
+								{{tripDuration.displayField}}
+							</md-option>
+						</md-select>
+					</md-input-container>
+
+				</div>
+				<!-- ./trip_duration -->
+			</div>
+
+			<!-- Row 8 -->
+			<div class='section group' layout="row" layout-xs="column" layout-sm="column">
+				<div flex="100" flex-xs="100" flex-sm="100" style="width: 100%;" class="">
+					<md-input-container class="md-block"> <label class="buyTextPadding wp_whiteColor">{{globalLabel.applicationLabels.travel.sumInsured}}</label>
+						<md-select name="type" ng-model="travelDetails.sumInsured" ng-change="callSingleClickQuote()" class="mdInputContainer_input"
+						 required>
+							<md-option ng-value="suminsuredvalue.suminsured" name='suminsured1' ng-repeat="suminsuredvalue in sumInsuredList">&#36; {{suminsuredvalue.suminsured | regexINR}}</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+			</div>
+		</md-content>
+		<!-- ./Row 8 -->
+		<!-- Travellers Modal -->
+		<modal-dialog show="modalTraveller" width='550px' height='auto' class="ng-hide">
+			<div class='ng-modal-close wp_modalClose' ng-click='closeTravellerModal()' ng-if="$root.wordPressEnabled">
+				<i class="material-icons">close</i>
+			</div>
+			<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow" style="" layout="row">
+				<div flex="100" flex-sm="100" flex-xs="100" class="wp_respWidth100 wp_Width100" style="padding: 4% 0%; text-align: center;">
+					<h2 class="white popupHeading wp_popupHeading">
+						{{globalLabel.applicationLabels.travel.addTravellers}}</h2>
+				</div>
+				<div class='ng-modal-close' ng-click='closeTravellerModal()' ng-if="!$root.wordPressEnabled" style="color: #fff;" flex="15">
+					<i class="material-icons">close</i>
+				</div>
+			</div>
+			<div class="divForMobile">
+				<div class="pad10 mobileHealthFamily pad10Padding mobileSmFix">
+					<!-- hide for mobile -->
+					<div class="section hideforMobile" ng-scrollable style="min-height:250px; max-height: auto;">
+						<div class="leadCaptureBox familyPopup" style="overflow:unset !important; ">
+
+							<div class="popupTableHealth popupPadding" layout="row" style="padding: 5% 0% !important;">
+								<div flex="30">
+									<b>Travellers</b>
+								</div>
+								<div flex="25">
+									<b>Gender</b>
+								</div>
+								<div flex="15" style="margin-left:1%;">
+									<b>Age</b>
+								</div>
+								<div flex="25">
+									<b>Relation</b>
+								</div>
+								<div 5lex="5"></div>
+							</div>
+							<md-divider></md-divider>
+							<div ng-repeat="data in travellersList">
+								<div layout="row" class="familyPopupPadding section" flex="100">
+									<div flex="30">
+										<md-checkbox value="{{data}}" ng-model="data.status" ng-change="removeTraveller($index)">
+										</md-checkbox>
+										<span class="alignLabelCheckBox">
+							{{globalLabel.applicationLabels.travel.traveller}}&nbsp;{{data.traveller_id}}</span>
+									</div>
+									<div class="familySelect" flex="25">
+										<div ng-if="data.status">
+											<md-input-container class="md-block " style="margin: 0%; top:-7px;">
+												<md-select name="gender" ng-model="data.gender" class="wp_familyPopoup " style="width: 86% !important;">
+													<md-option ng-value="gen.value" ng-selected="{{gen.value == data.gender}}" ng-repeat="gen in genderType">{{gen.label}}</md-option>
+												</md-select>
+											</md-input-container>
+										</div>
+									</div>
+									<div class="familySelect " flex="15">
+										<input type="hidden" ng-value="data.age" class="hiddenAge">
+										<div ng-if="data.status">
+											<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+												<md-select name="age" ng-model="data.age" class="wp_familyPopoup " style="width: 80% !important;">
+													<md-option ng-value="value" ng-selected="{{value == data.age}}" ng-repeat="value in getAgeArray(data.minAge, data.maxAge)">
+														{{value}}</md-option>
+												</md-select>
+											</md-input-container>
+										</div>
+									</div>
+									<div class="familySelect" flex="25">
+										<div ng-if="data.status">
+											<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+												<md-select name="relation" ng-model="data.relation" class="wp_familyPopoup" ng-change="changeRelation(data.relation)">
+													<md-option ng-value="relation.member" ng-selected="{{relation.member == data.relation}}" ng-repeat="relation in relationType"
+													 ng-show="!relation.val">
+														{{relation.member}}
+													</md-option>
+												</md-select>
+											</md-input-container>
+										</div>
+									</div>
+
+									<div flex="5" ng-if="data.status">
+										<a ng-click="addTraveller($index);" ng-show="!disableAddButton && data.addNew">
+					 <i	class="material-icons">add_box</i>
+						</a>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+
+								<div layout-sm="column">
+									<md-divider></md-divider>
+								</div>
+							</div>
+
+							<div class="center submitBtnAlign">
+								<div style="color: red" ng-repeat="error in familyErrors|limitTo:1" class="familySubmit">{{error}}</div>
+								<md-button type="submit" class="md-raised md-primary wp_button" id="submitFamilyMemberInstant" ng-click="submitTravellers()"
+								 style="margin: 0px !important;">Submit</md-button>
+							</div>
+						</div>
+					</div>
+					<!-- ./hide for mobile -->
+					<!-- show for mobile -->
+					<div class="section showforMobile">
+						<div class="leadCaptureBox familyPopup">
+							<!-- <div class="popupTableHealth popupPadding" layout="row"	style="padding: 5% 0% !important;">
+				<div flex="40">
+					<b>Travellers</b>
+				</div>
+				<div flex="30">
+					<b>Gender</b>
+				</div>
+				<div flex="20">
+					<b>Age</b>
+				</div>
+			<div flex="10"></div>
+				</div> -->
+							<md-divider></md-divider>
+							<div ng-repeat="data in travellersList">
+								<div layout="column" class="familyPopupPadding section">
+									<div layout="row">
+										<div flex-sm="40" flex-xs="40">
+											<md-checkbox value="{{data}}" ng-model="data.status" ng-change="removeTraveller($index)">
+											</md-checkbox>
+											<span class="alignLabelCheckBox">
+								<b>{{globalLabel.applicationLabels.travel.traveller}}&nbsp;{{data.traveller_id}}</b></span>
+										</div>
+										<div flex-sm="60" flex-xs="60" style="padding-left: 15px;">
+											<div ng-if="data.status">
+												<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+													<md-select name="relation" ng-model="data.relation" class="wp_familyPopoup" ng-change="changeRelation(data.relation)">
+														<md-option ng-value="relation.member" ng-selected="{{relation.member == data.relation}}" ng-repeat="relation in relationType"
+														 ng-show="!relation.val">
+															{{relation.member}}
+														</md-option>
+													</md-select>
+												</md-input-container>
+											</div>
+										</div>
+									</div>
+									<div layout="row">
+										<div class="familySelect" flex-sm="40" flex-xs="40" style="padding-right:10px;margin-left: 25px;">
+											<div ng-if="data.status">
+												<md-input-container class="md-block " style="margin: 0%; top:-7px;">
+													<md-select name="gender" ng-model="data.gender" class="wp_familyPopoup">
+														<md-option ng-value="gen.value" ng-selected="{{gen.value == data.gender}}" ng-repeat="gen in genderType">{{gen.label}}</md-option>
+													</md-select>
+												</md-input-container>
+											</div>
+										</div>
+
+										<div class="familySelect " flex-sm="40" flex-xs="40">
+											<input type="hidden" ng-value="data.age" class="hiddenAge">
+											<div ng-if="data.status">
+												<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+													<md-select name="age" ng-model="data.age" class="wp_familyPopoup">
+														<md-option ng-value="value" ng-selected="{{value == data.age}}" ng-repeat="value in getAgeArray(data.minAge, data.maxAge)">
+															{{value}}</md-option>
+													</md-select>
+												</md-input-container>
+											</div>
+										</div>
+										<div flex-sm="20" flex-xs="20" ng-if="data.status" style="text-align:right;">
+											<a ng-click="addTraveller($index);" ng-show="!disableAddButton && data.addNew">
+					 <i	class="material-icons">add_box</i>
+						</a>
+										</div>
+									</div>
+								</div>
+
+								<div layout-sm="column">
+									<md-divider></md-divider>
+								</div>
+							</div>
+
+							<div class="center submitBtnAlign">
+								<div style="color: red" ng-repeat="error in familyErrors | limitTo:1" class="familySubmit">{{error}}</div>
+								<md-button type="submit" class="md-raised md-primary wp_button" id="submitFamilyMemberInstant" ng-click="submitTravellers()"
+								 style="margin: 0px !important;">Submit</md-button>
+							</div>
+						</div>
+					</div>
+					<!-- ./show for mobile -->
+				</div>
+			</div>
+		</modal-dialog>
+		<!-- ./Traveller Modal -->
+		<modal-dialog show="modalHealth" width='600px' height='auto' class="ng-hide">
+			<div class='ng-modal-close wp_modalClose' ng-click='closePreExistingDiseaseModal()' ng-if="$root.wordPressEnabled">
+				<i class="material-icons">close</i>
+			</div>
+			<div class="blueBackground one-edge-shadow p_noBluebackground wp_noBoxShadow" style="" layout="row">
+				<div flex="85" flex-sm="85" class="wp_respWidth100 wp_Width100" flex-xs="85" style="padding: 4% 0%; text-align: center;">
+					<h2 class="white popupHeading wp_popupHeading">
+						{{globalLabel.applicationLabels.travel.existingDiseases}}</h2>
+				</div>
+				<div class='ng-modal-close' ng-click='closePreExistingDiseaseModal()' style="color: #fff;" flex="15" ng-if="!$root.wordPressEnabled">
+					<i class="material-icons">close</i>
+				</div>
+			</div>
+			<div class="pad10 pad10Padding">
+				<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+					<div class="section group" style="">
+						<div class="familyPopupPadding section" ng-repeat="data in diseaseList">
+							<div class="col col-sm-7">
+								<div class="" style="">
+									<md-checkbox name='add' checklist-model="getDisease()" ng-change="checkDisease(data.diseaseId, checked)" checklist-value="data.diseaseId"></md-checkbox>
+									<span class="alignLabelCheckBox">&nbsp;{{data.disease}}</span>
+								</div>
+							</div>
+							<div class="col col-sm-5">
+								<div class="illnessSelect" ng-if="selectedDisease.diseaseList.includes(data.diseaseId) == true">
+									<md-select name="preexistindDiseases" placeholder="Select Traveller" style="width: 78%;" ng-model="data.travellersList" 
+									class="illnessSelectAlign wp_familyPopoup" multiple ng-model-options="{trackBy: '$value.traveller_id'}">
+										<md-option ng-value="travelMember" ng-repeat="travelMember in selectedTravellerArray">
+											{{globalLabel.applicationLabels.travel.traveller}}&nbsp;{{travelMember.traveller_id}} &nbsp;{{travelMember.gender}} </md-option>
+									</md-select>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<md-divider></md-divider>
+						</div>
+					</div>
+				</div>
+				<div class="center submitBtnAlign">
+					<div style="color: red">{{diseaseError}}</div>
+					<md-button class="md-raised md-primary wp_button" id="submitPreDiseaseListInstant" ng-click="submitPreDiseaseList()">
+						{{globalLabel.applicationLabels.travel.submit}} </md-button>
+				</div>
+			</div>
+		</modal-dialog>
+	</ng-container>
+</form>
+<!-- </div> -->

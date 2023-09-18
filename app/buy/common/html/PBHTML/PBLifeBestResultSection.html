@@ -1,0 +1,290 @@
+<div class="e8e8Container">
+    <div class="side10PerMar center resp_noMar resp_topBot5Pad padBot5Per">
+            <div class="clearfix"></div>
+        <h2 class="chooseProfTitle padTop4Per resp_font18">
+            <span data-bind-html-compile="globalLabel.applicationLabels.professionalJourney.car.bestResultDetails" data-ng-bind-html="globalLabel.applicationLabels.professionalJourney.car.bestResultDetails">
+                 </span>
+        </h2>
+    </div>
+    <div>
+        <div layout="row" layout-xs="column" class="bestQuote pad10 recomdAddon resp_noMar">
+            <div flex="50" flex-xs="100" class="grey87Txt">
+                <h4 class="centerAlignTxt">Previous Quote</h4>
+                <div class="resFrameAlignment" ng-if="productInCart">
+                    <div class="whiteBg borRad10 posRel">
+                        <div class="bluredSec"></div>
+                        <div class="innerResultFrame pad20 padBot10 resp_pad10">
+                            <div class="wrap">
+                                <div class="pj_width25 lobResult">
+                                    <span>
+                                        <i class="material-icons lobIcon">favorite</i>
+                                    </span>
+                                    <span class="lobTitle">
+                                        Life
+                                    </span>
+                                </div>
+                                <div class="pj_width37 centerAlignTxt resp_width45Per">
+                                    <img class="" ng-src="{{$root.wp_path}}img/clogo/{{productInCart.carrierId}}.png">
+                                </div>
+                                <div class="pj_width37 centerAlignTxt resp_width30Per">
+                                    <div class="buyNowBtn posRel cursor">
+                                        <p ng-if="$root.isAnnualPremium" class="pinkFont topBot5PerMar bold17">&#8377; {{productInCart.basicPremium|number:0}}
+                                            <span class="font8 normFont">
+                                                (Annual)</span>
+                                        </p>
+                                        <!-- <p ng-if="!$root.isAnnualPremium" class="pinkFont topBot5PerMar bold17">&#8377; {{productInCart.monthlyBasePremium|number}}
+                                            <span class="font8 normFont">
+                                                (Monthly)</span>
+                                        </p> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="row">
+                                <p class="pinkFont noMarTopBot font11">
+                                    {{productInCart.productName}}
+                                </p>
+                            </div>
+                            <div layout="row">
+                                <div flex="20" flex-xs="30" flex-sm="15">
+                                    <p>Insurance For</p>
+                                </div>
+                                <div flex="80" flex-xs="70" flex-sm="85" class="mar18Bot resp_mar18Bot" style="border-bottom: 1px solid #ddd;"></div>
+                            </div>
+                            <div>
+                                <p class="font12" style="margin: 0;">
+                                    <span class="grey41Txt boldFont">{{commonInfo.gender}}&nbsp;({{commonInfo.age}}&nbsp;Years),</span>
+                                    <span class="grey41Txt boldFont" ng-if="commonInfo.smoking=='N'">Non-Smoker</span>
+                                    <span class="grey41Txt boldFont" ng-if="commonInfo.smoking=='Y'">Smoker</span>
+                                    <span class="grey63Txt">having an Annual Income of</span>
+                                    <span class="grey41Txt boldFont upperCaseText">{{commonInfo.incomeRange.label}},</span>
+                                    <span class="grey63Txt">Covered up to age</span>
+                                    <span class="grey41Txt boldFont">{{$root.insuredUptoAge}}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="innerResultFrame">
+                            <div class="resIdvSec pad20 padBot10 resp_pad10" layout="row">
+                                <div flex="70" layout="row" class="padRig15Per">
+                                    <div flex="25" class="center cursor">
+                                            <div style="position:relative">
+                                                    <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                                <span class="bold12 customStarText iPad_bold10">{{productInCart.netPremiumMean|number:1}}</span>
+                                            </div>
+                                            <p class="noMargin font9 greyc9Txt">
+                                                <span>Premium</span>
+                                            </p>
+                                        </div>
+                                        
+                                        <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                        <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                        <span class="bold12 customStarText iPad_bold10">{{productInCart.insurerIndex|number:1}}</span>
+                                        
+                                    </div>
+                                    <p class="noMargin font9 greyc9Txt"><span>Service</span></p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                            <div style="position:relative">
+                                        <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                        <span class="bold12 customStarText iPad_bold10">{{productInCart.benefitIndex|number:1}}</span>
+                                        
+                                    </div>
+                                    <p class="noMargin font9 greyc9Txt"><span>Benefits</span></p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                        <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                        <span class="bold12 customStarText iPad_bold10">{{productInCart.claimIndex|number:1}}</span>
+                                        
+                                    </div>
+                                    <p class="noMargin font9 greyc9Txt"><span>Claim</span></p>
+                                    </div>
+                                    <!-- <div flex="25">
+                                        <p style="margin: 0;" class="bold13">3.0</p>
+                                        <p class="noMargin font9 greyc9Txt"><a>Garage</a></p>
+                                    </div> -->
+                                </div>
+                                <div flex="30" class="center">
+                                    <p class="grey4bTxt bold17 noMargin" >&#8377; {{productInCart.sumInsured |number:0}}</p>
+                                    <p class="noMargin greyc9Txt">SUM INSURED</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- <div class="innerResultFrame pad7_20 left">
+                            <p class="noMargin font9 pinkFont"> &nbsp;</p>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- added to display loader -->
+            <!-- <div flex="50" class="grey87Txt" ng-if="!isGotLifeQuotes">
+                
+            </div> -->
+            <!-- end -->
+            <div flex="50" flex-xs="100" class="grey87Txt">
+                <h4 class="centerAlignTxt">Updated Quote</h4>
+                <div class="resFrameAlignment">
+                    <div class="whiteBg borRad10" ng-if="isGotLifeQuotes">
+                        <div class="innerResultFrame pad20 padBot10 resp_pad10">
+                            <div class="wrap">
+                                <div class="pj_width25 lobResult">
+                                    <span>
+                                        <i class="material-icons lobIcon">favorite</i>
+                                    </span>
+                                    <span class="lobTitle">
+                                       Life
+                                    </span>
+                                </div>
+                                <div class="pj_width37 centerAlignTxt resp_width45Per">
+                                    <img ng-src="{{$root.wp_path}}img/clogo/{{$root.lifeQuoteResult[0].carrierId}}.png">
+
+                                </div>
+                                <div class="pj_width37 centerAlignTxt resp_width30Per">
+                                    <div class="buyNowBtn posRel cursor">
+                                        <p ng-if="$root.isAnnualPremium" class="pinkFont topBot5PerMar bold17">&#8377; {{$root.lifeQuoteResult[0].basicPremium|number}}
+                                            <span class="font8 normFont">
+                                                (Annual)</span>
+                                        </p>
+                                        <!-- <p ng-if="!$root.isAnnualPremium" class="pinkFont topBot5PerMar bold17">&#8377; {{$root.lifeQuoteResult[0].monthlyBasePremium|number}}
+                                            <span class="font8 normFont">
+                                                (Monthly)</span>
+                                        </p> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="row">
+                                <p class="noMarTopBot font11" >
+                                    <a class="pinkFont textItalic" ng-click="getProductFeatures($root.lifeQuoteResult[0],true)"> {{$root.lifeQuoteResult[0].productName}}</a>
+                                </p>
+                            </div>
+                            <div layout="row">
+                                <div flex="20" flex-xs="30" flex-sm="15">
+                                    <p>Insurance For</p>
+                                </div>
+                                <div flex="80" flex-xs="70" flex-sm="85" class="mar18Bot resp_mar18Bot" style="border-bottom: 1px solid #ddd;"></div>
+                            </div>
+                            <div>
+                                <p class="font12" style="margin: 0;">
+                                    <span class="grey41Txt boldFont"><span ng-if="quoteParam.gender=='M'">Male</span>
+                                    <span ng-if="quoteParam.gender=='F'">Female</span>&nbsp;({{quoteParam.age}}&nbsp;Years),</span>
+                                    <span class="grey41Txt boldFont" ng-if="quoteParam.tobacoAdicted=='N'">Non-Smoker</span>
+                                    <span class="grey41Txt boldFont" ng-if="quoteParam.tobacoAdicted=='Y'">Smoker</span>
+                                    <span class="grey63Txt">having an Annual Income of</span>
+                                    <span class="grey41Txt boldFont upperCaseText">{{personalDetails.annualIncomeObject.display}},</span>
+                                    <span class="grey63Txt">Covered up to age</span>
+                                    <span class="grey41Txt boldFont">{{personalDetails.maturityAge}}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="innerResultFrame">
+                            <div class="resIdvSec pad20 padBot10 resp_pad10" layout="row">
+                                <div flex="70" layout="row">
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                        <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                        <span class="bold12 customStarText iPad_bold10">{{$root.lifeQuoteResult[0].netPremiumMean|number:1}}</span>
+                                        
+                                    </div>
+                                    <p class="noMargin font9 greyc9Txt"><span>Premium</span></p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                        <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                        <span class="bold12 customStarText iPad_bold10">{{$root.lifeQuoteResult[0].insurerIndex|number:1}}</span>
+                                    </div>
+                                    <p class="noMargin font9 greyc9Txt"><span>Service</span></p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                        <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                        <span class="bold12 customStarText iPad_bold10">{{$root.lifeQuoteResult[0].benefitIndex|number:1}}</span>
+                                    </div>
+                                    <p class="noMargin font9 greyc9Txt"><span>Benefits</span></p>
+                                    </div>
+                                    <div flex="25" class="center cursor">
+                                        <div style="position:relative">
+                                        <i class="fa fa-star customStar" aria-hidden="true"></i>
+                                        <span class="bold12 customStarText iPad_bold10">{{$root.lifeQuoteResult[0].claimIndex|number:1}}</span>
+                                    </div>
+                                    <p class="noMargin font9 greyc9Txt"><span>Claim</span></p>
+                                    </div>
+                                </div>
+                                <div flex="30" class="center">
+                                    <p class="grey4bTxt bold17 noMargin" >&#8377; {{$root.lifeQuoteResult[0].sumInsured |number:0}}</p>
+                                    <p class="noMargin greyc9Txt">SUM INSURED</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- riders text -->
+                        <div class="innerResultFrame pad5_20 rightAlignTxt font10">
+                            <p class="noMargin greyb7Txt">
+                                <span ng-if="quoteParam.riders.length > 0 && isGotLifeQuotes">
+                                    Your Selected {{quoteParam.riders.length}} Riders 
+                                    <a ng-click="showSelectedRiders()" class="cursor pinkFont"> View </a>
+                                </span>
+                            </p>
+                        </div>
+                        
+                        <!-- end -->
+                    </div>
+                    <div class="whiteBg borRad10 center" ng-if="!isGotLifeQuotes" style="min-height:250px;display: flex;" layout-align="center center">
+                        <img ng-src="{{$root.wp_path}}img/svg/eclipse.svg" alt="">
+                    </div>
+                    <div class="whiteBg borRad10" ng-if="isGotLifeQuotes && $root.lifeQuoteResult.length==0">
+                        <div class="innerResultFrame pad20 padBot10 resp_pad10">
+                            <div class="wrap">
+                            </div>
+                        </div>
+                        <div class="innerResultFrame">
+                            <div class="resIdvSec pad20 padBot10 resp_pad10" layout="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-container class="section padRig15 width100 center">
+            <div class="">
+                <p class="dialogButton">
+                    <md-button class='width20_per capitalTxt resp_normFont13 inpCancelBtn' ng-click="backToRiderSection()">BACK</md-button>
+                    <md-button class='width20_per capitalTxt resp_normFont13 inpSaveBtn' ng-disabled="$root.lifeQuoteResult.length==0" ng-click="buyProduct($root.lifeQuoteResult[0])">CONFIRM</md-button>
+                </p>
+            </div>
+        </ng-container>
+    </div>
+
+<!--     health Features Popup       -->
+<ng-container ng-include="lifeFeaturesTemplate"></ng-container>
+<!--     Premium Breakup Popup       -->
+
+<modal-dialog show="displaySelecteRidersModal" width='400px' height='auto' cls="ng-hide RTOSearchDiv">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">Selected Riders</h2>
+		</div>
+		<div class='ng-modal-close closePopup' ng-click='hideSelectedRiders()'>
+			<i class="material-icons greyb7Txt">highlight_off</i>
+		</div>
+	</div>
+	<div class="pad10 borderf2Top">
+		<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+			<div class="">
+				<div class="PACoverTxt grey63Txt"  ng-repeat="rider in $root.lifeQuoteResult[0].riderList"  layout="row">
+                        <div flex="80" flex-xs="100" flex-sm="100">
+                            <p class="font12 grey63Txt boldFont">
+                            <span class="pinkFont fa fa-check"></span> {{rider.riderName}}
+                        </p>
+                        </div>
+                        <div flex="20" flex-xs="100" flex-sm="100">
+                            <p class="font12 grey63Txt boldFont" ng-if="rider.riderPremiumAmount > 0"> &#8377; {{rider.riderPremiumAmount}}</p>
+                            <p class="font12 grey63Txt boldFont" ng-if="rider.riderPremiumAmount == 0"> NA</p>
+                        </div>	
+				</div>
+			</div>
+			<div class="center submitBtnAlign ">
+				<md-button class="md-raised md-primary popupSubmitBtn capitalizeText bold12" ng-click="hideSelectedRiders()" id="carSubmitPACoverForm">OK</md-button>
+			</div>
+		</div>
+	</div>
+</modal-dialog>

@@ -1,0 +1,278 @@
+<modal-dialog show='healthmodalBeneFeature' width='80%' class="ng-hide modalViewDetails">
+    <div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+        <div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+            <h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">Feature Benefits</h2>
+        </div>
+        <div class='ng-modal-close wp_modalClose closePopup' ng-click='closeBeneFeatureHealth()'>
+            <i class="material-icons">highlight_off</i>
+        </div>
+    </div>
+
+    <div class="tab-pane">
+        <div class="">
+            <div class="pad10 pinPopup">
+                <md-input-container class="md-block" style="margin:0px !important;">
+                    <div id="tabbed-nav">
+                        <!--Tab code-->
+                        <md-content style="position: relative">
+                            <md-tabs class="popTab garMod" md-selected="$root.selectedTabCar" md-dynamic-height md-swipe-content>
+                                <md-tab label="Hospitalisation Coverage">
+                                    <md-content class="md-padding grey4bTxt pad10"  style="max-height:60vh;overflow:auto;">
+                                        <div class="divForMobile tabcontainer tabcontainerHealth">
+                                            <div class="showforMobile">
+                                                <!-- <ng-rate-it ng-model="beneFeatures.ratingsList['1'][keySliderHospitalizationRelatedFeature.value]" resetable="false" min="0"
+                                                 max="5" step="1" read-only="true"></ng-rate-it> -->
+                                                <!--{{beneFeatures.ratingsList['1'][keySliderHospitalizationRelatedFeature.value]
+                                        | number:1}} --><br />
+                                                <ul class="tickpoints5">
+                                                    <li ng-repeat="feature in beneFeatures.featuresList[0].HospitalizationRelated | filter:mainFeature| limitTo:2">{{feature.Name}} - {{feature.displayLimit}}</li>
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="healthViewBorder topBot20Padd">
+                                                <div class="hideforMobile">
+                                                    <div class="buydetails healthViewDetails">
+                                                        <div class="section" style="width: 100%" ng-repeat="feature in beneFeatures.featuresList[0].HospitalizationRelated">
+                                                            <div>
+                                                                <div class="col col-lg-4 healthViewPopupPadding" ng-if="feature.isFeatureAvailable == 'No'">
+                                                                    <div class="md-list-item-text">
+                                                                        <p class="wrong">
+                                                                            <b>{{feature.Name}}</b>
+                                                                            <!--<i class="fa fa-question-circle fa-sm orangcolor"
+                                                                        data-toggle="tooltip"
+                                                                        title="{{feature.toolTip}}"></i>-->
+                                                                        </p>
+                                                                        <!--<p class="onlyBold"
+                                                                    ng-if="feature.displayLimit == undefined || feature.displayLimit.length <= 0">NA</p>
+                                                                <p class="onlyBold"
+                                                                    ng-if="feature.displayLimit != undefined">{{feature.displayLimit}}</p>-->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col col-lg-4 healthViewPopupPadding" ng-if="feature.isFeatureAvailable == 'Yes'">
+                                                                    <div class="md-list-item-text">
+                                                                        <p>
+                                                                            {{feature.Name}}
+                                                                            <!--<i class="fa fa-question-circle fa-sm orangcolor"
+                                                                        data-toggle="tooltip"
+                                                                        title="{{feature.toolTip}}"></i>-->
+                                                                        </p>
+                                                                        <!--<p class="onlyBold"
+                                                                    ng-if="feature.displayLimit == undefined || feature.displayLimit.length <= 0">NA</p>
+                                                                <p class="onlyBold"
+                                                                    ng-if="feature.displayLimit != undefined">{{feature.displayLimit}}</p>-->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col col-lg-8 healthViewPopupPadding">
+                                                                    <p>{{feature.toolTip}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Preventive & Out-Patient">
+                                    <md-content class="md-padding grey4bTxt pad10">
+                                        <div class="divForMobile tabcontainer tabcontainerHealth">
+                                            <div class="showforMobile">
+                                                <!-- <ng-rate-it ng-model="beneFeatures.ratingsList['2'][keySliderPreventiveOutPatientRelatedFeature.value]" resetable="false"
+                                                 min="0" max="5" step="1" read-only="true"></ng-rate-it> -->
+                                                <!--{{beneFeatures.ratingsList['2'][keySliderPreventiveOutPatientRelatedFeature.value]
+                                        | number:1}}--><br />
+                                                <ul class="tickpoints5">
+                                                    <li ng-repeat="feature in beneFeatures.featuresList[1].PreventiveOutPatientRelated | filter:mainFeature| limitTo:2">{{feature.Name}} - {{feature.displayLimit}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="healthViewBorder topBot20Padd">
+                                                <div class="hideforMobile">
+                                                    <div class="buydetails healthViewDetails">
+                                                        <div class="section" style="width: 100%" ng-repeat="feature in beneFeatures.featuresList[1].PreventiveOutPatientRelated">
+                                                            <div>
+                                                                <div class="col col-sm-4 healthViewPopupPadding" ng-if="feature.isFeatureAvailable == 'No'">
+                                                                    <div class="md-list-item-text">
+                                                                        <p class="wrong">
+                                                                            {{feature.Name}}
+                                                                            <!--<i
+                                                                        class="fa fa-question-circle fa-sm orangcolor"
+                                                                        data-toggle="tooltip" title="{{feature.toolTip}}"></i>-->
+                                                                        </p>
+                                                                        <!--<p class="onlyBold"
+                                                                    ng-if="feature.displayLimit == undefined || feature.displayLimit.length <= 0">NA</p>
+                                                                <p class="onlyBold" ng-if="feature.displayLimit != undefined">{{feature.displayLimit}}</p>-->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col col-sm-4 healthViewPopupPadding" ng-if="feature.isFeatureAvailable == 'Yes'">
+                                                                    <div class="md-list-item-text">
+                                                                        <p>
+                                                                            {{feature.Name}}
+                                                                            <!--<i
+                                                                        class="fa fa-question-circle fa-sm orangcolor"
+                                                                        data-toggle="tooltip" title="{{feature.toolTip}}"></i>-->
+                                                                        </p>
+                                                                        <!--<p class="onlyBold"
+                                                                    ng-if="feature.displayLimit == undefined || feature.displayLimit.length <= 0">NA</p>
+                                                                <p class="onlyBold" ng-if="feature.displayLimit != undefined">{{feature.displayLimit}}</p>-->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col col-lg-8 healthViewPopupPadding">
+                                                                    <p>{{feature.toolTip}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Bonus/Additional Coverage">
+                                    <md-content class="md-padding grey4bTxt pad10">
+                                        <div class="divForMobile tabcontainer tabcontainerHealth">
+                                            <div class="showforMobile">
+                                                <!-- <ng-rate-it ng-model="beneFeatures.ratingsList['3'][keySliderEnhancedCoverageFeature.value]" resetable="false" min="0" max="5"
+                                                 step="1" read-only="true"></ng-rate-it> -->
+                                                <!--{{beneFeatures.ratingsList['3'][keySliderEnhancedCoverageFeature.value]
+                                        | number:1}} --><br />
+                                                <ul class="tickpoints5">
+                                                    <li ng-repeat="feature in beneFeatures.featuresList[2].EnhancedCoverage | filter:mainFeature | limitTo:2">{{feature.Name}} - {{feature.displayLimit}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="healthViewBorder topBot20Padd">
+                                                <div class="hideforMobile">
+                                                    <div class="buydetails healthViewDetails">
+
+                                                        <div class="section" style="width: 100%" ng-repeat="feature in beneFeatures.featuresList[2].EnhancedCoverage">
+                                                            <div>
+                                                                <div class="col col-sm-4 healthViewPopupPadding" ng-if="feature.isFeatureAvailable == 'No'">
+                                                                    <div class="md-list-item-text">
+                                                                        <p class="wrong">
+                                                                            {{feature.Name}}
+                                                                            <!--<i
+                                                                        class="fa fa-question-circle fa-sm orangcolor"
+                                                                        data-toggle="tooltip" title="{{feature.toolTip}}"></i>-->
+                                                                        </p>
+                                                                        <!--<p class="onlyBold"
+                                                                    ng-if="feature.displayLimit == undefined || feature.displayLimit.length <= 0">NA</p>
+                                                                <p class="onlyBold" ng-if="feature.displayLimit != undefined">{{feature.displayLimit}}</p>-->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col col-sm-4 healthViewPopupPadding" ng-if="feature.isFeatureAvailable == 'Yes'">
+                                                                    <div class="md-list-item-text">
+                                                                        <p>
+                                                                            {{feature.Name}}
+                                                                            <!--<i
+                                                                        class="fa fa-question-circle fa-sm orangcolor"
+                                                                        data-toggle="tooltip" title="{{feature.toolTip}}"></i>-->
+                                                                        </p>
+                                                                        <!--<p class="onlyBold"
+                                                                    ng-if="feature.displayLimit == undefined || feature.displayLimit.length <= 0">NA</p>
+                                                                <p class="onlyBold" ng-if="feature.displayLimit != undefined">{{feature.displayLimit}}</p>-->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col col-lg-8 healthViewPopupPadding">
+                                                                    <p>{{feature.toolTip}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Exclusions & Shared Costs">
+                                    <md-content class="md-padding grey4bTxt pad10">
+                                        <div class="divForMobile tabcontainer tabcontainerHealth">
+                                            <div class="showforMobile">
+                                                <!-- <ng-rate-it ng-model="beneFeatures.ratingsList['4'][keySliderPreExistingDiseasesFeature.value]" resetable="false" min="0"
+                                                 max="5" step="1" read-only="true"></ng-rate-it> -->
+                                                <!--{{beneFeatures.ratingsList['4'][keySliderPreExistingDiseasesFeature.value]
+                                        | number:1}}--><br />
+                                                <ul class="tickpoints5">
+                                                    <li ng-repeat="feature in beneFeatures.featuresList[3].PreExistingDiseases | filter:mainFeature| limitTo:2">{{feature.Name}} - {{feature.displayLimit}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="healthViewBorder topBot20Padd">
+                                                <div class="hideforMobile">
+                                                    <div class="buydetails healthViewDetails">
+                                                        <div class="section" style="width: 100%" ng-repeat="feature in beneFeatures.featuresList[3].PreExistingDiseases">
+                                                            <div>
+                                                                <div class="col col-sm-4 healthViewPopupPadding" ng-if="feature.isFeatureAvailable == 'No'">
+                                                                    <div class="md-list-item-text">
+                                                                        <p class="wrong">
+                                                                            {{feature.Name}}
+                                                                            <!--<i
+                                                                        class="fa fa-question-circle fa-sm orangcolor"
+                                                                        data-toggle="tooltip" title="{{feature.toolTip}}"></i>-->
+                                                                        </p>
+                                                                        <!--<p class="onlyBold"
+                                                                    ng-if="feature.displayLimit == undefined || feature.displayLimit.length <= 0">NA</p>
+                                                                <p class="onlyBold" ng-if="feature.displayLimit != undefined">{{feature.displayLimit}}</p>-->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col col-sm-4 healthViewPopupPadding" ng-if="feature.isFeatureAvailable == 'Yes'">
+                                                                    <div class="md-list-item-text">
+                                                                        <p>
+                                                                            {{feature.Name}}
+                                                                            <!--<i
+                                                                        class="fa fa-question-circle fa-sm orangcolor"
+                                                                        data-toggle="tooltip" title="{{feature.toolTip}}"></i>-->
+                                                                        </p>
+                                                                        <!--<p class="onlyBold"
+                                                                    ng-if="feature.displayLimit == undefined || feature.displayLimit.length <= 0">NA</p>
+                                                                <p class="onlyBold" ng-if="feature.displayLimit != undefined">{{feature.displayLimit}}</p>-->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col col-lg-8 healthViewPopupPadding">
+                                                                    <p>{{feature.toolTip}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-content>
+                                </md-tab>
+                            </md-tabs>
+                        </md-content>
+
+                        <!-- <h4 id="toggle-tab" class="toggle-tab-menu">TAB MENU</h4>
+                        <ul class="tabsVert">
+                            <li class="" ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url), disabled: tab.disabled}" ng-click="onClickTab(tab)"><span class="{{tab.className}}">
+                </span>{{tab.title}}</li>
+                        </ul>
+                        <div class="clearfix"></div>
+                        <div id="mainView" class="tab-contentVert">
+                            <div class="">
+                                <div ng-include="currentTab"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <script type="text/ng-template" id="hospitalisation.tpl.html">
+                        
+                    </script>
+                    <script type="text/ng-template" id="preventive.tpl.html">
+                        
+                    </script>
+                    <script type="text/ng-template" id="enhanced.tpl.html">
+                        
+                    </script>
+                    <script type="text/ng-template" id="disease.tpl.html">
+                        
+                    </script> -->
+                </md-input-container>
+
+
+                
+                </div>
+            </div>
+        </div>
+</modal-dialog>

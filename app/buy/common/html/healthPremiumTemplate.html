@@ -1,0 +1,190 @@
+<!--     Premium Breakup Popup       -->
+<modal-dialog show='premiumModalHealth' width='900px' height='80vh' class="ng-hide RTOSearchDiv" style="overflow:auto;">
+        <!-- <div class='ng-modal-close wp_modalClose' ng-click='hidePremiumModalCar()'>
+                <i class="material-icons">close</i>
+            </div> -->
+        <div class="ang_loginWrap" layout-align="center center">
+            <div layout="row" layout-xs="row" class="pad25255">
+                <div flex="40" flex-xs="45" class="leftAlignTxt">
+                    <img ng-src="{{$root.wp_path}}img/clogo/{{healthProductToBeAddedInCart.carrierId}}.png" />
+                    <p class="font15 hideForMobile">{{healthProductToBeAddedInCart.planName}}</p>
+                </div>
+                <div flex="30" class="centerAlignTxt hideForMobile">
+                    <b class="font24">&#8377; {{healthProductToBeAddedInCart.sumInsured | regexINR}}</b>
+                    <div class="font13 greyb7Txt">Sum Insured</div>
+                </div>
+                <div flex="35" flex-xs="45" class="resp_selfCenter">
+                    <div class="width55 resp_width80 iPad_width40 side25Mar resp_autoMar">
+                        <div class="buyNowBtn posRel cursor">
+                            <p class="pinkFeTxt topBot1Mar popAddToCartBtn bold12 resp_font9">Premium</p>
+                            <p class="pinkFeTxt bold24 topBot5Mar resp_font14">&#8377; {{healthProductToBeAddedInCart.basicPremium|number:0}}</p>
+                        </div>
+                        <div class="centerAlignTxt topBot2Mar font10">Exclusive of GST</div>
+                    </div>
+                </div>
+                <div flex="5" flex-xs="10" style="text-align: right;" class="cursor" ng-click='hidePremiumModalHealth()'>
+                    <i class="material-icons greyb7Txt">highlight_off</i>
+                </div>
+            </div>
+            <div>
+                <md-content>
+                    <md-tabs class="popTab garMod greyTab" md-selected="$root.selectedTabHealth" md-dynamic-height  md-swipe-content>
+                        <md-tab label="Premium Details" >
+                                <div style="max-height:50vh;overflow:auto;">
+                            
+                            
+                            <md-content class="md-padding grey4bTxt side15Mar resp_side1Mar">
+                                <div class="md-body-1" layout="row">
+                                    <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                            Basic Premium
+                                    </div>
+                                    <div flex="66" flex-xs="60">
+                                        <div layout="row">
+                                            <div flex="50" flex-xs="70">
+                                                <p></p>
+                                            </div>
+                                            <div flex="20" flex-xs="30" class="right">
+                                                <p>&#8377; {{healthProductToBeAddedInCart.basicPremium|number:0}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-content>
+                            <md-content class="md-padding grey4bTxt side15Mar resp_side1Mar">
+                                <div class="md-body-1" layout="row">
+                                    <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                        Service Tax
+                                    </div>
+                                    <div flex="66" flex-xs="60">
+                                        <div layout="row">
+                                            <div flex="50" flex-xs="50">
+                                                <p></p>
+                                            </div>
+                                            <div flex="20" flex-xs="50" class="right">
+                                                <p>&#8377; {{healthProductToBeAddedInCart.serviceTax | number:0}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-content>
+                            <md-content class="md-padding grey4bTxt side15Mar resp_side1Mar">
+                                <div class="md-body-1" layout="row">
+                                    <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                        Annual Premium
+                                    </div>
+                                    <div flex="66" flex-xs="60">
+                                        <div layout="row">
+                                            <div flex="50" flex-xs="50">
+                                                <p></p>
+                                            </div>
+                                            <div flex="20" flex-xs="50" class="right">
+                                                <p>&#8377; {{healthProductToBeAddedInCart.annualPremium | number:0}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-content>
+                        </div>
+                        </md-tab>
+                        <md-tab label="Service Ratings">
+                            <md-content class="md-padding resp_servScroll">
+                                <div class="md-body-2">
+                                    <div class="md-body-1" layout-xs="column" layout="row">
+                                        <div flex="20" flex-xs="100" class="centerAlignTxt selfCenter">
+                                                <img ng-src="{{$root.wp_path}}img/professionalJourney/Service_Rating_Star_ResultScreen.png">
+                                        </div>
+                                        <div flex="60" flex-xs="100">
+                                                <p class="noMargin grey4BTxt"><b>Service Ratings?</b></p>
+                                                <p class="font12 grey4BTxt">{{p365Labels.common.serviceRatingDesc1}}</p>
+                                                <p class="font12 grey4BTxt">{{p365Labels.common.serviceRatingDesc2}}</p>
+                                                <ul class="font12 grey4BTxt">
+                                                    <li><span>-&nbsp;</span>{{p365Labels.common.inclurredClaimRatio}}</li>
+                                                    <li><span>-&nbsp;</span>{{p365Labels.common.solvencyRatio}}</li>
+                                                    <li><span>-&nbsp;</span>{{p365Labels.common.grievanceResolved}}</li>
+                                                </ul>
+                                        </div>
+                                        <div flex="20" flex-xs="100" class="selfCenter">
+                                                <p class="font24 noMargin grey4BTxt resp_font14 center">{{healthProductToBeAddedInCart.insurerIndex|number:1}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="Benefits">
+                            <md-content class="md-padding resp_servScroll">
+                                <div class="md-body-3" >
+                                    <div class="md-body-1" layout-xs="column" layout="row">
+                                        <div flex="20" flex-xs="100" class="centerAlignTxt selfCenter">
+                                           <img ng-src="{{$root.wp_path}}img/professionalJourney/Claim_Rating_Star_ResultScreen.png">
+                                        </div>
+                                        <div flex="60" flex-xs="100">
+                                                <p class="noMargin grey4BTxt"><b>Benefit Ratings?</b></p>
+                                                <p class="font12 grey4BTxt">{{p365Labels.common.benefitRatingDesc}}</p>
+                                               
+                                                <ul class="font12 grey4BTxt">
+                                                    <li><span>-&nbsp;</span>{{p365Labels.common.hospitalCoverage}}</li>
+                                                    <li><span>-&nbsp;</span>{{p365Labels.common.preventiveAndOutPatient}}</li>
+                                                    <li><span>-&nbsp;</span>{{p365Labels.common.additionalCoverage}}</li>
+                                                    <li><span>-&nbsp;</span>{{p365Labels.common.exclusionAndSharedCost}}</li>
+                                                </ul>
+                                        </div>
+                                        <div flex="20" flex-xs="100" class="selfCenter">
+                                            <p class="font24 noMargin grey4BTxt resp_font14 center">{{healthProductToBeAddedInCart.benefitIndex}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-content>
+                        </md-tab>  
+                        <md-tab label="Cashless Hospitals">
+                                <div style="max-height:50vh;overflow:auto;">
+                                        <md-content class="md-padding side10PerMar resp_servScroll">
+                                        <h2 class="md-body-4">
+                                            <ng-container  ng-repeat="hospital in hospitalList"  ng-if="hospital[healthProductToBeAddedInCart.carrierId]">
+                                                <ng-container>
+                                                    <p class="font18">List of hospitals in {{filterPincode}}</p>
+                                                    <div class="md-body-1 garageListBorder"  layout-xs="column" layout="row" ng-repeat = "data in hospital[healthProductToBeAddedInCart.carrierId]" ng-if="data.pincode==filterPincode">
+                                                        <div flex="70" flex-xs="100">
+                                                            <p class="noMargin grey4BTxt">
+                                                                <b>{{data.hospitalName}}, </b>
+                                                            </p>
+                                                            <p>{{data.area}}</p>
+                                                        </div>
+                                                        <div flex="5" flex-xs="100"></div>
+                                                        <div flex="25" flex-xs="100">
+                                                            <div><a ng-click="openMapHospital(data)" class="tempPos7">Get Direction</a>
+                                                            <span><i class="material-icons">directions</i></span></div>
+                                                        </div>
+                                                    </div>
+                                                    <p class="font18">List of hospitals in {{filterCity}}</p>
+                                                    <div class="md-body-1" layout-xs="column" layout="row" ng-repeat = "data in hospital[healthProductToBeAddedInCart.carrierId]" ng-if="data.pincode!=filterPincode">
+                                                        <div flex="70" flex-xs="100">
+                                                            <p class="noMargin grey4BTxt">
+                                                                <b>{{data.hospitalName}}, </b>
+                                                            </p>
+                                                            <p>{{data.area}}</p>
+                                                        </div>
+                                                        <div flex="5" flex-xs="100"></div>
+                                                        <div flex="25" flex-xs="100">
+                                                            <div><a ng-click="openMap(data)" class="tempPos7">Get Direction</a>
+                                                            <span><i class="material-icons">directions</i></span></div>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                                <!-- <ng-container ng-if="garageListData.garageData.length == 0">
+                                                    No Garage
+                                                </ng-container> -->
+                                            </ng-container>
+                                        </h2>
+                                        <!-- <h2 ng-if="!garageDataCheck(healthProductToBeAddedInCart.carrierId)">
+                                            No Hospital
+                                        </h2> -->
+                                    </md-content>
+                                    </div>
+                         </md-tab>                         
+                    </md-tabs>
+                </md-content>
+            </div>
+        </div>
+    </modal-dialog>
+    <!--     Premium Breakup Popup       -->
+    

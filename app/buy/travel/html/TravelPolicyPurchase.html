@@ -1,0 +1,141 @@
+<div class="editback wp_noBGPad" >
+	<div class="widthFull resultCommon wp_noBoxShadow wp_noBGPad">
+		<div class="InsideWrapper wp_purchasePopup wp_marginAutoSign wp_gradientBg">
+			<div class="additionalfeatures wp_noBoxShadow wp_noBGPadNew">
+				<!-- <div class="backButton">
+					<md-button class="md-fab md-mini md-primary backButtonColor"
+						aria-label="back" style="margin: 17px 10px 0px 17px !important;">
+					<md-icon style="" md-svg-src="img/arrow-left-bold.svg"></md-icon> </md-button>
+				</div> -->
+				<div class="pad10 purchasingHeader">
+					<h3>Insurance Sales Statement</h3>
+					<p>Thanks for Purchasing this policy through Policies365. The
+						transaction details of your {{lineOfBusiness}} Policy purchased
+						from {{policyDocument.insuranceCompany}} through
+						Policies365 are furnished below. Policy document will be issued by
+						the {{policyDocument.insuranceCompany}} with
+						these details .</p>
+				</div>
+				<!--................Personal Details Start................  -->
+				<div class="outerPurchase">
+					<div class="innerPurchaseLeft pad10">
+						<div class="purchaseTitle">
+							<label class="wp_blueText">Personal Details</label>
+						</div>
+						<div class="purchaseBody pad10 wp_gradientBg wp_resultBorder">
+							<div class="personalLabelLeft">Name :</div>
+							<div class="personalLabelRight">{{policyDocument.travelProposalResponse.firstName }} {{policyDocument.travelProposalResponse.lastName}} </div>
+							<div class="clear"></div>
+							<div class="personalLabelLeft">Address :</div>
+							<div class="personalLabelRight">{{policyDocument.addressLine1}}{{policyDocument.addressLine2}}</div>
+							<div class="clear"></div>
+							<div class="personalLabelLeft">Email :</div>
+							<div class="personalLabelRight">{{policyDocument.travelProposalResponse.emailId}}</div>
+							<div class="clear"></div>
+							<div class="personalLabelLeft">Mobile No. :</div>
+							<div class="personalLabelRight">{{policyDocument.travelProposalResponse.mobileNo}}</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+
+					<!--................Personal Details End................  -->
+
+					<!--................Travel Details Start................  -->
+					<div class="innerPurchaseLeft pad10">
+						<div class="purchaseTitle">
+							<label class="wp_blueText">Travel Details</label>
+						</div>
+						<div class="purchaseBody extraVehicleHeight pad10  wp_gradientBg wp_resultBorder">
+						<div class="purchaseBodyLeft rightBorder wp_respNoBorder">
+								<div class="labelLeft">Destinations :</div>
+								<div class="labelRight">
+								<span class="span_font" ng-repeat = "destination in policyDocument.proposalRequest.travelDetails.destinations">
+								{{destination.displayField}}<span ng-if="!$last">, </span></span>
+								</div>
+								<div class="clear"></div>
+								<div class="labelLeft">Trip Type :</div>
+								<div class="labelRight">{{policyDocument.proposalRequest.travelDetails.tripType}}</div>
+								<div class="clear"></div>
+								<div class="labelLeft">Trip Start Date :</div>
+								<div class="labelRight">{{policyDocument.proposalRequest.travelDetails.startdate}}</div>
+								<div class="clear"></div>
+								<div class="labelLeft">Trip End Date :</div>
+								<div class="labelRight">{{policyDocument.proposalRequest.travelDetails.enddate}}</div>
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<!--................Travel Details End................  -->
+
+				<!--................Policy Details Start................  -->
+				<div class="outerPurchase">
+					<div class="innerPurchaseLeft pad10">
+						<div class="purchaseTitle">
+							<label class="wp_blueText">Policy Details</label>
+						</div>
+						<div class="purchaseBody extraPolicyHeight pad10  wp_gradientBg wp_resultBorder">
+							<div class="purchaseBodyLeft rightBorder wp_respNoBorder">
+								<div class="labelLeft">Policy No. :</div>
+								<div class="labelRight">{{policyDocument.travelPolicyResponse.policyNo}}</div>
+								<div class="clear"></div>
+								<div class="labelLeft">Product Name :</div>
+								<div class="labelRight">{{policyDocument.planName}}</div>
+								<div class="clear"></div>
+								<div class="labelLeft">Policy Issue Date :</div>
+								<div class="labelRight">{{policyDocument.travelPolicyResponse.updatedDate}}</div>
+								<div class="clear"></div>
+							</div>
+							<div class="purchaseBodyRight">
+								<div class="labelLeft">Policy Start Date :</div>
+								<div class="labelRight">{{policyDocument.policyStartDate}}</div>
+								<div class="clear"></div>
+								<div class="labelLeft">Policy Expiry Date :</div>
+								<div class="labelRight">{{policyDocument.policyExpiryDate}}</div>
+								<div class="clear"></div>
+								<div class="labelLeft">Total Premium :</div>
+								<div class="labelRight">{{policyDocument.totalPremium}}</div>
+								<div class="clear"></div>
+								<div class="labelLeft">Payment Date :</div>
+								<div class="labelRight">{{policyDocument.paymentResponse.updatedDate}}</div>
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+
+					<!--................Policy Details End................  -->
+
+					<!--................Coverage Details Start................  -->
+
+					<div class="innerPurchaseRight pad10">
+						<div class="purchaseTitle">
+							<label class="wp_blueText">Coverage Details</label>
+						</div>
+						<div class="purchaseBody pad10 wp_gradientBg wp_resultBorder">
+							<div class="purchaseBodyLeft rightBorder wp_respNoBorder">
+								<div class="labelLeft">Sum Insured :</div>
+								<div class="labelRight">{{policyDocument.proposalRequest.travelDetails.sumInsured}}</div>
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<!--................Coverage Details End................  -->
+
+				<div class="purchasingHeader">
+					<div class="pad10">
+						<p>This is a transaction confirmation statement and Policy
+							will be issued by the Insurer. This cannot be used for filing
+							claims in your policy. If you have any questions, complaints or
+							suggestion, please write to us at contact@policies365.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

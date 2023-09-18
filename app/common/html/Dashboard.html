@@ -1,0 +1,267 @@
+<!-- My Policies & My Profile -->
+<div>
+	<md-content>
+		<md-tabs style="width:100%" class="popTab garMod2" md-dynamic-height="">
+			<md-tab label="My Profile">
+				<div>
+					<md-content class="grey4bTxt mar3_5Per borRad7 light1Border centerAlignTxt">
+						<div layout="row" class="font14">
+							<ng-container flex="100" ng-include="myProfileSection"></ng-container>
+						</div>
+					</md-content>
+				</div>
+			</md-tab>
+			<md-tab label="Risk & Insurance Profile">
+				<div>
+					<md-content class="grey4bTxt mar3_5Per borRad7 light1Border centerAlignTxt">
+						<div layout="row" class="font14">
+							<ng-container flex="100" ng-include="riskAndInsuranceProfileSection"></ng-container>
+						</div>
+					</md-content>
+				</div>
+			</md-tab>
+			
+			<md-tab label="My Quotes">
+				<div>
+					<md-content class="grey4bTxt mar3_5Per borRad7 light1Border centerAlignTxt">
+						<div layout="row" class="font14">
+							<ng-container flex="100" ng-include="myQuoteSection"></ng-container>
+						</div>
+					</md-content>
+				</div>
+			</md-tab>
+			<md-tab label="My Proposals">
+					<div>
+						<md-content class="grey4bTxt mar3_5Per borRad7 light1Border centerAlignTxt">
+							<div layout="row" class="font14">
+								<ng-container flex="100" ng-include="myProposalSection"></ng-container>
+							</div>
+						</md-content>
+					</div>
+				</md-tab>
+			<!-- heare policies will come  -->
+			<md-tab label="My Policies({{(userPolices != undefined && userPolices.length != 0)?userPolices.length:'00'}})">
+				
+				<ng-container ng-include="userPoliciesSection"></ng-container>
+			</md-tab>
+		</md-tabs>
+	</md-content>
+</div>
+<!-- My Policies & My Profile -->
+<!-- 
+<div class="ang_loginWrap loginWrapBg">
+	<div class="padContainer professionalBody">
+		<div class="centerAlignTxt">
+			<div class="padBot5Per col-md-6 centerAlignTxt" style="float:none; display:inline-block;padding-top:3%;">
+				<h2 class="chooseProfTitle" style="padding-top:5%;font-size:38px;">
+					Login to view your Policies & Risk Profile
+				</h2>
+			</div>
+			<div class="ui-widget centerAlignTxt">
+				<form name="loginForm" ng-show="!modalOTP">
+					<div class="col-md-5 custom_search">
+						<div class="col-md-12 centerAlignTxt" style="padding:0;margin:0;">
+							<div class="combobox-container">
+								<div class="input-group">
+									<input name="loginMobileNumber" ng-model="login.MobileNumber" placeholder="{{globalLabel.applicationLabels.login.registeredNumber}}"
+									 autocomplete="off" ng-pattern="/^[6789]\d{9}$/" maxlength="10" class="combobox" minlength="10" autocomplete="off"
+									 required />
+
+								</div>
+								<div ng-messages="loginForm.loginMobileNumber.$error" ng-if="loginForm.loginMobileNumber.$touched">
+									<div style="color: red" ng-message="required">Mobile number is required</div>
+									<div style="color: red" ng-message="pattern">Enter valid mobile number</div>
+									<div style="color: red" ng-message="minlength">Minimum length should be 10</div>
+								</div>
+								<div style="color: red; text-align: center; margin-bottom: 1%;">{{createOTPError}}</div>
+							</div>
+						</div>
+						<div class="col-md-6 get_quote_button" ng-disabled="loginForm.$invalid" ng-click="validateLogin()">
+
+							Send OTP
+						</div>
+					</div>
+				</form>
+				<form name="authenticateForm" ng-show="modalOTP">
+					<div class="col-md-5 custom_search">
+						<div class="col-md-12 centerAlignTxt" style="padding:0;margin:0;">
+							<div class="combobox-container">
+								<div class="input-group">
+									<input name="OTP" placeholder="{{globalLabel.applicationLabels.login.enterOTPCaption}}" ng-model="authenticate.enteredOTP"
+									 autocomplete="off" ng-pattern="/\d{6}/" maxlength="6" minlength="6" class="combobox" required/>
+
+								</div>
+								<div>
+									<a ng-click="resendOTP()">Resend OTP</a> |
+									<a ng-click="modalOTP=false">Entered Wrong Number?</a>
+								</div>
+								<div ng-messages="authenticateForm.OTP.$error" ng-if="authenticateForm.OTP.$touched">
+									<div style="color: red" ng-message="required">OTP number is required</div>
+									<div style="color: red" ng-message="pattern">Enter valid OTP number</div>
+									<div style="color: red" ng-message="minlength">Minimum lenght should be 6</div>
+								</div>
+								<div style="color: red; text-align: center; margin-bottom: 1%;" class="wp_respFont13">{{invalidOTPError}}</div>
+								<div style="color: green; text-align: center; margin-bottom: 1%;" class="wp_respFont13">{{globalLabel.validationMessages.otpValidPeriod}}</div>
+							</div>
+						</div>
+						<div class="col-md-6 get_quote_button" ng-click="authenticateUser()">Submit</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<!-- Failure Page -->
+
+<!-- <div class="failureBg ang_loginWrap">
+	<div class="padContainer professionalBody">
+		<div class="centerAlignTxt">
+			<div class="padBot5Per col-md-6 centerAlignTxt" style="float:none; display:inline-block;padding-top:1%;">
+				<h2 class="failureTitle">Sorry for Inconvenience</h2>
+				<div>
+					<p class="centerAlignTxt failurePara">
+						Dear Customer,</br>
+						<p class="failurePara">Due to some technical difficulties your payment has failed and hence we are unable to process your request with proposal
+							number <b>PROP000B104831</b>.<br> If amount has been deducted from your account kindly get in touch with your bank for refund.</p>
+						<hr class="failurePara" style="color: #ddd;border-bottom: 1px solid #ccc !important;border: 0px;margin: 0px 15%;">
+
+						<p class="failurePara">In case of any queries or assistance, please call us on our Helpline <span class="pinkFont"> 022-68284343</span>
+							<br> &nbsp;( Office hours 9;30 am to 6:00 pm ) or write to us @ <span class="pinkFont"><u>contact@policies365.com</u></span></p>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<!-- Failure Page -->
+
+<!-- <div>
+	<form name="loginForm">
+		<div class="wp_signinPopup wp_marginAutoSign wp_gradientBg">
+			<div
+				class="pad10 mobileHealthFamily pad10Padding wp_signinFamilyPopup"
+				layout="column">
+				<div class="fullShadow resultBg familyPopup wp_noBg"
+					style="margin-bottom: 0px !important;">
+					<div class="popupTableHealth popupPadding" layout="row"
+						style="padding: 3% 0% 0% 0% !important;">
+						<div flex="100" style="text-align: center; padding: 1% 0%;">
+							<b>{{globalLabel.applicationLabels.login.registeredNumber}}</b>
+						</div>
+					</div>
+					<md-input-container class="md-block">
+					<div layout="row" class="pad10 wp_signinFamilyInnerPopup">
+						<div flex="15" class="mobileNoIcon">
+							<i class="material-icons">call</i>
+						</div>
+						<div flex="75">
+							<input name="loginMobileNumber" ng-model="login.MobileNumber"
+								autocomplete="off" ng-pattern="/^[789]\d{9}$/" maxlength="10"
+								class="signBoxShadow wp_signinMbNo" minlength="10"
+								style="background: transparent !important; text-align: center;"
+								required />
+						</div>
+					</div>
+					</md-input-container>
+					<div style="color: red; text-align: center; margin-bottom: 1%;">{{createOTPError}}</div>
+				</div>
+			</div>
+
+			<div class="center">
+				<button type="submit" class="orangebutton wp_signInBtn"
+					id="loginForm" ng-disabled="loginForm.$invalid"
+					ng-click="validateLogin()">Submit</button>
+			</div>
+		</div>
+	</form>
+
+	<modal-dialog show='modalOTP' width='500px' height='auto'
+		class="ng-hide">
+	<div class='ng-modal-close wp_modalClose' ng-click='closeAuthenticateForm()'
+		ng-if="$root.wordPressEnabled">
+		<i class="material-icons">close</i>
+	</div>
+	<form name="authenticateForm">
+		<div class="modalHeader wp_noBluebackground wp_noBoxShadow">
+			<div class="blueBackground one-edge-shadow wp_noBoxShadow" style=""
+				layout="row">
+				<div flex="85" class="wp_respWidth100">
+					<h2 class="white popupHeading wp_popupHeading wp_OTPTitleFont">
+						{{globalLabel.applicationLabels.login.OTPTemplateHeader}}</span>
+					</h2>
+				</div>
+				<div class='ng-modal-close' ng-click='closeAuthenticateForm()'
+					style="color: #fff;" flex="15" ng-if="!$root.wordPressEnabled">
+					<i class="material-icons">close</i>
+				</div>
+			</div>
+		</div>
+
+		<div class="pad10 mobileHealthFamily pad10Padding" layout="column">
+			<div
+				class="fullShadow resultBg familyPopup wp_signinFamilyInnerPopup"
+				style="margin-bottom: 0px !important;">
+				<div class="popupTableHealth popupPadding" layout="row"
+					style="padding: 3% 0% 0% 0% !important;">
+					<div flex="100" style="text-align: center; padding: 1% 0%;">
+						<b class="wp_respFont13">{{globalLabel.applicationLabels.login.enterOTPCaption}}</b>
+					</div>
+				</div>
+				<md-input-container class="md-block">
+				<div class="pad10">
+					<div flex="100">
+						<input name="loginMobileNumber" ng-model="authenticate.enteredOTP"
+							autocomplete="off" ng-pattern="/\d{6}/" maxlength="6"
+							minlength="6" class="signBoxShadow"
+							style="background: transparent !important; text-align: center;"
+							required />
+					</div>
+				</div>
+				</md-input-container>
+				<div style="color: red; text-align: center; margin-bottom: 1%;" class="wp_respFont13">{{invalidOTPError}}</div>
+				<div style="color: green; text-align: center; margin-bottom: 1%;" class="wp_respFont13">{{globalLabel.validationMessages.otpValidPeriod}}</div>
+			</div>
+		</div>
+		<div class="center">
+			<button type="submit" class="bluebutton wp_signInBtn"
+				id="authenticateUser" ng-disabled="authenticateForm.$invalid"
+				ng-click="authenticateUser()">Submit</button>
+		</div>
+		<div class="pad10 center">
+			<md-button ng-click="resendOTP()" ng-disabled="disableOTP">
+			<span class="resendLink">Resend OTP</span></md-button>
+		</div>
+	</form>
+	</modal-dialog>
+
+</div> -->
+<!-- 
+<modal-dialog show="renewPolicyModal" width='500px' height='auto' class="ng-hide RTOSearchDiv">
+	<div class="fullShadow resultBg">
+		<div>
+			<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+				<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+					<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">Choose Your Option </h2>
+				</div>
+				<div class='ng-modal-close closePopup' ng-click='hideRenewPolicyModal()'>
+					<i class="material-icons">highlight_off</i>
+				</div>
+			</div>
+
+			<div class="pad10">
+
+				<div class="center submitBtnAlign">
+
+					<div class="dialogButton wrap" style="display: inline;">
+						<md-button ng-disabled="true" ng-click="gotoProposalScreen()" class="bluebuybuttoncar wp_riderPopup pj_submit" id="carBuyProductBtn">Choose Same Carrier </md-button>
+						<md-button ng-click="gotoResultScreen()" class="bluebuybuttoncar wp_riderPopup pj_submit" id="carBuyProductBtn">Choose Different Carrier </md-button>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</modal-dialog> -->

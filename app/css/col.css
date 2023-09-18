@@ -1,0 +1,208 @@
+
+/*  SECTIONS  ============================================================================= */
+.section {clear: both;padding: 0px;margin: 0px;  box-sizing:border-box;}
+
+/*  GROUPING  ============================================================================= */
+.group:before,.group:after {content:""; display:table;}
+.group:after {clear:both;}
+.group {    zoom:1;  box-sizing:border-box;/* For IE 6/7 (trigger hasLayout) */}
+
+/*  GRID COLUMN SETUP   ==================================================================== */
+/*.col {display: block;float:left;margin: 1% 0 1% 1.6%;}*/
+.colRight {display: block;float:right;margin: 1% -10% 1% 1.6%;} 
+.colLeft {display: block;float:left;margin: 1% 0 1% 8%;} 
+.col {display: block;float:left;margin: 0%;} 
+
+.col:first-child { margin-left: 0; } /* all browsers except IE6 and lower */
+/*  REMOVE MARGINS AS ALL GO FULL WIDTH AT 480 PIXELS */
+
+@media only screen and (max-width: 480px) {	.col { 	margin: 1% 0 1% 0%;	}}
+
+/*  GRID OF TWO   ============================================================================= */
+.span_2_of_2 {width: 100%; box-sizing:border-box;}
+.span_1_of_2 {width: 49.2%; box-sizing:border-box;text-align:left;}
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {.span_2_of_2 {width: 100%;  box-sizing:border-box;}
+	.span_1_of_2 {	width: 100%;  box-sizing:border-box;}}
+/*  GRID OF THREE   ============================================================================= */
+.span_3_of_3 {width: 100%; box-sizing:border-box;}
+.span_2_of_3 {	width: 66.13%; box-sizing:border-box;}
+.span_1_of_3 {width: 32.26%; box-sizing:border-box;}
+.span_1_of_3_footerAlign {width: 32.26%; box-sizing:border-box; }/*padding-left: 90px;*/
+
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {	.span_3_of_3 {width: 100%; box-sizing:border-box;}
+	.span_2_of_3 {width: 100%; box-sizing:border-box;}
+	.span_1_of_3 {width: 100%;box-sizing:border-box;}}
+/*  GRID OF FOUR   ============================================================================= */
+.span_4_of_4 {width: 100%; box-sizing:border-box;}
+.span_3_of_4 {width: 74.6%; box-sizing:border-box;}
+.span_2_of_4 {width: 49.2%; box-sizing:border-box;}
+.span_1_of_4 {width: 23.8%; box-sizing:border-box;}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {.span_4_of_4 {width: 100%; box-sizing:border-box;}
+	.span_3_of_4 {width: 100%; box-sizing:border-box;}
+	.span_2_of_4 {width: 100%; box-sizing:border-box;}
+	.span_1_of_4 {width: 100%; box-sizing:border-box;}}
+/*  GRID OF FIVE   ============================================================================= */
+.span_5_of_5 {width: 100%;box-sizing:border-box;}
+.span_4_of_5 {	width: 79.68%; box-sizing:border-box;}
+.span_3_of_5 { 	width: 59.36%; box-sizing:border-box;}
+.span_2_of_5 {	width: 39.04%;box-sizing:border-box;}
+.span_1_of_5 { 	width: 18.72%;box-sizing:border-box;}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {.span_5_of_5 {width: 100%; box-sizing:border-box;}
+	.span_4_of_5 {width: 100%; box-sizing:border-box;}
+	.span_3_of_5 {width: 100%; box-sizing:border-box;}
+	.span_2_of_5 {width: 100%; box-sizing:border-box;}
+	.span_1_of_5 {width: 100%; box-sizing:border-box;}}
+/*  GRID OF SIX   ============================================================================= */
+.span_6_of_6 {width: 100%;box-sizing:border-box;}
+.span_5_of_6 {	width: 83.06%;box-sizing:border-box;}
+.span_4_of_6 {width: 66.13%;box-sizing:border-box;}
+.span_3_of_6 {width: 49.2%;box-sizing:border-box;}
+.span_2_of_6 {width: 32.26%;box-sizing:border-box;}
+.span_1_of_6 {	width: 15.33%;box-sizing:border-box;}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {	.span_6_of_6 {	width: 100%; box-sizing:border-box;}
+	.span_5_of_6 {width: 100%; box-sizing:border-box;}
+	.span_4_of_6 {width: 100%; box-sizing:border-box;}
+	.span_3_of_6 {width: 100%; box-sizing:border-box;}
+	.span_2_of_6 {width: 100%; box-sizing:border-box;}
+	.span_1_of_6 {width: 100%; box-sizing:border-box;}}
+/*  GRID OF SEVEN   ============================================================================= */
+.span_7_of_7 {width: 100%;box-sizing:border-box;}
+.span_6_of_7 {width: 85.48%;box-sizing:border-box;}
+.span_5_of_7 { 	width: 70.97%;box-sizing:border-box;}
+.span_4_of_7 {width: 56.45%;box-sizing:border-box;}
+.span_3_of_7 {	width: 41.94%;box-sizing:border-box;}
+.span_2_of_7 {width: 27.42%;box-sizing:border-box;}
+.span_1_of_7 {width: 12.91%;box-sizing:border-box;}
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {.span_7_of_7 {width: 100%; box-sizing:border-box;}
+	.span_6_of_7 {width: 100%; box-sizing:border-box;}
+	.span_5_of_7 {width: 100%; box-sizing:border-box;}
+	.span_4_of_7 {width: 100%; box-sizing:border-box;}
+	.span_3_of_7 {width: 100%; box-sizing:border-box;}
+	.span_2_of_7 {	width: 100%; box-sizing:border-box;	}
+	.span_1_of_7 {width: 100%; box-sizing:border-box;}}
+	/*  GRID OF EIGHT   ============================================================================= */
+.span_8_of_8 {	width: 100%;box-sizing:border-box;}
+.span_7_of_8 {width: 87.3%; box-sizing:border-box;}
+.span_6_of_8 {width: 74.6%; box-sizing:border-box;}
+.span_5_of_8 {	width: 61.9%; box-sizing:border-box;}
+box-sizing:border-box;.span_4_of_8 {width: 49.2%; box-sizing:border-box;}
+.span_3_of_8 {width: 36.5%;box-sizing:border-box;}
+.span_2_of_8 {width: 23.8%; box-sizing:border-box;}
+.span_1_of_8 {width: 11.1%; box-sizing:border-box;}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {.span_8_of_8 {width: 100%; box-sizing:border-box;}
+	.span_7_of_8 {width: 100%; box-sizing:border-box;}
+	.span_6_of_8 {width: 100%; box-sizing:border-box;}
+	.span_5_of_8 {width: 100%; box-sizing:border-box;}
+	.span_4_of_8 {width: 100%; box-sizing:border-box;}
+	.span_3_of_8 {width: 100%; box-sizing:border-box;}
+	.span_2_of_8 {width: 100%; box-sizing:border-box;}
+	.span_1_of_8 {width: 100%; box-sizing:border-box;}}
+/*  GRID OF NINE   ============================================================================= */
+.span_9_of_9 {width: 100%;box-sizing:border-box;}
+.span_8_of_9 {width: 88.71%;box-sizing:border-box;}
+.span_7_of_9 {width: 77.42%; box-sizing:border-box;}
+.span_6_of_9 {width: 66.13%; box-sizing:border-box;}
+.span_5_of_9 {width: 54.84%; box-sizing:border-box;}
+.span_4_of_9 {width: 43.55%; box-sizing:border-box;}
+.span_3_of_9 {width: 32.26%;box-sizing:border-box;}
+.span_2_of_9 {width: 20.97%; box-sizing:border-box;}
+.span_1_of_9 {width: 9.68%; box-sizing:border-box;}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {	.span_9_of_9 {width: 100%;box-sizing:border-box; }
+	.span_8_of_9 {width: 100%;box-sizing:border-box; }
+	.span_7_of_9 {	width: 100%; box-sizing:border-box;	}
+	.span_6_of_9 {	width: 100%;box-sizing:border-box; }
+	.span_5_of_9 {	width: 100%;box-sizing:border-box; }
+	.span_4_of_9 {	width: 100%; box-sizing:border-box;}
+	.span_3_of_9 {	width: 100%; box-sizing:border-box;	}
+	.span_2_of_9 {	width: 100%; box-sizing:border-box;}
+	.span_1_of_9 {	width: 100%; box-sizing:border-box;}}
+/*  GRID OF TEN   ============================================================================= */
+
+.span_10_of_10 {width: 100%;box-sizing:border-box;}
+.span_9_of_10 {	width: 89.84%;box-sizing:border-box;}
+.span_8_of_10 {	width: 79.68%;box-sizing:border-box;}
+.span_7_of_10 {	width: 69.52%; box-sizing:border-box;}
+.span_6_of_10 {	width: 59.36%;box-sizing:border-box; }
+.span_5_of_10 {	width: 49.2%; box-sizing:border-box;}
+.span_4_of_10 {	width: 39.04%; box-sizing:border-box;}
+.span_3_of_10 {	width: 28.88%;box-sizing:border-box;}
+.span_2_of_10 {	width: 18.72%; box-sizing:border-box;}
+.span_1_of_10 {	width: 8.56%; box-sizing:border-box;}
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {	.span_10_of_10 {width: 100%; box-sizing:border-box;}
+	.span_9_of_10 {width: 100%; box-sizing:border-box;	}
+	.span_8_of_10 {width: 100%; box-sizing:border-box;}
+	.span_7_of_10 {	width: 100%; box-sizing:border-box;	}
+	.span_6_of_10 {	width: 100%; box-sizing:border-box;	}
+	.span_5_of_10 {	width: 100%; box-sizing:border-box;	}
+	.span_4_of_10 {	width: 100%; box-sizing:border-box;	}
+	.span_3_of_10 {width: 100%; box-sizing:border-box;	}
+	.span_2_of_10 {	width: 100%; box-sizing:border-box;	}
+	.span_1_of_10 {	width: 100%; box-sizing:border-box;	}}
+/*  GRID OF ELEVEN   ============================================================================= */
+.span_11_of_11 {width: 100%;box-sizing:border-box;}
+.span_10_of_11 {width: 90.76%;box-sizing:border-box;}
+.span_9_of_11 {	width: 81.52%;box-sizing:border-box;}
+.span_8_of_11 {	width: 72.29%;box-sizing:border-box;}
+.span_7_of_11 {	width: 63.05%; box-sizing:border-box;}
+.span_6_of_11 {	width: 53.81%; box-sizing:border-box;}
+.span_5_of_11 {	width: 44.58%; box-sizing:border-box;}
+.span_4_of_11 {	width: 35.34%; box-sizing:border-box;}
+.span_3_of_11 {	width: 26.1%;box-sizing:border-box;}
+.span_2_of_11 {	width: 16.87%; box-sizing:border-box;}
+.span_1_of_11 {	width: 7.63%; box-sizing:border-box;}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {.span_11_of_11 {	width: 100%; box-sizing:border-box;	}
+	.span_10_of_11 {	width: 100%; box-sizing:border-box;	}
+	.span_9_of_11 {	width: 100%; box-sizing:border-box;	}
+	.span_8_of_11 {	width: 100%; box-sizing:border-box;	}
+	.span_7_of_11 {	width: 100%; box-sizing:border-box;	}
+	.span_6_of_11 {	width: 100%; box-sizing:border-box;	}
+	.span_5_of_11 {	width: 100%; box-sizing:border-box;	}
+	.span_4_of_11 {	width: 100%; box-sizing:border-box;	}
+	.span_3_of_11 {	width: 100%; box-sizing:border-box;	}
+	.span_2_of_11 {	width: 100%; box-sizing:border-box;}
+	.span_1_of_11 {	width: 100%;box-sizing:border-box; 	}}
+/*  GRID OF TWELVE   ============================================================================= */
+.span_12_of_12 {	width: 100%;box-sizing:border-box;}
+.span_11_of_12 {width: 91.53%;box-sizing:border-box;}
+.span_10_of_12 {width: 83.06%;box-sizing:border-box;}
+.span_9_of_12 {	width: 74.6%;box-sizing:border-box;}
+.span_8_of_12 {	width: 66.13%;box-sizing:border-box;}
+.span_7_of_12 {	width: 57.66%; box-sizing:border-box;}
+.span_6_of_12 {	width: 49.2%; box-sizing:border-box;}
+.span_5_of_12 {	width: 40.73%; box-sizing:border-box;}
+.span_4_of_12 {	width: 32.26%; box-sizing:border-box;}
+.span_3_of_12 {	width: 23.8%;box-sizing:border-box;}
+.span_2_of_12 {	width: 15.33%; box-sizing:border-box;}
+.span_1_of_12 {	width: 6.86%; box-sizing:border-box;}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {	.span_12_of_12 {width: 100%; box-sizing:border-box;	}
+	.span_11_of_12 {width: 100%; box-sizing:border-box;	}
+	.span_10_of_12 {	width: 100%; box-sizing:border-box;	}
+	.span_9_of_12 {width: 100%; box-sizing:border-box;}
+	.span_8_of_12 {	width: 100%; box-sizing:border-box;}
+	.span_7_of_12 {	width: 100%; box-sizing:border-box;	}
+	.span_6_of_12 {	width: 100%; box-sizing:border-box;	}
+	.span_5_of_12 {	width: 100%; box-sizing:border-box;	}
+	.span_4_of_12 {	width: 100%; box-sizing:border-box;	}
+	.span_3_of_12 {	width: 100%; box-sizing:border-box;	}
+	.span_2_of_12 {	width: 100%; box-sizing:border-box;	}
+	.span_1_of_12 {	width: 100%; box-sizing:border-box;	}
+}

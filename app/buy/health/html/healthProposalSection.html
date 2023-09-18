@@ -1,0 +1,86 @@
+<form name="coverageDetailsForm">
+
+	<div class="noMargin pad10 professionalProposalSection" >
+		<div class="right">
+						<!-- <p class="noMargin grey87Txt"><span><i class="material-icons pinkFont bold11">edit</i></span> Edit</p> -->
+		</div>
+		<div layout="row" layout-xs="column" layout-sm="row" class="resp_center">
+			<div flex="35" flex-xs="100" flex-sm="35">
+				<img ng-src="{{$root.wp_path}}img\clogo\{{selectedProduct.carrierId}}.png">
+			</div>
+			<div flex="65" flex-xs="100" flex-sm="65">
+				<p class="font12 noMarBot marTop8Per resp_noMar" ng-if="$root.wordPressEnabled">{{selectedProduct.insuranceCompany}} </p>
+
+				<p class="font12 noMarBot marTop8Per resp_noMar" ng-if="!$root.wordPressEnabled">
+						<md-input-container class="md-block resultPad">
+							<md-select name="reltn" ng-model-options="{trackBy: '$value.id'}" ng-model="premiumDetails.selectedProductDetails"
+									ng-change="changeInsuranceCompany()" class="mdInputContainer_input" md-no-asterisk>
+									<md-option ng-value="healthquoteresp" ng-repeat="healthquoteresp in quoteCalcResponse">
+										{{healthquoteresp.insuranceCompany + " - (SA : " + healthquoteresp.sumInsured + " & Premium : " + healthquoteresp.annualPremium
+										+ ")"}}</md-option>
+								</md-select>
+						</md-input-container>
+					</p>
+				<p class="bold16 pinkFont marTop3Per" style="margin-bottom: 0">Premium Amount &#8377; {{proposalApp.coverageDetails.totalPremium | number | regexINR}}
+				</p>
+				<p class="compareMsg font10" style="margin-top: 0">(All prices are inclusive of GST)</p>
+			</div>
+		</div>
+		<div layout="row" layout-xs="column" layout-sm="row">
+			<div flex="35" flex-xs="100" flex-sm="35" class="propCoverageTxt">
+				<p class="noMargin resp_normFont13">Coverage Details</p>
+			</div>
+			<div flex="65" flex-xs="100" flex-sm="65" style="border-top: 1px solid #ddd;margin-top: 5px;"></div>
+		</div>
+		<div class="pad1020 iPad_wrap">
+			<md-input-container class="noMarBot noMarTop width100 iPad_width50">
+				<p class="pLabel">Hospitalisation limit</p>
+				<p class="bold12">&#8377; {{proposalApp.coverageDetails.sumAssured | regexINR}}
+				</p>
+			</md-input-container>
+			<md-input-container class="noMarBot noMarTop width100 iPad_width50">
+				<p class="pLabel">Product</p>
+				<p class="bold12">{{selectedProduct.planName}}</p>
+			</md-input-container>
+			<div class="iPad_width100" layout="row" layout-xs="column" layout-sm="row">
+				<div flex="50" flex-xs="100" flex-sm="50">
+					<md-input-container class="noMarBot noMarTop width100">
+						<p class="pLabel">Policy Start Date</p>
+						<p class="bold12">{{proposalApp.coverageDetails.policyStartDate}}</p>
+					</md-input-container>
+				</div>
+				<div flex="40" flex-xs="100" flex-sm="50">
+					<md-input-container class="noMarBot noMarTop width100">
+						<p class="pLabel">Policy End Date</p>
+						<p class="bold12">{{proposalApp.coverageDetails.policyEndDate}}</p>
+					</md-input-container>
+				</div>
+			</div>
+			<md-input-container class="noMarBot noMarTop width100 iPad_width50">
+				<p class="pLabel">Policy Term</p>
+				<p class="bold12">{{proposalApp.coverageDetails.policyTerm}}&nbsp;Year</p>
+			</md-input-container>
+			<md-input-container class="noMarBot noMarTop width100" ng-if="selectedProduct.deductibleAmount">
+				<p class="pLabel">Deductible Amount</p>
+				<p class="bold12">&#8377; {{selectedProduct.deductibleAmount | number | regexINR}}</p>
+			</md-input-container>
+		</div>
+
+
+		<div layout="row" layout-xs="column" layout-sm="row" ng-if="buyScreenRiders.length > 0">
+			<div flex="35" flex-xs="100" flex-sm="35" class="propCoverageTxt">
+				<p class="noMargin resp_normFont13">Riders</p>
+			</div>
+			<div flex="65" flex-xs="100" flex-sm="65" style="border-top: 1px solid #ddd;margin-top: 5px;"></div>
+		</div>
+		<div class="pad1020">
+			<md-input-container class="noMarBot noMarTop width100" ng-repeat="buyScreenRider in buyScreenRiders">
+				<p class="pLabel">{{buyScreenRider.riderName}}</p>
+				<p class="bold12" ng-if="buyScreenRider.riderId == 17">&#8377;{{selectedProduct.sumInsured * 5 | regexINR}}</span>
+				</p>
+			</md-input-container>
+		</div>
+	</div>
+
+	
+</form>

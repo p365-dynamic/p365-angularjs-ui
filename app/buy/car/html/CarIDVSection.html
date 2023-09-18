@@ -1,0 +1,46 @@
+<!-- Commented based on Uday comments -->
+<!-- ng-if="quoteParam.policyType == 'renew'" -->
+<div class="fullShadow resultBg">
+
+	<md-list  class="resultPad modifyIDVDiv">
+		<md-radio-group ng-change="updateUserIDV()" ng-model="vehicleDetails.idvOption">
+			<md-list-item class="md-1-line">
+				<md-radio-button ng-value="1" class="classForTooltip" ng-checked="true">BEST DEAL 
+					<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" data-html="true" title="{{tooltipContent.IDVBestDeal}}"
+					 tooltip></i> -->
+					</md-radio-button>
+			</md-list-item>
+			<md-list-item class="md-1-line">
+				<md-radio-button ng-value="3" class="classForTooltip">MIN IDV 
+					<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" data-html="true" title="{{tooltipContent.IDVMinDeal}}"
+					 tooltip></i> -->
+					</md-radio-button>
+			</md-list-item>
+			<md-list-item class="md-1-line">
+		
+				<!-- idv here -->
+				<md-radio-button  ng-value="2" class="classForTooltip"> YOUR IDV 
+					<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" data-html="true" title="{{tooltipContent.IDVYourDeal}}"
+					 tooltip></i> -->
+					</md-radio-button>
+				</md-list-item>
+				<md-list-item class="md-1-line">
+					<div class="clearfix"></div>
+					<md-list class="resultPad" ng-if="vehicleDetails.idvOption == 2">
+					<md-input-container class="md-block IDV_Input noMargin"> <input ng-model="vehicleInfo.IDV" ng-change="validateUserIDV()" style="margin: 0px 12px; width: 95%;">
+							<p style="text-align: left; padding-left: 2%;">&#8377; {{(minIDVSuggested) | number:0 | regexINR}} to &#8377; {{(maxIDVSuggested) | number:0 | regexINR}}</p>
+							<div style="color: red" ng-show="userIDVError">{{globalLabel.validationMessages.userIDVInvalid}}</div>
+						</md-input-container>
+
+						<div class="center submitBtnAlign">
+							<div class="dialogButton wrap" style="display: inline;">
+								<md-button ng-click="toggleIDVChangeClose()" class="bluebuybuttoncar wp_riderPopup pj_cancel" id="carBuyProductBtn" style="background-color: #c4c4c4 !important;">Cancel</md-button>
+								<md-button ng-click="singleClickCarQuote()" ng-disabled="userIDVError" class="bluebuybuttoncar wp_riderPopup pj_submit" id="carBuyProductBtn">Submit</md-button>
+							</div>
+						</div>
+					</md-list>
+				
+			</md-list-item>
+		</md-radio-group>
+	</md-list>
+</div>

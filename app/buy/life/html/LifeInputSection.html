@@ -1,0 +1,117 @@
+<div class="showForMobile" style="display:{{$root.hideonEdit}}">
+		<div>
+				<div class="clearfix"></div>
+			<md-card class="pad2TopBot">
+				<div layout="row" class="resp_pad7_10 border1Bot">
+					<div flex="10">
+						<span><i class="material-icons resp_font18">favorite</i></span>
+					</div>
+					<div flex="80" class="font12">Life Details </div>
+					<div flex="10" class="font12 pinkFont cursor" ng-click="$root.editForMobile()">Edit</div>
+				</div>
+				<div class="resp_pad7_10 bold12">
+					{{quoteParam.gender == 'M' ? "Male": "Female"}}, aged {{quoteParam.age}} with {{personalDetails.annualIncomeObject.annualIncome}} Annual Income
+				</div>
+				
+				<div layout="row" class="resp_pad7_10">
+					<div flex="60" class="resp_titleProp">
+						Insured upto
+					</div>
+					<div flex="40" class="resp_valueProp">
+						{{personalDetails.maturityAge}}
+					</div>
+				</div>
+				<div layout="row" class="resp_pad7_10">
+					<div flex="60" class="resp_titleProp">
+						Sum Assured
+					</div>
+					<div flex="40" class="resp_valueProp">
+						{{personalDetails.sumInsuredObject.display}}
+					</div>
+				</div>
+			</md-card>
+		</div>
+	</div>
+	<div ng-form="lifeInputForm" class="hideForMobile" style="display:{{$root.showonEdit}}">
+			<div class="wrap width100 side3Pad quoteInpSec modifyDiv">
+				<ng-container class="pj_width16 padRig15 resp_width100">
+					<md-input-container class="md-block">
+						<label class="md-no-float classForTooltip font12">{{p365Labels.common.gender}}</label> 
+						<md-select name="type" ng-model="quoteParam.gender" required class="bold12 lineHgt34"
+							md-no-asterisk> <md-option ng-value="gender.value"
+							ng-repeat="gender in genderType">{{gender.label}}</md-option> 
+						</md-select>
+				 </md-input-container>
+				</ng-container>
+				<ng-container class="wp_left wp_resultCol30 wp_padRgt30 pj_width16 padRig15 resp_width100">
+					<md-input-container class="md-block"> 
+						<label class="md-no-float classForTooltip norm11"> {{p365Labels.common.age}}			<!--<i class="fa fa-question-circle fa-sm bluecolor" data-html="true"
+							data-toggle="tooltip" title="{{tooltipContent.insuredAge}}" tooltip></i>--></label> 
+							<md-select name="type" ng-model="quoteParam.age" class="bold12 lineHgt34"
+							ng-change="updateMaturityAgeList()" required md-no-asterisk>
+							<md-option ng-value="age" ng-repeat="age in ageList">{{age}}</md-option>
+							</md-select>
+					</md-input-container>
+				</ng-container>
+				<ng-container class="pj_width16 padRig15 resp_width100">
+					<md-input-container class="md-block">
+						<label class="md-no-float classForTooltip font12">{{p365Labels.common.tobaccoAddiction}}<!--{{globalLabel.applicationLabels.car.expiryDate}}-->
+						<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+			data-toggle="tooltip" data-html="true"
+			title="{{tooltipContent.insuredSmokingHabit}}" tooltip></i> -->
+					</label> <md-select name="type" ng-model="quoteParam.tobacoAdicted" required class="bold12 lineHgt34"
+					md-no-asterisk> <md-option ng-value="tobacco.value"
+					ng-repeat="tobacco in tobaccoAddictionStatus">{{tobacco.label}}</md-option>
+						</md-select>
+					</md-input-container>
+				</ng-container>
+				<ng-container class="wp_left wp_resultCol30 wp_padRgt30 pj_width16 padRig15 resp_width100">
+					<md-input-container class="md-block">
+						<label class="md-no-float classForTooltip font12">{{p365Labels.common.annualIncome}}</label>
+						<md-select name="type" ng-model="personalDetails.annualIncomeObject"
+							required md-no-asterisk class="bold12 lineHgt34"
+							ng-model-options="{trackBy: '$value.display'}"
+							ng-change="calculateSumAssured()"> <md-option
+							ng-repeat="income in annualIncomesRange" ng-value="income">{{income.label}}</md-option>
+						</md-select>
+					</md-input-container>
+				</ng-container>
+				<ng-container class="pj_width16 resp_width100">
+					<md-input-container class="md-block">
+						<label class="md-no-float classForTooltip font12">
+								{{p365Labels.common.maturityAge}}
+							<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-html="true"
+			data-toggle="tooltip" title="{{tooltipContent.insuredAge}}" tooltip></i> -->
+					</label>
+					<md-select name="type" ng-model="personalDetails.maturityAge" class="bold12 lineHgt34"
+					required md-no-asterisk> <md-option
+					ng-repeat="maturity in maturityAgeList" ng-value="maturity">{{maturity}}</md-option>
+				</md-select>
+					</md-input-container>
+				</ng-container>
+				<ng-container class="pj_width16 resp_width100">
+						<md-input-container class="md-block">
+							<label class="md-no-float classForTooltip font12">
+									{{p365Labels.common.sumAssured}}
+								<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+			data-toggle="tooltip" data-html="true"
+			title="{{tooltipContent.sumAssured}}" tooltip></i> -->
+						</label>
+						<md-select name="type" ng-model="personalDetails.sumInsuredObject"
+							required md-no-asterisk class="bold12 lineHgt34"
+							ng-model-options="{trackBy: '$value.display'}"> <md-option
+							ng-repeat="sumInsured in personalDetails.sumInsuredList"
+							ng-value="sumInsured">{{sumInsured.display}}</md-option> </md-select>
+						</md-input-container>
+					</ng-container>
+					<ng-container class="section padRig15 width100 center" ng-if="lifeInputForm.$dirty">
+							<div class="">
+								<p class="dialogButton">
+									<md-button ng-click="toggleChange()" class="inpCancelBtn" id="carBuyProductBtn" >Cancel</md-button>
+									<md-button ng-click="singleClickLifeQuote()" class="inpSaveBtn" id="editLifeInputSectionBtn">Submit</md-button>
+								</p>
+							</div>
+						</ng-container>
+			</div>
+		</div>
+ 

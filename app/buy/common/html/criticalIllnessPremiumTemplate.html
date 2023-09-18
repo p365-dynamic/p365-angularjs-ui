@@ -1,0 +1,219 @@
+<!--     Premium Breakup Popup       -->
+<modal-dialog show='premiumModalCriticalIllness' width='900px' height='80vh' class="ng-hide RTOSearchDiv" style="overflow:auto;">
+        <!-- <div class='ng-modal-close wp_modalClose' ng-click='hidePremiumModalCar()'>
+                <i class="material-icons">close</i>
+            </div> -->
+        <div class="ang_loginWrap" layout-align="center center">
+            <div layout="row" layout-xs="row" class="pad25255">
+                <div flex="40" flex-xs="45" class="leftAlignTxt">
+                    <img ng-src="{{$root.wp_path}}img/clogo/{{criticalIllnessProductToBeAddedInCart.carrierId}}.png" />
+                    <p class="font15 hideForMobile">{{criticalIllnessProductToBeAddedInCart.insuranceCompany}}</p>
+                </div>
+                <div flex="30" class="centerAlignTxt hideForMobile">
+                    <b class="font24">&#8377; {{criticalIllnessProductToBeAddedInCart.sumInsured | number:0 | regexINR}}</b>
+                    <div class="font13 greyb7Txt">Sum Insured</div>
+                </div>
+                <div flex="35" flex-xs="45" class="resp_selfCenter">
+                    <div class="width55 resp_width80 iPad_width40 side25Mar resp_autoMar">
+                        <div class="buyNowBtn posRel cursor">
+                            <p class="pinkFeTxt topBot1Mar popAddToCartBtn bold12 resp_font9">Premium</p>
+                            <p class="pinkFeTxt bold24 topBot5Mar resp_font14">&#8377; {{criticalIllnessProductToBeAddedInCart.annualPremium |number:0 | regexINR}}</p>
+                        </div>
+                        <div class="centerAlignTxt topBot2Mar font10">Exclusive of GST</div>
+                    </div>
+                </div>
+                <div flex="5" flex-xs="10" style="text-align: right;" class="cursor" ng-click='hidePremiumModalCriticalIllness()'>
+                    <i class="material-icons greyb7Txt">highlight_off</i>
+                </div>
+            </div>
+            <div>
+                <md-content>
+                    <md-tabs class="popTab garMod greyTab" md-selected="$root.selectedTabCriticalIllness" md-dynamic-height  md-swipe-content>
+                        <md-tab label="Premium Details" >
+                                <div style="max-height:50vh;overflow:auto;">
+                            
+                            
+                            <md-content class="md-padding grey4bTxt side15Mar resp_side1Mar">
+                                <div class="md-body-1" layout="row">
+                                    <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                        Annual Premium
+                                    </div>
+                                    <div flex="66" flex-xs="60">
+                                        <div layout="row">
+                                            <div flex="50" flex-xs="70">
+                                                <p></p>
+                                            </div>
+                                            <div flex="20" flex-xs="30" class="right">
+                                                <p>&#8377; {{criticalIllnessProductToBeAddedInCart.annualPremium|number:0|regexINR}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-content>
+                            <!-- <md-content class="md-padding grey4bTxt side15Mar" ng-if="criticalIllnessProductToBeAddedInCart.riderList.length > 0 && criticalIllnessProductToBeAddedInCart.basicPremiumWithRider > 0">
+                                <div class="md-body-1" layout="row">
+                                    <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                        {{p365Labels.common.riders}}</b>
+                                    </div>
+                                    <div flex="66" flex-xs="60">
+                                        <ng-container ng-repeat="riders in criticalIllnessProductToBeAddedInCart.riderList">
+                                            <div layout="row" ng-if="riders.riderPremiumAmount > 0">
+                                                <div flex="50" flex-xs="70" ng-if="riders.updatedRiderName">
+                                                    <p>{{riders.updatedRiderName}}</p>
+                                                </div>
+                                                <div flex="50" flex-xs="70" ng-if="!riders.updatedRiderName">
+                                                    <p>{{riders.riderName}}</p>
+                                                </div>
+                                                <div flex="20" flex-xs="30" class="right">
+                                                    <p ng-if="riders.riderType != 'NA' && riders.riderType != 'included' && riders.riderPremiumAmount > 0">&#8377; {{riders.riderPremiumAmount | number:0 | regexINR}}</p>
+                                                    <p ng-if="riders.riderType == 'NA' || riders.riderType == 'included'">{{riders.riderType}}</p>
+                                                </div>
+                                            </div>
+                                            <div layout="row" ng-if="!riders.riderPremiumAmount && (riders.riderType == 'NA' || riders.riderType == 'included')">
+                                                <div flex="50" flex-xs="70" ng-if="riders.updatedRiderName">
+                                                    <p>{{riders.updatedRiderName}}</p>
+                                                </div>
+                                                <div flex="50" flex-xs="70" ng-if="!riders.updatedRiderName">
+                                                    <p>{{riders.riderName}}</p>
+                                                </div>
+                                                <div flex="20" flex-xs="30" class="right">
+                                                    <p ng-if="riders.riderType == 'NA' || riders.riderType == 'included'">{{riders.riderType}}</p>
+                                                </div>
+                                            </div>
+                                            <div layout="row" ng-repeat="dependants in riders.dependant">
+                                                <div flex="50" flex-xs="70">
+                                                    <p>{{dependants.riderName}}</p>
+                                                </div>
+                                                <div flex="20" flex-xs="30" class="right">
+                                                    <p>{{dependants.riderType}}</p>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="md-body-1" layout="row">
+                                    <div flex="33" flex-xs="40" class="vertAlignCenter">
+    
+                                    </div>
+                                    <div flex="66" flex-xs="60">
+                                        <div layout="row">
+                                            <div flex="50" flex-xs="50">
+                                                <p></p>
+                                            </div>
+                                            <div flex="20" flex-xs="30" class="right">
+                                                <p><b>+ &#8377; {{criticalIllnessProductToBeAddedInCart.basicPremiumWithRider | number:0 | regexINR}}</b></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-content> -->
+                            <md-content class="md-padding grey4bTxt side15Mar resp_side1Mar">
+                                <div class="md-body-1" layout="row">
+                                    <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                        Service Tax
+                                    </div>
+                                    <div flex="66" flex-xs="60">
+                                        <div layout="row">
+                                            <div flex="50" flex-xs="50">
+                                                <p></p>
+                                            </div>
+                                            <div flex="20" flex-xs="50" class="right">
+                                                <p>&#8377; {{criticalIllnessProductToBeAddedInCart.serviceTax | number:0 | regexINR}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-content>
+                            <md-content class="md-padding grey4bTxt side15Mar resp_side1Mar">
+                                <div class="md-body-1" layout="row">
+                                    <div flex="33" flex-xs="40" class="vertAlignCenter">
+                                        Annual Premium
+                                    </div>
+                                    <div flex="66" flex-xs="60">
+                                        <div layout="row">
+                                            <div flex="50" flex-xs="50">
+                                                <p></p>
+                                            </div>
+                                            <div flex="20" flex-xs="50" class="right">
+                                                <p>&#8377; {{criticalIllnessProductToBeAddedInCart.annualPremium | number:0 | regexINR}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-content>
+                        </div>
+                        </md-tab>
+                        <md-tab label="Service Ratings">
+                            <md-content class="md-padding resp_servScroll">
+                                <div class="md-body-2">
+                                    <div class="md-body-1" layout-xs="column"  layout="row">
+                                        <div flex="20" flex-xs="100" class="centerAlignTxt selfCenter">
+                                                <img ng-src="{{$root.wp_path}}img/professionalJourney/Service_Rating_Star_ResultScreen.png">
+                                        </div>
+                                        <div flex="60" flex-xs="100">
+                                                <p class="noMargin grey4BTxt"><b>Service Ratings?</b></p>
+                                                <p class="font12 grey4BTxt">The service rating signifies the ability to pay claims, history of settled claims and customer grievance resolution.</p>
+                                                <p class="font12 grey4BTxt">The service rating is a relative rating derived using the trend of following factors reported to IRDA by different insurance companies. Higher the rating better it is.</p>
+                                                <ul class="font12 grey4BTxt">
+                                                    <li><span>-&nbsp;</span>Incurred Claim Ratio</li>
+                                                    <li><span>-&nbsp;</span>Solvency Ratio</li>
+                                                    <li><span>-&nbsp;</span>Grievance Resolved</li>
+                                                </ul>
+                                        </div>
+                                        <div flex="20" flex-xs="100" class="selfCenter">
+                                                <p class="font24 noMargin grey4BTxt resp_font14 pad10 center">{{criticalIllnessProductToBeAddedInCart.insurerIndex|number:1}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-content>
+                        </md-tab>
+                        <md-tab label="Claim Settlement Ratio">
+                            <md-content class="md-padding resp_servScroll">
+                                <div class="md-body-3">
+                                    <div class="md-body-1" layout-xs="column" layout="row">
+                                        <div flex="20" flex-xs="100" class="centerAlignTxt selfCenter">
+                                           <img ng-src="{{$root.wp_path}}img/professionalJourney/Claim_Rating_Star_ResultScreen.png">
+                                        </div>
+                                        <div flex="60" flex-xs="100">
+                                            <p class="noMargin grey4BTxt"><b>Claim Settlement Ratio</b></p>
+                                            <p class="font12 grey4BTxt">Claim Settlement Ratio indicates the number of claims settled by the life insurance company in a financial year.It is calculated as the total number of claims received against the total number of claims settled.</p>
+                                        </div>
+                                        <div flex="20"  flex-xs="100" class="selfCenter">
+                                            <p class="font24 noMargin grey4BTxt resp_font14 center">{{criticalIllnessProductToBeAddedInCart.claimRatioCriticalIllness}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-content>
+                        </md-tab>  
+                        <!-- <md-tab label="Benefits">
+                                <md-content class="md-padding resp_servScroll">
+                                    <div class="md-body-2">
+                                        <div class="md-body-1" layout-xs="column" layout="row">
+                                            <div flex="20"  flex-xs="100" class="centerAlignTxt selfCenter">
+                                                    <img ng-src="{{$root.wp_path}}img/professionalJourney/Service_Rating_Star_ResultScreen.png">
+                                            </div>
+                                            <div flex="60"  flex-xs="100">
+                                                    <p class="noMargin grey4BTxt"><b>{{p365Labels.common.benefitRating}}</b></p>
+                                                    <p class="font12 grey4BTxt">{{p365Labels.common.benefitRatingDesc}}</p>
+                                                   
+                                                    <ul class="font12 grey4BTxt">
+                                                        <li><span>-&nbsp;</span>{{p365Labels.common.eligibilityCriteria}}</li>
+                                                        <li><span>-&nbsp;</span>{{p365Labels.common.premiumAndPaymentOptions}}</li>
+                                                        <li><span>-&nbsp;</span>{{p365Labels.common.criticalIllnessBenefit}}</li>
+                                                        <li><span>-&nbsp;</span>{{p365Labels.common.riders}}</li>
+                                                    </ul>
+                                            </div>
+                                            <div flex="20"  flex-xs="100" class="selfCenter">
+                                                    <p class="font24 noMargin grey4BTxt resp_font14 pad10 center">{{criticalIllnessProductToBeAddedInCart.benefitIndex|number:1}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </md-content>
+                            </md-tab>                       -->
+                    </md-tabs>
+                </md-content>
+            </div>
+        </div>
+    </modal-dialog>
+    <!--     Premium Breakup Popup       -->
+    

@@ -1,0 +1,137 @@
+
+<div class="" style="background-color: #2d738C;height:482px;">
+	<!-- <!-- <ng-container ng-include="currentTab"></ng-container>
+	<ng-container ng-include="leadHTML"></ng-container> 
+	<div ng-include="currentTab"></div>
+	<div ng-form="createLeadForm">
+		<ng-container ng-include="leadHTML"></ng-container>
+	</div> -->
+	<div ng-include="currentTab"></div>
+
+	<div  style="padding: 5%; padding-top: 5% " >
+	<form name="quoteUserInfoForm" class="wp_md-content"> 
+	<div class="pad10 responsiveTellus newPopupInnerShadow wp_pad10"
+		style="">
+		<div class="leadCaptureBox leadScrollMobile">
+			<div
+				class="pad10 leftnoborder paddingWebNew leadCapturePadding wp_pad10 wp_inputBorderRadius">
+
+				<div class="section group">
+					<div layout="row">
+						<md-input-container flex="50" style="width: 100%;"
+							class="wp_whiteColor">
+						<div class="">
+							<input type="text" class="capitializeName"
+								placeholder="First name" name="firstName"
+								ng-model="quoteUserInfo.firstName" autocomplete="off"
+								maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/"
+								required capitalize-first />
+							<div ng-messages="quoteUserInfoForm.firstName.$error"
+								ng-if="quoteUserInfoForm.firstName.$touched">
+								<div style="color: red" ng-message="required">{{globalLabel.validationMessages.firstNameRequired}}</div>
+								<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+								<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+								<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+							</div>
+						</div>
+						</md-input-container>
+						<md-input-container flex="50" style="width: 100%;"
+							class="wp_whiteColor wp_padLeft">
+						<div class="">
+							<input type="text" class="capitializeName"
+								placeholder="Last name" name="lastName"
+								ng-model="quoteUserInfo.lastName" autocomplete="off"
+								maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/"
+								style="box-shadow: 0px;" capitalize-first />
+
+							<div ng-messages="quoteUserInfoForm.lastName.$error"
+								ng-if="quoteUserInfoForm.lastName.$touched">
+								<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+								<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+								<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+							</div>
+						</div>
+						</md-input-container>
+
+					</div>
+				</div>
+				<md-input-container style="width: 100%;" class="wp_whiteColor">
+				<div class="section group">
+					<div class="col span_3_of_3">
+						<input type="text"
+							ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-z.]{2,5}$/"
+							placeholder="Email-ID" autocomplete="off" maxlength="50"
+							name="emailId" ng-model="quoteUserInfo.emailId"  />
+						<div ng-messages="quoteUserInfoForm.emailId.$error"
+							ng-if="quoteUserInfoForm.emailId.$touched">
+							<!-- Email  Is not mandatory  as discussed with udaya - 16-11-18    -->
+							<!-- <div style="color: red" ng-message="required">{{globalLabel.validationMessages.emailIdRequired}}</div> -->
+							<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.emailIdInvalid}}</div>
+							<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.emailIdInvalid}}</div>
+						</div>
+					</div>
+				</div>
+				</md-input-container>
+				<br />
+				<md-input-container style="width: 100%;" class="wp_whiteColor">
+				<div class="section group">
+					<div class="col span_3_of_3">
+						<input type="text" placeholder="Mobile Number" name="mobileNumber"
+							ng-model="quoteUserInfo.mobileNumber" autocomplete="off"
+							ng-pattern="/^[6789]\d{9}$/" maxlength="10" minlength="10"
+							required />
+						<div ng-messages="quoteUserInfoForm.mobileNumber.$error"
+							ng-if="quoteUserInfoForm.mobileNumber.$touched">
+							<div style="color: red" ng-message="required">{{globalLabel.validationMessages.mobileNumberRequired}}</div>
+							<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+							<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+							<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+						</div>
+					</div>
+				</div>
+				</md-input-container>
+				<br />
+				<md-input-container
+					class="md-block divForMobile wp_NoinputBorderRadius TandCPad"
+					style="width:100%;font-size:13px;"> <md-checkbox
+					style="display:block" class="blackAddon resize"
+					ng-model="quoteUserInfo.termsCondition" name='termsCondition'
+					required>
+				<p style="text-align: left;"
+					class="showforMobile wp_white TandCFont">Accept Terms &
+					Conditions and Privacy Policy</p>
+				<p style="text-align: left;" class="hideforMobile wp_white"
+					ng-if="!$root.wordPressEnabled">
+					Accept <a href="common/html/TermsNConditions.html" target="blank"
+						class="wp_white">Terms & Conditions </a>and <a target="blank"
+						href="common/html/PrivacyPolicy.html" class="wp_white">Privacy
+						Policy</a>
+				</p>
+				<p style="text-align: left;" class="hideforMobile wp_white"
+					ng-if="$root.wordPressEnabled" >
+					Accept <a class="wp_white" ng-click="wp_TermsCondition()">Terms & Conditions </a>and <a
+						class="wp_white" ng-click="wp_PrivacyPolicy()">Privacy Policy</a>
+				</p>
+				</md-checkbox>
+				<div ng-messages="quoteUserInfoForm.termsCondition.$error"
+					ng-if="quoteUserInfoForm.termsCondition.$touched">
+					<div style="color: red" ng-message="required">This is
+						required</div>
+				</div>
+				</md-input-container>
+				<ng-container ng-if="$root.wordPressEnabled">
+				<div class="section">
+					<md-button type="submit" ng-click="redirectToResult()"
+						id="aboutLeadBtn" ng-disabled="disabledRedirectToResult"
+						class="md-raised md-primary leadBtnPadding wp_viewBtn"
+						style="display: block;"> <b>{{globalLabel.applicationLabels.common.submit}}</b>
+					<span ng-show="disabledRedirectToResult"><i
+						class="fa fa-spinner fa-spin "></i></span> </md-button>
+				</div>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+</form>
+</div>
+</div>

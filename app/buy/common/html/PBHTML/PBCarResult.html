@@ -1,0 +1,5 @@
+<form name="quoteCarInputForm">
+<ng-container ng-include="PBCarInputSection" ng-if="inputSectionEnabled && !ridersSectionEnabled"></ng-container>
+<ng-container ng-include="PBCarRidersSection" ng-if="!inputSectionEnabled && ridersSectionEnabled"></ng-container>
+<ng-container ng-include="PBCarBestResultSection" ng-if="resultSectionEnabled"></ng-container>
+</form>

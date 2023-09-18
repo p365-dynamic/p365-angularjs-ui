@@ -1,0 +1,59 @@
+	
+				<div ng-repeat="policy in userPolices">
+					
+					<md-content class="grey4bTxt mar3_5Per borRad7 light1Border side3_30Pad centerAlignTxt">
+						<div layout="row" layout-xs="column">
+							<div flex="30" flex-xs="100" class="rightBord1ddd topBot2Mar topBot4Pad side2Pad">
+								
+								<div>
+									<i  ng-if="policy.businessLineId==1" class="material-icons font30 grey63Txt">favorite</i> 
+									<i  ng-if="policy.businessLineId==2" class="material-icons font30 grey63Txt">directions_bike</i> 
+									<i  ng-if="policy.businessLineId==3" class="material-icons font30 grey63Txt">directions_car</i> 
+									<i  ng-if="policy.businessLineId==4" class="material-icons font30 grey63Txt">hotel</i> 
+									
+								</div>
+								<div  ng-if="policy.businessLineId== 2 || policy.businessLineId==3">
+									<p class="font15 topBot3Mar grey63Txt">{{policy.carrierVariantDisplayName}}</p>
+									
+								</div>
+								<div  ng-if="policy.businessLineId== 1 || policy.businessLineId== 4">
+									<p class="font15 topBot3Mar grey63Txt">{{policy.productName}}</p>
+									
+								</div>
+							</div>
+						
+							<div flex="20" flex-xs="100" class="topBot2Mar topBot4Pad side2Pad">
+								<img ng-src="{{$root.wp_path}}img\clogo\{{policy.carrierId}}.png">
+							</div>
+							<div flex="25" flex-xs="100" class="topBot2Mar topBot2Pad side2Pad leftAlignTxt" >
+								<div>
+									<p class="noMargin font15 grey63Txt">{{p365Labels.common.policyNo}}</p>
+									<p class="noMargin font15 grey4dTxt">{{policy.policyNo}}</p>
+								</div>
+								<div class="topBot14Mar">
+									<span class="pinkFont font13"><a ng-click="viewPolicySummary(policy)">{{p365Labels.common.purchaseStatement}}</a></span>
+									<span>&nbsp;|&nbsp;</span>
+									<span class="pinkFont font13"><a ng-click="viewPolicyDocument(policy)">{{p365Labels.common.policyDoc}}</a></span>
+								</div>
+								<div>
+									<p class="noMargin font15 grey63Txt">
+										Policy Start Date - <span class="grey4dTxt">{{policy.policyStartDate}}</span>
+									</p>
+									<p class="noMargin font15 grey63Txt">
+										Policy Expiry Date - <span class="grey4dTxt">{{policy.policyExpiryDate}}</span>
+									</p>
+								</div>
+							</div>
+							<!-- check if renew policy details is present and renew flag is y  -->
+							<div ng-if="policy.renewPolicyDetails  && policy.renewPolicyDetails.renewRun == 'Y'" flex="25" flex-xs="100" class="topBot2Mar topBot4Pad side2Pad topBot4Pad">
+								<md-button class='width80 capitalizeText norm13 resp_normFont13 pinkBgBtn'ng-click="showRenewPolicyModal(policy)" >Renew Policy</md-button>
+								 <!-- <div>
+									<i class="material-icons font30 activeColor">done_all</i>
+									<p class="font15 topBot3Mar activeColor">Your Profile is Active</p>
+								</div> -->
+								<!-- <md-button class="quoteBtn pinkFont norm13 pj_width200">Your Policy will Expire Soon</md-button> -->
+							</div>
+						</div>
+					</md-content>
+				</div>
+			

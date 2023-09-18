@@ -1,0 +1,71 @@
+<!-- Commented based on Uday comments -->
+<!-- ng-if="quoteParam.policyType == 'renew'" -->
+<div class="fullShadow resultBg">
+	<div class="pad1020 centerAlignTxt">
+		<div class="menuSubHeaderText">
+			{{globalLabel.applicationLabels.common.shareEmailLabel}}</div>
+		<md-list class="resultPad" ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled">
+			<md-list-item class="md-1-line checkBox" ng-if="(quotesToShow != null && quotesToShow != undefined && quotesToShow.length > 0)"
+			 ng-repeat="data in quotesToShow  | orderBy :sortKey:sortReverse" ng-show="showForShare(data)">
+				<div layout="row" layout-wrap flex>
+					<div class="md-list-item-text classForTooltip" flex="100">
+						<p>
+							<md-checkbox class="resize" data-toggle="tooltip" data-html="true" title="{{data.insuranceCompany}}" tooltip checklist-model="insuranceCompanyList.selectedInsuranceCompany"
+							 checklist-value="data.carrierId" name='shareInsuranceCompany'>&nbsp;{{data.insuranceCompany}}
+							</md-checkbox>
+							<md-divider></md-divider>
+						</p>
+					</div>
+				</div>
+			</md-list-item>
+		</md-list>
+
+		<md-list class="resultPad">
+			<md-input-container data-ng-repeat="choice in EmailChoices" ng-if="EmailChoices.length >= 1" md-no-float class="md-icon-right md-block emailTextPadding wp_emailTextPadding"
+			 style="padding-right:0px;">
+				<input ng-model="choice.username" type="email" placeholder="Email-Id(required)" style="width:85%;">
+				<md-icon ng-if="!$root.wordPressEnabled">
+					<i class="material-icons">create</i>
+				</md-icon>
+				<!-- <i ng-click="deleteReceipient($index)" ng-if="$root.wordPressEnabled && EmailChoices.length > 1" class="material-icons">delete</i> -->
+				<!-- <i ng-click="addNewChoice()" ng-show="$root.wordPressEnabled && !emailPopUpDisabled && choice.addNew" class="material-icons">add_box</i> -->
+			</md-input-container>
+			<p ng-if="!$root.wordPressEnabled">
+				<!-- <md-button class="md-raised emailOrangeBtn" id="carShareEmailId" md-prevent-menu-close="md-prevent-menu-close" ng-click="addNewChoice()"
+				 style="background:#f7a100;padding:" ng-disabled="emailPopUpDisabled">+ Add Another Email-Id</md-button> -->
+			</p>
+			<!-- <p ng-if="$root.wordPressEnabled">
+			<md-icon ng-click="addNewChoice()"
+				md-prevent-menu-close="md-prevent-menu-close"
+				ng-disabled="emailPopUpDisabled"> <i
+				class="material-icons">add_box </i></md-icon>
+		</p> -->
+			<div class="center submitBtnAlign">
+				<md-button class="md-raised md-primary popupSubmitBtn capitalizeText bold12" id="carShareEmailQuotes"  
+				ng-if="!$root.baseEnvEnabled && !$root.wordPressEnabled" ng-click="sendQuotesByEmail()"> 
+				Send Quotes by Email </md-button>
+
+				<md-button class="md-raised md-primary popupSubmitBtn capitalizeText bold12" id="sendQuotesByEmail"  
+				ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled" ng-disabled="insuranceCompanyList.selectedInsuranceCompany.length == 0"
+				ng-click="sendQuotesByEmail()"> Send Quotes by Email </md-button>
+
+				<md-button class="md-raised md-primary popupSubmitBtn capitalizeText bold12" id="carShareEmailQuotes"  
+				ng-if="$root.baseEnvEnabled && $root.wordPressEnabled" ng-click="sendQuotesByEmail()"> 
+				Send Quotes by Email </md-button>
+			</div>
+			<!-- <p>
+				<md-button class="md-raised emailBlueBtn" ng-if="!$root.baseEnvEnabled && !$root.wordPressEnabled" id="carShareEmailQuotes"
+				 style="background:#2991ea;" ng-click="sendQuotesByEmail()">Send Quotes by Email</md-button>
+
+				<md-button class="md-raised emailBlueBtn" ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled" id="carShareEmailQuotes"
+				 style="background:#2991ea;" ng-disabled="insuranceCompanyList.selectedInsuranceCompany.length == 0" ng-click="sendQuotesByEmail()">Send Quotes by Email</md-button>
+				
+
+				<md-button class="md-raised emailBlueBtn" ng-if="$root.baseEnvEnabled && $root.wordPressEnabled" id="carShareEmailQuotes"
+				 style="background:#2991ea;" ng-click="sendQuotesByEmail()">Send Quotes by Email</md-button>
+			</p> -->
+		</md-list>
+	</div>
+	</md-menu-content>
+	</md-menu>
+</div>

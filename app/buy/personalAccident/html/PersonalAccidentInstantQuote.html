@@ -1,0 +1,237 @@
+<div  ng-controller="personalAccidentInstantQuoteController">
+<form name="instantQuotePersonalAccidentForm" class="wp_md-content">
+<md-content
+	class="wp_md-content wp_inputBorderRadius"><!-- style="background:#fff;" -->
+<ng-container ng-if="$root.displayInstantScreen"> <md-input-container
+	style="width: 100%;"> <label>{{globalLabel.applicationLabels.personalAccident.genderType}}</label>
+<md-select name="type" ng-model="quoteParam.gender"
+	ng-change="calculatePersonalAccidentPremium()"> <md-option
+	ng-value="gender.value" ng-repeat="gender in genderType"
+	>{{gender.label}}</md-option>
+</md-select> </md-input-container>
+<div class="clearfix"></div>
+
+<md-input-container class="md-block"> <label
+	style="font-size: 13px !important;">{{globalLabel.applicationLabels.personalAccident.insuranceFor}}
+	<a  class="white"
+	href="javascript:;" ng-click='toggleFamilyInfo()'
+	style="font-size: 13px !important;">[{{globalLabel.applicationLabels.personalAccident.change}}]</a>
+</label>
+<div class="btn-group btn-group-vertical" data-toggle="buttons">
+	<div ng-repeat="data in familyList" ng-if="data.val==true">
+		<span class="" style="font-size: 15px !important;"> <b>{{data.member}}
+				- {{data.age}} years</b>
+		</span>
+	</div>
+</div>
+</md-input-container>
+<div class="clearfix"></div>
+
+<md-input-container
+	class="md-block"> <label>{{globalLabel.applicationLabels.personalAccident.occupation}}</label>
+<md-select name="type" ng-model="personalDetails.occupation"
+	ng-model-options="{trackBy: '$value'}"> <md-option
+	ng-value="occupation.occupation" ng-repeat="occupation in occupationList">{{occupation.display}}</md-option> </md-select> </md-input-container> 
+	<div class="clearfix"></div>
+	
+<md-input-container class="md-block wp_whiteColor">
+<label>{{globalLabel.applicationLabels.personalAccident.pinCode}}
+	<a class="RTOLink"
+	href="javascript:;" ng-click='togglePin()'>&nbsp;[{{globalLabel.applicationLabels.personalAccident.change}}]</a>
+</label> <input ng-model="displayPincodeInfo" placeholder="MH-01 MUMBAI TARDEO"
+	readonly> <label class="ng-binding"></label> </md-input-container>
+<div class="clearfix"></div>
+ 
+ <md-input-container
+ class="md-block"> <label>{{globalLabel.applicationLabels.personalAccident.annualIncome}}&nbsp;&nbsp;</label>
+ <div class="">
+ <input  style="color: #fff" ng-pattern='/^[1-9][0-9]*$/' class="" name='annualIncome' ng-change="checkSum(quoteParam.annualIncome);calculatePersonalAccidentPremium()" 
+ ng-model='quoteParam.annualIncome' autocomplete='off'
+		maxlength='8' minlength='1'
+	   required md-no-asterisk style="position: relative;" />
+ <div class="ammount-lable" style="background-color: #fbfbfbcc;position: absolute;right: 0px;width: 33%;height: 100%;border-radius: 0 24px 24px 0px;top: 0px;">
+	 <label class="ammount-lable1" style="color:#f56909 !important;font-weight:bold;font-size: 100% !important;top:30%;left:12%;">
+	 &#x20B9;&nbsp;{{showAmount(quoteParam.annualIncome)}} Lakhs
+	 </label>
+ </div>
+ </div> 
+</md-input-container>
+ 
+<div class="clearfix"></div>
+
+ <span ng-show="$root.disableNextScreen">{{message}}</span> </ng-container> </md-content>
+ 
+ <modal-dialog show='modalFamilyInfo' width='500px' height='auto'
+	class="ng-hide">
+<div class='ng-modal-close wp_modalClose'
+	ng-click='closeFamilyMemberModal()' ng-if="$root.wordPressEnabled">
+	<i class="material-icons">close</i>
+</div>
+<div
+	class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow"
+	style="" layout="row">
+	<div flex="85" flex-sm="85"
+		flex-xs="85" class="wp_respWidth100 wp_Width100" style="padding: 4% 0%; text-align: center;">
+		<h2 class="white popupHeading wp_popupHeading">
+			{{globalLabel.applicationLabels.personalAccident.addFamilyMembers}}
+		</h2>
+	</div>
+	<div class='ng-modal-close' ng-click='closeFamilyMemberModal()'
+		ng-if="!$root.wordPressEnabled" style="color: #fff;" flex="15">
+		<i class="material-icons">close</i>
+	</div>
+</div>
+
+<div class="pad10 mobileHealthFamily pad10Padding mobileSmFix">
+	<div class="leadCaptureBox familyPopup">
+		<div class="popupTableHealth popupPadding" layout="row"
+			style="padding: 5% 0% !important;">
+			<div class="col col-lg-5">
+				<b>Relationship</b>
+			</div>
+			<div class="col col-lg-2">
+				<b>Age</b>
+			</div>
+			<div class="col col-lg-5">
+				<b>DOB</b>
+			</div>
+		</div>
+		<md-divider></md-divider>
+		<div ng-repeat="data in familyList" ng-if="data.other==false">
+			<div layout="row" class="familyPopupPadding section">
+				<div class="col col-lg-5">
+					<md-checkbox value="{{data}}" ng-model="data.val"> </md-checkbox>
+					<span class="alignLabelCheckBox">{{data.member}}</span> <!-- <span
+						ng-if="data.member=='Son' && data.iconFlag==true "> <md-button
+							class="familyBtnChild" ng-disabled="data.val==false"
+							ng-click="addNewSon($index)" id="addNewSonInstant">+
+						Son</md-button>
+					</span> <span ng-if="data.member=='Daughter' && data.iconFlag==true">
+
+						<md-button class="familyBtnChild" ng-disabled="data.val==false"
+							ng-click="addNewDaughter($index)" id="addNewSonInstant">+
+						Daughter</md-button>
+					</span> -->
+				</div>
+				<div class="familySelect col col-lg-2">
+					<input type="hidden" ng-value="data.age" class="hiddenAge">
+						<div ng-if="data.val">
+						<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+							<input  ng-value="data.age" ng-model="data.age"  style="width: 100%; border: 0" readonly>
+						</md-input-container>
+						</div>
+					</div>
+				<div class="familySelect col col-lg-5">
+					<div ng-if="data.val">
+						<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+						<input class="newDatepickerBorder"
+								ng-model='data.dob'
+								ng-change="validateAge(data,data.dob)"
+								name='dateofbirth'
+								p365-date-picker="DOBOptions{{$index}}" required
+								md-no-asterisk style="border: 0" readonly/>
+						</md-input-container>
+					</div>
+					
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div layout-sm="column">
+				<md-divider></md-divider>
+			</div>
+
+		</div>
+		<div ng-if="basicExpanded">
+			<div ng-repeat="data in familyList" ng-if="data.other==true">
+				<div layout="row" class="familyPopupPadding section">
+					<div class="col col-lg-8">
+						<md-checkbox value="{{data}}" ng-model="data.val"> </md-checkbox>
+						<span class="alignLabelCheckBox">{{data.member}}</span>
+					</div>
+					<div class="familySelect col col-lg-4">
+						<span> <input type="hidden" ng-value="data.age"
+							class="hiddenAge">
+							<div ng-if="data.val">
+								<md-input-container class="md-block"
+									style="margin: 0%; top:-7px;"> <md-select
+									ng-if="data.val" name="type" ng-model="data.age"> <md-option
+									ng-value="value" ng-selected="{{value == data.age}}"
+									ng-repeat="value in getAgeArray(data.minAge, data.maxAge)">
+								{{value}} </md-option> </md-select> </md-input-container>
+							</div></span>
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+				<div layout-sm="column">
+					<md-divider></md-divider>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="familyBtnAlign" style="text-align: center;">
+			<md-button ng-click="toggleBasicExpanded()" class="familyBtn"
+				id="addNewFamilyMemberInstant"> &nbsp;<i
+				ng-if="basicExpanded" class="fa fa-minus" style="font-size: 10px;"
+				aria-hidden="true"></i> <i ng-if="!basicExpanded" class="fa fa-plus"
+
+				style="font-size: 10px;" aria-hidden="true"></i> Other Family
+			Members&nbsp; </md-button>
+		</div> -->
+	</div>
+
+	<div class="center submitBtnAlign center">
+		<div style="color: red" ng-repeat="error in familyErrors"
+			class="familySubmit">{{error}}</div>
+		<md-button type="submit" class="md-raised md-primary wp_button"
+			id="submitFamilyMemberInstant" ng-click="submitFamily()"
+			style="margin: 0px !important;">Submit</md-button>
+	</div>
+</div>
+</modal-dialog>
+ <modal-dialog show='modalPIN' width='500px' height='auto !important'
+	class="ng-hide">
+<div class='ng-modal-close wp_modalClose' ng-click='hideModal()'
+	ng-if="$root.wordPressEnabled">
+	<i class="material-icons">close</i>
+</div>
+<div
+	class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow"
+	style="" layout="row">
+	<div class="wp_respWidth100 wp_Width100" style="padding: 4% 0%; text-align: center;" flex="85" flex-sm="85" flex-xs="85">
+		<h2 class="white popupHeading wp_popupHeading">
+			Enter Area or City or Pincode</span>
+		</h2>
+	</div>
+	<div class='ng-modal-close' ng-click='hideModal()' style="color: #fff;"
+
+		ng-if="!$root.wordPressEnabled" flex="15">
+		<i class="material-icons">close</i>
+	</div>
+</div>
+<div class="tab-pane">
+	<div class="">
+		<div class="pad10 pinPopup">
+			<md-input-container class="md-block">
+			<div layout="row">
+				<i class="material-icons" flex="2">room</i>
+				<div flex="95">
+					<input name="pin" ng-required="true" class="wp_healthModalPin"
+						typeahead-on-select="onSelectPinOrArea($item)" autocomplete="off"
+						typeahead-wait-ms="10" typeahead-no-results="noResults"
+						ng-model="personalDetails.pincode"
+						uib-typeahead="pin.display for pin in getPinCodeAreaList($viewValue)"
+						typeahead-show-hint="false" typeahead-min-length="3"
+						typeahead-wait-ms="10" style="background: transparent !important;" />
+				</div>
+				
+			</div>
+			<div class="dropdown-menu-NoResult dropdown-menu-NoResultPosition"
+					ng-if="noResults">No Results Found</div>
+
+			</md-input-container>
+		</div>
+	</div>
+</div>
+</modal-dialog> 
+</form>
+ </div>

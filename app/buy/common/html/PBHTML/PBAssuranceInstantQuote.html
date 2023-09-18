@@ -1,0 +1,66 @@
+<div class="professionalBody bestQuote resp_padContainer" ng-controller="lifeInstantQuoteController">
+	<div class="personalInfo resp_topBot5Pad padBot5Per marTop4Per">
+		<h2 class="chooseProfTitle">{{$root.professionalText}}</h2>
+	</div>
+	<div layout='row' layout-xs="column" class='resp_noMar'>
+		<div flex="45" flex-xs="100" class="selfCenter">
+			<img class="width80" ng-src="{{$root.wp_path}}img/professionalJourney/{{$root.professionalImg}}.png">
+		</div>
+		<div flex="55" flex-xs="100">
+			<div class="pad10 vertAlignCenter pbCarInput offWhiteBg side3_6Pad borRad7 marBot3Per createLeadHt">
+				<div layout="row"layout-xs="column"  layout-xs="column" class="width100">
+					<div flex="50" flex-xs="100" class="left padRig5Per resp_zeroPadRight">
+						
+						<md-input-container class="width100">
+								<label class="pbCarInput">{{globalLabel.applicationLabels.life.genderType}}</label>
+								<md-select name="gen der" ng-model="quoteParam.gender" ng-change="calculateLifePremium()" class="pbCarSelect">
+										<md-option ng-value="gender.value" ng-repeat="gender in genderType" ng-disabled="instantQuoteLifeForm">{{gender.label}}</md-option>
+								</md-select>
+							</md-input-container>
+					</div>
+					<div flex="50" flex-xs="100" class="left pbCarInput">
+						<md-input-container class="width100">
+							<label class="pbCarInput">{{globalLabel.applicationLabels.life.age}}</label>
+							<md-select name="type" ng-model="quoteParam.age" ng-change="calculateLifePremium()" class="pbCarSelect">
+								<md-option ng-value="age" ng-repeat="age in ageList" ng-disabled="instantQuoteLifeForm">{{age}}</md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+					
+				</div>
+				<div layout="row" layout-xs="column" class="width100">
+					<div flex="50" flex-xs="100" class="left padRig5Per resp_zeroPadRight">
+						<md-input-container class="width100">
+							<label class="pbCarInput">{{globalLabel.applicationLabels.life.tobaccoAddiction}}</label>
+							<md-select name="type" ng-model="quoteParam.tobacoAdicted" class="pbCarSelect" ng-change="calculateLifePremium()">
+								<md-option ng-value="tobacco.value" ng-repeat="tobacco in tobaccoAddictionStatus" ng-disabled="instantQuoteLifeForm">{{tobacco.label}}</md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+					<div flex="50" flex-xs="100" class="left pbCarInput">
+						<md-input-container class="width100">
+							<label class="pbCarInput">{{globalLabel.applicationLabels.life.annualIncome}}</label>
+							<md-select name="type" ng-model="personalDetails.annualIncomeObject" class="pbCarSelect" ng-model-options="{trackBy: '$value.display'}"
+							 ng-change="calculateSumAssured()">
+								<md-option ng-value="income" ng-repeat="income in annualIncomesRange" ng-disabled="instantQuoteLifeForm">{{income.display}}</md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+				</div>
+
+				<div layout="row" layout-xs="column" class="width100">
+					<div flex="50" flex-xs="100" class="left padRig5Per resp_zeroPadRight">
+						<md-input-container class="width100">
+							<label class="pbCarInput">{{globalLabel.applicationLabels.life.sumAssured}}</label>
+							<md-select name="type" ng-model="personalDetails.sumInsuredObject" class="pbCarSelect" ng-change="calculateLifePremium()"
+							 ng-model-options="{trackBy: '$value.display'}">
+								<md-option ng-repeat="sumInsured in personalDetails.sumInsuredList" ng-value="sumInsured" ng-disabled="instantQuoteLifeForm">{{sumInsured.display}}</md-option>
+							</md-select>
+						</md-input-container>
+					</div>
+					<div flex="50" flex-xs="100" class="left pbCarInput"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

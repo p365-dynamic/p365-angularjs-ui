@@ -1,0 +1,760 @@
+<loading></loading>
+<!-- <nav class="showForMobile" mfb-menu position="br" effect="zoomin" toggling-method="click" class="app-menu" menu-state="menuState"
+ ng-class="{'fadeOut' : menuState === 'closed'}">
+	<button mfb-button label="Share Quotes" icon="share" ng-click="showShareEmailModal()"></button>
+	<button mfb-button label="Sort" icon="swap_vert" ng-click="showSortOptionsModal()"></button>
+</nav> -->
+<iframe  ng-if="$root.isHealthLanding" ng-src="{{healthAffilatedLeadId}}" width="1" height="1" id="pixelcodeurl">
+</iframe>
+<div after-render="missionCompled"></div>
+<div ng-class="{header_container : $root.header_container == true}">
+	<div class="section healthBg wp_padHeaderNavi wp_innerHealth" ng-if="$root.wordPressEnabled  && !$root.professionalJourney">
+		<ng-container ng-include="$root.headerNavigation" ng-controller='headerNavigationController'></ng-container>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<div class="section carBg wp_padHeaderNavi wp_innerCar" ng-if="!$root.wordPressEnabled && $root.baseEnvEnabled">
+	<ng-container ng-include="$root.iquoteTabNavigationHTML" ng-controller='iquoteTabNavigationController'></ng-container>
+	<div class="clearfix"></div>
+</div>
+<div class="section healthBg wp_padHeaderNavi wp_innerHealth" ng-if="!$root.wordPressEnabled && $root.baseEnvEnabled  && $root.professionalJourney">
+	<ng-container ng-include="$root.headerNavigation" ng-controller='headerNavigationController'></ng-container>
+	<div class="clearfix"></div>
+</div>
+<div class="middleTab one-edge-shadow widthFull resultCommon mobileResult wp_padHeaderNavi wp_resultBorder wp_noBoxShadow e8e8Container">
+	<span class="cursor backBtn" ng-show="$root.isFromProfessionalJourney ||  ($root.wordPressEnabled)">
+		<span ng-click="backToResultScreen()" id="bikeBackToResultScreen" role="button" tabindex="0">
+			<i class="material-icons">keyboard_arrow_left</i>
+		</span>
+	</span>
+
+	<form name="quoteHealthInputForm">
+		<div class="boxShadow pad5Bot white_e7_Bg resp_white_f7_Bg">
+			<div class="section">
+				<ng-container ng-include="healthInputSectionHTML"></ng-container>
+			</div>
+			<div class="showForMobile">
+				<div style="margin:8px;" class="wrap center">
+				</div>
+			</div>
+		</div>
+		<div class="section">
+			<div layout="flex" layout-xs="column" class="side4Mar center border1Bot iPad_wrap">
+				<div flex="15" flex-xs="100" class="rightBord1ddd padBot1Per iPad_borderBottom resp_borderBottom resp_noRigBorder">
+					<p class="greyb7Txt">No Co-pay
+						<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="" tooltip></i> -->
+					</p>
+					<md-switch layout-align="center center" class="posRel" ng-model="isNoCoPayApplicable" ng-change="noCoPayClick(isNoCoPayApplicable)">
+						&nbsp;&nbsp;Yes <span class="customSwitch">No</span>
+					</md-switch>
+				</div>
+				<div flex="15" flex-xs="100" class="rightBord1ddd padBot1Per iPad_borderBottom resp_borderBottom resp_noRigBorder">
+					<p class="greyb7Txt">Pre-Existing Coverage
+						<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="" tooltip></i> -->
+						<!-- <md-button ng-click="resetFeatures('preExistingCoverage')"><i class="material-icons font12">rotate_left</i></md-button> -->
+					</p>
+					<md-radio-group class="resFilterRadio" style="text-align:initial;" layout-align="center center" ng-model="parent.coverageAfter"
+					 ng-change="parent.preExistingCoverageFeature=true">
+						<md-radio-button class="tempMar15Lf resp_20LfMar iPad_10MarLeft" ng-repeat="coverage in preExistingCoverages" ng-value="coverage">&nbsp;{{coverage.display}}</md-radio-button>
+					</md-radio-group>
+				</div>
+				<div flex="15" flex-xs="100" class="rightBord1ddd padBot1Per iPad_borderBottom iPad_noRigBorder resp_borderBottom resp_noRigBorder">
+					<p class="greyb7Txt">Room Rent
+						<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="" tooltip></i> -->
+						<!-- <md-button ng-click="resetFeatures('roomRent')"><i class="material-icons font12">rotate_left</i></md-button> -->
+					</p>
+					<md-radio-group class="resFilterRadio" style="text-align:initial;" layout-align="center center" ng-model="parent.roomType"
+					 ng-change="parent.roomRentFeature=true;addRoomRentAsFeature(parent.roomType)">
+						<md-radio-button class="tempMar15Lf resp_25LfMar iPad_20MarLeft" ng-repeat="room in roomTypesArray" ng-value="room">&nbsp;{{room.name}}
+							<span class="pinkFont" ng-if="room.isRecommended && $root.showRecommendedRider">(P365 Recommended)</span>
+						</md-radio-button>
+					</md-radio-group>
+				</div>
+				<div flex="25" flex-xs="100" class="rightBord1ddd padBot1Per iPad_borderBottom resp_borderBottom resp_noRigBorder">
+					<p class="greyb7Txt">Benefits
+						<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="" tooltip></i> -->
+					</p>
+					<div class="smallChkBox resp_6LfMar leftAlignTxt iPad_15MarLeft" ng-repeat="features in planBenefits" ng-if="features.featureId!=36">
+						<md-checkbox class="tempMar15Lf" checklist-model="$root.selectedFeatures" checklist-value="features">&nbsp;{{features.name}}&nbsp;</md-checkbox>
+						<span class="pinkFont" ng-if="features.isRecommended && $root.showRecommendedRider">(P365 Recommended)</span>
+					</div>
+				</div>
+				<div flex="15" flex-xs="100" class="rightBord1ddd padBot1Per resp_noRigBorder">
+					<p class="greyb7Txt">Insurer
+						<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="" tooltip></i> -->
+					</p>
+					<md-select class="leftAlignTxt mar10 modiSelectOption" ng-model="selectedCarrierName.CompanyName" ng-change="filterResult();"
+					 multiple>
+						<!-- <md-option ng-value="defaultCarrierList">
+								&nbsp;ALL
+							</md-option> -->
+						<md-button ng-click="selectAllInsurer()" ng-if="(quotesToShow.length == 0 || quotesToShow.length!=quotesToShowCopy.length )">Select All</md-button>
+						<md-button ng-click="DeselectAllInsurer()" ng-if="(quotesToShow.length==quotesToShowCopy.length)">Deselect All</md-button>
+						<md-option ng-repeat="carrier in quotesToShowCopy | unique:'insuranceCompany'" ng-value="carrier.insuranceCompany">
+							&nbsp;{{carrier.insuranceCompany}}
+						</md-option>
+
+					</md-select>
+				</div>
+				<div flex="15" flex-xs="100" class="greyb7Txt padBot1Per selfCenter" layout-align="center center">
+					<md-button class="resFilterBtn" ng-click="applyFilter()">Apply Filters</md-button>
+					<md-button ng-click="resetFeatures()" class="font12 capitalTxt vertAlignInherit"><i class="material-icons font12 ">rotate_left</i> Reset All Filters</md-button>
+				</div>
+			</div>
+		</div>
+
+		<div flex="100" class="flex-100 showForMobile">
+			<p class="right greyb7Txt font13 resp_10Mar">All prices are exclusive of GST</p>
+		</div>
+
+		<!--Professional resut-->
+		<div class="showForMobile">
+			<md-card class="posRel resp_mar8" ng-repeat="data in quotesToShow  | orderBy :sortKey:sortReverse" ng-if="validatePremium(data) && $root.professionalJourney"
+			 ng-show="showForShare(data)">
+				<ng-container class="pad5">
+					<div layout="row" id="mobileCarrierId-{{data.carrierId}}-{{data.planId}}">
+						<div flex="50" class="side10Pad">
+							<img data-toggle="tooltip" title="{{data.insuranceCompany}}" ng-src="{{$root.wp_path}}img\clogo\{{data.carrierId}}.png" style=""
+							 tooltip>
+						</div>
+						<input type="hidden" name="{{data.planId}}" id="mobilePlanId" value="{{data.planId}}" ng-model="data.planId">
+						<div flex="50" class="right">
+							<md-button class="quoteBtn pinkFont" ng-disabled="quoteCarInputForm.$invalid || buyOptionDisabled"
+							 ng-click="buyProduct(data)" id="healthBuyProductBtn">Buy Now</md-button>
+							<!-- <md-button class="quoteBtn pinkFont" ng-disabled="quoteCarInputForm.$invalid || buyOptionDisabled" ng-show="$root.isFromProfessionalJourney"
+							 ng-click="selectProduct(data)" id="carBuyProductBtn">Select this</md-button> -->
+						</div>
+					</div>
+					<div layout="row">
+						<p style=" font-size: 12px;"><a ng-click="viewBeneFeature(data)" class="pinkFont textItalic">{{data.planName}}</a></p>
+					</div>
+				</ng-container>
+				<div layout="row" class="resp_white_f7_Bg">
+					<div flex="33.33" class="width100 padLf10">
+						<p class="font12 lightGrey">Rating <span class="chipsRating font11 lightGrey">{{data.proffesionalRating  | number:1}}</span></p>
+						<p class="bold13 highlightBlack">
+							<ng-rate-it star-width="12" star-height="12" ng-model="data.proffesionalRating" data-toggle="tooltip" title="{{data.proffesionalRating | number:1}}"
+							 resetable="false" rated="ratedCallback" step="0.1" min="0" max="5" read-only="true"></ng-rate-it>
+						</p>
+					</div>
+					<div flex="33.33" class="width100 padLf10 centerAlignTxt">
+						<p class="font12 lightGrey">
+							Hospital Limit
+							<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.insuredDeclaredValue}}" tooltip></i> -->
+						</p>
+						<p class="bold13 highlightBlack">&#8377; {{data.sumInsured | number:0 | regexINR}}</p>
+					</div>
+					<div flex="33.33" class="width100 padLf10 rightAlignTxt padRig10">
+						<p class="font12 lightGrey">
+							Premium
+							<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.totalPremium}}" tooltip></i> -->
+						</p>
+						<div class="bold13 highlightBlack">
+							<a class="pinkFont cursor" title="{{tooltipContent.viewDetails}}" data-html="true" tooltip>
+								&#8377; {{data.basicPremium | number:0}}
+							</a>
+						</div>
+					</div>
+				</div>
+				<div ng-if="isMinPremium(data.annualPremium,data.carrierId)" class="lowPremium">
+					<span><img ng-src="{{$root.wp_path}}img/icons/lowPremium.png"></span>
+				</div>
+				<div ng-if="$first" class="highValue">
+					<span><img ng-src="{{$root.wp_path}}img/icons/highValue.png"></span>
+				</div>
+			</md-card>
+			<div class="clearfix"></div>
+		</div>
+		<div class="hideForMobile">
+			<div layout="row" class="side3Pad">
+				<div flex="50" class="">
+					<div class="col pj_widthAuto hideForMobile">
+						<div class="padButtonResult marBtmMobile  wp_marBorder">
+							<md-button class="pj_noBoxShadow pj_shareText" id="bikeShareBtn" ng-class="{tabActive : activeMenu === 'Email'}" md-ink-ripple="{{rippleColor}}"
+							 ng-click="showShareEmailModal()" style="line-height:45px;">
+								<i class="material-icons wp_btnIcons pj_shareIcon">share</i> Share Quote</md-button>
+						</div>
+					</div>
+				</div>
+				<div flex="50" class="selfEnd">
+					<p class="right greyb7Txt font13" style="top:1px;">All prices are exclusive of GST</p>
+				</div>
+			</div>
+
+			<div class="section posRel">
+				<!-- <div class="floatShareIc posAbs" style="top:0%;" ng-click="showShareEmailModal()"><i class="material-icons pinkFont font17">share</i></div> -->
+
+				<div class="">
+					<div class="wrap side3Pad" class="hideForMobile" ng-if="$root.professionalJourney">
+						<div class="pj_width25 iPad_width33 resp_width100 resp_width100" ng-repeat="data in quotesToShow  | orderBy :sortKey:sortReverse | filter: customFilterHealth |filter: applyPreExistingCoverageFilter:data "
+						 ng-if="validatePremium(data)" ng-show="showForShare(data)">
+							<div class="whiteBg borRad5 side5Mar posRel">
+								<div layout="row" class="pad10" id="carrierId-{{data.carrierId}}-{{data.planId}}">
+									<div flex="50">
+										<img ng-src="{{$root.wp_path}}img\clogo\{{data.carrierId}}.png" data-toggle="tooltip" title="{{data.insuranceCompany}}" tooltip>
+									</div>
+									<input type="hidden" name="{{data.planId}}" id="planId" value="{{data.planId}}" ng-model="data.planId">
+									<div flex="50" class="right">
+										<!-- <md-button class="quoteBtn pinkFont" ng-disabled="false" ng-show="$root.isFromProfessionalJourney" ng-click="selectProduct(data)"
+										 id="carBuyProductBtn">Select this </md-button> -->
+										<md-button class="quoteBtn pinkFont" ng-disabled="false"  ng-click="buyProduct(data)"
+										 id="healthBuyProductBtn">Buy Now</md-button>
+									</div>
+								</div>
+								<div layout="row" class="side10Pad min54Hgt">
+									<p style=" font-size: 12px;"><a ng-click="viewBeneFeature(data)" class="pinkFont textItalic">{{data.planName}}</a></p>
+								</div>
+								<md-card layout="row" class="pad10 noSideMar offWhiteBg noPadtop borRad7" style="box-shadow: 1px 2px 4px #ddd;">
+									<div flex="33.33" class="width100 padLf10">
+										<p class="font12 lightGrey">Rating <span class="chipsRating font11 lightGrey">{{data.proffesionalRating  | number:1}}</span></p>
+										<p class="bold13 highlightBlack">
+											<ng-rate-it star-width="12" star-height="12" ng-model="data.proffesionalRating" step="0.1" data-toggle="tooltip" title="{{data.proffesionalRating | number:1}}"
+											 resetable="false" rated="ratedCallback" min="0" max="5" read-only="true"></ng-rate-it>
+										</p>
+									</div>
+									<div flex="33.33" class="width100 padLf10 centerAlignTxt">
+										<p class="font12 lightGrey">
+											Hospital limit
+											<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="" tooltip></i> -->
+										</p>
+										<p class="bold13 highlightBlack">&#8377; {{data.sumInsured | number:0 | regexINR}}</p>
+									</div>
+									<div flex="33.33" class="width100 padLf10 rightAlignTxt padRig3Per">
+										<p class="font12 lightGrey">Premium </p>
+										<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.totalPremium}}"
+								 tooltip></i> -->
+										<div class="bold13 pinkFont cursor" ng-click="openHealthPopup(0, data)">
+											&#x20B9; {{data.basicPremium | number:0}}
+										</div>
+									</div>
+								</md-card>
+								<div ng-if="isMinPremium(data.annualPremium,data.carrierId)" class="lowPremium">
+									<span><img ng-src="{{$root.wp_path}}img/icons/lowPremium.png"></span>
+								</div>
+								<div ng-if="$first" class="highValue">
+									<span><img ng-src="{{$root.wp_path}}img/icons/highValue.png"></span>
+								</div>
+								<md-card layout="row" class="pad10 noSideMar noPadtop borRad7 noMarTop" style="box-shadow: 1px 2px 4px #ddd;">
+									<div flex="25" class="center cursor" ng-click="openHealthPopup(0, data)">
+										<div style="position:relative">
+											<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+											<span class="bold12 customStarText28">{{data.netPremiumMean|number:1}}</span>
+										</div>
+										<p class="font11 pinkFont">Premium</p>
+									</div>
+									<div flex="25" class="center cursor" ng-click="openHealthPopup(1, data)">
+										<div style="position:relative">
+											<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+											<span class="bold12 customStarText28">{{data.insurerIndex|number:1}}</span>
+										</div>
+										<p class="font11 pinkFont">Service</p>
+									</div>
+									<!-- <div flex="20" class="center">
+										<div style="position:relative">
+											<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+											<span class="bold12 customStarText28">{{data.claimIndex|number:1}}</span>
+										</div>
+										<p class="font12 lightGrey">Claims</p>
+									</div> -->
+									<div flex="25" class="center cursor" ng-click="openHealthPopup(2, data)">
+										<div style="position:relative">
+											<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+											<span class="bold12 customStarText28">{{data.benefitIndex|number:1}}</span>
+										</div>
+										<p class="font11 pinkFont">Benefits</p>
+									</div>
+									<div flex="25" class="center cursor" ng-click="openHealthPopup(3, data)">
+										<div style="position:relative">
+											<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+											<span class="bold12 customStarText28">{{data.hospitalIndex|number:1}}</span>
+										</div>
+										<p class="font11 pinkFont"> Cashless</p>
+									</div>
+								</md-card>
+							  <!-- <div layout="row" class="pad10 resultQuote"  ng-repeat="feature in data.featuresList[0].HospitalizationRelated" ng-if="feature.resultFeature == 'Y'">
+									<p flex="5" class="">					
+									</p>
+									<p flex="50">{{feature.Name}}</p>
+									<p flex="45">
+											<span ng-if="feature.displayLimit == undefined || feature.displayLimit.length <= 0">NA</span>
+											<span ng-if="feature.displayLimit != undefined">{{feature.displayLimit}}</span>
+									</p>
+								</div> 
+								<div layout="row" class="pad10 resultQuote"  ng-repeat="feature in data.featuresList[2].EnhancedCoverage" ng-if="feature.resultFeature == 'Y'">
+									<p flex="5" class="">
+									</p>
+									<p flex="50">{{feature.Name}}</p>
+									<p flex="45">
+											<span ng-if="feature.displayLimit == undefined || feature.displayLimit.length <= 0">NA</span>
+											<span ng-if="feature.displayLimit != undefined">{{feature.displayLimit}}</span>
+									</p>
+								</div>-->
+							</div>
+						</div>
+						<div class="pj_width25 iPad_width33 resp_width100 resp_width100" ng-repeat="quoteRequest in $root.healthQuoteRequest" ng-if="quoteRequest.status == 0">
+							<div class="whiteBg borRad5 side5Mar">
+								<div layout="row">
+									<div flex="50" class="side10Pad">
+										<img data-toggle="tooltip" title="{{data.insuranceCompany}}" ng-src="{{$root.wp_path}}img\clogo\{{quoteRequest.carrierId}}.png"
+										 style="" tooltip>
+									</div>
+									<div flex="50" class="right">
+									</div>
+								</div>
+								<md-card layout="row" class="pad10 noSideMar offWhiteBg borRad7 errorCard justifyCenter" style="box-shadow: 1px 2px 4px #ddd;">
+									<img src="{{$root.wp_path}}img/svg/eclipse.svg" alt="">
+									<!-- <div ng-bind-html="quoteRequest.message" bind-html-compile="quoteRequest.message" ng-if="quoteRequest.status == 2"></div></div> -->
+								</md-card>
+
+							</div>
+						</div>
+						<!-- End-->
+					</div>
+					<div ng-if="noQuoteResultFound">
+							<md-card layout="row" class="pad10 noSideMar offWhiteBg borRad7 errorCard justifyCenter" style="box-shadow: 1px 2px 4px #ddd;">
+								<div ng-bind-html="$root.healthQuoteRequest[0].message" bind-html-compile="$root.healthQuoteRequest[0].message" ng-if="$root.healthQuoteRequest[0].status == 2"></div>
+						</div>
+						</md-card>
+						</div>
+
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<modal-dialog show='filterBenefitModal' width='500px' height='auto' class="ng-hide RTOSearchDiv">
+			<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+				<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+					<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad side6Pad">Select Filter Benefit</h2>
+				</div>
+				<div class='ng-modal-close wp_modalClose closePopup' ng-click='hideFilterBenefitModal()'>
+					<i class="material-icons greyb7Txt">highlight_off</i>
+				</div>
+			</div>
+
+			<div class="pad10">
+				<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+					<ng-container ng-include="healthAddOnSectionHTML"></ng-container>
+				</div>
+				<div class="center submitBtnAlign" layout="row">
+					<button flex="50" ng-click="hideFilterBenefitModal()" class="bluebuybuttoncar wp_riderPopup" id="healthBuyProductBtn" style="background-color: #c4c4c4 !important;">Cancel</button>
+					<button flex="50" ng-click="singleClickHealthQuote()" class="bluebuybuttoncar wp_riderPopup" id="healthBuyProductBtn">Submit</button>
+				</div>
+			</div>
+		</modal-dialog>
+		<modal-dialog show="shareEmailModal" width='500px' height='auto' class="ng-hide RTOSearchDiv">
+			<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+				<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+					<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">Share Email</h2>
+				</div>
+				<div class='ng-modal-close wp_modalClose closePopup' ng-click='hideEmailModal()'>
+					<i class="material-icons greyb7Txt">highlight_off</i>
+				</div>
+			</div>
+			<div class="pad10">
+				<div class="leadCaptureBox familyPopup selectRiderPop" style="padding: 0% !important;">
+					<ng-container ng-include="healthShareEmailSectionHTML"></ng-container>
+				</div>
+			</div>
+		</modal-dialog>
+	</form>
+</div>
+<div class="clearfix"></div>
+
+<!--     health Features Popup       -->
+<ng-container ng-include="healthFeaturesTemplate"></ng-container>
+<!--     Premium Breakup Popup       -->
+
+<!--     Premium Breakup Popup       -->
+<ng-container ng-include="healthPremiumTemplate"></ng-container>
+<!--     Premium Breakup Popup       -->
+
+<modal-dialog show='modalHealth' width='900px' height='auto' class="ng-hide">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{globalLabel.applicationLabels.health.existingDiseases}}</h2>
+		</div>
+		<div class='ng-modal-close wp_modalClose closePopup' ng-click='closePreExistingDiseaseModal()'>
+			<i class="material-icons greyb7Txt">highlight_off</i>
+		</div>
+	</div>
+	<div class="pad20 pad10Padding borderf2Top">
+		<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+			<div class="section group wrap" layout="row" layout-xs="column" layout-sm="column">
+				<div flex="50" flex-xs="100" flex-sm="100" class="familyPopupPadding section" ng-repeat="data in diseaseList">
+					<div class="col col-sm-7">
+						<div class="smallChkBox marTop3Per">
+							<md-checkbox name='add' checklist-model="getDisease()" ng-change="checkDisease(data.diseaseId, checked)" checklist-value="data.diseaseId"></md-checkbox>
+							<span class="alignLabelCheckBox font13">&nbsp;{{data.disease}}</span>
+						</div>
+					</div>
+					<div class="col col-sm-5">
+						<div class="illnessSelect" ng-if="selectedDisease.diseaseList.includes(data.diseaseId) == true">
+							<md-select name="preexistindDiseases" placeholder="Select Member" ng-model="data.familyList" class="illnessSelectAlign noMargin width100"
+							 multiple ng-model-options="{trackBy: '$value.id'}">
+								<md-option ng-if="$root.wordPressEnabled" ng-value="familyMember" ng-repeat="familyMember in selectedFamilyArray">
+									{{familyMember.display}} {{"("+familyMember.age+" "+"years"+")"}} </md-option>
+								<md-option ng-if="!$root.wordPressEnabled" ng-value="familyMember" ng-repeat="familyMember in selectedFamilyArray">
+									{{familyMember.display}}</md-option>
+							</md-select>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+		<div class="center submitBtnAlign">
+			<div style="color: red">{{diseaseError}}</div>
+			<md-button class="md-raised md-primary popupSubmitBtn capitalizeText bold12" id="submitPreDiseaseListInstant" ng-click="submitPreDiseaseList()">
+				{{globalLabel.applicationLabels.health.submit}} </md-button>
+		</div>
+	</div>
+</modal-dialog>
+
+<modal-dialog show='modalFamily' width='500px' height='auto' class="ng-hide">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.addFamilyMembers}}</h2>
+		</div>
+		<div class='ng-modal-close wp_modalClose closePopup' ng-click='closeFamilyMemberModal()'>
+			<i class="material-icons">highlight_off</i>
+		</div>
+	</div>
+
+
+	<div class="pad10 mobileHealthFamily pad10Padding mobileSmFix">
+		<div class="leadCaptureBox familyPopup selectRiderPop">
+			<div class="popupTableHealth popupPadding" layout="row" style="padding: 5% 0% !important;">
+				<div class="font16 greyb7Txt" flex="50">
+					Relationship
+				</div>
+				<div class="font16 greyb7Txt" flex="15">
+					Age
+				</div>
+				<div class="font16 greyb7Txt" flex="35"> 
+					Date of birth
+				</div>
+			</div>
+			<div ng-repeat="data in familyList" ng-if="data.other==false">
+				<div layout="row" class="familyPopupPadding section">
+					<div flex="50">
+						<md-checkbox value="{{data}}" ng-model="data.val" class="customCheckBoxPopup"> </md-checkbox>
+						<span class="customCheckBoxLabel">{{data.member}}</span> <span ng-if="data.member=='Son' && data.iconFlag==true "> 
+									<md-button class="familyBtnChild font11 whiteTxt resp_noMar" ng-disabled="data.val==false"
+								ng-click="addNewSon($index)" id="addNewSonInstant">+
+							Son</md-button>
+						</span> <span ng-if="data.member=='Daughter' && data.iconFlag==true">
+							<md-button class="familyBtnChild font11 whiteTxt resp_noMar" ng-disabled="data.val==false"
+								ng-click="addNewDaughter($index)" id="addNewSonInstant">+
+							Daughter</md-button>
+						</span>
+					</div>
+					<div class="familySelect" flex="15">
+						<input type="hidden" ng-value="data.age" class="hiddenAge">
+						<div ng-if="data.val">
+							<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+								<input ng-value="data.age" ng-model="data.age" style="width: 100%; border: 0" readonly>
+							</md-input-container>
+						</div>
+					</div>
+					<div class="familySelect" flex="35">
+						<div ng-if="data.val">
+							<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+								<input class="newDatepickerBorder" ng-model='data.dob' ng-change="validateAge(data,data.dob)" name='dateofbirth' p365-date-picker="DOBOptions{{$index}}"
+								 required md-no-asterisk style="border: 0" readonly/>
+							</md-input-container>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div ng-if="basicExpanded">
+				<div ng-repeat="data in familyList" ng-if="data.other==true">
+					<div layout="row" class="familyPopupPadding section">
+						<div flex="50">
+							<md-checkbox value="{{data}}" ng-model="data.val"> </md-checkbox>
+							<span class="alignLabelCheckBox">{{data.member}}</span>
+						</div>
+						<div class="familySelect" flex="50">
+							<span> <input type="hidden" ng-value="data.age"
+								class="hiddenAge">
+								<div ng-if="data.val">
+									<md-input-container class="md-block"
+										style="margin: 0%; top:-7px;"> <md-select
+										ng-if="data.val" name="type" ng-model="data.age"> <md-option
+										ng-value="value" ng-selected="{{value == data.age}}"
+										ng-repeat="value in getAgeArray(data.minAge, data.maxAge)">
+									{{value}} </md-option> </md-select> </md-input-container>
+								</div></span>
+						</div>
+
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<div class="familyBtnAlign" style="text-align: center;">
+				<md-button ng-click="toggleBasicExpanded()" class="familyBtn font12" id="addNewFamilyMemberInstant"> &nbsp;<i ng-if="basicExpanded" class="fa fa-minus" style="font-size: 10px;" aria-hidden="true"></i> <i ng-if="!basicExpanded"
+					 class="fa fa-plus" style="font-size: 10px;" aria-hidden="true"></i> Other Family Members&nbsp; </md-button>
+			</div>
+		</div>
+
+		<div class="center submitBtnAlign center">
+			<div style="color: red" ng-repeat="error in familyErrors" class="familySubmit">{{error}}</div>
+			<md-button type="submit" class="md-raised md-primary wp_button popupSubmitBtn capitalizeText font14" id="submitFamilyMemberInstant"
+			 ng-click="submitFamily()" style="margin: 0px !important;">Submit</md-button>
+		</div>
+	</div>
+</modal-dialog>
+<form name="resultCnfrmBuy">
+	<modal-dialog show='modalResultCnfrmBuy' width='500px' height='auto' class="ng-hide">
+		<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{p365Labels.common.confirmInsuredMembers}}</h2>
+			</div>
+			<div class='ng-modal-close wp_modalClose closePopup' ng-click='hideResultCnfrmBuyModal()'>
+				<i class="material-icons">highlight_off</i>
+			</div>
+		</div>
+
+
+		<div class="pad10 mobileHealthFamily pad10Padding mobileSmFix">
+			<div class="leadCaptureBox familyPopup selectRiderPop">
+				<div class="popupTableHealth popupPadding" layout="row" style="padding: 5% 0% !important;">
+					<div class="font16 greyb7Txt" flex="50">
+						Relationship
+					</div>
+					<div class="font16 greyb7Txt" flex="15">
+						Age
+					</div>
+					<div class="font16 greyb7Txt" flex="35">
+						Date of birth
+					</div>
+				</div>
+				<div ng-repeat="data in familyList" ng-if="data.other==false">
+					<div layout="row" class="familyPopupPadding section">
+						<div flex="50">
+							<md-checkbox value="{{data}}" ng-model="data.val" class="customCheckBoxPopup"> </md-checkbox>
+							<span class="customCheckBoxLabel">{{data.member}}</span> <span ng-if="data.member=='Son' && data.iconFlag==true "> 
+									<md-button class="familyBtnChild font11 whiteTxt resp_noMar" ng-disabled="data.val==false"
+								ng-click="addNewSon($index)" id="addNewSonInstant">+
+							Son</md-button>
+						</span> <span ng-if="data.member=='Daughter' && data.iconFlag==true">
+							<md-button class="familyBtnChild font11 whiteTxt resp_noMar" ng-disabled="data.val==false"
+								ng-click="addNewDaughter($index)" id="addNewSonInstant">+
+							Daughter</md-button>
+						</span>
+						</div>
+						<div class="familySelect" flex="15">
+							<input type="hidden" ng-value="data.age" class="hiddenAge">
+							<div ng-if="data.val">
+								<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+									<input ng-value="data.age" ng-model="data.age" style="width: 100%; border: 0" readonly>
+								</md-input-container>
+							</div>
+						</div>
+						<div class="familySelect" flex="35">
+							<div ng-if="data.val">
+								<md-input-container class="md-block" style="margin: 0%; top:-7px;">
+									<input class="newDatepickerBorder" ng-model='data.dob' ng-change="validateAge(data,data.dob)" name='dateofbirth' p365-date-picker="DOBOptions{{$index}}"
+									 required md-no-asterisk style="border: 0" readonly/>
+								</md-input-container>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div ng-if="basicExpanded">
+					<div ng-repeat="data in familyList" ng-if="data.other==true">
+						<div layout="row" class="familyPopupPadding section">
+							<div flex="50">
+								<md-checkbox value="{{data}}" ng-model="data.val"> </md-checkbox>
+								<span class="alignLabelCheckBox">{{data.member}}</span>
+							</div>
+							<div class="familySelect" flex="50">
+								<span> <input type="hidden" ng-value="data.age"
+								class="hiddenAge">
+								<div ng-if="data.val">
+									<md-input-container class="md-block"
+										style="margin: 0%; top:-7px;"> <md-select
+										ng-if="data.val" name="type" ng-model="data.age"> <md-option
+										ng-value="value" ng-selected="{{value == data.age}}"
+										ng-repeat="value in getAgeArray(data.minAge, data.maxAge)">
+									{{value}} </md-option> </md-select> </md-input-container>
+								</div></span>
+							</div>
+
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+				<div class="familyBtnAlign" style="text-align: center;">
+					<md-button ng-click="toggleBasicExpanded()" class="familyBtn font12" id="addNewFamilyMemberInstant"> &nbsp;<i ng-if="basicExpanded" class="fa fa-minus" style="font-size: 10px;" aria-hidden="true"></i> <i ng-if="!basicExpanded"
+						 class="fa fa-plus" style="font-size: 10px;" aria-hidden="true"></i> Other Family Members&nbsp; </md-button>
+				</div>
+			</div>
+
+			<div class="center submitBtnAlign center">
+				<div style="color: red" ng-repeat="error in familyErrors" class="familySubmit">{{error}}</div>
+				<md-button type="submit" class="md-raised md-primary wp_button popupSubmitBtn capitalizeText font14" id="confirmFamilyMemberInstant"
+				 ng-click="submitResultCnfrmBuy()" style="margin: 0px !important;">Confirm</md-button>
+			</div>
+		</div>
+	</modal-dialog>
+</form>
+
+<modal-dialog show='modalPIN' width='500px' height='auto !important' class="ng-hide">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">Enter Area or City or Pincode</h2>
+		</div>
+		<div class='ng-modal-close wp_modalClose closePopup' ng-click='hideModal()'>
+			<i class="material-icons">highlight_off</i>
+		</div>
+	</div>
+
+	<div class="tab-pane">
+		<div class="">
+			<div class="pad10 pinPopup">
+				<md-input-container class="md-block">
+					<div layout="row">
+						<i class="material-icons" flex="2" style="position: relative;top:10px;">room</i>
+						<div flex="95">
+							<input name="pin" ng-required="true" class="wp_healthModalPin" typeahead-on-select="onSelectPinOrArea($item,true)" typeahead-wait-ms="10"
+							 typeahead-no-results="noResults" ng-model="personalInfo.pincode" uib-typeahead="pin.display for pin in getPinCodeAreaList($viewValue)"
+							 typeahead-show-hint="false" autocomplete="off" typeahead-min-length="3" typeahead-wait-ms="10" style="background: transparent !important;"
+							/>
+						</div>
+					</div>
+					<div class="dropdown-menu-NoResult dropdown-menu-NoResultPosition" ng-if="noResults">No Results Found</div>
+				</md-input-container>
+			</div>
+		</div>
+	</div>
+</modal-dialog>
+<modal-dialog show='hospitalModal' width='500px' class="ng-hide modalViewDetails">
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">List of Hospitals</h2>
+		</div>
+		<div class='ng-modal-close wp_modalClose closePopup' ng-click='closeModalHospital()'>
+			<i class="material-icons">highlight_off</i>
+		</div>
+	</div>
+	<div class="pad10">
+		<ng-container class="md-1-line checkBox" ng-repeat="hospital in hospitalList" ng-if="hospital[$root.selCarrierId]">
+			<div layout="row" layout-wrap flex ng-repeat="data in hospital[$root.selCarrierId]">
+				<div class="md-list-item-text" flex="100">
+					<p>
+						{{data.hospitalName}}, {{data.area}}
+					</p>
+				</div>
+			</div>
+		</ng-container>
+	</div>
+	</div>
+</modal-dialog>
+
+<modal-dialog show='modalEmailView' width='550px' height='auto' class="ng-hide">
+
+	<div class="blueBackground one-edge-shadow wp_noBoxShadow" style="" layout="row">
+		<div class="" style="padding-top: 5px; text-align: center;" flex="90" flex-sm="85" flex-xs="85">
+			<h2 class="white popupHeading wp_popupHeading side6Pad">{{globalLabel.applicationLabels.common.shareEmailModalLabel1}}</h2>
+		</div>
+		<div class='ng-modal-close wp_modalClose' ng-click='hideEmailModal()'>
+			<i class="material-icons">highlight_off</i>
+		</div>
+	</div>
+	<div class="pad10 responsiveTellus newPopupInnerShadow" style="">
+		<div class="popupTableHealth popupPadding" layout="row" style="padding: 3% 0% 3% 0% !important;">
+			<div flex="100" style="text-align: center; padding: 1% 0%;">
+				<b>{{globalLabel.applicationLabels.common.shareEmailModalLabel2}}</b>
+				<div data-ng-repeat="choice in EmailChoices" ng-if="choice.username" flex="100" style="text-align: center; padding: 1% 0%;">
+					{{$index+1}}.<b>{{choice.username}}</b>
+				</div>
+			</div>
+		</div>
+		<div class="center" ng-if="!$root.wordPressEnabled">
+			<!-- <button type="button" class="bluebutton" ng-click="hideEmailModal()">OK</button> -->
+			<md-button class='md-raised md-primary popupSubmit' ng-click="hideEmailModal()" style="margin-bottom: 8px !important;">OK</md-button>
+		</div>
+	</div>
+</modal-dialog>
+<form name="quoteUserInfoForm">
+	<modal-dialog show='modalView' width='550px' height='auto' class="ng-hide">
+		<div class="blueBackground one-edge-shadow">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{globalLabel.applicationLabels.common.userInfoModalLabel4}}</h2>
+			</div>
+			<!-- <div class='ng-modal-close closePopup' ng-click='hideEmailModal()'>
+				<i class="material-icons">highlight_off</i>
+			</div> -->
+		</div>
+		<div class="pad10 responsiveTellus newPopupInnerShadow">
+			<div class="leadCaptureBox leadScrollMobile">
+				<div class="pad10 leftnoborder paddingWebNew leadCapturePadding">
+					<div class="section group">
+						<div layout="row" layout-xs="column">
+							<div class="right5Mar" flex="50" flex-xs="100">
+								<md-input-container style="width: 100%;">
+									<input type="text" class="capitializeName" placeholder="First name" name="firstName" ng-model="quoteUserInfo.firstName" autocomplete="off"
+									 maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/" required capitalize-first />
+									<div ng-messages="quoteUserInfoForm.firstName.$error" ng-if="quoteUserInfoForm.firstName.$touched">
+										<div style="color: red" ng-message="required">{{globalLabel.validationMessages.firstNameRequired}}</div>
+										<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+										<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+										<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+									</div>
+								</md-input-container>
+							</div>
+							<div flex="50" flex-xs="100" style="width: 100%;">
+								<md-input-container style="width: 100%;">
+									<input type="text" class="capitializeName" placeholder="Last name" name="lastName" ng-model="quoteUserInfo.lastName" autocomplete="off"
+									 maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/" style="box-shadow: 0px;" capitalize-first />
+
+									<div ng-messages="quoteUserInfoForm.lastName.$error" ng-if="quoteUserInfoForm.lastName.$touched">
+										<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+										<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+										<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+									</div>
+								</md-input-container>
+							</div>
+						</div>
+					</div>
+					<div layout="row" layout-xs="column">
+						<div class="right5Mar" flex="50" flex-xs="100">
+							<md-input-container style="width: 100%;">
+								<input type="text" ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-z.]{2,5}$/" placeholder="Email-ID" autocomplete="off"
+								 maxlength="50" name="emailId" ng-model="quoteUserInfo.emailId" required />
+								<div ng-messages="quoteUserInfoForm.emailId.$error" ng-if="quoteUserInfoForm.emailId.$touched">
+									<div style="color: red" ng-message="required">{{globalLabel.validationMessages.emailIdRequired}}</div>
+									<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.emailIdInvalid}}</div>
+									<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.emailIdInvalid}}</div>
+								</div>
+							</md-input-container>
+						</div>
+						<div class="right5Mar" flex="50" flex-xs="100">
+							<md-input-container style="width: 100%;">
+								<div class="section group">
+									<div class="col span_3_of_3">
+										<input type="text" placeholder="Mobile Number" name="mobileNumber" ng-model="quoteUserInfo.mobileNumber" autocomplete="off"
+										 ng-pattern="/^[6789]\d{9}$/" maxlength="10" minlength="10" required />
+										<div ng-messages="quoteUserInfoForm.mobileNumber.$error" ng-if="quoteUserInfoForm.mobileNumber.$touched">
+											<div style="color: red" ng-message="required">{{globalLabel.validationMessages.mobileNumberRequired}}</div>
+											<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+											<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+											<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+										</div>
+									</div>
+								</div>
+							</md-input-container>
+						</div>
+					</div>
+					<div class="center resp_topBot5Pad">
+						<md-button type="submit" ng-click="redirectToAPResult()" id="aboutLeadBtn" ng-disabled="quoteUserInfoForm.$invalid || disabledRedirectToResult" class="PB_QuoteSaveBtn">
+							{{globalLabel.applicationLabels.common.viewBuyQuote}}
+							<span ng-show="disabledRedirectToResult"><i class="fa fa-spinner fa-spin "></i></span></md-button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</modal-dialog>
+</form>

@@ -1,0 +1,1566 @@
+@media screen and (min-width: 320px) and (max-width: 767px) {
+	body {
+		font-size: 0.8em;
+	}
+	.wp_mar20 {
+		margin: 0 2% !important;
+	}
+	.font15 {
+		font-size: 13px;
+	}
+	.wp_respFont15 {
+		font-size: 16px !important;
+	}
+	.font34 {
+		font-size: 20px;
+		text-align: center;
+	}
+	.loading .loaderPlacer {
+		margin-top: -50px;
+		margin-left: 25%;
+		left: 0;
+	}
+	.loaderPlacer > img{
+	  height:100px !important;
+	  margin-left: 30% !important;
+	}
+	.wp_width50 {
+		width: 100%;
+		float: none;
+	}
+	.wp_claimDiv .wp_uppercase {
+		margin: 20px 0 0 0;
+		font-size: 30px;
+	}
+	.wp_padCommonClaims {
+		padding: 30px;
+	}
+	.wp_respCenterText {
+		text-align: center;
+	}
+	.wp_respBtn{padding: 1% 7% !important;}
+	.wp_claimsHeader span {
+		vertical-align: super;
+		font-size: 20px;
+		padding-left: 20px;
+	}
+	.wp_claimsHeader img {
+		width: 40px !important;
+	}
+	.wp_claimsEmptyPadding {
+		padding: 0px;
+	}
+	.claimNavigationTitle h4 {
+		line-height: 17px !important;
+		font-size: 13px !important;
+	}
+	.wp_upperCase.wp_inputBorderRadius md-input-container label:not (.md-container-ignore){
+		font-size: 14px !important;
+		text-transform: capitalize !important;
+	}
+	.wp_upperCase.wp_inputBorderRadius md-input-container > md-select, .wp_upperCase.wp_inputBorderRadius md-input-container .md-select-value > span:not(.md-select-icon) .md-text, .wp_upperCase.wp_inputBorderRadius md-input-container .md-input{
+		font-size: 14px !important;
+		font-weight: 600;
+		text-transform: capitalize !important;
+	}
+	.horizontalTab .active::after{left: 35%;}
+	.wp_respDispBlock {
+		display: block !important;
+	}
+	.wp_proposalNumStyle {
+		margin-left: 0px;
+		margin-right: 5px;
+		padding: 5px 8px;
+	}
+	.tabs .navigationTitle {
+		margin-left: 0px;
+	}
+	.wp_contactSection .span_1_of_3 {
+		width: 100%;
+	}
+	.wp_contactSection .span_2_of_3 {
+		width: 100%;
+	}
+	.orangetitle {
+		font-size: 13px;
+		font-weight: normal;
+	}
+	.buyAccordianH3 .editBtnBlack {
+		border-left: none;
+	}
+	.wp_respFont13 {
+		font-size: 13px;
+	}
+	.wp_proposalAccordian.active::after {
+		left: 28%;
+	}
+	.wp_padNo {
+		padding: 0px;
+	}
+	.wp_respSubmitPad1 {
+		margin-top: 1% !important;
+	}
+	.wp_resSmallFont {
+		font-size: 12px;
+	}
+	.wp_proposalAccordian {
+		width: 100%;
+		left: 0px;
+	}
+	.wp_signinFamilyInnerPopup {
+		padding: 10px !important;
+	}
+	.wp_col60 {
+		width: 100%;
+	}
+	.wp_col50 {
+		width: 100%;
+	}
+	.wp_col40 {
+		width: 100%;
+	}
+	.wp_respWidthFull {
+		padding: 0px !important;
+	}
+	.wp_respFloat1 {
+		width: 100% !important;
+		float: none;
+	}
+	.wp_respFailPad {
+		padding: 0px !important;
+	}
+	.wp_respFailSubHead {
+		padding-top: 5%;
+		text-align: center;
+		font-size: 17px;
+	}
+	.wp_respFloat2 {
+		width: 100%;
+		text-align: center;
+	}
+	.wp_padLeft60 {
+		padding-left: 0px;
+	}
+	.wp_InsideWrapperPaySuccess {
+		max-width: 100%;
+	}
+	.wp_InsideWrapperPayFailure {
+		max-width: 100%;
+	}
+	.buyOwnerBtn {
+		text-align: center;
+	}
+	.cancelbuybuttoncar {
+		margin: 5px 0px;
+	}
+	.accordionBuy a {
+		font-size: 11px !important;
+	}
+	.resSm_Md_ScreenPad {
+		padding-right: 0px;
+	}
+	.buyBtnAlign {
+		text-align: center;
+	}
+	.P-logo {
+		background-image: url(../privacy-policy/img/P-logo.png);
+		margin: 23px 0px 0px 0px;
+		background-size: 70% 70%;
+	}
+	.smallTextInfo {
+		width: 100%;
+	}
+	.labelSetting .md-button {
+		margin-bottom: 5px !important;
+	}
+	.HLReachPad {
+		padding: 0px !important;
+	}
+	.partnerIcon {
+		width: auto !important;
+	}
+	.LLHeadTitle {
+		font-size: 25px !important;
+		line-height: 30px !important;
+	}
+	.resCenter {
+		text-align: center !important;
+	}
+	.benefitPara p {
+		font-size: 15px !important;
+		line-height: 19px !important;
+	}
+	.headMarLeft {
+		margin: 0% !important;
+	}
+	.LLHeadPatch {
+		padding: 10px !important;
+	}
+	.LLResPad30 {
+		padding: 1% !important;
+	}
+	.CLclaimTop, .CLclaimTop a {
+		width: 80% !important;
+		color: #fff;
+	}
+	.CLHeadTitle {
+		font-size: 24px !important;
+	}
+	.LLPremiLeft {
+		font-size: 15px !important;
+	}
+	.CLourPart {
+		padding: 5% 0% 2% 0% !important;
+	}
+	.getInsuredText {
+		font-size: 55px !important;
+	}
+	.regRTOProp {
+		width: 100% !important;
+	}
+	.regRTOPropBtn {
+		margin-right: 0% !important;
+		width: 100% !important;
+	}
+	.CLclaimBot {
+		width: 80% !important;
+	}
+	.resCLViewBtn {
+		padding: 0px !important;
+	}
+	.subContainer {
+		padding: 5% 0% 2% 0% !important;
+	}
+	.calcBtn {
+		position: unset !important;
+		width: 100% !important;
+	}
+	.CLBenefits button {
+		padding: 4% !important;
+		width: 100% !important;
+	}
+	.resLLHeadPatch {
+		background-color: rgb(255, 238, 191) !important;
+	}
+	.getStrtContainer {
+		padding: 5% 20% 2% 20% !important;
+	}
+	.resCLLowerCont {
+		padding-top: 16% !important;
+	}
+	.HLPartnerImg {
+		text-align: center;
+	}
+	.HLPartnerImg img {
+		display: inline !important;
+	}
+	.LLPartnerImg img {
+		display: inline !important;
+		width: 160px !important;
+		padding: 1%;
+	}
+	.lowerBlueContainer {
+		padding: 4% 14% 25% 14% !important;
+	}
+	.reachSales {
+		font-size: 13px !important;
+		line-height: 22px;
+	}
+	.imgWidth {
+		width: 100%;
+	}
+	.sectionWeb .marginAdd {
+		margin: 0px auto !important;
+		flex: 1;
+		padding: 20px !important;
+	}
+	md-input-container a {
+		font-size: 11px !important;
+	}
+	.sectionWeb {
+		display: block;
+	}
+	.document_section1 {
+		width: 100%;
+		float: none;
+		height: auto;
+	}
+	.document_section2 {
+		width: 100%;
+		float: none;
+		height: auto;
+	}
+	.borderIDV {
+		border-top: none;
+		margin-right: 0px;
+	}
+	.container {
+		box-sizing: border-box;
+	}
+	.carBuyConfirmDialog {
+		max-height: 50vh !important;
+	}
+	.instantPremium {
+		font-size: 18px !important;
+	}
+	.wp_respNoPadLeft {
+		padding-left: 0% !important;
+	}
+	.wp_respNoPadRight {
+		padding-right: 0% !important;
+	}
+	.feedBackText label {
+		padding-bottom: 0px !important;
+	}
+	.feedbackList {
+		border-bottom: 1px solid #42424280;
+		padding-bottom: 20px !important;
+	}
+	.fixForMobile {
+		width: 100%;
+	}
+	#sticky {
+		position: relative !important;
+		width: 100% !important;
+	}
+	.fullWidth {
+		width: 100% !important;
+	}
+	.wrapper {
+		box-sizing: border-box;
+		padding: 0px 8px;
+	}
+	.InsideWrapper {
+		box-sizing: border-box;
+		padding: 0px 8px;
+	}
+	.head_left {
+		padding-left: 5px;
+	}
+	.head_right {
+		font-size: 0.9em;
+	}
+	.head_left li {
+		margin-right: 0px;
+		padding: 0px;
+	}
+	.head_left li a {
+		padding: 3px;
+	}
+	.navigation {
+		line-height: 36px !important;
+	}
+	.navigation li a {
+		text-transform: initial !important;
+	}
+	.navigation li {
+		line-height: 5px !important;
+	}
+	.navigation li a:hover {
+		color: #f7a100;
+	}
+	.borderright, .borderbottom {
+		border: none;
+	}
+	.wp_respDisplayNone {
+		display: none !important;
+	}
+	.tabs {
+		width: 100%;
+	}
+	.partnerDiv .InsideWrapper .demo-3 .fixed-bar ul {
+		padding-left: 30%;
+	}
+	.mobileInstantQuote .col {
+		width: 100%;
+	}
+	.familyPopup .col-lg-8 {
+		width: 66.6%;
+		font-size: 12px;
+	}
+	.familyPopup .col-lg-4 {
+		width: 33.3%;
+		margin: 1% 5%;
+	}
+	.familyPopup .col-lg-8 {
+		font-size: 12px;
+	}
+	/* .mobileSmFix{overflow:auto;height:22em;}
+ */
+	.dropdown-menu>li>a, .area>li>a {
+		font-size: 11px;
+	}
+	.familyPopup {
+		max-height: 63vh !important;
+		overflow-y:scroll;
+		-webkit-overflow:scroll;
+		-webkit-overflow-scrolling:auto;
+		overflow-scrolling:auto;
+	}
+	.illnessSelectAlign {
+		margin: 3% 0% !important;
+		width: 100% !important;
+	}
+	.mobileInstantQuote .col.col-lg-7 {
+		padding: 0;
+	}
+	.mobileInstantQuote .col.col-lg-5 {
+		padding: 0;
+	}
+	.mobileInstantQuote  .pad20 {
+		padding: 0;
+	}
+	.mobileInstantQuote  .pad50 {
+		padding: 0;
+	}
+	.mobileInstantQuote  .pad50 .btnPadding {
+		padding: 0 !important;
+		margin: 0 !important;
+		width: 100%;
+	}
+	.info-bg .span_1_of_3 {
+		width: 100% !important;
+	}
+	.showMetro .section .borderBtmRTO {
+		border-bottom: 0;
+	}
+	.instantQuoteTo {
+		padding: 0 5px;
+	}
+	.angularMaterial.angularTab {
+		margin: 0%;
+	}
+	.leadCaptureBox {
+		width: 100%;
+		margin: 0;
+	}
+	.mobileResult {
+		padding: 15px 0 0 0;
+	}
+	.mobileResult .col {
+		margin: 0;
+	}
+	.mobileResult .col-sm-5 {
+		margin-left: 15px;
+	}
+	.mobileMidTop .col {
+		margin: 0;
+		padding: 0;
+	}
+	.mobileMidTop .col-sm-4 {
+		padding: 0;
+		width: 100%;
+	}
+	.mobileMidTop .fullShadowMiddle {
+		margin-bottom: 18px;
+	}
+	.mobileMidTop .lastMidTop .fullShadowMiddle, .marBtmMobile {
+		margin-bottom: 10px;
+	}
+	.mobileMidTop .padButtonResult {
+		padding: 0;
+	}
+	.mobileResult .buyRight {
+		padding: 0
+	}
+}
+/* media screen added for share and sort buttons alignment for ipos screen*/
+@media screen and (min-width: 320px) and (max-width: 479px) {
+	.col-sm-12PadRem {
+		width: 100%;
+	}
+	.showforDcp {
+		display: none !important;
+	}
+	.RTOHeading {
+		font-size: 13px;
+	}
+	.regAreaInput .inner-addon .form-control {
+		height: 40px !important;
+	}
+	.purchasingHeader h3 {
+		font-size: 22px;
+	}
+	.purchasingHeader p {
+		font-size: 12px;
+	}
+	.labelLeft {
+		width: 60%;
+	}
+	.wp_button {
+		font-size: 15px !important;
+	}
+	.illnessSelectAlign md-select-value .md-text {
+		font-size: 15px;
+	}
+	md-input-container .col input[type="text"] {
+		font-size: 12px;
+	}
+	.responsiveTellus .leftnoborder input[type="text"] {
+		font-size: 12px;
+	}
+	.wp_respBuyEditIcon i {
+		font-size: 18px;
+	}
+	.wp_respBuyEditIcon {
+		min-height: 30px !important;
+	}
+	.buySub {
+		font-size: 12px !important;
+	}
+}
+
+@media screen and (min-width: 480px) and (max-width: 1024px) {
+	.col-sm-12PadRem {
+		width: 100% !important;
+	}
+	.mobileMidTop .col-sm-4 {
+		width: 50%;
+	}
+	.col-sm-12PadRem {
+		padding: 0px 2px !important;
+	}
+	.showforDcp {
+		display: block !important;
+	}
+}
+/*ipos screen end here*/
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+	.sectionWeb .marginAdd {
+		margin: 10px auto !important;
+		flex: 1;
+		padding: 10px !important;
+	}
+	.sectionWeb {
+		display: block;
+	}
+	.tabs {
+		width: 100%;
+	}
+	.feedBackText label {
+		padding-bottom: 0px !important;
+	}
+	#sticky {
+		position: relative !important;
+		width: 100% !important;
+	}
+	.tabPremium {
+		display: block !important;
+		max-height: unset !important;
+		padding: 0px 16px;
+	}
+	.leadCaptureBox {
+		width: 100%;
+		margin: 0;
+	}
+	.wp_claimDiv{padding: 70px 0px;}
+	.wp_uppercase{font-size: 35px;}
+	/* .col{margin: 1% 0 1% 0% !important;} */
+	.buyRight {
+		padding: 0px;
+	}
+	.angularMaterial.angularTab {
+		margin: 0%;
+	}
+	.col-sm-8 {
+    width: 66.66666667% !important;
+	}
+	.col-sm-2 {
+    width: 16.66666667% !important;
+}
+	.mobileInstantQuote .col {
+		width: 100%;
+	}
+	.newWidth .section {
+		width: auto;
+	}
+	.newWidth .section .span_1_of_3 {
+		padding: 10px 6px;
+	}
+	.mobileInstantQuote .col.col-lg-7 {
+		padding: 0;
+	}
+	.mobileInstantQuote .col.col-lg-5 {
+		padding: 0;
+	}
+	figure img {
+		height: 214px;
+		width: 100%;
+	}
+	.tab-content {
+		width: 100%;
+		box-shadow: 0px 0px 0px 0px #191919;
+		margin-top: 5px;
+	}
+	.righttab {
+		width: 100%;
+	}
+	.mobileInstantQuote  .pad20 {
+		padding: 0;
+	}
+	.tabs li label {
+		display: inline-block;
+	}
+	.tabs li.active {
+		right: 0;
+		border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-ms-border-radius: 0px;
+		width: 25%;
+	}
+/* 	.tabs li.active:after {
+		width: 0;
+		height: 0;
+		border-left: 15px solid transparent;
+		border-right: 15px solid transparent;
+		border-bottom: 15px solid #ececec;
+		top: 77%;
+		content: '';
+		position: absolute;
+		right: 50%;
+		clear: both;
+	} */
+	.tabs li {
+		width: 25%;
+		right: 0;
+		margin-bottom: 0px;
+		border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-ms-border-radius: 0px;
+		border-bottom: 0px !important;
+	}
+	.logo {
+		background-image: url(../img/mlogo.png) !important;
+		height: 51px !important;
+		width: 145px !important;
+	}
+	.marqueeText {
+		width: 50%;
+	}
+	.navigationLabel {
+		margin-top: 3px;
+		padding-bottom: 0px !important;
+	}
+	.tabs li:hover {
+		border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-ms-border-radius: 0px;
+	}
+	.lefttab {
+		margin-right: 10px;
+	}
+	.tab-content {
+		width: 100%;
+	}
+	.featuretitle {
+		font-size: 14px;
+	}
+	.imageFeatures .making p {
+		font-size: 12px;
+	}
+	.imageFeatures {
+		height: 190px;
+	}
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) and
+	(min-color-index:0) {
+	figure img {
+		height: 250px !important;
+		width: 100%;
+	}
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	figure img {
+		height: 250px !important;
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+	.navigationLabel h4 {
+		font-size: 14px;
+		font-weight: bold;
+	}
+	.carTab, .bikeTab, .lifeTab, .healthTab, .homeTab, .travelTab, .criticalIllnessTab  {
+		width: 50px !important;
+		height: 50px !important;
+	}
+	.wp_border32 {
+		line-height: 42px;
+	}
+	.RTOLink {
+		letter-spacing: -0.3px;
+	}
+	.wp_inputBorderRadius md-input-container {
+		margin: 3px 0;
+	}
+	.wp_viewBtn {
+		font-size: 14px !important;
+		padding: 0px;
+	}
+	.wp_resultCol30 {
+		width: 100%;
+	}
+	.wp_resultCol50 {
+		width: 100%;
+	}
+	.resultBg .resultPad p {
+		font-size: 13px;
+	}
+	.wp_resultInpBtn {
+		width: 100% !important;
+	}
+	md-menu-content[width="6"] {
+		min-width: 300px !important;
+	}
+	.wp_quotesBorderRight {
+		border-right: none;
+	}
+	.wp_padRgt30 {
+		padding-right: 0px;
+	}
+	.wp_signinPopup {
+		width: 93%;
+		padding: 10px;
+	}
+	.wp_respWidth100 {
+		max-width: 100% !important;
+	}
+	
+	.blackText p {
+		font-size: 12px !important;
+	}
+	.pad10Padding {
+		padding-top: 5px !important;
+	}
+	.wp_modalClose {
+		height: 34px;
+		top: -17px;
+		right: -10px;
+		padding: 5px 5px !important;
+	}
+	
+	.wp_numberAlign {
+		margin-right: 0px;
+	}
+	.numberAlign {
+		margin-right: 0px;
+		text-align: center;
+	}
+	.wp_respDashPolicy {
+		border-bottom: 1px solid #ececec;
+		padding: 7% 0%;
+	}
+	.wp_dashboardTitle {
+		padding: 0px !important;
+	}
+	.wp_respFont1_4 {
+		font-size: 1.4em;
+	}
+	.innerPurchaseLeft {
+		width: 100%;
+	}
+	.personalLabelLeft {
+		width: 35%;
+	}
+	.personalLabelRight {
+		width: 65%;
+	}
+	.purchaseBodyLeft {
+		width: 100%;
+	}
+	.purchaseBodyRight {
+		width: 100%;
+	}
+	.wp_respNoBorder {
+		border: none !important;
+	}
+	.wp_popupHeading {
+		text-align: center;
+		padding: 0px 20px !important;
+	}
+	.innerPurchaseRight {
+		width: 100%;
+	}
+	.wp_RtoMetro {
+		padding: 20px 0px 30px 0px;
+	}
+	.wp_respLeftText {
+		text-align: left !important;
+	}
+	.wp_marginAutoSign {
+		margin: 4% auto;
+	}
+	.RTOMiddleTab {
+		background-color: transparent;
+		overflow: scroll;
+		max-height: 48vh;
+	}
+	.popularHeadRto {
+		font-size: 18px !important;
+	}
+	.TandCFont {
+		font-size: 11px;
+	}
+	.TandCPad {
+		padding: 0px 15px !important;
+	}
+	.TandCPad md-checkbox {
+		margin-bottom: 10px;
+	}
+	.wp_Section40 ul {
+		padding-top: 0px;
+	}
+	.lineHeight17em {
+		line-height: 1.5em;
+		font-size: 12px;
+		text-align: justify !important;
+	}
+	.wp_borderRight {
+		border-right: none;
+	}
+	.popupHeading {
+		font-weight: 500;
+		font-size: 1.2em;
+		line-height: 22px !important;
+	}
+	.leadScrollMobile {
+		height: 360px;
+		overflow-x: auto;
+	}
+	.borderIDV {
+		border-top: none;
+		margin-right: 0px !important;
+	}
+	.newWidth .section {
+		width: auto;
+	}
+	.newWidth .section .span_1_of_3 {
+		padding: 20px 18px;
+	}
+	.buySide {
+		width: 100%;
+		padding: 0px !important;
+	}
+	.buySide .accordion-content {
+		border: none !important;
+	}
+	.buySide .accordion-toggle {
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		background: transparent;
+	}
+	.orangeShadow {
+		font-size: 1.3em
+	}
+	.orangeShadow .subtitle {
+		font-size: .8em
+	}
+	.editback2 {
+		padding: 0;
+	}
+	.paddingboth {
+		padding: 5px 0 !important;
+	}
+	.spinner {
+		left: 35%;
+	}
+	h2 {
+		font-size: 1.2em;
+		line-height: 22px !important;
+	}
+	.tabs {
+		width: 100%;
+	}
+	.Headericonfafa {
+		float: right;
+		margin: 21px auto !important;
+		-webkit-border-radius: 5px;
+		/* border: 1px solid #422422; */
+		padding: 6px;
+		line-height: 1;
+	}
+	.login {
+		float: right !important;
+		margin: 21px auto !important;
+		-webkit-border-radius: 5px;
+		-webkit-border-radius: 6px;
+		-ms-border-radius: 6px;
+		/* height: 30px !important;
+		width: 96px !important;
+		margin: 31px auto !important;
+		width: 100%;
+		display: block;
+		float: right !important; */
+	}
+	.logout {
+		float: right !important;
+		/* margin: 31px auto !important; */
+		margin: 20px auto !important;
+		-webkit-border-radius: 5px;
+		-webkit-border-radius: 6px;
+		-ms-border-radius: 6px;
+	}
+	.logo {
+		/* background-image: url(../img/mlogo.png) !important;
+		height: 51px !important;
+		width: 145px !important;
+		margin:;
+		width: 100%;
+		display: block;
+		float: left !important;*/
+		background-image: url(../img/mlogo1.png) !important;
+		height: 30px !important;
+		width: 96px !important;
+		margin: 16px auto !important;
+		width: 100%;
+		display: block;
+		float: left !important;
+	}
+	.leftlogo {
+		float: none;
+	}
+	.navigation {
+		line-height: 30px;
+		float: right;
+	}
+	.navigation li {
+		padding-left: 10px;
+		font-size: 0.9 .5em;
+	}
+	.navigation a.active {
+		padding: 3px 5px;
+	}
+	.carright, .bikeleft, .liferight, .healthleft, .homeright, .travelleft {
+		display: none;
+	}
+	.wHealth, .insideSpan, .rightSpan {
+		width: 100%;
+	}
+	.wHealth.borderFeaturesRight, .rightSpan.borderFeatures {
+		border: none;
+		padding: 0;
+	}
+	.pratRight {
+		width: 77%;
+	}
+	.carleft, .lifeleft, .homeleft {
+		background-color: #2991ea;
+		padding: 8px;
+		float: none;
+		width: 100%;
+		height: auto;
+	}
+	.bikeright, .healthright, .travelright {
+		background-color: #e46717;
+		padding: 8px;
+		float: none;
+		width: 100%;
+		height: auto;
+	}
+	.RTOsearch {
+		margin: auto;
+		width: 100%;
+	}
+	#ninja-slider-prev::before, #ninja-slider-next::before {
+		top: 12px !important;
+		width: 10px !important;
+		height: 10px !important;
+		border-left: 3px solid white !important;
+		border-top: 3px solid white !important;
+	}
+	#ninja-slider-prev, #ninja-slider-next {
+		width: 29px !important;
+		height: 36px !important;
+		line-height: 36px important;
+	}
+	#ninja-slider-next::before {
+		right: 11px !important;
+	}
+	#ninja-slider-prev::before {
+		left: 11px !important;
+	}
+	#ninja-slider ul {
+		padding-top: 30% !important;
+	}
+	.backslider {
+		margin-top: 5px;
+	}
+	.content div {
+		font-size: 9px;
+	}
+	#ninja-slider-next div {
+		display: none !important;
+	}
+	.footsocial li {
+		margin-top: 10px !important;
+		margin-bottom: 10px;
+	}
+	.search {
+		box-sizing: border-box;
+		max-width: 300px;
+	}
+	.featuretitle {
+		font-size: 0.9em !important;
+	}
+	.imageFeatures .making p {
+		font-size: 0.9em;
+	}
+	/* #tabbed-nav img {
+		width: 32px !important;
+		height: 32px !important;
+	} */
+	.buyborderright {
+		border-right: 0px;
+		border-bottom: 1px solid #c3c5c0;
+		min-height: 0px;
+	}
+	.tableoverflow {
+		overflow: auto !important;
+		width: 100% !important;
+	}
+	.white img {
+		width: 100%;
+	}
+	.buynow2 .orangebutton {
+		padding: 8px 5px !important;
+	}
+	.wp_claimsText .tabs li{width: 100% !important;}
+	.ng-modal-dialog {
+		top: 50% !important;
+		left: 50%;
+		width: 90% !important;
+		height: 90% !important;
+	}
+	.imageFeatures {
+		height: 150px;
+		border-bottom: 1px solid #999;
+	}
+	.minheight_health {
+		min-height: auto !important;
+	}
+	.buyInput .input-append {
+		width: 75% !important;
+	}
+	.buyInput .input-append>input[type="text"] {
+		width: 81% !important;
+	}
+	.quoteLeftPlacer {
+		margin-left: 0px
+	}
+	.responsiveTab .tabsVert {
+		top: 16px;
+	}
+	.RTOinput {
+		width: 100% !important;
+	}
+	.responsiveTab .tabsVert li {
+		float: left;
+		min-height: 55px;
+		line-height: normal !important;
+		font-weight: normal;
+		text-transform: inherit;
+	}
+	.responsiveTab .tabsVert li.active {
+		top: 1px !important;
+	}
+	.sidebar {
+		position: absolute;
+		top: 5%;
+	}
+	#accordion .commonBtn, #accordion .commonBtn:hover {
+		margin-top: 2px;
+		right: 3px;
+	}
+	#accordion .commonReportBtn, #accordion .commonReportBtn:hover {
+		margin-top: 2px;
+		right: 3px;
+	}
+	.editCommonBtn, .editCommonBtn:hover {
+		margin-top: 3px;
+		right: 3px;
+	}
+	.accForMobile {
+		display: block;
+	}
+	.accForWeb {
+		display: none;
+	}
+	.accGroup.col {
+		margin: 0;
+	}
+	.planBenefits_borderFeatures {
+		padding: 0;
+	}
+	.divForMobile .resultHeader {
+		display: none;
+	}
+	.divForMobile .hideforMobile {
+		display: none;
+	}
+	.divForMobile .showforMobile .col {
+		position: relative;
+		padding: 5px 10px;
+	}
+	.divForMobile .showforMobile .col img {
+		width: 100%;
+	}
+	.divForMobile .showforMobile .bottomForMobile .emptySpace {
+		padding: 0;
+	}
+	.divForMobile .showforMobile .bottomForMobile hr {
+		margin: 0;
+	}
+	.divForMobile .showforMobile .bottomForMobile {
+		position: absolute;
+		bottom: 5px;
+		z-index: 1;
+		width: auto;
+		background: #000;
+		opacity: 0.8;
+		margin: 0 10px 0px 0px;
+		padding: 3px;
+	}
+	.divForMobile .showforMobile {
+		display: block;
+	}
+	.divForMobileTable .hideforMobile {
+		display: none;
+	}
+	.divForMobileTable .showforMobile {
+		display: block;
+	}
+	.divForMobile .width50 {
+		width: 49.2%;
+		min-height: auto !important;
+	}
+	div .afterlogin {
+		text-align: center;
+		font-weight: 600;
+	}
+	.thirdPaneContent .width60 .orangeText {
+		display: block;
+	}
+	.carImportant .width60 {
+		display: block;
+		float: left;
+		width: 100%;
+	}
+	.mobileDate {
+		width: 58%;
+	}
+	.mobileDate>input {
+		width: 78% !important;
+	}
+	.mobileRadioGroup, .polStatusMobile {
+		width: 60%;
+	}
+	.mobileRadioGroup label {
+		display: block;
+	}
+	.pad5 {
+		padding: 5px !important;
+	}
+	.info-pc {
+		left: 47% !important;
+	}
+	.ng-modal-overlay {
+		opacity: 1 !important;
+	}
+	div.rn-carousel-indicator span {
+		padding: 0 1px !important;
+	}
+	.paddingWebNew {
+		padding: 10px;
+	}
+	.emptySpace {
+		padding-bottom: 20px;
+	}
+	/*simple accordion*/
+	#accordion {
+		width: 100%;
+		margin: 1em auto;
+	}
+	.accordion-toggle  b {
+		padding-left: 5px;
+	}
+	.accordion-toggle {
+		padding: 7px 5px;
+		border-top: 1px solid #DBDBDB;
+		border-left: 1px solid #DBDBDB;
+		border-right: 1px solid #DBDBDB;
+		background: #fdfdfd;
+		background: -moz-linear-gradient(top, #fdfdfd 0%, #e1e2dd 100%);
+		background: -webkit-linear-gradient(top, #fdfdfd 0%, #e1e2dd 100%);
+		background: linear-gradient(to bottom, #fdfdfd 0%, #e1e2dd 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdfdfd',
+			endColorstr='#e1e2dd', GradientType=0);
+		margin: 0 auto;
+		text-align: left;
+		cursor: pointer;
+		font-size: 12px;
+	}
+	.last-child {
+		border-bottom: 1px solid #DBDBDB;
+	}
+	.accordion-content {
+		display: block;
+		border: 1px solid #ddd !important;
+		border-top: 0 !important;
+		margin: 0 !important;
+	}
+	.accGroup {
+		position: relative;
+	}
+	.accordion-content.default {
+		display: none;
+	}
+	.accordion-toggle:after {
+		font-family: 'FontAwesome';
+		content: "\f078";
+		float: left;
+	}
+	.accordion-toggle.opened:after {
+		content: "\f054";
+	}
+	.bs-wizard>.bs-wizard-step .bs-wizard-stepnum {
+		font-size: 11px;
+	}
+	.gallery-item {
+		width: 100%;
+	}
+	.insuredTable {
+		overflow: auto;
+	}
+	.insuredTableStyle {
+		float: none;
+	}
+	.mobileHealthFamily .select-style {
+		width: 60%;
+	}
+	.marqueeText {
+		float: none;
+		width: 100%;
+		margin-top: 0px;
+		padding: 0;
+	}
+	.insideEditBox label {
+		width: 32%;
+	}
+	.footsocial ul {
+		margin-top: 0px;
+	}
+	.responsiveTellus input[name="firstName"], .responsiveTellus input[name="emailId"],
+		.responsiveTellus input[name="mobileNumber"] {
+		width: 100% !important;
+	}
+	.responsiveTellus input[name="lastName"] {
+		width: 97% !important;
+	}
+	.tabs li label {
+		display: inline-block;
+	}
+	.tabs li.active {
+		right: 0;
+		border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-ms-border-radius: 0px;
+		width: 20%;
+	}
+	.tabs li {
+		width: 20%;
+		right: 0;
+		margin-bottom: 0px;
+		border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-ms-border-radius: 0px;
+		border-bottom: 0px !important;
+	}
+	.navigationLabel {
+		margin-top: 3px;
+		padding-bottom: 0px !important;
+	}
+	.lefttab {
+		width: 100%;
+	}
+	.tabs li:hover {
+		border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-ms-border-radius: 0px;
+	}
+	/* Detect Mac Firefox 25 or newer */
+	@
+	supports (-moz-osx-font-smoothing:auto ) { .tabs {
+		width: 100%;
+	}
+	.tabs li {
+		width: 25%;
+	}
+	.ng-modal-dialog {
+		top: 50% !important;
+		left: 50%;
+		width: 90% !important;
+		height: 90% !important;
+	}
+}
+
+.instantQuote .newWidthLabel .radioSelect, .instantQuote .radioSelect {
+	width: 100%;
+}
+
+.instantQuote .radioSelect .btn-group .btn {
+	width: auto;
+}
+
+.instantQuote .newWidthLabel .width60 label, .instantQuote  .width60 label
+	{
+	width: 100%;
+	text-align: left;
+}
+
+
+
+.newWidthLabel .width60 .RTOLink, .newWidthLabel .errorLink, .RTOLink,
+	.errorLink {
+	margin-left: 0%;
+}
+
+.tab-content {
+	width: 100%;
+	box-shadow: 0px 0px 0px 0px #191919;
+	margin-top: 5px;
+}
+
+.righttab {
+	width: 100%;
+}
+
+table.dottable td {
+	margin: 0;
+	padding: 4px 0;
+	text-indent: 0px !important;
+	white-space: normal !important;
+}
+
+.dot2 {
+	display: none;
+}
+
+.dot1 {
+	width: 41% !important;
+}
+
+.tabsVert {
+	top: 0px;
+}
+
+.tabsVert li {
+	float: none;
+	padding: 6px 5px;
+}
+
+.tabsVert li.active {
+	line-height: 19px;
+	top: 1px !important;
+}
+
+.fieldtable td {
+	display: block;
+	width: 100%;
+}
+
+}
+@media screen and (min-width: 320px) and (max-width: 767px) {
+	.container {
+		box-sizing: border-box;
+	}
+	.wrapper {
+		box-sizing: border-box;
+		padding: 0px 3px;
+	}
+	.head_left {
+		padding-left: 5px;
+	}
+	.head_right {
+		top: 0px;
+		font-size: 0.8em;
+	}
+	.tab {
+		background-size: 100% 100%;
+	}
+	.InsideWrapper {
+		box-sizing: border-box;
+		padding: 0px;
+	}
+	.startedform {
+		max-width: 50%;
+	}
+	.pinArea {
+		margin-left: 33%;
+	}
+	.alertFeatures1 {
+		padding: 0px 0px 6px 0px;
+		line-height: 1.4em;
+		color: #f7a100;
+		text-align: left;
+		font-size: 0.9em;
+		font-weight: normal;
+	}
+	.cashlessDiv {
+		float: none;
+		width: 100%;
+		padding: 0px;
+	}
+	.carLogo {
+		margin-bottom: 9%;
+	}
+}
+
+/* 
+@media screen and (-webkit-max-device-pixel-ratio:1) and
+(min-color-index:0) {
+.tabs {
+	width: 100%;
+}
+.tabs li {
+	width: 25%;
+}
+.ng-modal-dialog {
+	top: 50% !important;
+	left: 50%;
+	width: 90% !important;
+	height: 90% !important;
+}
+}
+ */
+@media screen and (min-width: 500px) and (max-width: 767px) {
+	.ng-modal-dialog {
+		top: 50% !important;
+		left: 50%;
+		max-width: 90% !important;
+		height: auto !important;
+	}
+}
+
+.footerPadding {
+	padding-left: 9%;
+}
+
+@media screen and (min-width:1370px) {
+	.md-button {
+		margin: 20px 0px !important;
+	}
+	.btnPadding {
+		padding: 0 16% 0 12% !important;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.span_1_of_3_footerAlign {
+		width: 100% !important;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+	.divForMobile .hideforMobile {
+		display: none;
+	}
+	.divForMobile .showforMobile {
+		display: block;
+	}
+	.wp_mar20 {
+		margin: 0 2% !important;
+	}
+	
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+	.marginOpx {
+		margin: 0px auto !important;
+	}
+	.center {
+		text-align: center;
+	}
+	.outerHeadDropText {
+		height: auto !important;
+	}
+	.outerHeadDropText2 {
+		height: auto !important;
+		width: 100% !important;
+		background-color: #fff;
+		border-radius: 10px;
+		padding: 4%;
+		margin-top: 6%;
+	}
+	.outerHeadDropText2 .headDropText, .outerHeadDropText2 .innerHeadDropText
+		{
+		border-radius: 10px !important;
+		margin-top: 5px;
+	}
+	.headViewQuote {
+		padding: 0% !important;
+		background-color: transparent;
+		margin: 0% !important;
+		width: 100% !important;
+		background-color: transparent !important;
+		border-radius: 0px;
+	}
+	.headViewQuote .HLViewBtn {
+		padding: 0px !important;
+	}
+	.headViewQuote button {
+		width: 100% !important;
+		background: #2991ea !important;
+	}
+	.headRightDropText {
+		width: 100% !important;
+	}
+	.headDropText, .innerHeadDropText {
+		width: 100% !important;
+		border-radius: 30px 30px 30px 30px !important;
+		border-right: none !important;
+	}
+	.HLViewBtn {
+		border-radius: 0px 30px 30px 0px !important;
+		padding: 10px 0px 0px 0px !important;
+		border-radius: 0px 0px 30px 30px !important;
+	}
+	.resCovered {
+		border-bottom: 2px solid #c6c3c3 !important;
+		margin-bottom: 8% !important;
+	}
+	.exAdMar {
+		margin-bottom: 5% !important;
+	}
+	.expertAdvise button {
+		margin-left: 0% !important;
+	}
+	.justifyText {
+		text-align: justify !important;
+	}
+	.resHLReachPad {
+		padding: 10px !important;
+	}
+	.resFoot2 {
+		padding-top: 10% !important;
+	}
+	.footPadRig {
+		padding-right: 0% !important;
+	}
+	.mar11, .mar16 {
+		margin: 6px 0 0 0
+	}
+}
+@media screen and (min-width: 320px) and (max-width: 660px){
+	.quoteMenus {
+    width: 100%;
+    float: none;
+}
+.quotePad {
+    padding: 0px 20px !important;
+}
+.instant_scrollable{height: auto;}
+}

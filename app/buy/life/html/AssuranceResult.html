@@ -1,0 +1,830 @@
+<loading></loading>
+<div after-render="missionCompled"></div>
+<!-- <nav class="showForMobile" mfb-menu position="br" effect="zoomin" toggling-method="click" class="app-menu" menu-state="menuState"
+ ng-class="{'fadeOut' : menuState === 'closed'}">
+	<button mfb-button label="Share Quotes" icon="share" ng-click="showShareEmailModal()"></button>
+	<button mfb-button label="Sort" icon="swap_vert" ng-click="showSortOptionsModal()"></button>
+</nav> -->
+<iframe  ng-if="$root.isLifeLanding" ng-src="{{lifeAffilatedLeadId}}" width="1" height="1" id="pixelcodeurl">
+</iframe>
+<div ng-class="{header_container : $root.header_container == true}">
+	<div class="section termBg wp_padHeaderNavi wp_innerLife" ng-if="$root.wordPressEnabled  && !$root.professionalJourney">
+		<ng-container ng-include="$root.headerNavigation" ng-controller='headerNavigationController'></ng-container>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<div class="section carBg wp_padHeaderNavi wp_innerCar" ng-if="!$root.wordPressEnabled && $root.baseEnvEnabled">
+	<ng-container ng-include="$root.iquoteTabNavigationHTML" ng-controller='iquoteTabNavigationController'></ng-container>
+	<div class="clearfix"></div>
+</div>
+<div class="section termBg wp_padHeaderNavi wp_innerLife" ng-if="!$root.wordPressEnabled && $root.baseEnvEnabled">
+	<ng-container ng-include="$root.headerNavigation" ng-controller='headerNavigationController'></ng-container>
+	<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+<div class="middleTab one-edge-shadow widthFull resultCommon mobileResult wp_padHeaderNavi wp_resultBorder wp_noBoxShadow e8e8Container">
+	<!-- <div class="backButtonPlacer wp_backBtnPlacer" >
+		<a ng-click="backToResultScreen()" id="assuranceBackToHomeScreen">
+			<div class="md-raised backButtonColor backButton" data-html="true"
+				data-toggle="tooltip" data-placement="right" data-title="Back" tooltip>
+				<i class="fa fa-chevron-left"></i>
+			</div>
+		</a>
+	</div> -->
+	<span class="cursor backBtn" ng-show="$root.isFromProfessionalJourney ||  ($root.wordPressEnabled)">
+		<span ng-click="backToResultScreen()" id="bikeBackToResultScreen" role="button" tabindex="0">
+			<i class="material-icons">keyboard_arrow_left</i>
+		</span>
+	</span>
+	<form name="quoteLifeInputForm">
+		<div class="boxShadow pad5Bot white_e7_Bg resp_white_f7_Bg">
+			<div class="section">
+				<ng-container ng-include="lifeInputSectionHTML"></ng-container>
+			</div>
+			<div class="showForMobile">
+				<div style="margin:8px;" class="wrap center">
+					<div class="resp_pj_width55 selfCenter rightBord1ddd cursor" ng-click="showPayoutOptionModal()">
+						<span ng-if="!payoutDetails.payoutOption" class="resp_normFont12">Payout Options</span>
+						<span ng-if="payoutDetails.payoutOption" class="resp_normFont12 textCapitialize">Payout Options - {{payoutDetails.payoutOption.name}}</span>
+						<div class="clearfix"></div>
+						<div class="arrow-down"></div>
+					</div>
+					<div class="resp_pj_width25 selfCenter rightBord1ddd cursor" ng-click="showRiderModal()">
+						<span ng-if="quoteParam.riders.length=='0' || !quoteParam.riders">Rider </span>
+						<span ng-if="quoteParam.riders.length > 0">{{quoteParam.riders.length+" "+""+"riders"}} </span>
+						<div class="clearfix"></div>
+						<div class="arrow-down"></div>
+					</div>
+					<div class="resp_pj_width20 selfCenter cursor" ng-click="showShareEmailModal()">
+						Share
+						<div class="clearfix"></div>
+						<div class="arrow-down"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="topBot1Pad side3Pad resp_noPad noPadBot hideForMobile white_e7_Bg">
+			<!-- <div class="section pad20 resp_noPad hideForMobile white_e7_Bg"> -->
+			<ng-container>
+				<div class="col fullWidth wp_padNo pj_widthAuto resp_widthAuto">
+					<md-button class="md-raised wp_Width100 wp_resultBorder wp_noTextTransform wp_borderRadius25 wp_noMarginLeft wp_btnText themedBorder resp_width90"
+					 layout="row" layout-align="end-start" md-ink-ripple="{{rippleColor}}" ng-click="showPayoutOptionModal()">
+						<label ng-if="!payoutDetails.payoutOption" class="resp_normFont12">Payout Options</label>
+						<label ng-if="payoutDetails.payoutOption" class="resp_normFont12 textCapitialize">Payout Options - {{payoutDetails.payoutOption.name}}</label>
+						<span flex></span>
+						<i class="material-icons wp_btnIconPlacer" style="position: relative; top: 7px">keyboard_arrow_down</i>
+					</md-button>
+				</div>
+				<div class="col fullWidth wp_padNo pj_widthAuto resp_widthAuto">
+					<md-button class="md-raised wp_Width100 wp_resultBorder wp_noTextTransform wp_borderRadius25 wp_noMarginLeft wp_btnText themedBorder resp_width90"
+					 layout="row" layout-align="end-start" md-ink-ripple="{{rippleColor}}" ng-click="showRiderModal()">
+						<label ng-if="personalDetails.selectedAddOnCovers.length=='0'" class="resp_normFont12 textCapitialize">Rider Options</label>
+						<label ng-if="personalDetails.selectedAddOnCovers.length > 0" class="resp_normFont12 textCapitialize">{{personalDetails.selectedAddOnCovers.length+""+" "+"riders selected"}}
+						</label>
+						<span flex></span>
+						<i class="material-icons wp_btnIconPlacer" style="position: relative; top: 7px">keyboard_arrow_down</i>
+					</md-button>
+				</div>
+				<div class="col fullWidth wp_padNo pj_width12 resp_widthAuto">
+					<md-button class="pj_noBoxShadow pj_shareText lineHgt44" id="carShareBtn" ng-class="{tabActive : activeMenu === 'Email'}"
+					 md-ink-ripple="{{rippleColor}}" ng-click="showShareEmailModal()" style="line-height:45px;">
+						<i class="material-icons wp_btnIcons pj_shareIcon">share</i> Share Quote</md-button>
+				</div>
+				<div class="col pj_widthAuto hideForMobile floatRight">
+					<div class="hideForMobile posRel lineHgt55">
+						<div flex="100">
+							<p class="right greyb7Txt font13 noMargin">All prices are exclusive of GST</p>
+						</div>
+					</div>
+				</div>
+			</ng-container>
+			<div class="col col-sm-2 pj_widthAuto topBot1Mar floatRight">
+				<!--<span style="float: left;margin-top: 6px;">{{globalLabel.applicationLabels.life.annualPremium}}	</span>
+				<md-switch class="switchBubble" style="margin:auto;display:inline" ng-model="premiumChoice" ng-change="annualPremiumClick()">
+						<span>{{globalLabel.applicationLabels.life.monthlyPremium}}</span>
+						</md-switch>-->
+			</div>
+			<div class="clearfix"></div>
+			<!-- <div class="clearfix"></div> -->
+			<!--  <div class="col col-sm-4 fullWidth wp_padNo">
+				<p class="compareMsg wp_pad15TB" style="font-size:12px;">{{globalLabel.applicationLabels.common.GSTmsg}}</p>
+			</div> -->
+		</div>
+
+		<div class="showForMobile white_e7_Bg posRel">
+			<div class="clearfix"></div>
+			<!-- <div ng-show="!$root.isFromProfessionalJourney" layout="row" class="wrap resp_pad10">
+				<span style="float: left;margin-top: -2px;" class="selfCenter">{{globalLabel.applicationLabels.life.annualPremium}} </span>
+				<md-switch class="switchBubble" style="margin:auto;display:inline" ng-model="premiumChoice" ng-change="annualPremiumClick()">
+						<span>{{globalLabel.applicationLabels.life.monthlyPremium}}</span>
+						</md-switch> 
+			</div> -->
+			<div class="clearfix"></div>
+			<div layout="row">
+				<div flex="100" class="side4Pad padTop4Per">
+					<p class="right greyb7Txt font13 noMargin">All prices are exclusive of GST</p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<md-card class="posRel resp_mar8" ng-repeat="data in $root.lifeQuoteResult | orderBy :sortKey:sortReverse | filter:customFilterLife"
+			 ng-if="validatePremium(data)" ng-show="showForShare(data)">
+				<div layout="row">
+					<div flex="50" class="side10Pad">
+						<img data-toggle="tooltip" title="{{data.insuranceCompany}}" ng-src="{{$root.wp_path}}img\clogo\{{data.carrierId}}.png" style=""
+						 tooltip>
+					</div>
+					<div flex="50" class="right">
+						<md-button class="quoteBtn pinkFont" ng-click="buyProduct(data)" id="lifeBuyProductBtn">Buy Now</md-button>
+						<!-- <md-button class="quoteBtn pinkFont" ng-show="$root.isFromProfessionalJourney" ng-click="selectProduct(data)" id="carBuyProductBtn">Select this</md-button> -->
+					</div>
+				</div>
+				<div layout="row" class="side10Pad min54Hgt">
+					<p style=" font-size: 12px;">
+						<a ng-click="getProductFeatures(data, true)" class="pinkFont textItalic">{{data.productName}}</a>
+					</p>
+					<p style=" font-size: 12px;" class="pinkFont">{{data.subProductName}}</p>
+				</div>
+				<div layout="row" class="resp_white_f7_Bg">
+					<div flex="33.33" class="width100 padLf10 centerAlignTxt">
+						<p class="font12 lightGrey">Rating
+							<span class="chipsRating font11 lightGrey">{{data.proffesionalRating | number:1}}</span>
+						</p>
+						<p class="bold13 highlightBlack">
+							<ng-rate-it star-width="12" star-height="12" step="0.1" ng-model="data.proffesionalRating" data-toggle="tooltip" title="{{data.proffesionalRating | number:1}}"
+							 resetable="false" rated="ratedCallback" min="0" max="5" read-only="true"></ng-rate-it>
+
+						</p>
+					</div>
+					<div flex="33.33" class="width100 padLf10 centerAlignTxt">
+						<p class="font12 lightGrey ">
+							{{globalLabel.applicationLabels.life.sumAssured}}
+						</p>
+						<p class="bold13 highlightBlack">&#8377; {{(data.sumInsured) | number:0 | regexINR}}</p>
+					</div>
+					<div flex="33.33" class="width100 padLf10 centerAlignTxt padRig10">
+						<p class="font12 lightGrey">
+							<span ng-if="isAnnualPremium">{{globalLabel.applicationLabels.life.premium}}<span class="font9">(Annual)</span></span>
+							<span ng-if="isMonthlyPremium">{{globalLabel.applicationLabels.life.monthlyPremium}}</span>
+							<span ng-if="isMonthlyPremium && data.monthlyBasePremium==undefined">{{globalLabel.applicationLabels.life.monthlyPremium}}</span>
+							<!-- <i class="fa fa-question-circle fa-sm bluecolor" data-toggle="tooltip" title="{{tooltipContent.totalPremium}}" tooltip></i> -->
+						</p>
+						<div class="bold13 highlightBlack">
+							<p class="bold13 highlightBlack" ng-if="isAnnualPremium">{{(data.basicPremiumWithRider) | number:0 | regexINR}}</p>
+							<p class="bold13 highlightBlack" ng-if="isMonthlyPremium">{{(data.monthlyBasePremium) | number:0 | regexINR}}</p>
+							<p class="bold13 highlightBlack" ng-if="isMonthlyPremium && data.monthlyBasePremium==undefined">NA</p>
+						</div>
+					</div>
+				</div>
+				<div ng-if="isMinPremium(data.annualPremium,data.carrierId)" class="lowPremium">
+					<span><img ng-src="{{$root.wp_path}}img/icons/lowPremium.png"></span>
+				</div>
+				<div ng-if="$first" class="highValue">
+					<span><img ng-src="{{$root.wp_path}}img/icons/highValue.png"></span>
+				</div>
+			</md-card>
+			<div class="clearfix"></div>
+		</div>
+
+		<div class="section posRel hideForMobile">
+			<!-- <div layout="row" class="white_e7_Bg" ng-if="$root.professionalJourney">
+				<div flex="100" class="side4Pad">
+					<p class="right greyb7Txt font13 noMargin">All prices are exclusive of GST</p>
+				</div>
+			</div> -->
+
+			<div class="wrap side3Pad white_e7_Bg">
+				<div class="pj_width25 topBot1Mar  resp_width100" ng-repeat="data in $root.lifeQuoteResult | orderBy :sortKey:sortReverse | filter:customFilterLife"
+				 ng-if="validatePremium(data)" ng-show="showForShare(data)">
+					<div class="whiteBg borRad5 side5Mar posRel">
+						<div layout="row">
+							<div flex="50" class="side10Pad">
+								<img data-toggle="tooltip" title="{{data.insuranceCompany}}" ng-src="{{$root.wp_path}}img\clogo\{{data.carrierId}}.png" style=""
+								 tooltip>
+							</div>
+							<div flex="50" class="right">
+								<md-button class="quoteBtn pinkFont" ng-click="buyProduct(data)" id="lifeBuyProductBtn">Buy Now</md-button>
+								<!-- <md-button class="quoteBtn pinkFont" ng-show="$root.isFromProfessionalJourney" ng-click="selectProduct(data)" id="carBuyProductBtn">Select this</md-button> -->
+							</div>
+						</div>
+						<div layout="row" class="side10Pad min54Hgt">
+							<p style=" font-size: 12px;">
+								<a ng-click="getProductFeatures(data, true)" class="pinkFont textItalic">{{data.productName}}</a>
+							</p>
+							<p style=" font-size: 12px;" class="pinkFont">{{data.subProductName}}</p>
+						</div>
+						<md-card layout="row" class="pad10 noSideMar offWhiteBg borRad7" style="box-shadow: 1px 2px 4px #ddd;">
+							<div flex="33.33" class="width100 padLf10">
+								<p class="font11 lightGrey">Rating
+									<span class="chipsRating font11 lightGrey">{{data.proffesionalRating | number:1}}</span>
+								</p>
+								<p class="bold13 highlightBlack">
+									<ng-rate-it star-width="12" star-height="12" step="0.1" ng-model="data.proffesionalRating" data-toggle="tooltip" title="{{data.proffesionalRating | number:1}}"
+									 resetable="false" rated="ratedCallback" min="0" max="5" read-only="true"></ng-rate-it>
+
+									<!-- &nbsp; {{data.insurerIndex | number:1}} -->
+								</p>
+							</div>
+							<div flex="33.33" class="width100 padLf10 centerAlignTxt">
+								<p class="font11 lightGrey">
+									{{globalLabel.applicationLabels.life.sumAssured}}
+								</p>
+								<p class="bold13 highlightBlack">&#8377; {{(data.sumInsured) | number:0 | regexINR}}</p>
+							</div>
+							<div flex="33.33" class="width100 padLf10 centerAlignTxt resp_white_f7_Bg">
+								<p class="font11 lightGrey" ng-if="isAnnualPremium">{{globalLabel.applicationLabels.life.premium}}<span class="font8">(Annual)</span></p>
+								<p class="bold13" ng-if="isAnnualPremium">
+									<a ng-click="openLifePopup(0,data)" class="pinkFont">{{(data.basicPremiumWithRider) | number:0 | regexINR}}</a>
+								</p>
+								<p class="font11 lightGrey" ng-if="isMonthlyPremium">{{globalLabel.applicationLabels.life.monthlyPremium}}</p>
+								<p class="bold13" ng-if="isMonthlyPremium">
+									<a ng-click="openLifePopup(0,data)" class="pinkFont">{{(data.monthlyBasePremium) | number:0 | regexINR}}</a>
+								</p>
+								<p class="font11 lightGrey" ng-if="isMonthlyPremium && data.monthlyBasePremium==undefined">{{globalLabel.applicationLabels.life.monthlyPremium}}</p>
+								<p class="bold13 highlightBlack" ng-if="isMonthlyPremium && data.monthlyBasePremium==undefined">NA</p>
+							</div>
+						</md-card>
+						<div ng-if="isMinPremium(data.annualPremium,data.carrierId)" class="lowPremium">
+							<span><img ng-src="{{$root.wp_path}}img/icons/lowPremium.png"></span>
+						</div>
+						<div ng-if="$first" class="highValue">
+							<span><img ng-src="{{$root.wp_path}}img/icons/highValue.png"></span>
+						</div>
+						<md-card layout="row" class="pad10 noSideMar borRad7 noMarTop" style="box-shadow: 1px 2px 4px #ddd;">
+							<div flex="25" class="center cursor" ng-click="openLifePopup(0,data)">
+								<div style="position:relative">
+									<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+									<span class="bold12 customStarText28">{{data.netPremiumMean | number:1}}</span>
+								</div>
+								<p class="font12 pinkFont">Premium</p>
+							</div>
+							<div flex="25" class="center cursor" ng-click="openLifePopup(1,data)">
+								<div style="position:relative">
+									<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+									<span class="bold12 customStarText28">{{data.insurerIndex | number:1}}</span>
+								</div>
+								<p class="font12 pinkFont">Service</p>
+							</div>
+							<div flex="25" class="center cursor" ng-click="openLifePopup(2,data)">
+								<div style="position:relative">
+									<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+									<span class="bold12 customStarText28">{{data.claimIndex | number:1}}</span>
+								</div>
+								<p class="font12 pinkFont">Claims</p>
+							</div>
+							<div flex="25" class="center cursor" ng-click="openLifePopup(3,data)">
+								<div style="position:relative">
+									<i class="fa fa-star customStarGrey" aria-hidden="true"></i>
+									<span class="bold12 customStarText28">{{data.benefitIndex | number:1}}</span>
+								</div>
+								<p class="font12 pinkFont">Benefit</p>
+							</div>
+						</md-card>
+						<div>
+							<div layout="row" class="pad10 resultQuote">
+								<p flex="5" class="">
+									<!-- <i class="material-icons pinkFont font12 padLf10">done_all</i> -->
+								</p>
+								<p flex="75">Accidental Death
+									<i class="fa fa-info-circle fa-sm bluecolor" ng-if="data.riders[0].riderType == 'selected'" data-toggle="tooltip" data-html="true"
+									 title="Accidental Death SumAssured <b>{{data.riders[0].riderSumAssured | number:0 |regexINR}}</b>" tooltip></i>
+								</p>
+								<p flex="20">
+									<span ng-if="data.riders[0].riderType == 'selected' && isAnnualPremium==true" class="strong">&#8377; {{data.riders[0].riderPremiumAmount | number:0 | regexINR}} </span>
+									<span ng-if="data.riders[0].riderType == 'selected' && isMonthlyPremium==true" class="strong">&#8377; {{data.riders[0].riderMonthlyPremium | number:0 | regexINR}} </span>
+									<span class="inlineImg" ng-if="data.riders[0].riderType != 'selected'" class="strong">
+										<img ng-src="{{$root.wp_path}}img/icons/{{data.riders[0].riderImgPath}}.png" data-html="true" data-toggle="tooltip"
+										 data-placement="right" title="{{data.riders[0].riderTooltipName}}" tooltip>
+									</span>
+								</p>
+							</div>
+							<div layout="row" class="pad10 resultQuote">
+								<p flex="5" class="">
+									<!-- <i class="material-icons pinkFont font12 padLf10">done_all</i> -->
+								</p>
+								<p flex="75">Accidental Disability
+									<i class="fa fa-info-circle fa-sm bluecolor" ng-if="data.riders[1].riderType == 'selected'" data-toggle="tooltip" data-html="true"
+									 title="Accidental Disability SumAssured <b>{{data.riders[1].riderSumAssured| number:0 | regexINR}}</b>" tooltip></i>
+								</p>
+								<p flex="20">
+									<span ng-if="data.riders[1].riderType == 'selected' && isAnnualPremium==true" class="strong">&#8377; {{data.riders[1].riderPremiumAmount | number:0 | regexINR}}
+									</span>
+									<span ng-if="data.riders[1].riderType == 'selected' && isMonthlyPremium==true" class="strong">&#8377; {{data.riders[1].riderMonthlyPremium | number:0 | regexINR}} </span>
+									<span class="inlineImg" ng-if="data.riders[1].riderType != 'selected'" class="strong">
+										<img ng-src="{{$root.wp_path}}img/icons/{{data.riders[1].riderImgPath}}.png" data-html="true" data-toggle="tooltip"
+										 data-placement="right" title="{{data.riders[1].riderTooltipName}}" tooltip>
+									</span>
+								</p>
+							</div>
+							<div layout="row" class="pad10 resultQuote">
+								<p flex="5" class="">
+									<!-- <i class="material-icons pinkFont font12 padLf10">done_all</i> -->
+								</p>
+								<p flex="75">Critical Illness <i class="fa fa-info-circle fa-sm bluecolor" ng-if="data.riders[2].riderType == 'selected'" data-toggle="tooltip"
+									 data-html="true" title="Critical Illness SumAssured <b>{{data.riders[2].riderSumAssured| number:0 | regexINR}}</b>"
+									 tooltip></i></p>
+								<p flex="20">
+									<span ng-if="data.riders[2].riderType == 'selected' && isAnnualPremium==true" class="strong">&#8377; {{data.riders[2].riderPremiumAmount | number:0 | regexINR}}
+									</span>
+									<span ng-if="data.riders[2].riderType == 'selected' && isMonthlyPremium==true" class="strong">&#8377; {{data.riders[2].riderMonthlyPremium | number:0 | regexINR}} </span>
+
+									<span class="inlineImg" ng-if="data.riders[2].riderType != 'selected'" class="strong">
+										<img ng-src="{{$root.wp_path}}img/icons/{{data.riders[2].riderImgPath}}.png" data-html="true" data-toggle="tooltip"
+										 data-placement="right" title="{{data.riders[2].riderTooltipName}}" tooltip>
+									</span>
+								</p>
+							</div>
+							<!-- <div layout="row" class="pad10 resultQuote"  ng-if="data.riders[3].riderId">
+							<p flex="15" class="">
+								<i class="material-icons pinkFont font12 padLf10">done_all</i>
+							</p>
+							<p flex="65">Family Income Benefit</p>
+							<p flex="20"><span 
+								ng-if="data.riders[3].riderType == 'selected' && isAnnualPremium==true"
+								class="strong">&#8377;
+								{{data.riders[3].riderPremiumAmount | number:0 |
+								regexINR}}</span> <span 
+								ng-if="data.riders[3].riderType == 'selected' && isMonthlyPremium==true"
+								class="strong">&#8377;
+								{{data.riders[3].riderMonthlyPremium | number:0 |
+								regexINR}} </span> <i class="fa fa-info-circle fa-sm bluecolor"
+								ng-if="data.riders[3].riderType == 'selected'"
+								data-toggle="tooltip" data-html="true"
+								title="Family Income Benefit <b>{{data.riders[3].riderSumAssured | number:0 | regexINR}}</b>"
+								tooltip></i> <span class="inlineImg"
+								ng-if="data.riders[3].riderType != 'selected'"
+								class="strong"><img
+								ng-src="{{$root.wp_path}}img/icons/{{data.riders[3].riderImgPath}}.png"
+								data-html="true" data-toggle="tooltip"
+								data-placement="right"
+								title="{{data.riders[3].riderTooltipName}}" tooltip></span></p>
+						</div> -->
+							<div layout="row" class="pad10 resultQuote" ng-if="data.riders[4].riderId">
+								<p flex="5" class="">
+									<!-- <i class="material-icons pinkFont font12 padLf10">done_all</i> -->
+								</p>
+								<p flex="75">Waiver of Premium <i class="fa fa-info-circle fa-sm bluecolor" ng-if="data.riders[4].riderType == 'selected'" data-toggle="tooltip"
+									 data-html="true" title="Waiver of Premium SumAssured <b> {{data.riders[4].riderSumAssured | number:0 | regexINR}}</b>"
+									 tooltip></i></p>
+								<p flex="20">
+									<span ng-if="data.riders[4].riderType == 'selected' && isAnnualPremium==true" class="strong">&#8377; {{data.riders[4].riderPremiumAmount | number:0 | regexINR}}
+									</span>
+									<span ng-if="data.riders[4].riderType == 'selected' && isMonthlyPremium==true" class="strong">&#8377; {{data.riders[4].riderMonthlyPremium | number:0 | regexINR}} </span>
+
+									<span class="inlineImg" ng-if="data.riders[4].riderType != 'selected'" class="strong">
+										<img ng-src="{{$root.wp_path}}img/icons/{{data.riders[4].riderImgPath}}.png" data-html="true" data-toggle="tooltip"
+										 data-placement="right" title="{{data.riders[4].riderTooltipName}}" tooltip>
+									</span>
+								</p>
+							</div>
+							<!-- <div layout="row" class="pad10 resultQuote"  >
+								<p flex="15" class="">
+									<i class="material-icons pinkFont font12 padLf10">done_all</i>
+								</p>
+								<p flex="65">Terminal Illness Cover</p>
+								<p flex="20"><span 
+									ng-if="data.riders[5].riderType == 'selected' && isAnnualPremium==true"
+									class="strong">&#8377;
+									{{data.riders[5].riderPremiumAmount | number:0 |
+									regexINR}}</span> <span 
+									ng-if="data.riders[5].riderType == 'selected' && isMonthlyPremium==true"
+									class="strong">&#8377;
+									{{data.riders[5].riderMonthlyPremium | number:0 |
+									regexINR}} </span> <i class="fa fa-info-circle fa-sm bluecolor"
+									ng-if="data.riders[5].riderType == 'selected'"
+									data-toggle="tooltip" data-html="true"
+									title="Terminal Illness Cover SumAssured <b>{{data.riders[5].riderSumAssured | number:0 | regexINR}}</b>"
+									tooltip></i> <span class="inlineImg"
+									ng-if="data.riders[5].riderType != 'selected'"
+									class="strong"><img
+									ng-src="{{$root.wp_path}}img/icons/{{data.riders[5].riderImgPath}}.png"
+									data-html="true" data-toggle="tooltip"
+									data-placement="right"
+									title="{{data.riders[5].riderTooltipName}}" tooltip></span></p>
+							</div> -->
+							<!-- <div layout="row" class="pad10 resultQuote" ng-if="data.riders[6].riderId" >
+								<p flex="15" class="">
+									<i class="material-icons pinkFont font12 padLf10">done_all</i>
+								</p>
+								<p flex="65">Hospital Cash Benefit</p>
+								<p flex="20"><span 
+									ng-if="data.riders[6].riderType == 'selected' && isAnnualPremium==true"
+									class="strong">&#8377;
+									{{data.riders[6].riderPremiumAmount | number:0 |
+									regexINR}}</span> <span 
+									ng-if="data.riders[6].riderType == 'selected' && isMonthlyPremium==true"
+									class="strong">&#8377;
+									{{data.riders[6].riderMonthlyPremium | number:0 |
+									regexINR}} </span> <i class="fa fa-info-circle fa-sm bluecolor"
+									ng-if="data.riders[6].riderType == 'selected'"
+									data-toggle="tooltip" data-html="true"
+									title="Hospital Cash Benefit SumAssured <b>{{data.riders[6].riderSumAssured | number:0 | regexINR}}</b>"
+									tooltip></i> <span class="inlineImg"
+									ng-if="data.riders[6].riderType != 'selected'"
+									class="strong"><img
+									ng-src="{{$root.wp_path}}img/icons/{{data.riders[6].riderImgPath}}.png"
+									data-html="true" data-toggle="tooltip"
+									data-placement="right"
+									title="{{data.riders[6].riderTooltipName}}" tooltip></span></p>
+							</div>
+							<div layout="row" class="pad10 resultQuote" ng-if="data.riders[7].riderId" >
+								<p flex="15" class="">
+									<i class="material-icons pinkFont font12 padLf10">done_all</i>
+								</p>
+								<p flex="65">Additional Critical Illness</p>
+								<p flex="20"><span 
+									ng-if="data.riders[7].riderType == 'selected' && isAnnualPremium==true"
+									class="strong">&#8377;
+									{{data.riders[7].riderPremiumAmount | number:0 |
+									regexINR}}</span> <span 
+									ng-if="data.riders[7].riderType == 'selected' && isMonthlyPremium==true"
+									class="strong">&#8377;
+									{{data.riders[7].riderMonthlyPremium | number:0 |
+									regexINR}} </span> <i class="fa fa-info-circle fa-sm bluecolor"
+									ng-if="data.riders[7].riderType == 'selected'"
+									data-toggle="tooltip" data-html="true"
+									title="Additional Critical Illness SumAssured <b>{{data.riders[7].riderSumAssured | number:0| regexINR}}</b>"
+									tooltip></i> <span class="inlineImg"
+									ng-if="data.riders[7].riderType != 'selected'"
+									class="strong"><img
+									ng-src="{{$root.wp_path}}img/icons/{{data.riders[7].riderImgPath}}.png"
+									data-html="true" data-toggle="tooltip"
+									data-placement="right"
+									title="{{data.riders[7].riderTooltipName}}" tooltip></span></p>
+							</div> -->
+						</div>
+					</div>
+				</div>
+				<div class="pj_width25 topBot1Mar  resp_width100" ng-repeat="quoteRequest in $root.lifeQuoteRequest" ng-if="quoteRequest.status == 0">
+
+
+					<div class="whiteBg borRad5 side5Mar">
+						<div layout="row">
+							<div flex="50" class="side10Pad">
+								<img data-toggle="tooltip" title="{{data.insuranceCompany}}" ng-src="{{$root.wp_path}}img\clogo\{{quoteRequest.carrierId}}.png"
+								 style="" tooltip>
+							</div>
+							<div flex="50" class="right">
+							</div>
+						</div>
+						<md-card layout="row" class="pad10 noSideMar offWhiteBg borRad7 errorCard justifyCenter" style="box-shadow: 1px 2px 4px #ddd;">
+							<img src="{{$root.wp_path}}img/svg/eclipse.svg" alt="">
+							<!-- <div ng-bind-html="quoteRequest.message" bind-html-compile="quoteRequest.message" ng-if="quoteRequest.status == 2"></div></div> -->
+						</md-card>
+
+					</div>
+				</div>
+			</div>
+			<div ng-if="noQuoteResultFound">
+				<md-card layout="row" class="pad10 noSideMar offWhiteBg borRad7 errorCard justifyCenter" style="box-shadow: 1px 2px 4px #ddd;">
+					<div ng-bind-html="$root.lifeQuoteRequest[0].message" bind-html-compile="$root.lifeQuoteRequest[0].message" ng-if="$root.lifeQuoteRequest[0].status == 2"></div>
+				</md-card>
+			</div>
+
+
+		</div>
+		<!--     life Features Popup       -->
+		<ng-container ng-include="lifeFeaturesTemplate"></ng-container>
+		<!--     Premium Breakup Popup       -->
+
+		<!--     Premium Breakup Popup       -->
+		<ng-container ng-include="lifePremiumTemplate"></ng-container>
+		<!--     Premium Breakup Popup       -->
+
+		<modal-dialog show='riderDetailsModal' width='80%' height='auto' class="ng-hide RTOSearchDiv">
+			<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+				<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+					<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">Select Rider Options</h2>
+				</div>
+				<div class='ng-modal-close closePopup' ng-click='hideRiderDetailsModal()'>
+					<i class="material-icons">highlight_off</i>
+				</div>
+			</div>
+
+			<div class="pad10">
+				<div class="leadCaptureBox familyPopup selectRiderPop" style="padding: 0% !important;">
+					<ng-container ng-include="lifeRiderSectionHTML"></ng-container>
+
+				</div>
+
+				<ng-container class="section padRig15 width100 center">
+					<div class="">
+						<p class="dialogButton">
+							<md-button class='width20_per capitalTxt resp_normFont13 inpCancelBtn' ng-click="resetRiderDetails()">Cancel</md-button>
+							<md-button class='width20_per capitalTxt resp_normFont13 inpSaveBtn' ng-click="singleClickLifeQuote()">Submit</md-button>
+						</p>
+					</div>
+				</ng-container>
+				<!-- <div class="center submitBtnAlign" layout="row">
+				<button flex="50" ng-click="resetRiderDetails()"
+					class="bluebuybuttoncar wp_riderPopup" id="carBuyProductBtn"
+					style="background-color: #c4c4c4 !important;">Cancel</button>
+				<button flex="50" ng-click="singleClickLifeQuote()"
+					class="bluebuybuttoncar wp_riderPopup" id="carBuyProductBtn">Submit</button>
+			</div> -->
+			</div>
+		</modal-dialog>
+
+
+		<modal-dialog show="shareEmailModal" width='500px' height='auto' class="ng-hide RTOSearchDiv">
+			<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+				<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+					<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">Share Email </h2>
+				</div>
+				<div class='ng-modal-close closePopup' ng-click='hideEmailModal()'>
+					<i class="material-icons">highlight_off</i>
+				</div>
+			</div>
+
+			<div class="pad10">
+				<div class="leadCaptureBox familyPopup" style="padding: 0% !important;">
+					<ng-container ng-include="lifeShareEmailSectionHTML"></ng-container>
+				</div>
+			</div>
+		</modal-dialog>
+
+		<modal-dialog show="payoutOptionModal" width='500px' height='auto' class="ng-hide RTOSearchDiv">
+			<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow">
+				<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+					<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">Select Payout Option</h2>
+				</div>
+				<div class='ng-modal-close closePopup' ng-click='hidePayoutOptionModal()'>
+					<i class="material-icons">highlight_off</i>
+				</div>
+			</div>
+
+			<div class="pad10">
+				<div class="leadCaptureBox familyPopup selectRiderPop" style="padding: 0% !important;">
+					<ng-container ng-include="lifePayoutSectionHTML"></ng-container>
+				</div>
+				<ng-container class="section padRig15 width100 center">
+					<div class="">
+						<p class="dialogButton">
+							<md-button class='width20_per capitalTxt resp_normFont13 inpCancelBtn' ng-click="resetPayoutDetails()">Cancel</md-button>
+							<md-button class='width20_per capitalTxt resp_normFont13 inpSaveBtn' ng-click="togglePayoutChange(payoutDetails.payoutOption)">Submit</md-button>
+						</p>
+					</div>
+				</ng-container>
+			</div>
+		</modal-dialog>
+
+	</form>
+</div>
+
+<form style="display: hidden;" ng-form-commit action='' method='post' target="_blank" name="paymentForm" novalidate>
+	<div ng-repeat="formParams in postMethodFormContent">
+		<input type="hidden" name="{{formParams.name}}" value="{{formParams.value}}">
+	</div>
+</form>
+
+<modal-dialog show='modalCompare' width='930px' height='auto' class="ng-hide modalDialog">
+	<div ng-click="hideModal()" class="material-icons close" style="">close</div>
+	<div style="overflow: auto; height: 400px">
+		<div class="col-container">
+			<div class="mainCol" style="width: 10%;">
+				<div class="col-container">
+					<div class="row header compareHeaderProp rowDisplay">
+						<div class="col compareColProp colDisplay">S No</div>
+					</div>
+					<div class="row compareRowProp rowDisplay">
+						<div class="col subHeader compareColProp colDisplay">&nbsp;</div>
+					</div>
+					<div class="row compareRowProp rowDisplay" ng-repeat="data in comparePoliciesDisplayList">
+						<div class="col compareColProp colDisplay">{{($index+1)}}</div>
+					</div>
+					<div ng-show="consolatedDiscountList != 0" class="row compareRowProp rowDisplay">
+						<div class="col subHeader compareColProp colDisplay">&nbsp;</div>
+					</div>
+					<div class="row compareRowProp rowDisplay" ng-repeat="data in consolatedDiscountList">
+						<div class="col subHeader compareColProp colDisplay">
+							{{(comparePoliciesDisplayList.length)+($index+1)}}</div>
+					</div>
+					<div ng-show="consolatedRiderList != 0" class="row compareRowProp rowDisplay">
+						<div class="col compareColProp colDisplay">&nbsp;</div>
+					</div>
+					<div class="row compareRowProp rowDisplay" ng-repeat="rider in consolatedRiderList">
+						<div class="col subHeader compareColProp colDisplay">{{(comparePoliciesDisplayList.length) + (consolatedDiscountList.length) + ($index+1)}}</div>
+					</div>
+					<div class="row compareRowProp rowDisplay">
+						<!-- ng-show="vehicleDetails.checkforDriverAccCover && !vehicleDetails.checkforPsgCover" -->
+						<div class="col compareColProp colDisplay">{{(comparePoliciesDisplayList.length) + (consolatedDiscountList.length) + (consolatedRiderList.length) + ($index+1)}}
+						</div>
+					</div>
+					<div class="row compareRowProp rowDisplay">
+						<!-- 	ng-show="vehicleDetails.checkforPsgCover && !vehicleDetails.checkforDriverAccCover"> -->
+						<div class="col compareColProp colDisplay">{{(comparePoliciesDisplayList.length) + (consolatedDiscountList.length) + (consolatedRiderList.length) + ($index+1)}}
+						</div>
+					</div>
+					<div class="row compareRowProp rowDisplay">
+						<!-- ng-show="vehicleDetails.checkforPsgCover && vehicleDetails.checkforDriverAccCover"> -->
+						<div class="col compareColProp colDisplay">{{(comparePoliciesDisplayList.length) + (consolatedDiscountList.length) + (consolatedRiderList.length) + ($index+1)}}
+						</div>
+					</div>
+					<div class="row compareRowProp rowDisplay">
+						<!-- ng-show="vehicleDetails.checkforPsgCover && vehicleDetails.checkforDriverAccCover"> -->
+						<div class="col compareColProp colDisplay">{{(comparePoliciesDisplayList.length) + (consolatedDiscountList.length) + (consolatedRiderList.length) + ($index+1)
+							+ ($index+1)}}</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="mainCol" style="width: 30%;">
+				<div class="col-container">
+					<div class="row header compareHeaderProp rowDisplay">
+						<div class="col compareColProp colDisplay">Policy Details</div>
+					</div>
+					<div class="row compareRowProp rowDisplay">
+						<div class="col compareColProp colDisplay">
+							<b>Basic Coverage</b>
+						</div>
+					</div>
+					<div class="row compareRowProp rowDisplay" ng-repeat="data in comparePoliciesDisplayList">
+						<div class="col compareColProp colDisplay">{{data.label}}</div>
+					</div>
+					<div ng-show="consolatedDiscountList != 0" class="row compareRowProp rowDisplay">
+						<div class="col compareColProp colDisplay">
+							<b>Discounts</b>
+						</div>
+					</div>
+					<div class="row compareRowProp rowDisplay" ng-repeat="discount in consolatedDiscountList">
+						<div class="col compareColProp colDisplay">{{discount.type}}</div>
+					</div>
+					<div ng-show="consolatedRiderList != 0" class="row compareRowProp rowDisplay">
+						<div class="col compareColProp colDisplay">
+							<b>Add-on Coverage</b>
+						</div>
+					</div>
+					<div class="row compareRowProp rowDisplay" ng-repeat="rider in consolatedRiderList">
+						<div class="col compareColProp colDisplay">{{rider.riderName}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="mainCol" ng-repeat="data in selectedCarrier">
+				<div class="col-container">
+					<div class="row header compareHeaderProp rowDisplay">
+						<div class="col compareColProp colDisplay">{{data.insuranceCompany}}</div>
+					</div>
+					<div class="row compareRowProp rowDisplay">
+						<div class="col compareColProp colDisplay">&nbsp;</div>
+					</div>
+					<div class="row compareRowProp rowDisplay">
+						<div class="col compareColProp colDisplay">{{data.sumInsured}}</div>
+					</div>
+					<div class="row compareRowProp rowDisplay">
+						<div class="col compareColProp colDisplay">{{data.annualPremium}}</div>
+					</div>
+					<div class="row compareRowProp rowDisplay" ng-repeat="discount in consolatedDiscountList">
+						<div class="col compareColProp colDisplay">{{findDiscount(discount.discountId,data.discountList)}}</div>
+					</div>
+					<div ng-show="consolatedRiderList != 0" class="row compareRowProp rowDisplay">
+						<div class="col compareColProp colDisplay">&nbsp;</div>
+					</div>
+
+					<div class="row compareRowProp rowDisplay" ng-repeat="rider in consolatedRiderList">
+						<div class="col compareColProp colDisplay">{{findRider(rider.riderId,data.ridersList)}}</div>
+					</div>
+					<div class="row compareRowProp rowDisplay" ng-show="vehicleDetails.checkforDriverAccCover">
+						<div class="col compareColProp colDisplay">{{vehicleDetails.driverAccidentCover}}</div>
+					</div>
+					<div class="row compareRowProp rowDisplay" ng-show="vehicleDetails.checkforPsgCover">
+						<div class="col compareColProp colDisplay">{{vehicleDetails.passengerCover}}</div>
+					</div>
+					<div class="row compareRowProp rowDisplay">
+						<div class="col compareColProp colDisplay">
+							<button ng-disabled="$root.baseEnvEnabled" ng-click="buyProduct(data)" class="bluebuybuttoncar wp_resultInpBtn buyNowBtnPlacer ng-binding"
+							 id="assuranceBuyProductBtn" style="width: auto">Buy now</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</modal-dialog>
+<modal-dialog show='modalEmailView' width='550px' height='auto' class="ng-hide">
+	<div class='ng-modal-close wp_modalClose' ng-click='hideEmailModal()' ng-if="$root.wordPressEnabled">
+		<i class="material-icons">close</i>
+	</div>
+	<div class="blueBackground one-edge-shadow wp_noBoxShadow" style="" layout="row">
+		<div class="" style="padding-top: 5px; text-align: center;" flex="90" flex-sm="85" flex-xs="85">
+			<h2 class="white popupHeading wp_popupHeading">{{globalLabel.applicationLabels.common.shareEmailModalLabel1}}</h2>
+		</div>
+		<div class='ng-modal-close' ng-click='hideEmailModal()' style="color: #fff; margin-top: 5px !important; text-align: center;"
+		 flex="10" flex-sm="15" flex-xs="15">
+			<i class="material-icons">X</i>
+		</div>
+	</div>
+	<div class="pad10 responsiveTellus newPopupInnerShadow" style="">
+		<div class="popupTableHealth popupPadding" layout="row" style="padding: 3% 0% 3% 0% !important;">
+			<div flex="100" style="text-align: center; padding: 1% 0%;">
+				<b>{{globalLabel.applicationLabels.common.shareEmailModalLabel2}}</b>
+				<div data-ng-repeat="choice in EmailChoices" ng-if="choice.username" flex="100" style="text-align: center; padding: 1% 0%;">
+					{{$index+1}}.
+					<b>{{choice.username}}</b>
+				</div>
+			</div>
+		</div>
+		<div class="center">
+			<md-button class='md-raised md-primary popupSubmit' ng-click="hideEmailModal()" style="margin-bottom: 8px !important;">OK</md-button>
+		</div>
+	</div>
+</modal-dialog>
+<form name="quoteUserInfoForm">
+	<modal-dialog show='modalView' width='550px' height='auto' class="ng-hide">
+		<div class="blueBackground one-edge-shadow">
+			<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+				<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar side6Pad">{{globalLabel.applicationLabels.common.userInfoModalLabel4}}</h2>
+			</div>
+			<!-- <div class='ng-modal-close closePopup' ng-click='hideEmailModal()'>
+				<i class="material-icons">highlight_off</i>
+			</div> -->
+		</div>
+		<div class="pad10 responsiveTellus newPopupInnerShadow">
+			<div class="leadCaptureBox leadScrollMobile">
+				<div class="pad10 leftnoborder paddingWebNew leadCapturePadding">
+					<div class="section group">
+						<div layout="row" layout-xs="column">
+							<div class="right5Mar" flex="50" flex-xs="100">
+								<md-input-container style="width: 100%;">
+									<input type="text" class="capitializeName" placeholder="First name" name="firstName" ng-model="quoteUserInfo.firstName" autocomplete="off"
+									 maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/" required capitalize-first />
+									<div ng-messages="quoteUserInfoForm.firstName.$error" ng-if="quoteUserInfoForm.firstName.$touched">
+										<div style="color: red" ng-message="required">{{globalLabel.validationMessages.firstNameRequired}}</div>
+										<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+										<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+										<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+									</div>
+								</md-input-container>
+							</div>
+							<div flex="50" flex-xs="100" style="width: 100%;">
+								<md-input-container style="width: 100%;">
+									<input type="text" class="capitializeName" placeholder="Last name" name="lastName" ng-model="quoteUserInfo.lastName" autocomplete="off"
+									 maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/" style="box-shadow: 0px;" capitalize-first />
+
+									<div ng-messages="quoteUserInfoForm.lastName.$error" ng-if="quoteUserInfoForm.lastName.$touched">
+										<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+										<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+										<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+									</div>
+								</md-input-container>
+							</div>
+						</div>
+					</div>
+					<div layout="row" layout-xs="column">
+						<div class="right5Mar" flex="50" flex-xs="100">
+							<md-input-container style="width: 100%;">
+								<input type="text" ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-z.]{2,5}$/" placeholder="Email-ID" autocomplete="off"
+								 maxlength="50" name="emailId" ng-model="quoteUserInfo.emailId" required />
+								<div ng-messages="quoteUserInfoForm.emailId.$error" ng-if="quoteUserInfoForm.emailId.$touched">
+									<div style="color: red" ng-message="required">{{globalLabel.validationMessages.emailIdRequired}}</div>
+									<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.emailIdInvalid}}</div>
+									<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.emailIdInvalid}}</div>
+								</div>
+							</md-input-container>
+						</div>
+						<div class="right5Mar" flex="50" flex-xs="100">
+							<md-input-container style="width: 100%;">
+								<div class="section group">
+									<div class="col span_3_of_3">
+										<input type="text" placeholder="Mobile Number" name="mobileNumber" ng-model="quoteUserInfo.mobileNumber" autocomplete="off"
+										 ng-pattern="/^[6789]\d{9}$/" maxlength="10" minlength="10" required />
+										<div ng-messages="quoteUserInfoForm.mobileNumber.$error" ng-if="quoteUserInfoForm.mobileNumber.$touched">
+											<div style="color: red" ng-message="required">{{globalLabel.validationMessages.mobileNumberRequired}}</div>
+											<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+											<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+											<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+										</div>
+									</div>
+								</div>
+							</md-input-container>
+						</div>
+					</div>
+					<div class="center resp_topBot5Pad">
+						<md-button type="submit" ng-click="redirectToAPResult()" id="aboutLeadBtn" ng-disabled="quoteUserInfoForm.$invalid || disabledRedirectToResult"
+						 class="PB_QuoteSaveBtn">
+							{{globalLabel.applicationLabels.common.viewBuyQuote}}
+							<span ng-show="disabledRedirectToResult"><i class="fa fa-spinner fa-spin "></i></span></md-button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</modal-dialog>
+</form>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		setTimeout(function () {
+			$('[data-toggle="tooltip"]').tooltip();
+		}, 100)
+	});
+
+	var scrollv // register two global vars for two scrollable instances
+
+	jQuery(function (e) { // on DOM load
+
+		scrollv = new scrollable({
+			wrapperid: "scrollable-v",
+			moveby: 1
+		})
+	})
+
+</script>

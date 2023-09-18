@@ -1,0 +1,260 @@
+<div class="showForMobile" style="display:{{$root.hideonEdit}}">
+	<div>
+		<div class="clearfix"></div>
+		<md-card class="pad2TopBot">
+			<div layout="row" class="resp_pad7_10 border1Bot">
+				<div flex="10">
+					<span><i class="material-icons resp_font18">directions_car</i></span>
+				</div>
+				<div flex="80" class="font12"> Car Details </div>
+				<div flex="10" class="font12 pinkFont cursor" ng-click="$root.editForMobile()">Edit</div>
+			</div>
+			<div class="resp_pad7_10 bold12">
+				{{vehicleInfo.registrationPlace}}, {{vehicleDisplayName}}
+			</div>
+			<div layout="row" class="resp_pad7_10">
+				<div flex="50">
+					<span class="resp_titleProp" ng-if="quoteParam.policyType == 'renew'">Registered</span>
+					<span class="resp_titleProp" ng-if="quoteParam.policyType != 'renew'">Purchase</span>
+					<span class="resp_valueProp">{{vehicleInfo.dateOfRegistration}}</span>
+				</div>
+				<div flex="50">
+					<span class="resp_titleProp">Expiry</span> <span class="resp_valueProp">
+						{{vehicleInfo.PreviousPolicyExpiryDate}}</span>
+				</div>
+			</div>
+			<div layout="row" class="resp_pad7_10">
+				<div flex="60" class="resp_titleProp">
+					No claim bonus in existing policy
+				</div>
+				<div flex="40" class="resp_valueProp">
+					{{vehicleDetails.ncb.value}}
+				</div>
+			</div>
+			<div layout="row" class="resp_pad7_10">
+				<div flex="60" class="resp_titleProp">
+					Insurance Claim in last 12 Months
+				</div>
+				<div flex="10" class="resp_valueProp">
+					{{vehicleInfo.previousClaim}}
+				</div>
+			</div>
+		</md-card>
+	</div>
+</div>
+<div ng-form="carInputForm" class="hideForMobile" style="display:{{$root.showonEdit}}">
+	<div class="wrap width100 side3Pad quoteInpSec modifyDiv">
+		<ng-container class="width18_per padRig15 resp_width100 iPad_width50"
+			ng-if="($root.baseEnvEnabled && !$root.wordPressEnabled)||(isThirdPartyResource)">
+			<md-input-container class="md-block"> <label
+					class="md-no-float classForTooltip">{{p365Labels.common.insuranceType}}</label>
+				<md-select name="insuranceType" ng-model="vehicleDetails.insuranceType"
+					ng-model-options="{trackBy: '$value.type'}" class="lineHgt34 bold12" ng-change="alterRenewal()">
+					<md-option ng-value="data" ng-repeat="data in carInsuranceTypes">{{data.type}} </md-option>
+				</md-select>
+			</md-input-container>
+		</ng-container>
+		<ng-container class="width18_per padRig15 resp_width100 iPad_width50">
+			<md-input-container class="md-block" ng-if="$root.showCarRegAreaStatus == true">
+				<label class="md-no-float classForTooltip font12">{{p365Labels.common.regArea}}
+					<!--<i class="fa fa-question-circle fa-sm bluecolor"
+					data-toggle="tooltip"
+					data-original-title="{{tooltipContent.registeredRTO}}" tooltip></i> -->
+				</label> <input ng-model="vehicleInfo.registrationPlace" ng-click="toggleVehicleRegistrationPopup(true)"
+					class="wp_textBlack bold12" ng-readonly="true"> <a class="font12" href="javascript:;"
+					id="carRegNumberHint" ng-click='toggleVehicleRegistrationPopup(false)'>[I Know my
+					registration number]</a> </md-input-container>
+			<md-input-container class="md-block" ng-if="$root.showCarRegAreaStatus == false">
+				<label class="md-no-float classForTooltip">{{p365Labels.common.regNumber}}
+					<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+					data-toggle="tooltip"
+					data-original-title="{{tooltipContent.registrationNumber}}" tooltip></i> -->
+				</label> <input ng-model="$root.vehicleDetails.registrationNumber"
+					ng-change="getRegNumber($root.vehicleDetails.registrationNumber)" class="bold12"
+					ng-model-options='{ debounce: 2000 }' focus-me="focusInput" style="text-transform: uppercase;"> <a
+					ng-click='toggleVehicleRegistrationPopup(true)' class="font12">[Don't know my
+					registration number]</a>
+				<div style="color: red" ng-show="$root.regNumStatus">{{p365Labels.validationMessages.regNumInvalid}}
+				</div>
+			</md-input-container>
+			<input type="hidden" name="{{UNIQUE_QUOTE_ID_ENCRYPTED}}" id="{{UNIQUE_QUOTE_ID_ENCRYPTED}}"
+				value="{{UNIQUE_QUOTE_ID_ENCRYPTED}}" ng-model="UNIQUE_QUOTE_ID_ENCRYPTED">
+		</ng-container>
+		<ng-container
+			class="wp_autoComplete pj_width25 padRig15 resp_width100 iPad_width50 noDisplay iPad_zeroPadRight">
+			<div class="innerHeadDropText">
+				<md-autocomplete flex md-input-name="autocompleteField" class="bold12" md-input-minlength="2"
+					md-no-cache="noCache" md-selected-item="vehicleInfo.make"
+					md-selected-item-change="selectedDisplayVehicle(item)" md-search-text="searchText"
+					md-items="item in querySearch(searchText)" md-item-text="item" md-floating-label="Make" required>
+					<md-item-template> <span md-highlight-text="searchText">{{item}}</span>
+					</md-item-template>
+					<div ng-messages="bikeInputForm.autocompleteField.$error"
+						ng-if="bikeInputForm.autocompleteField.$touched">
+						<div ng-message="required">
+							You <b>must</b> have a make.
+						</div>
+						<div ng-message="md-require-match">Please select an existing make.
+						</div>
+						<div ng-message="minlength">Your entry is not long enough.</div>
+					</div>
+				</md-autocomplete>
+			</div>
+		</ng-container>
+		<ng-container
+			class="wp_autoComplete pj_width25 padRig15 resp_width100 iPad_width50 noDisplay iPad_zeroPadRight">
+			<div class="innerHeadDropText1">
+				<md-autocomplete flex md-input-name="autocompleteField1" class="bold12" md-input-minlength="1"
+					md-no-cache="noCache" md-selected-item="vehicleInfo.model"
+					md-selected-item-change="selectedDisplayModel(selectedModel)" md-search-text="searchText1"
+					md-items="selectedModel in modelSearch(searchText1)" md-item-text="selectedModel"
+					md-floating-label="Model" required>
+					<md-item-template> <span md-highlight-text="searchText">{{selectedModel}}</span>
+					</md-item-template>
+					<div ng-messages="bikeInputForm.autocompleteField1.$error"
+						ng-if="bikeInputForm.autocompleteField1.$touched">
+						<div ng-message="required">
+							You <b>must</b> have a model.
+						</div>
+						<div ng-message="md-require-match">Please select an existing model.
+						</div>
+						<div ng-message="minlength">Your entry is not long enough.</div>
+					</div>
+				</md-autocomplete>
+			</div>
+		</ng-container>
+		<ng-container
+			class="wp_autoComplete pj_width25 padRig15 resp_width100 iPad_width50 noDisplay iPad_zeroPadRight">
+			<div class="innerHeadDropText">
+				<md-autocomplete flex md-input-name="autocompleteField2" class="bold12" md-input-minlength="1"
+					md-no-cache="noCache" md-selected-item="selectedVariantDetails.selectedItem"
+					md-selected-item-change="selectedDisplayVariant(selectedVariant)" md-search-text="searchText2"
+					md-items="selectedVariant in variantSearch(searchText2)" md-item-text="selectedVariant"
+					md-floating-label="Variant" required>
+					<md-item-template> <span md-highlight-text="searchText2">{{selectedVariant}}</span>
+					</md-item-template>
+					<div ng-messages="bikeInputForm.autocompleteField2.$error"
+						ng-if="bikeInputForm.autocompleteField2.$touched">
+						<div ng-message="required">
+							You <b>must</b> have a variant.
+						</div>
+						<div ng-message="md-require-match">Please select an existing variant.
+						</div>
+						<div ng-message="minlength">Your entry is not long enough.</div>
+					</div>
+				</md-autocomplete>
+			</div>
+		</ng-container>
+		<ng-container class="wp_left wp_resultCol30 wp_padRgt30 pj_width14 padRig15 resp_width100 iPad_width25"
+			ng-show="renewal == true">
+			<md-input-container class="md-block"> <label
+					class="md-no-float classForTooltip font12">FUEL
+				</label>	
+				<md-select name="regYear" ng-model="vehicleInfo.fuel" class="pbCarSelect"  required md-no-asterisk>
+					<md-option ng-value="fuel" ng-repeat="fuel in fuelList" ng-disabled="instantQuoteCarForm">{{fuel}}</md-option>
+				</md-select>
+			</md-input-container>
+		</ng-container>
+
+		<div class="clearfix"></div>
+		<ng-container class="wp_left wp_resultCol30 wp_padRgt30 pj_width14 padRig15 resp_width100 iPad_width25">
+			<md-input-container class="md-block"> <label class="md-no-float classForTooltip font12"> <span
+						ng-if="quoteParam.policyType == 'renew'">{{p365Labels.common.regDate}}</span>
+					<span ng-if="quoteParam.policyType != 'renew'">{{p365Labels.common.purchaseDate}}</span>
+					<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+				data-toggle="tooltip"
+				data-original-title="{{tooltipContent.registeredDate}}" tooltip></i> -->
+				</label> <input class="newDatepickerBorder wp_textBlack bold12" type="text" name="regYear"
+					ng-model="vehicleInfo.dateOfRegistration" required md-no-asterisk
+					ng-change="validateRegistrationDate()" readonly="readonly"
+					p365-date-picker="dateOfRegistrationOptions" />
+			</md-input-container>
+		</ng-container>
+		<ng-container class="wp_left wp_resultCol30 wp_padRgt30 pj_width14 padRig15 resp_width100 iPad_width25"
+			ng-if="$root.baseEnvEnabled && !$root.wordPressEnabled && polStatus">
+			<md-input-container class="md-block">
+				<label class="md-no-float classForTooltip font12">{{p365Labels.common.existingPolicyStatus}}</label>
+				<md-select class="bold12 lineHgt34" name="policyStatus" ng-model="vehicleDetails.policyStatus"
+					ng-model-options="{trackBy: '$value.label'}" ng-change="changePolStatus()">
+					<md-option ng-value="status" ng-repeat="status in policyStatusList"
+						ng-disabled="instantQuoteCarForm">{{status.label}}</md-option>
+				</md-select>
+			</md-input-container>
+
+		</ng-container>
+		<ng-container class="pj_width14 padRig15 resp_width100 iPad_width25">
+			<md-input-container class="md-block" ng-show="polStatus">
+				<label class="md-no-float classForTooltip font12">{{p365Labels.common.expiryDate}}
+					<!--{{globalLabel.applicationLabels.car.expiryDate}}-->
+					<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+				data-toggle="tooltip"
+				data-original-title="{{tooltipContent.prevPolicyExpiryDate}}" tooltip></i> -->
+				</label><input class="newDatepickerBorder wp_textBlack bold12" type="text"
+					ng-model="vehicleInfo.PreviousPolicyExpiryDate" ng-change="validatePrevPolicyStartDate()"
+					readonly="readonly" p365-date-picker="previousPolicyExpiryDateOptions" />
+
+			</md-input-container>
+		</ng-container>
+
+		<ng-container class="wp_left wp_resultCol30 wp_padRgt30 pj_width14 padRig15 resp_width100 iPad_width25"
+			ng-show="renewal == true">
+			<md-input-container class="md-block"> <label
+					class="md-no-float classForTooltip font12">{{p365Labels.common.insuranceClaimExist}}
+					<!--{{globalLabel.applicationLabels.car.insuranceClaimExist}}-->
+					<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+					data-toggle="tooltip"
+					data-original-title="{{tooltipContent.insuranceClaim}}" tooltip></i> -->
+				</label>
+				<md-select name="previousClaim" ng-model="vehicleInfo.previousClaim" class="bold12 lineHgt34">
+					<md-option ng-value="prevClaimStatus.value" ng-repeat="prevClaimStatus in previousClaimStatus"
+						ng-disabled="instantQuoteCarForm">{{prevClaimStatus.label}}</md-option>
+				</md-select>
+			</md-input-container>
+		</ng-container>
+		<ng-container class="pj_width14 resp_width100 iPad_width25"
+			ng-show="vehicleInfo.previousClaim == 'false' && renewal == true">
+			<md-input-container class="md-block">
+				<label class="md-no-float classForTooltip font12">
+					{{p365Labels.common.ncbExist}}
+					<!-- {{globalLabel.applicationLabels.car.ncbExist}} -->
+					<!-- <i class="fa fa-question-circle fa-sm bluecolor"
+				data-toggle="tooltip" data-original-title="{{tooltipContent.ncb}}"
+				tooltip></i> -->
+				</label>
+				<md-select name="ncb1" ng-model="vehicleDetails.ncb" ng-model-options="{trackBy: '$value.id'}"
+					class="bold12 lineHgt34">
+					<md-option ng-value="ncb" ng-repeat="ncb in ncbList" ng-disabled="instantQuoteCarForm">
+						{{ncb.display}} </md-option>
+				</md-select>
+			</md-input-container>
+		</ng-container>
+		<!-- <ng-container class="pj_width14 resp_width100 iPad_width25" ng-show="($root.baseEnvEnabled && !$root.wordPressEnabled)">
+				<md-input-container class="md-block">
+					<md-checkbox class="blackAddon resize noMarBot" ng-model="showCarrierVehicleVariants" name='add' ng-change="changeCarrierVehicleVariants()">
+						<span class="font12 marTopBot10" layout="row">Carrier Variants</span>
+					</md-checkbox>
+				</md-input-container>
+			</ng-container>
+			<ng-container class="section padRig15 width100" ng-if="!$root.wordPressEnabled && showCarrierVehicleVariants">
+				<div  ng-if='displayLoader' class="VariantSpinner"><i class='fa fa-spinner fa-spin'></i></div>
+					<div ng-if="noCarrierVariantFound">No Result Founds</div>
+						<div class="col fullWidth wp_padNo pj_widthAuto resp_widthAuto" ng-if="!displayLoader" ng-repeat="data in carrierVariantList">				
+					<label class="resp_normFont12 hideForMobile textCapitialize">&nbsp;{{data.carrierName}}</label>
+					<span flex></span>
+					<md-select name="type" ng-model="carrierVarients" ng-change="onSelectCarrierVariant(carrierVarients,data)" class="bold12 lineHgt34">
+						<md-option ng-value="varients" ng-repeat="varients in data.CarrierMaster"> {{varients.displayName}} </md-option>
+					</md-select>
+				</div>
+			</ng-container> -->
+		<ng-container class="section padRig15 width100 center" ng-if="carInputForm.$dirty">
+			<div class="">
+				<p class="dialogButton">
+					<md-button ng-click="toggleChangeClose()" class="inpCancelBtn" id="carBuyProductBtn">Cancel
+					</md-button>
+					<md-button ng-click="toggleChange()" class="inpSaveBtn" id="editCarInputSectionBtn">Submit
+					</md-button>
+				</p>
+			</div>
+		</ng-container>
+	</div>
+</div>

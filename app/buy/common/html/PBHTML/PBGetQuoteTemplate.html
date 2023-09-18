@@ -1,0 +1,169 @@
+<div class="">
+	<div id="mainView" class="">
+		<div class="active newWidthLabel clearfix">
+			<div ng-include="$root.professionalTab" ng-show="!createLeadScreen"></div>
+			<div ng-form="createLeadForm" ng-show="createLeadScreen">
+				<form name="quoteUserInfoForm" class="wp_md-content">
+
+					<div class="professionalBody bestQuote resp_padContainer">
+						<div class="personalInfo resp_topBot5Pad padBot5Per marTop4Per">
+							<h2 class="chooseProfTitle">{{$root.professionalText}}</h2>
+						</div>
+						<div layout='row' layout-xs="column" class='resp_noMar'>
+							<div flex="45" flex-xs="100" class="selfCenter">
+								<img class="width80" ng-src="{{$root.wp_path}}img/professionalJourney/{{$root.professionalImg}}.png"/>
+							</div>
+							<div flex="55" flex-xs="100">
+								<div class="pad10 vertAlignCenter pbCarInput offWhiteBg side3_6Pad borRad7 marBot3Per createLeadHt">
+									<div layout="row" layout-xs="column" class="width100">
+										<div flex="50" flex-xs="100" class="left padRig5Per resp_zeroPadRight">
+											<md-input-container class="width100">
+												<label class="pbCarInput">First Name</label>
+												<input type="text" class="capitializeName" placeholder="First name" name="firstName" ng-model="quoteUserInfo.firstName" autocomplete="off"
+												 maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/" required capitalize-first />
+												<!-- <div ng-messages="quoteUserInfoForm.firstName.$error" ng-if="quoteUserInfoForm.firstName.$touched">
+													<div style="color: red" ng-message="required">{{globalLabel.validationMessages.firstNameRequired}}</div>
+													<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+													<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+													<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+												</div> -->
+												<div ng-if="quoteUserInfoForm.firstName.$error.required" style="color: red;">{{globalLabel.validationMessages.firstNameRequired}}</div>
+												<div ng-if="quoteUserInfoForm.firstName.$error.pattern" style="color: red;">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+												<div ng-if="quoteUserInfoForm.firstName.$error.maxlength" style="color: red;">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+												<div ng-if="quoteUserInfoForm.firstName.$error.minlength" style="color: red;">{{globalLabel.validationMessages.firstNameInvalid}}</div>
+											</md-input-container>
+										</div>
+										<div flex="50" flex-xs="100" class="left pbCarInput">
+											<md-input-container class="width100">
+												<label class="pbCarInput">Last Name </label>
+												<input type="text" class="capitializeName" placeholder="Last name" name="lastName" ng-model="quoteUserInfo.lastName" autocomplete="off"
+												 maxlength="35" minlength="1" ng-pattern="/^[a-zA-Z\s]*$/" style="box-shadow: 0px;" capitalize-first />
+
+												<div ng-messages="quoteUserInfoForm.lastName.$error" ng-if="quoteUserInfoForm.lastName.$touched">
+													<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+													<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+													<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.lastNameInvalid}}</div>
+												</div>
+											</md-input-container>
+										</div>
+									</div>
+									<div layout="row" layout-xs="column" class="width100">
+										<div flex="50" flex-xs="100" class="left padRig5Per resp_zeroPadRight">
+											<md-input-container class="width100">
+												<label class="pbCarInput">Email ID </label>
+												<input type="text" ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z.]{2,5}$/" placeholder="Email-ID" autocomplete="off"
+												 maxlength="50" name="emailId" ng-model="quoteUserInfo.emailId"/>
+												<div ng-messages="quoteUserInfoForm.emailId.$error" ng-if="quoteUserInfoForm.emailId.$touched">
+													<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.emailIdInvalid}}</div>
+													<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.emailIdInvalid}}</div>
+												</div>
+											</md-input-container>
+										</div>
+										<div flex="50" flex-xs="100" class="left pbCarInput">
+											<md-input-container class="width100">
+												<label class="pbCarInput">Phone Number </label>
+												<input type="text" placeholder="Mobile Number" name="mobileNumber" ng-model="quoteUserInfo.mobileNumber" autocomplete="off"
+												 ng-pattern="/^[6789]\d{9}$/" maxlength="10" minlength="10" required />
+												<!-- <div ng-messages="quoteUserInfoForm.mobileNumber.$error" ng-if="quoteUserInfoForm.mobileNumber.$touched">
+													<div style="color: red" ng-message="required">{{globalLabel.validationMessages.mobileNumberRequired}}</div>
+													<div style="color: red" ng-message="maxlength">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+													<div style="color: red" ng-message="minlength">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+													<div style="color: red" ng-message="pattern">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+												</div> -->
+												<div ng-if="quoteUserInfoForm.mobileNumber.$error.required" style="color: red;">{{globalLabel.validationMessages.mobileNumberRequired}}</div>
+												<!-- <div ng-if="quoteUserInfoForm.mobileNumber.$error.maxlength" style="color: red;">{{globalLabel.validationMessages.mobileNumberInvalid}}</div> -->
+												<!-- <div ng-if="quoteUserInfoForm.mobileNumber.$error.minlength" style="color: red;">{{globalLabel.validationMessages.mobileNumberInvalid}}</div> -->
+												<div ng-if="quoteUserInfoForm.mobileNumber.$error.pattern" style="color: red;">{{globalLabel.validationMessages.mobileNumberInvalid}}</div>
+											</md-input-container>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div layout="row" layout-xs="column" ng-if="createLeadScreen">
+							<div flex="45" flex-xs="100"></div>
+							<div flex="55" flex-xs="100" class="center resp_topBot5Pad">
+								<md-button ng-click='$root.navigateView()' class="PB_QuoteBackBtn" id="carBuyProductBtn">Back</md-button>
+								<md-button ng-click="redirectToResult()" id="aboutLeadBtn" ng-disabled="disabledRedirectToResult" class="PB_QuoteSaveBtn">Get Quotes <span ng-show="disabledRedirectToResult"><i class="fa fa-spinner fa-spin "></i></span></md-button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="professionalBody bestQuote resp_padContainer" ng-if="!createLeadScreen">
+			<div layout="row" layout-xs="column">
+				<div flex="45" flex-xs="100"></div>
+				<div flex="55" flex-xs="100">
+					<div ng-if="$root.wordPressEnabled" class="center resp_topBot5Pad">
+						<md-button ng-if="$root.hideBackButton" ng-click='backToProfessionalJourney()' id="viewOptionAndCompare" class="PB_QuoteBackBtn">Back</md-button>
+						<md-button ng-disabled="$root.disableNextScreen" ng-click='toggleView()' id="viewOptionAndCompare" class="PB_QuoteSaveBtn">Next</md-button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<modal-dialog show='modalVehicleRegistration' width='900px' class="ng-hide RTOSearchDiv fghjhh" style="overflow:auto;">
+
+	<div class="blueBackground one-edge-shadow wp_noBluebackground wp_noBoxShadow posRel RTOPopHead">
+		<div class="wp_respWidth100 wp_Width100" style="padding: 0%; text-align: center;">
+			<h2 class="white popupHeading wp_popupHeading wp_resultPopupMar">{{globalLabel.applicationLabels.common.regPlaceModalLabel1}} </h2>
+		</div>
+		<div class='ng-modal-close wp_modalClose closePopup' ng-click='hideModal()' ng-if="$root.wordPressEnabled">
+			<i class="material-icons">highlight_off</i>
+		</div>
+		<div class='ng-modal-close closePopup' ng-click='hideModal()' style="color: #fff;" ng-if="!$root.wordPressEnabled">
+			<i class="material-icons">highlight_off</i>
+		</div>
+	</div>
+
+	<div class="pad10 responsiveTellus newPopupInnerShadow regAreaInput wp_noPadTop">
+		<div class="pad30 wp_noPadTop wp_RtoMetro">
+			<div class="inner-addon right-addon posRel">
+				<i class="material-icons RTOSearchIcon">search</i> <input type="text" class="form-control wp_borRadius30 wp_noBoxShadow"
+				 placeholder="Search for your RTO or City using search option below" ng-required="true" name="search" ng-model="$root.selectedRegData"
+				 typeahead-on-select="onSelect($item)" typeahead-wait-ms="10" typeahead-no-results="noResults" uib-typeahead="reg.display for reg in getRegPlaceList($viewValue)"
+				 typeahead-show-hint="true" autocomplete="off" typeahead-min-length="2" style="width: 100%;" />
+			</div>
+			<div class="dropdown-menu-NoResult" ng-if="noResults">No Results Found
+			</div>
+			<div class="RTOPopup">
+				<p class="RTOHeading blueTextColor popularHeadRto center">Popular Cities</p>
+			</div>
+			<div class="RTOMiddleTab">
+				<div class="gallery-items" style="padding-bottom: 5px;">
+					<div class="gallery-item clickMetro" ng-click="selectedMetroRTO(metros)" ng-repeat="metros in defaultMetroList" style="height: 55px">
+						<div class="gallery-contents">
+							<div class="thumbnail gallery-trigger wp_RTOThumbnail">{{metros.cityName}}</div>
+							<input type="hidden" ng-value="$index" class="rowCount" />
+							<!-- <div style="width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-left:10px solid red;position:absolute;top:10px;left:10px;"></div> -->
+						</div>
+						<div class="showMetro">
+							<div class="info-bg" ng-hide="hideStatus" style="display: block;">
+								<div class="section group divForMobile">
+									<div class="col span_1_of_3 borderBtmRTO" ng-repeat="rto in metros.RTODetails">
+										<a ng-click="onSelect(rto)" class="hiddencities">{{rto.display}}</a>
+									</div>
+									<div ng-if="dummyLength==1" class="hideforMobile">
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+									</div>
+									<div ng-if="dummyLength==2" class="hideforMobile">
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+										<div class="col span_1_of_3 borderBtmRTO">&nbsp;</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</modal-dialog>

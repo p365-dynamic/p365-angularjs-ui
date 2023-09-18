@@ -1,0 +1,172 @@
+<form name="carInstantQuoteForm">
+	<div class="professionalBody bestQuote resp_padContainer" ng-controller="carInstantQuoteController">
+		<div class="personalInfo resp_topBot5Pad padBot5Per marTop4Per">
+			<h2 class="chooseProfTitle">{{$root.professionalText}}</h2>
+		</div>
+		<div layout='row' layout-xs="column" class='resp_noMar'>
+			<div flex="45" flex-xs="100" class="selfCenter">
+				<img class="width80" ng-src="{{$root.wp_path}}img/professionalJourney/{{$root.professionalImg}}.png"/>
+			</div>
+			<div flex="55" flex-xs="100">
+				<div class="pad10 vertAlignCenter pbCarInput offWhiteBg side3_6Pad borRad7 marBot3Per createLeadHt">
+					<div layout="row" layout-xs="column" class="width100">
+						<div flex="50" flex-xs="100" class="left padRig5Per resp_zeroPadRight">
+							<md-input-container class="width100">
+								<label class="pbCarInput">{{p365Labels.common.insuranceFor}}</label>
+								<md-select name="type" ng-model="vehicleDetails.insuranceType" class="pbCarSelect" ng-model-options="{trackBy: '$value.type'}"
+								 ng-change="alterRenewal()">
+									<md-option ng-value="data" ng-repeat="data in carInsuranceTypes" ng-disabled="instantQuoteCarForm">{{data.type}}</md-option>
+								</md-select>
+							</md-input-container>
+						</div>
+						<div flex="50" flex-xs="100" class="left pbCarInput">
+							<md-input-container class="width100" ng-if="$root.showCarRegAreaStatus == true">
+								<label class="pbCarInput">{{p365Labels.common.regArea}} <a
+								href="javascript:;" class="RTOLink font13"
+								data-ng-class="{'disabled': instantQuoteCarForm}"
+								ng-click='toggleVehicleRegistrationPopup(false)'>[I know my	registration no.]</a></label>
+								<input ng-model="$root.vehicleInfo.registrationPlace" placeholder="MH-01 XXXX XXXX" ng-click="toggleVehicleRegistrationPopup(true)"
+								 ng-readonly="true" capitalize>
+							</md-input-container>
+							<md-input-container class="width100" ng-if="$root.showCarRegAreaStatus == false">
+								<label class="pbCarInput">{{p365Labels.common.regNumber}} <a class="RTOLink font13" data-ng-class="{'disabled': instantQuoteCarForm}"
+									ng-click='toggleVehicleRegistrationPopup(true)'>[I don't know my
+										registration no.]</a></label>
+								<input ng-model="$root.vehicleDetails.registrationNumber" placeholder="MH-01-AA-XXXX" ng-model-options='{ debounce: 1500 }'
+								 ng-change="getRegNumber($root.vehicleDetails.registrationNumber)" focus-me="focusInput" name="regNumber" ng-disabled="instantQuoteCarForm"
+								 style="text-transform: uppercase;" required>
+								 <span class='pinkFont RtoSpinner' ng-show='fetchingCar' required><i class='fa fa-spinner fa-spin'></i></span>
+								<div class="errorLink font12 right" style='color: red;' ng-if="$root.regNumStatus">{{p365Labels.validationMessages.regNumInvalid}}</div>
+								<div class="errorLink font12 right" style='color: red;' ng-show='!isCarFound'>{{globalLabel.applicationLabels.professionalJourney.car.vehicleNotFound}}</div>
+							</md-input-container>
+						</div>
+					</div>
+					<div layout="row" layout-xs="column" class="width100">
+						<div flex="100" flex-xs="100" class="left">
+							<md-input-container class="width100">
+								<label class="pbCarInput">Make </label>
+								<md-autocomplete flex md-input-name="autocompleteField" class="bold12"
+									md-input-minlength="2" md-no-cache="noCache" md-selected-item="vehicleInfo.make"
+									md-selected-item-change="selectedDisplayVehicle(item)" md-search-text="searchText"
+									md-items="item in querySearch(searchText)" md-item-text="item" md-floating-label="&nbsp;" required>
+									<md-item-template> <span md-highlight-text="searchText">{{item}}</span>
+									</md-item-template>
+									<div ng-messages="bikeInputForm.autocompleteField.$error"
+										ng-if="bikeInputForm.autocompleteField.$touched">
+										<div ng-message="required">
+											You <b>must</b> have a make.
+										</div>
+										<div ng-message="md-require-match">Please select an existing make.
+										</div>
+										<div ng-message="minlength">Your entry is not long enough.</div>
+									</div>
+								</md-autocomplete>
+							</md-input-container>
+						</div>
+					</div>
+					<div layout="row" layout-xs="column" class="width100">
+						<div flex="100" flex-xs="100" class="left">
+							<md-input-container class="width100">
+								<label class="pbCarInput">Model </label>
+								<!-- model here -->
+								<md-autocomplete flex md-input-name="autocompleteField1" class="bold12"
+									md-input-minlength="1" md-no-cache="noCache" md-selected-item="vehicleInfo.model"
+									md-selected-item-change="selectedDisplayModel(selectedModel)"
+									md-search-text="searchText1" md-items="selectedModel in modelSearch(searchText1)"
+									md-item-text="selectedModel" md-floating-label="&nbsp;" required>
+									<md-item-template> <span md-highlight-text="searchText">{{selectedModel}}</span>
+									</md-item-template>
+									<div ng-messages="bikeInputForm.autocompleteField1.$error"
+										ng-if="bikeInputForm.autocompleteField1.$touched">
+										<div ng-message="required">
+											You <b>must</b> have a model.
+										</div>
+										<div ng-message="md-require-match">Please select an existing model.
+										</div>
+										<div ng-message="minlength">Your entry is not long enough.</div>
+									</div>
+								</md-autocomplete>
+							</md-input-container>
+						</div>
+					</div>
+					<div layout="row" layout-xs="column" class="width100">
+						<div flex="100" flex-xs="100" class="left">
+							<md-input-container class="width100">
+								<label class="pbCarInput">Variant </label>
+								<!-- variant here -->
+								<md-autocomplete flex md-input-name="autocompleteField2" class="bold12"
+									md-input-minlength="1" md-no-cache="noCache" md-selected-item="selectedVariantDetails.selectedItem"
+									md-selected-item-change="selectedDisplayVariant(selectedVariant)"
+									md-search-text="searchText2"
+									md-items="selectedVariant in variantSearch(searchText2)"
+									md-item-text="selectedVariant" md-floating-label="&nbsp;" required>
+									<md-item-template> <span md-highlight-text="searchText2">{{selectedVariant}}</span>
+									</md-item-template>
+									<div ng-messages="bikeInputForm.autocompleteField2.$error"
+										ng-if="bikeInputForm.autocompleteField2.$touched">
+										<div ng-message="required">
+											You <b>must</b> have a variant.
+										</div>
+										<div ng-message="md-require-match">Please select an existing variant.
+										</div>
+										<div ng-message="minlength">Your entry is not long enough.</div>
+									</div>
+								</md-autocomplete>
+							</md-input-container>
+						</div>
+					</div>
+					<div layout="row" layout-xs="column" class="width100">
+						<div flex="50" flex-xs="100" class="left padRig5Per resp_zeroPadRight">
+							<md-input-container class="width100">
+								<label class="pbCarInput" ng-if="renewal">Fuel</label>
+								
+								<md-select name="regYear" ng-model="vehicleInfo.fuel" class="pbCarSelect"  required md-no-asterisk>
+									<md-option ng-value="fuel" ng-repeat="fuel in fuelList" ng-disabled="instantQuoteCarForm">{{fuel}}</md-option>
+								</md-select>
+							</md-input-container>
+						</div>
+					</div>
+					<div layout="row" layout-xs="column" class="width100">
+						<div flex="50" flex-xs="100" class="left padRig5Per resp_zeroPadRight">
+							<md-input-container class="width100">
+								<label class="pbCarInput" ng-if="renewal">{{p365Labels.common.regYear}}</label>
+								<label ng-if="!renewal">{{p365Labels.common.mfgYear}}</label>
+								<md-select name="regYear" ng-model="vehicleDetails.regYear" class="pbCarSelect" ng-change="changeRegYear()" required md-no-asterisk>
+									<md-option ng-value="year" ng-repeat="year in yearList" ng-disabled="instantQuoteCarForm">{{year}}</md-option>
+								</md-select>
+							</md-input-container>
+						</div>
+						<div flex="50" flex-xs="100" class="left pbCarInput">
+							<md-input-container class="width100" ng-if="polStatus">
+								<label class="pbCarInput">{{p365Labels.common.existingPolicyStatus}}</label>
+								<md-select name="type" ng-model="vehicleDetails.policyStatus" class="pbCarSelect" ng-model-options="{trackBy: '$value.label'}"
+								 ng-change="changePolStatus()">
+									<md-option ng-value="status" ng-repeat="status in policyStatusList" ng-disabled="instantQuoteCarForm">{{status.label}}</md-option>
+								</md-select>
+							</md-input-container>
+						</div>
+					</div>
+
+					<div layout="row" layout-xs="column" class="width100">
+						<div flex="50" flex-xs="100" class="left padRig5Per resp_zeroPadRight">
+							<md-input-container class="width100" ng-if="renewal">
+								<label class="pbCarInput">{{p365Labels.common.insuranceClaimExist}}</label>
+								<md-select name="type" ng-model="vehicleInfo.previousClaim" class="pbCarSelect">
+									<md-option ng-value="prevClaimStatus.value" ng-repeat="prevClaimStatus in previousClaimStatus" ng-disabled="instantQuoteCarForm">{{prevClaimStatus.label}}</md-option>
+								</md-select>
+							</md-input-container>
+						</div>
+						<div flex="50" flex-xs="100" class="left pbCarInput">
+							<md-input-container class="width100" ng-if="vehicleInfo.previousClaim == 'false' && renewal == true">
+								<label class="pbCarInput">{{p365Labels.common.ncbExist}}</label>
+								<md-select name="type" class="pbCarSelect" ng-model="vehicleDetails.ncb" ng-model-options="{trackBy: '$value.id'}">
+									<md-option ng-value="ncb" ng-repeat="ncb in ncbList" ng-disabled="instantQuoteCarForm">{{ncb.display}}</md-option>
+								</md-select>
+							</md-input-container>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
