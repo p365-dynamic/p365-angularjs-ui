@@ -14,5 +14,5 @@ current versions it ran on:
 
 Live Reload
 run:
-> npm i nodemon
+> npm i nodemon -g
 > nodemon
