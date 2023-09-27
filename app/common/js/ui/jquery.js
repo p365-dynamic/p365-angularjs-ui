@@ -11,7 +11,7 @@
  *
  * Date: 2014-12-18T15:11Z
  */
-if(iquoteJqueryEnabled || agencyPortalEnabled || icrmEnabled){
+if(iquoteJqueryEnabled || agencyPortalEnabled || icrmEnabled || true){
 	console.log("Jquery loaded from website");
 	(function( global, factory ) {
 
