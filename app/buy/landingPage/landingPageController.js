@@ -24,43 +24,43 @@ angular
     ) {
       $window.scrollTo(0, 0);
       const url = document.referrer;
-
-      function routeToBikeQuote() {
+      $scope.routeToBikeQuote = function () {
         $location.path("/bike/#/PBQuote");
       }
 
-      function routeToCarQuote() {
+      $scope.routeToCarQuote = function () {
         $location.path("/car/#/PBQuote");
       }
 
-      function routeToLifeQuote() {
+      $scope.routeToLifeQuote = function() {
         $location.path("/life/#/PBQuote");
       }
 
-      function routeToHealthQuote() {
+      $scope.routeToHealthQuote = function() {
         $location.path("/health/#/PBQuote");
       }
 
-      const optionSelected = url.split("/");
-      console.log(optionSelected);
-      const len = optionSelected.length;
-      console.log(len);
-      console.log("selected option = ", optionSelected[len - 2]);
-      switch (optionSelected[len - 2]) {
-        case "bike":
-          routeToBikeQuote();
-          break;
-
-        case "car":
-          routeToCarQuote();
-          break;
-
-        case "life":
-          routeToLifeQuote();
-          break;
-
-        case "health":
-          routeToHealthQuote();
-      }
+      // below function invokes when opened inside wordpress, has no meaning otherwise
+      (function() {
+        const optionSelected = url.split("/");
+        console.log(optionSelected);
+        const len = optionSelected.length;
+        switch (optionSelected[len - 2]) {
+          case "bike":
+            routeToBikeQuote();
+            break;
+  
+          case "car":
+            routeToCarQuote();
+            break;
+  
+          case "life":
+            routeToLifeQuote();
+            break;
+  
+          case "health":
+            routeToHealthQuote();
+        }
+      })
     },
   ]);

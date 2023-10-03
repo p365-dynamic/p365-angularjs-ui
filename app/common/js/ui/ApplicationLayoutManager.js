@@ -78,7 +78,7 @@ angular.module('policies365', [
 	.config(['$routeProvider', function ($routeProvider) {
 		$routeProvider
 			.when('/', {
-				controller: 'quoteController',
+				controller: 'landingPageController',
 				templateUrl: wp_path + 'buy/landingPage/landingPage.html',
 				title: 'landing page'
 			})
