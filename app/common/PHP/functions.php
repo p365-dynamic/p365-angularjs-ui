@@ -101,8 +101,6 @@
 	wp_enqueue_script('GetQuoteTemplateController', get_template_directory_uri() .'/app/buy/common/js/GetQuoteTemplateController.js');
 
 	wp_enqueue_script('lifeController', get_template_directory_uri() .'/app/buy/life/js/AssuranceInstantQuoteController.js');
-	wp_enqueue_script('landingPageController', get_template_directory_uri() .'/app/buy/landingPange/landingPageController.js');
-
 	wp_enqueue_script('AssuranceResultController', get_template_directory_uri() .'/app/buy/life/js/AssuranceResultController.js');
 	wp_enqueue_script('AssurancePaySuccessController', get_template_directory_uri() .'/app/buy/life/js/AssurancePaySuccessController.js');
 	wp_enqueue_script('AssurncePayFailureController', get_template_directory_uri() .'/app/buy/life/js/AssurncePayFailureController.js');
