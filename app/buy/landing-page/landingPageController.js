@@ -29,7 +29,7 @@ angular.module("landingPageModule", ["LocalStorageModule"]).controller(
       const url = document.referrer.split("/");
       const category = url[url.length - 2];
       console.log("cat ", document.referrer);
-      $rootScope.routeTo("bike");
+      $rootScope.routeTo(category);
     },
   ]
 
